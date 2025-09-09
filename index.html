@@ -3,102 +3,236 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Discipline Se Success Tak — Official</title>
+  <title>Discipline Se Success Tak — Jeet S. Singh</title>
+  <meta name="description" content="Discipline Se Success Tak — By Jeet S. Singh. Practical, emotional & interactive self-help guide. Read sample or read free with Kindle Unlimited." />
+  <meta name="author" content="Jeet S. Singh" />
+  <link rel="canonical" href="https://discipline-se-success-tak.vercel.app/" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="Discipline Se Success Tak — Jeet S. Singh" />
+  <meta property="og:description" content="Practical, emotional & interactive self-help guide. Read sample or read free with Kindle Unlimited." />
+  <meta property="og:image" content="https://m.media-amazon.com/images/I/31jrBAyTDjL._SY445_SX342_.jpg" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://discipline-se-success-tak.vercel.app/" />
+
   <style>
-    :root{--accent:#0b5;--bg:#f7f8fb;--card:#ffffff;--muted:#6b6b6b}
-    body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#111}
-    .wrap{max-width:920px;margin:28px auto;padding:20px}
-    .card{background:var(--card);border-radius:12px;box-shadow:0 8px 30px rgba(8,12,24,.06);overflow:hidden}
-    .hero{display:flex;gap:20px;padding:28px;align-items:center}
-    .cover{flex:0 0 260px}
-    .cover img{width:100%;border-radius:6px;display:block}
-    .meta{flex:1}
-    h1{margin:0;font-size:28px;letter-spacing:.2px}
-    p.lead{color:var(--muted);margin:12px 0;font-size:15px;line-height:1.5}
-    .buttons{margin-top:14px;display:flex;gap:12px;flex-wrap:wrap}
-    .btn{background:var(--accent);color:#012;padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:600}
-    .btn.alt{background:transparent;border:1px solid #ddd;color:#333}
-    .section{padding:22px;border-top:1px solid #f0f0f0}
-    .watermark{position:fixed;right:-60px;top:40vh;transform:rotate(-30deg);font-size:28px;color:rgba(255,255,255,.12);
-      background:linear-gradient(90deg,rgba(0,0,0,.15),rgba(0,0,0,.05));padding:8px 30px;border-radius:6px;pointer-events:none}
-    .small{font-size:13px;color:var(--muted)}
-    .contact{display:flex;gap:18px;flex-wrap:wrap;margin-top:12px}
-    .badge{background:#eef;padding:6px 8px;border-radius:8px;font-weight:600;color:#0b4}
-    .qa{margin-top:14px}
-    .qa p{margin:8px 0}
-    .footer{padding:16px;text-align:center;color:var(--muted);font-size:13px}
-    @media(max-width:720px){.hero{flex-direction:column}.cover{width:60%;max-width:320px;margin:0 auto}}
+    :root{
+      --bg:#0f1724; --card:#fff; --accent:#0b9e86; --accent-dark:#077a63; --muted:#64748b;
+      --glass: rgba(255,255,255,0.06);
+      --radius: 14px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+      background:linear-gradient(180deg,#071225 0%, #071b2d 60%, #082232 100%);
+      color:#0b1720;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:28px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .page{
+      width:100%;
+      max-width:980px;
+      margin:12px;
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.96));
+      border-radius:var(--radius);
+      box-shadow: 0 18px 50px rgba(2,6,23,0.35);
+      overflow:hidden;
+      display:grid;
+      grid-template-columns: 320px 1fr;
+      gap:0;
+      align-items:stretch;
+    }
+    @media(max-width:840px){
+      .card{grid-template-columns: 1fr; padding-bottom:0}
+    }
+
+    /* Left cover */
+    .left {
+      background: linear-gradient(180deg,#051827 0%, #062b34 100%);
+      padding:26px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:18px;
+      color:#fff;
+    }
+    .cover{
+      width:220px;
+      border-radius:10px;
+      overflow:hidden;
+      box-shadow: 0 12px 28px rgba(2,6,23,0.45);
+      transition: transform .35s ease;
+    }
+    .cover img{width:100%;display:block;height:auto}
+    .cover:hover{transform:translateY(-6px) rotate(-0.5deg)}
+    .badges{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+    .badge{
+      background:rgba(255,255,255,0.08);
+      color:#fff;padding:6px 10px;border-radius:999px;font-weight:700;font-size:13px;
+      border:1px solid rgba(255,255,255,0.06)
+    }
+
+    /* Right content */
+    .right{padding:28px}
+    h1{margin:0;font-size:26px;color:var(--accent-dark);letter-spacing:0.2px}
+    .by{margin-top:6px;color:var(--muted);font-size:14px}
+    .lead{margin-top:14px;color:#243139;font-size:15px;line-height:1.6}
+    .buttons{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:12px 16px;border-radius:10px;text-decoration:none;font-weight:700;font-size:14px;
+      box-shadow: 0 8px 18px rgba(11,158,134,0.12);
+    }
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-dark));color:#fff;border:0}
+    .btn-ghost{background:transparent;color:var(--accent-dark);border:2px solid rgba(11,158,134,0.12)}
+    .btn-ghost:hover{background:rgba(11,158,134,0.04)}
+    .small{color:var(--muted);font-size:13px;margin-top:10px}
+
+    .section{margin-top:22px;padding-top:8px;border-top:1px dashed rgba(7,13,20,0.03)}
+    .section h2{margin:0;font-size:18px;color:#0b5;letter-spacing:0.2px}
+    .section p{margin:10px 0;color:#304048;line-height:1.55}
+
+    .feedback-list{margin:10px 0;padding-left:18px;color:#2b4550}
+    .contact{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+    .contact a{color:var(--accent-dark);text-decoration:none;font-weight:600}
+
+    .watermark{
+      position:fixed;right:-80px;top:42vh;transform:rotate(-30deg);font-size:28px;color:rgba(0,0,0,0.06);
+      pointer-events:none;font-weight:800
+    }
+
+    footer{padding:18px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* accessibility focus */
+    .btn:focus, a:focus{outline:3px solid rgba(11,158,134,0.18);outline-offset:3px}
   </style>
 </head>
 <body>
-  <div class="watermark">PREVIEW ONLY — Jeet S Singh</div>
+  <div class="watermark">PREVIEW ONLY — Jeet S. Singh</div>
 
-  <div class="wrap">
-    <div class="card">
-      <div class="hero">
-        <div class="cover">
-          <img alt="Book Cover — Discipline se Success tak" src="https://m.media-amazon.com/images/I/31jrBAyTDjL._SY445_SX342_.jpg">
+  <main class="page" role="main" aria-labelledby="title">
+    <article class="card" aria-labelledby="book-title">
+      <aside class="left" aria-hidden="false">
+        <figure class="cover" aria-hidden="true">
+          <img src="https://m.media-amazon.com/images/I/31jrBAyTDjL._SY445_SX342_.jpg" alt="Book cover - Discipline Se Success Tak">
+        </figure>
+
+        <div class="badges" aria-hidden="true">
+          <div class="badge">🔥 Bestseller — Hot New Releases</div>
+          <div class="badge">🚀 Launch Live</div>
         </div>
 
-        <div class="meta">
-          <h1>Discipline Se Success Tak</h1>
-          <p class="small">By <strong>Jeet S. Singh</strong> · Discipline • Faith • Success</p>
-          <p class="lead">
-            Ek practical, emotional aur interactive guide — chhote steps, consistent action aur faith se bada transformation possible hai. Pehla chapter free preview ke liye available hai.
+        <div class="small" style="margin-top:8px;text-align:center;color:rgba(255,255,255,0.85)">
+          Discipline • Faith • Success
+        </div>
+      </aside>
+
+      <section class="right">
+        <h1 id="book-title">Discipline Se Success Tak</h1>
+        <div class="by">By <strong>Jeet S. Singh</strong></div>
+
+        <p class="lead" id="summary">
+          Ek practical, emotional aur interactive guide — chhote steps, consistent action aur faith se badi success possible hai. Pehla chapter aur sample Amazon par directly padh sakte hain.
+        </p>
+
+        <div class="buttons" role="group" aria-label="Primary actions">
+          <!-- Buy -->
+          <a class="btn btn-primary" href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank" rel="noopener noreferrer" aria-label="Buy on Amazon for 99 rupees">
+            Buy on Amazon — ₹99
+          </a>
+
+          <!-- Read Sample: link to Amazon book page where sample is available -->
+          <a class="btn btn-ghost" href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank" rel="noopener noreferrer" aria-label="Read sample on Amazon">
+            Read Sample
+          </a>
+
+          <!-- Kindle Unlimited free read -->
+          <a class="btn btn-primary" href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank" rel="noopener noreferrer" aria-label="Read free with Kindle Unlimited">
+            Read Free with Kindle Unlimited
+          </a>
+
+          <!-- Feedback anchor -->
+          <a class="btn btn-ghost" href="#feedback" aria-label="Give feedback">Give Feedback</a>
+        </div>
+
+        <div class="small">Launch date: 9 September 2025 • Price: ₹99 • Kindle Unlimited available</div>
+
+        <div class="section" aria-labelledby="about-heading">
+          <h2 id="about-heading">📖 Quick Summary</h2>
+          <p>
+            Discipline Se Success Tak ek short aur actionable book hai jisme real experiences aur simple steps share kiye gaye hain, taaki aap apne sapno ko reality mein badal paayein. Isme short exercises, 30-day starter plan aur motivating examples diye gaye hain.
           </p>
 
-          <div class="buttons">
-            <a class="btn" href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank" rel="noopener">Buy on Amazon — ₹99</a>
-            <a class="btn alt" href="https://drive.google.com/file/d/1RDCwrE8MLXaYWfJ6tNwZekm3CM1jROyw/view?usp=sharing" target="_blank" rel="noopener">Read Free Preview (Chapter 1)</a>
-            <a class="btn alt" href="#feedback" target="_self">Give Feedback</a>
-          </div>
+          <h3 style="margin-top:12px">Early reader feedback</h3>
+          <ul class="feedback-list" role="list">
+            <li>“Practical & motivating — short tasks I actually tried.”</li>
+            <li>“Clear language, fast action steps.”</li>
+            <li>“Perfect for busy people who want results.”</li>
+          </ul>
+        </div>
 
-          <div style="margin-top:12px" class="small">
-            <span class="badge">Best Seller — Hot New Releases (Top categories)</span> &nbsp; • &nbsp; Launch live ✅
-          </div>
+        <div class="section" id="feedback" aria-labelledby="feedback-heading">
+          <h2 id="feedback-heading">✨ Feedback</h2>
+          <p class="small">Aapki rai mere liye bahut keemti hai. Kripya thoda time nikal kar 1-line feedback bhejein:</p>
+          <ol class="small">
+            <li>Kaaisa laga? (1–10)</li>
+            <li>Sabse useful idea kaun sa tha?</li>
+            <li>Agla topic aap kya chahenge?</li>
+          </ol>
 
           <div class="contact">
-            <div class="small">📧 <a href="mailto:jeetssinghbooks@gmail.com">jeetssinghbooks@gmail.com</a></div>
+            <div class="small">📧 Email: <a href="mailto:jeetssinghbooks@gmail.com">jeetssinghbooks@gmail.com</a></div>
             <div class="small">📱 WhatsApp: <a href="https://wa.me/917018085440" target="_blank">+91 70180 85440</a></div>
-            <div class="small">🔗 Author: <a href="https://amazon.in/author/jeetssingh" target="_blank">Amazon Author Page</a></div>
           </div>
+
+          <p class="small" style="margin-top:8px;font-style:italic;color:#223">Mera short review: “Practical, direct aur motivating. Jo log apne goals ko consistently follow karna chahte hain, unke liye ye ek powerful starter guide hai.”</p>
         </div>
-      </div>
 
-      <div class="section">
-        <h2>Quick Summary</h2>
-        <p class="small">
-          Discipline Se Success Tak — ek short aur actionable book jisme maine apne real experiences aur simple steps share kiye hain, taaki aap bhi apne goals consistent action se achieve kar saken.
-        </p>
+        <div class="section" aria-labelledby="author-heading">
+          <h2 id="author-heading">👤 Author</h2>
+          <p class="small">Hi, I’m <strong>Jeet S. Singh</strong>. Writing mera passion hai aur mera maksad simple — agar meri writing ek bhi insaan ko inspire kar sake, to main apna maksad pura samjhoonga.</p>
 
-        <div class="qa">
-          <h3>Small feedback (1-line)</h3>
-          <p class="small">1) Kaisa laga? (1-10)</p>
-          <p class="small">2) Sabse useful idea kaun-sa tha?</p>
-          <p class="small">3) Aur kya chahiye aapse next?</p>
-          <p class="small">Send reply to: <a href="mailto:jeetssinghbooks@gmail.com">jeetssinghbooks@gmail.com</a> or WhatsApp <a href="https://wa.me/917018085440">+91 70180 85440</a></p>
+          <p class="small">Author page: <a href="https://www.amazon.in/author/jeetssingh" target="_blank">Amazon Author Page</a></p>
         </div>
-      </div>
 
-      <div class="section" id="feedback">
-        <h2>Readers' Note & My Short Review</h2>
-        <p class="small">
-          Aap ab free preview padh sakte ho. Agar ye value laga to book support kar dijiye on Amazon — aapka ek chhota review bahut madad karega.
-        </p>
-        <p style="margin-top:10px;font-style:italic;color:#333">Mera short review: “Practical, direct aur motivating. Jo log apne goals ko consistently follow karna chahte hain, unke liye ye ek powerful starter guide hai.”</p>
-      </div>
+        <footer style="margin-top:18px">
+          <div class="small">© 2025 Jeet S. Singh — Preview only. For full book visit Amazon.</div>
+        </footer>
 
-      <div class="section">
-        <h2>Share & Follow</h2>
-        <p class="small">Instagram: <a href="https://instagram.com/jeetssingh9" target="_blank">@jeetssingh9</a></p>
-        <p class="small">Follow author on Amazon: <a href="https://amazon.in/author/jeetssingh" target="_blank">JEET S SINGH</a></p>
-      </div>
+      </section>
+    </article>
+  </main>
 
-      <div class="footer">
-        © <strong>Jeet S. Singh</strong> — Preview only. For full book visit Amazon.  
-        <div style="margin-top:8px" class="small">Discipline • Faith • Success</div>
-      </div>
-    </div>
-  </div>
+  <!-- Structured Data for Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Book",
+    "name": "Discipline Se Success Tak",
+    "author": {
+      "@type": "Person",
+      "name": "Jeet S. Singh"
+    },
+    "image": "https://m.media-amazon.com/images/I/31jrBAyTDjL._SY445_SX342_.jpg",
+    "url": "https://discipline-se-success-tak.vercel.app/",
+    "description": "Practical, emotional & interactive self-help guide about building discipline and achieving success.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Self-published"
+    },
+    "datePublished": "2025-09-09"
+  }
+  </script>
 </body>
 </html>
