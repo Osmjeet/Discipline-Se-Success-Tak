@@ -1,45 +1,54 @@
-name: Generate Sitemap
+name: Generate sitemap & robots (auto)
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch: {}
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build-and-commit:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
 
+      - name: Install (none required) - show node version
+        run: node -v && npm -v || true
+
       - name: Run sitemap generator
-        run: |
-          mkdir -p scripts
-          echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' > sitemap.xml
-          echo '  <url><loc>https://discipline-se-success-tak.vercel.app/</loc><priority>1.0</priority></url>' >> sitemap.xml
-          echo '  <url><loc>https://discipline-se-success-tak.vercel.app/blog.html</loc><priority>0.9</priority></url>' >> sitemap.xml
-          echo '  <url><loc>https://discipline-se-success-tak.vercel.app/#sample</loc><priority>0.8</priority></url>' >> sitemap.xml
-          echo '  <url><loc>https://discipline-se-success-tak.vercel.app/#feedback</loc><priority>0.8</priority></url>' >> sitemap.xml
-          echo '  <url><loc>https://discipline-se-success-tak.vercel.app/#about</loc><priority>0.7</priority></url>' >> sitemap.xml
-          echo '</urlset>' >> sitemap.xml
+        run: node scripts/generate-sitemap.js
 
-      - name: Show produced sitemap
-        run: |
-          echo "---- sitemap.xml preview ----"
-          head -n 40 sitemap.xml || true
+      - name: Run robots generator
+        run: node scripts/generate-robots.js
 
-      - name: Commit sitemap if changed
+      - name: Show produced sitemap (preview)
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add sitemap.xml
-          git diff --cached --quiet && echo "No changes" || git commit -m "chore: regenerate sitemap.xml"
-          git push
+          echo "---- sitemap.xml (preview) ----"
+          head -n 120 sitemap.xml || true
+          echo "---- robots.txt (preview) ----"
+          cat robots.txt || true
+
+      - name: Commit sitemap & robots.txt if changed
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Action"
+          git add sitemap.xml robots.txt || true
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: update sitemap.xml & robots.txt [ci skip]" || true
+            git push origin HEAD:main
+          fi
