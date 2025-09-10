@@ -1,124 +1,108 @@
 <!doctype html>
 <html lang="hi">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Blog — Discipline Se Success Tak — Jeet S. Singh</title>
-  <meta name="description" content="Blog — Discipline Se Success Tak. Practical tips, exercises, aur updates from Jeet S. Singh." />
-  <link rel="canonical" href="https://discipline-se-success-tak.vercel.app/blog.html" />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Blog — Discipline Se Success Tak" />
-  <meta property="og:description" content="Practical posts, daily exercises, and updates from Jeet S. Singh." />
-  <meta property="og:image" content="https://m.media-amazon.com/images/I/31jrBAyTDjL._SY445_SX342_.jpg" />
-  <meta property="og:url" content="https://discipline-se-success-tak.vercel.app/blog.html" />
-  <meta name="twitter:card" content="summary_large_image" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Discipline Se Success Tak — Blog</title>
+  <meta name="description" content="Short posts, exercises aur updates — practical tips to build discipline and daily habits.">
+  <meta name="author" content="Jeet S. Singh">
+  <link rel="canonical" href="https://discipline-se-success-tak.vercel.app/blog.html">
 
   <style>
-    :root{--bg:#f6f8f9;--card:#ffffff;--accent:#0bb39a;--muted:#55656b;--radius:12px;--maxw:1000px}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;background:linear-gradient(180deg,#e9f4f2,#f6f8f9);color:#072;display:flex;justify-content:center;padding:28px}
-    .wrap{width:100%;max-width:var(--maxw)}
-    header{display:flex;align-items:center;gap:14px;margin-bottom:18px}
-    header img{width:64px;height:64px;border-radius:8px;object-fit:cover}
-    header h1{margin:0;font-size:20px;color:#073b33}
-    .nav{margin-left:auto}
-    .nav a{color:#05584a;text-decoration:none;font-weight:700;padding:8px 10px;border-radius:8px}
-    .card{background:var(--card);border-radius:var(--radius);padding:18px;box-shadow:0 8px 30px rgba(2,6,23,0.08)}
-    .lead{color:var(--muted);margin-top:8px}
-    .grid{display:grid;grid-template-columns:2fr 1fr;gap:18px;margin-top:18px}
-    @media(max-width:880px){.grid{grid-template-columns:1fr}}
-    .posts{display:flex;flex-direction:column;gap:12px}
-    article.post{background:#fff;border-radius:10px;padding:14px;border:1px solid #f0f3f2}
-    article.post h2{margin:0;font-size:18px;color:#034b3f}
-    article.post p.meta{margin:8px 0 10px;font-size:13px;color:#6b7c7a}
-    article.post p.excerpt{margin:0;color:#2b4f4a;line-height:1.6}
-    .readmore{display:inline-block;margin-top:10px;padding:8px 12px;border-radius:8px;background:linear-gradient(90deg,var(--accent),#078a72);color:#fff;text-decoration:none;font-weight:700}
-    .sidebar .card{padding:12px}
-    .sidebar h3{margin:0;color:#05584a}
-    .tag{display:inline-block;background:#e8fffa;color:#05584a;padding:6px 8px;border-radius:999px;margin:6px 6px 0 0;font-size:13px}
-    footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:#f4f7f6;color:#223;padding:20px}
+    .wrap{max-width:850px;margin:auto}
+    h1{font-size:28px;color:#05584a;margin-top:0}
+    .nav{margin:12px 0;display:flex;gap:14px}
+    .nav a{color:#0a6452;text-decoration:none;font-weight:600}
+    .post{background:#fff;padding:18px;border-radius:12px;margin-bottom:16px;box-shadow:0 4px 16px rgba(0,0,0,0.05)}
+    .post h2{margin:0;font-size:20px;color:#0b5247}
+    .meta{font-size:13px;color:#777;margin-top:6px}
+    .excerpt{margin-top:10px;font-size:15px;color:#2d3e3a}
+    .readmore{display:inline-block;margin-top:10px;color:#0a6452;font-weight:700;text-decoration:none}
+    .full-post{display:none}
+    .post:target .full-post{display:block}
+    .post:target .excerpt{display:none}
+    .post:target .readmore{display:none}
+    footer{margin-top:28px;font-size:13px;color:#777;text-align:center}
+    .tags{margin-top:10px;font-size:13px}
+    .tags span{background:#e6f5f1;padding:3px 8px;border-radius:6px;margin-right:6px}
   </style>
 </head>
 <body>
-  <main class="wrap" role="main">
-    <header>
-      <img src="https://m.media-amazon.com/images/I/31jrBAyTDjL._SY445_SX342_.jpg" alt="Book cover">
-      <div>
-        <h1>Discipline Se Success Tak — Blog</h1>
-        <div class="lead">Short posts, exercises aur updates — practical tips to build discipline and daily habits.</div>
-      </div>
-      <nav class="nav" aria-label="Main">
-        <a href="/">Home</a>
-        <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank" rel="noopener noreferrer">Buy on Amazon</a>
-      </nav>
-    </header>
+  <main class="wrap">
+    <h1>📖 Discipline Se Success Tak — Blog</h1>
+    <div class="nav">
+      <a href="/">🏠 Home</a>
+      <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">🛒 Buy on Amazon</a>
+    </div>
 
-    <div class="grid">
-      <!-- POSTS -->
-      <section class="posts card" aria-labelledby="recent-posts">
-        <h2 id="recent-posts" style="margin-top:0">Recent Posts</h2>
+    <p>Short posts, exercises aur updates — practical tips to build discipline and daily habits.</p>
 
-        <!-- ✅ New Blog Post -->
-        <article class="post" id="post-5-morning-habits">
-          <h2>5 Morning Habits for Discipline & Success</h2>
-          <p class="meta">10 September 2025 — 3 min read</p>
+    <section class="posts">
+      <!-- Post 1 -->
+      <article class="post" id="post-morning-habits">
+        <h2>5 Morning Habits for Discipline & Success</h2>
+        <p class="meta">10 September 2025 — 3 min read</p>
 
-          <p class="excerpt">
-            Subah ka time sabse powerful hota hai. Ye 5 simple morning habits tumhari discipline aur consistency ko strong bana denge.
-          </p>
+        <p class="excerpt">
+          Subah ke pehle 60 minutes aapki productivity aur mindset ko decide karte hain. Yeh 5 habits apni routine me add karke aap apne din ko next level bana sakte ho.
+        </p>
 
-          <div class="full-post" style="margin-top:12px;line-height:1.7;color:#243f3a">
-            <p><strong>Intro:</strong> Discipline build karna ek din ka kaam nahi — ye daily habits se banta hai. Ye 5 habits tumhe har subah ek fresh start dengi.</p>
-
-            <h3>1. Wake up 15 minutes earlier</h3>
-            <p>Apna din shuru karo thoda jaldi uthkar. Ye extra 15 minutes tumhe planning aur shanti denge.</p>
-
-            <h3>2. 2-Minute Planning</h3>
-            <p>Din ke sabse important ek kaam ko likho. Sirf ek hi top priority rakho.</p>
-
-            <h3>3. Tiny Action</h3>
-            <p>Subah ek chhota task complete karo jo momentum build kare. Jaise ek page padhna ya 10 pushups.</p>
-
-            <h3>4. Daily Review</h3>
-            <p>Raat ko 60 seconds me apna din review karo aur kal ke liye ek improvement note karo.</p>
-
-            <h3>5. Reward Yourself</h3>
-            <p>Har chhoti jeet ke baad khud ko reward do — jaise 5 min relax ya favourite song suno.</p>
-
-            <p style="margin-top:12px;"><strong>Exercise:</strong> In 5 habits ko ek hafte follow karo aur apni progress likho. 7 din baad dekho kaise tumhara routine change hua hai.</p>
-
-            <p style="margin-top:12px;"><em>Liked this post? Share your feedback at <a href="mailto:jeetssinghbooks@gmail.com">jeetssinghbooks@gmail.com</a> or WhatsApp <a href="https://wa.me/917018085440">+91 70180 85440</a>.</em></p>
-          </div>
-
-          <a class="readmore" href="#post-5-morning-habits">Read more</a>
-        </article>
-      </section>
-
-      <!-- SIDEBAR -->
-      <aside class="sidebar">
-        <div class="card">
-          <h3>About the Blog</h3>
-          <p class="lead">Short, actionable posts — exercises, reader questions aur book updates. Har post ka maksad: action lena, na ki sirf padhna.</p>
-
-          <div style="margin-top:12px">
-            <div class="tag">Habits</div><div class="tag">Discipline</div><div class="tag">30-Day Plan</div><div class="tag">Motivation</div>
-          </div>
-
-          <div style="margin-top:12px">
-            <a class="readmore" href="mailto:jeetssinghbooks@gmail.com">Suggest a topic / Feedback</a>
-          </div>
+        <div class="full-post" style="margin-top:12px;line-height:1.7;color:#243f3a">
+          <ol>
+            <li><strong>Wake up early (at a fixed time):</strong> 1 ghanta jaldi uthna discipline ka foundation hai.</li>
+            <li><strong>2-minute planning:</strong> ek sticky note par 3 most important tasks likho.</li>
+            <li><strong>Tiny physical action:</strong> 10 pushups, short walk — body ko active karo.</li>
+            <li><strong>Daily reflection:</strong> kal ki ek achievement aur ek mistake likho.</li>
+            <li><strong>No phone till 1st task:</strong> distraction se bacho, focus high rahega.</li>
+          </ol>
+          <p><strong>Exercise:</strong> Agle 7 din me inme se kam se kam 3 habits follow karo aur apna feedback share karo.</p>
+          <p><em>Feedback bhejo: <a href="mailto:jeetssinghbooks@gmail.com">jeetssinghbooks@gmail.com</a> or WhatsApp <a href="https://wa.me/917018085440">+91 70180 85440</a>.</em></p>
         </div>
 
-        <div style="height:12px"></div>
+        <a class="readmore" href="#post-morning-habits">Read more</a>
+      </article>
 
-        <div class="card">
-          <h3>Quick Links</h3>
-          <p style="margin:8px 0"><a href="/">Official page</a></p>
-          <p style="margin:8px 0"><a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">Buy on Amazon</a></p>
-          <p style="margin:8px 0"><a href="https://wa.me/917018085440" target="_blank">WhatsApp</a></p>
+      <!-- Post 2 -->
+      <article class="post" id="post-discipline-vs-motivation">
+        <h2>Discipline vs Motivation — Kaun jeetega?</h2>
+        <p class="meta">11 September 2025 — 3 min read</p>
+
+        <p class="excerpt">
+          Motivation temporary hoti hai, discipline permanent. Par dono ka sahi mix hi real progress banata hai. Yeh post batata hai kaise.
+        </p>
+
+        <div class="full-post" style="margin-top:12px;line-height:1.7;color:#243f3a">
+          <p><strong>Intro:</strong> Motivation milti hai jab hum inspired feel karte hain. Problem tab aati hai jab inspiration chali jaye. Discipline wahi hai jo aapko roz wahi kaam karne par majboor karega — chaahe mann na kare. Par dono ka balance hi sustainable success deta hai.</p>
+
+          <h3>Motivation — short-term fuel</h3>
+          <p>Motivation bright aur strong hoti hai — par fade bhi jaldi ho jaati hai. Yeh spark deti hai, shuru karne ke liye. Example: ek motivational video dekh ke aap gym ja sakte ho, par agar routine disciplined nahi toh kal wapas nahi jaoge.</p>
+
+          <h3>Discipline — long-term engine</h3>
+          <p>Discipline ek habit hoti hai — ek structure jo bina emotion ke bhi chalti rahe. Discipline ka matlab strictness nahi, balki consistency. Discipline se aap daily chhote kaam karte ho jo ek mahine me bada result ban jate hain.</p>
+
+          <h3>Kaise dono ko jodna hai (practical)</h3>
+          <ol>
+            <li><strong>Start with motivation:</strong> ek clear reason likho — “kyun” tumhe karna hai.</li>
+            <li><strong>Small ritual banalo:</strong> 2-minute warmup ya 1 tiny action — isse discipline build hota hai.</li>
+            <li><strong>Daily check:</strong> 60-sec review — kya kiya, kya nahi; kal ka ek chhota target set karo.</li>
+            <li><strong>Reward system:</strong> chhote wins celebrate karo — isse motivation bhi maintain hoti hai.</li>
+          </ol>
+
+          <p><strong>Exercise:</strong> Aaj se 7 din tak har roz ek 2-minute ritual follow karo + raat ko 60-sec review. Note down ek change after 7 days.</p>
+
+          <p><em>Feedback / experience share karo: 
+            <a href="mailto:jeetssinghbooks@gmail.com">jeetssinghbooks@gmail.com</a> 
+            or WhatsApp <a href="https://wa.me/917018085440">+91 70180 85440</a>.
+          </em></p>
         </div>
-      </aside>
+
+        <a class="readmore" href="#post-discipline-vs-motivation">Read more</a>
+      </article>
+    </section>
+
+    <div class="tags">
+      <span>#Habits</span> <span>#Discipline</span> <span>#30DayPlan</span> <span>#Motivation</span>
     </div>
 
     <footer>
