@@ -2,81 +2,38 @@
 const fs = require('fs');
 const path = require('path');
 
-const SITE_ROOT = 'https://discipline-se-success-tak.vercel.app';
-const OUT_FILE = path.join(process.cwd(), 'sitemap.xml');
-const IGNORE = new Set(['sitemap.xml', 'robots.txt', '.DS_Store']);
+const SITE = 'https://discipline-se-success-tak.vercel.app'; // <-- change if needed
 
-function walk(dir) {
-  const results = [];
-  const list = fs.readdirSync(dir);
-  list.forEach((file) => {
-    if (file.startsWith('.')) return;
-    const full = path.join(dir, file);
-    const stat = fs.statSync(full);
-    if (stat && stat.isDirectory()) {
-      results.push(...walk(full));
-    } else {
-      results.push(full);
-    }
-  });
-  return results;
+// Add all public pages/anchors you want in sitemap
+const urls = [
+  { loc: `${SITE}/`, priority: 1.0 },
+  { loc: `${SITE}/index.html`, priority: 0.9 },
+  { loc: `${SITE}/blog.html`, priority: 0.8 },
+  { loc: `${SITE}/#sample`, priority: 0.8 },
+  { loc: `${SITE}/#feedback`, priority: 0.7 },
+  { loc: `${SITE}/#about`, priority: 0.7 },
+  // You can add more URLs below
+  { loc: 'https://www.amazon.in/dp/B0FPHVNRBK', priority: 0.6 }
+];
+
+function formatDateISO(d = new Date()) {
+  return d.toISOString().split('T')[0];
 }
 
-function toUrl(filePath) {
-  const rel = path.relative(process.cwd(), filePath).replace(/\\/g, '/');
-  if (IGNORE.has(path.basename(rel))) return null;
-  if (!rel.endsWith('.html')) return null;
-  if (rel === 'index.html') return SITE_ROOT + '/';
-  return SITE_ROOT + '/' + rel;
-}
+const lastmod = formatDateISO(new Date());
 
-function lastModFor(filePath) {
-  const stat = fs.statSync(filePath);
-  const mtime = stat.mtime;
-  return mtime.toISOString().slice(0, 10);
-}
+let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
 
-function buildSitemap(entries) {
-  const header = `<?xml version="1.0" encoding="UTF-8"?>\n` +
-    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n\n`;
-  const footer = `</urlset>\n`;
-  const body = entries.map(e => {
-    return `  <url>\n    <loc>${e.loc}</loc>\n    <lastmod>${e.lastmod}</lastmod>\n    <priority>${e.priority}</priority>\n  </url>\n`;
-  }).join('\n');
-  return header + body + '\n' + footer;
-}
+urls.forEach(u => {
+  xml += `  <url>\n`;
+  xml += `    <loc>${u.loc}</loc>\n`;
+  xml += `    <lastmod>${lastmod}</lastmod>\n`;
+  xml += `    <priority>${u.priority}</priority>\n`;
+  xml += `  </url>\n`;
+});
 
-function determinePriority(url) {
-  if (url === SITE_ROOT + '/') return '1.0';
-  if (url.endsWith('blog.html') || url.includes('/blog')) return '0.9';
-  if (url.includes('#')) return '0.6';
-  return '0.7';
-}
+xml += `</urlset>\n`;
 
-function main() {
-  const allFiles = walk(process.cwd());
-  const rows = [];
-  allFiles.forEach(f => {
-    const u = toUrl(f);
-    if (!u) return;
-    const lastmod = lastModFor(f);
-    const priority = determinePriority(u);
-    rows.push({ loc: u, lastmod, priority });
-  });
-
-  rows.sort((a,b) => {
-    if (a.priority === b.priority) return a.loc.localeCompare(b.loc);
-    return parseFloat(b.priority) - parseFloat(a.priority);
-  });
-
-  const homepageExists = rows.some(r => r.loc === SITE_ROOT + '/');
-  if (!homepageExists) {
-    rows.unshift({ loc: SITE_ROOT + '/', lastmod: new Date().toISOString().slice(0,10), priority: '1.0' });
-  }
-
-  const xml = buildSitemap(rows);
-  fs.writeFileSync(OUT_FILE, xml, { encoding: 'utf8' });
-  console.log('Wrote sitemap.xml with', rows.length, 'items.');
-}
-
-main();
+fs.writeFileSync(path.join(process.cwd(), 'sitemap.xml'), xml, 'utf8');
+console.log('✅ sitemap.xml generated');
