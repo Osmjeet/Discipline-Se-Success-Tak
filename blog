@@ -1,1 +1,30 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why Discipline is Greater Than Motivation – Jeet S Singh</title>
+  <meta name="description" content="Why discipline always beats motivation for real and lasting success.">
+  <style>
+    body { font-family: Arial, sans-serif; margin:20px; background:#f8f9fa; }
+    .container { max-width: 900px; margin:auto; background:#fff; padding:30px; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.08);}
+    h1 { color:#0A1A2F; margin-bottom:10px; }
+    p.date { color:gray; font-size:0.9em; margin-bottom:20px; }
+    p { line-height:1.6; margin-bottom:15px; }
+    .back { margin-top:30px; }
+    .back a { color:#0bb39a; text-decoration:none; font-weight:bold; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Why Discipline is Greater Than Motivation</h1>
+    <p class="date">Published: 8 September 2025</p>
+
+    <p>Motivation ek fuel hai, lekin wo temporary hota hai. Discipline ek engine hai jo har din aapko chalata hai — chahe mood ho ya na ho.</p>
+    <p>Jo log sirf motivation ke bharose rehte hain wo short-term results paate hain. Lekin jo discipline banate hain wo consistency aur long-term success paate hain.</p>
+
+    <div class="back"><a href="../blog.html">⬅ Back to All Blogs</a></div>
+  </div>
+</body>
+</html>
