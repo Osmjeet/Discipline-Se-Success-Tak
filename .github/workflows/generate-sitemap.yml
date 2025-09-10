@@ -1,55 +1,57 @@
-name: Generate sitemap & robots and ping search engines
+name: Generate sitemap & robots
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   workflow_dispatch:
-
-permissions:
-  contents: write
 
 jobs:
   build-and-commit:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
 
+      # Run sitemap generator script
       - name: Run sitemap generator
-        run: node scripts/generate-sitemap.js
-
-      - name: Run robots.txt generator
-        run: node scripts/generate-robots.js
-
-      - name: Show produced files
         run: |
-          echo "---- sitemap.xml ----"
-          head -n 40 sitemap.xml || true
-          echo "---- robots.txt ----"
-          cat robots.txt || true
+          node scripts/generate-sitemap.js
 
-      - name: Commit sitemap & robots.txt if changed
+      # Run robots.txt generator script
+      - name: Run robots generator
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          node scripts/generate-robots.js
+
+      # Show sitemap preview in logs
+      - name: Show sitemap preview
+        run: |
+          echo "---- sitemap.xml preview ----"
+          head -n 50 sitemap.xml || true
+
+      # Commit updated sitemap + robots.txt
+      - name: Commit sitemap & robots if changed
+        run: |
+          git config --global user.name "actions-user"
+          git config --global user.email "actions@github.com"
           git add sitemap.xml robots.txt
-          git diff --cached --quiet && echo "No changes" || git commit -m "chore: regenerate sitemap.xml & robots.txt"
+          git diff --quiet && git diff --staged --quiet || git commit -m "chore: update sitemap.xml & robots.txt [ci skip]"
           git push
 
+      # Ping Google
       - name: Ping Google
         run: |
-          echo "Pinging Google..."
-          curl -s "https://www.google.com/ping?sitemap=https://discipline-se-success-tak.vercel.app/sitemap.xml" -w "\nhttp_status:%{http_code}\n"
+          curl "http://www.google.com/ping?sitemap=https://discipline-se-success-tak.vercel.app/sitemap.xml"
 
+      # Ping Bing
       - name: Ping Bing
         run: |
-          echo "Pinging Bing..."
-          curl -s "https://www.bing.com/webmaster/ping.aspx?siteMap=https://discipline-se-success-tak.vercel.app/sitemap.xml" -w "\nhttp_status:%{http_code}\n"
+          curl "http://www.bing.com/ping?sitemap=https://discipline-se-success-tak.vercel.app/sitemap.xml"
