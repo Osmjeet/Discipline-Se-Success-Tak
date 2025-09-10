@@ -1,9 +1,8 @@
-name: Generate sitemap & robots (auto)
+name: Generate sitemap & robots and ping search engines
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
@@ -12,6 +11,7 @@ permissions:
 jobs:
   build-and-commit:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -23,32 +23,33 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install (none required) - show node version
-        run: node -v && npm -v || true
-
       - name: Run sitemap generator
         run: node scripts/generate-sitemap.js
 
-      - name: Run robots generator
+      - name: Run robots.txt generator
         run: node scripts/generate-robots.js
 
-      - name: Show produced sitemap (preview)
+      - name: Show produced files
         run: |
-          echo "---- sitemap.xml (preview) ----"
-          head -n 120 sitemap.xml || true
-          echo "---- robots.txt (preview) ----"
+          echo "---- sitemap.xml ----"
+          head -n 40 sitemap.xml || true
+          echo "---- robots.txt ----"
           cat robots.txt || true
 
       - name: Commit sitemap & robots.txt if changed
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git config user.email "actions@github.com"
-          git config user.name "GitHub Action"
-          git add sitemap.xml robots.txt || true
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "chore: update sitemap.xml & robots.txt [ci skip]" || true
-            git push origin HEAD:main
-          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add sitemap.xml robots.txt
+          git diff --cached --quiet && echo "No changes" || git commit -m "chore: regenerate sitemap.xml & robots.txt"
+          git push
+
+      - name: Ping Google
+        run: |
+          echo "Pinging Google..."
+          curl -s "https://www.google.com/ping?sitemap=https://discipline-se-success-tak.vercel.app/sitemap.xml" -w "\nhttp_status:%{http_code}\n"
+
+      - name: Ping Bing
+        run: |
+          echo "Pinging Bing..."
+          curl -s "https://www.bing.com/webmaster/ping.aspx?siteMap=https://discipline-se-success-tak.vercel.app/sitemap.xml" -w "\nhttp_status:%{http_code}\n"
