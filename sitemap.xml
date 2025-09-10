@@ -8,14 +8,14 @@
     <priority>1.0</priority>
   </url>
 
-  <!-- Amazon Book Link -->
+  <!-- Blog Page -->
   <url>
-    <loc>https://www.amazon.in/dp/B0FPHVNRBK</loc>
+    <loc>https://discipline-se-success-tak.vercel.app/blog.html</loc>
     <lastmod>2025-09-09</lastmod>
     <priority>0.9</priority>
   </url>
 
-  <!-- Read Sample -->
+  <!-- Read Sample Section -->
   <url>
     <loc>https://discipline-se-success-tak.vercel.app/#sample</loc>
     <lastmod>2025-09-09</lastmod>
@@ -29,7 +29,7 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- About Author -->
+  <!-- About Author Section -->
   <url>
     <loc>https://discipline-se-success-tak.vercel.app/#about</loc>
     <lastmod>2025-09-09</lastmod>
