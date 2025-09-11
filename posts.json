@@ -1,11 +1,50 @@
 [
-  { "id": 1, "title": "Blog 1: Discipline ही असली Superpower", "preview": "Talent शुरुआत देता है, लेकिन discipline ही आपको मंज़िल तक ले जाता है — रोज़ के छोटे कदम ही बड़ा फर्क लाते हैं", "file": "posts/blog1.html" },
-  { "id": 2, "title": "Blog 2: Motivation vs Discipline", "preview": "Motivation spark देता है, लेकिन रोज़ चलने वाला engine है discipline — यही long-term success बनाता है", "file": "posts/blog2.html" },
-  { "id": 3, "title": "Blog 3: छोटे Steps, बड़े Results", "preview": "Big results छोटे daily steps के compounding से आते हैं — consistency और छोटे actions ही game-changer हैं", "file": "posts/blog3.html" },
-  { "id": 4, "title": "Blog 4: Failures से सीखो", "preview": "Failure कोई अंत नहीं, बल्कि feedback है — उठो, सीखो और बेहतर तरीके से आगे बढ़ो", "file": "posts/blog4.html" },
-  { "id": 5, "title": "Blog 5: छोटी जीतें ही बड़ी सफलता का रास्ता बनाती हैं", "preview": "Daily small wins confidence और momentum लाते हैं — यही छोटी जीतें बड़ी सफलता की नींव बनाती हैं", "file": "posts/blog5.html" },
-  { "id": 6, "title": "Blog 6: Consistency ही Success का असली Secret", "preview": "Motivation आता और जाता है — लेकिन consistency हर छोटे action को result में बदल देता है", "file": "posts/blog6.html" },
-  { "id": 7, "title": "Blog 7: Time Management — Success का सबसे बड़ा हथियार", "preview": "24 घंटे सबको मिलते हैं, फर्क उन्हें कैसे use करते हो — smart planning से productivity double हो सकती है", "file": "posts/blog7.html" },
-  { "id": 8, "title": "Blog 8: Habits Shape Destiny — आदतें ही किस्मत बदलती हैं", "preview": "छोटी-छोटी आदतें ही लंबे समय में आपकी identity और destiny बदल देती हैं — habits का compounding effect powerful है", "file": "posts/blog8.html" },
-  { "id": 9, "title": "Blog 9: Self-Belief — सफलता की असली नींव", "preview": "खुद पर विश्वास ही हर सफलता की जड़ है — यही ताकत आपको गिरने के बाद भी उठने की हिम्मत देती है", "file": "posts/blog9.html" }
+  {
+    "id": 1,
+    "title": "Blog 1: Discipline ही असली Superpower",
+    "preview": "Talent शुरुआत देता है, लेकिन discipline ही आपको मंज़िल तक ले जाता है — रोज़ के छोटे कदम ही बड़ा फर्क लाते हैं।",
+    "file": "posts/blog1.html"
+  },
+  {
+    "id": 2,
+    "title": "Blog 2: Motivation vs Discipline",
+    "preview": "Motivation spark देता है, लेकिन रोज़ चलने वाला engine है discipline — यही long-term success बनाता है।",
+    "file": "posts/blog2.html"
+  },
+  {
+    "id": 3,
+    "title": "Blog 3: छोटे Steps, बड़े Results",
+    "preview": "Big results छोटे daily steps के compounding से आते हैं — consistency और छोटे actions ही game-changer हैं।",
+    "file": "posts/blog3.html"
+  },
+  {
+    "id": 4,
+    "title": "Blog 4: Failures से सीखो",
+    "preview": "Failure कोई अंत नहीं, बल्कि feedback है — उठो, सीखो और बेहतर तरीके से आगे बढ़ो।",
+    "file": "posts/blog4.html"
+  },
+  {
+    "id": 5,
+    "title": "Blog 5: छोटी जीतें ही बड़ी सफलता का रास्ता बनाती हैं",
+    "preview": "Daily small wins confidence और momentum लाते हैं — यही छोटी जीतें बड़ी सफलता की नींव बनाती हैं।",
+    "file": "posts/blog5.html"
+  },
+  {
+    "id": 6,
+    "title": "Blog 6: Consistency ही Success का असली Secret",
+    "preview": "Motivation आता और जाता है — लेकिन consistency वही ताकत है जो छोटे actions को बड़े results में बदल देती है।",
+    "file": "posts/blog6.html"
+  },
+  {
+    "id": 7,
+    "title": "Blog 7: Time Management — Success का सबसे बड़ा हथियार",
+    "preview": "24 घंटे सबको मिलते हैं, फर्क उन्हें कैसे use करते हो — smart planning से productivity double हो सकती है।",
+    "file": "posts/blog7.html"
+  },
+  {
+    "id": 8,
+    "title": "Blog 8: Habits Shape Destiny — आदतें ही किस्मत बदलती हैं",
+    "preview": "छोटी-छोटी आदतें ही लंबे समय में आपकी identity और destiny बदल देती हैं — habits का compounding effect powerful है।",
+    "file": "posts/blog8.html"
+  }
 ]
