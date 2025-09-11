@@ -4,263 +4,124 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Blogs — Jeet S Singh (Author of Discipline Se Success Tak)</title>
-  <meta name="description" content="Read practical, short & actionable blogs by Jeet S Singh. Build discipline, habits and success." />
+  <meta name="description" content="Read inspiring blogs by Jeet S Singh, Author of 'Discipline Se Success Tak'. Learn about discipline, success, motivation and daily habits." />
+  <link rel="canonical" href="https://discipline-se-success-tak.vercel.app/blog.html" />
 
   <style>
-    :root{
-      --bg:#f7fbfa; --card:#ffffff; --accent:#0bb39a; --dark:#06493f; --muted:#445b56;
-      --maxw:1100px; --radius:12px;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:#0b2b27;line-height:1.7}
-    nav{background:var(--dark);padding:12px 16px}
-    nav .menu{max-width:var(--maxw);margin:auto;display:flex;gap:18px;align-items:center}
-    nav a{color:#fff;text-decoration:none;font-weight:700}
-    .wrap{max-width:var(--maxw);margin:26px auto;padding:0 16px}
-    h1{color:var(--dark);text-align:center;margin-bottom:8px}
-    .top-note{max-width:var(--maxw);margin:8px auto 22px;padding:12px;background:linear-gradient(90deg,rgba(11,179,150,0.06),rgba(7,138,114,0.02));border-radius:10px;color:var(--dark);font-weight:700;text-align:center}
+    body{margin:0;font-family:Inter,Roboto,Arial;background:#f9fbfa;color:#102827;line-height:1.75}
+    .wrap{max-width:900px;margin:0 auto;padding:28px}
+    h1{color:#06493f;text-align:center;margin:32px 0}
+    h2{color:#0a3d36;margin-top:20px;margin-bottom:10px}
+    p{margin-bottom:14px;font-size:1.05rem}
+    .preview{margin-bottom:44px;padding:24px;background:#fff;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+    .preview h2{margin-top:0}
+    .actions{margin-top:14px}
+    .btn{display:inline-block;background:#0bb39a;color:#fff;padding:10px 16px;border-radius:8px;font-weight:600;text-decoration:none;cursor:pointer;border:none}
+    .btn:hover{background:#078a72}
+    .collapse{margin-top:16px;padding:12px;background:#fafafa;border-radius:8px;display:none}
+    footer{text-align:center;margin-top:28px;padding:16px;font-size:0.9rem;color:#666}
 
-    /* Previews grid */
-    #posts-preview{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-    @media(max-width:880px){#posts-preview{grid-template-columns:1fr}}
-    .preview{background:var(--card);padding:16px;border-radius:10px;box-shadow:0 8px 26px rgba(6,18,16,0.05)}
-    .preview h2{margin:0 0 8px;color:var(--dark);font-size:18px}
-    .preview p{margin:0 0 12px;color:var(--muted)}
-    .preview .actions{display:flex;gap:10px;align-items:center}
-    .btn{
-      display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:8px;border:0;cursor:pointer;font-weight:800;
-    }
-    .btn-read{background:transparent;color:var(--accent);border:2px solid rgba(11,179,150,0.12)}
-    .btn-secondary{background:#eefaf7;color:var(--dark);border:1px solid rgba(6,18,16,0.03)}
-    .muted{color:var(--muted);font-size:0.95rem}
-
-    hr.sep{border:0;border-top:1px solid #e6f2ef;margin:26px 0}
-
-    /* Expanded full post area */
-    .blog-full{margin-bottom:34px;padding:22px;background:var(--card);border-radius:12px;box-shadow:0 10px 30px rgba(6,18,16,0.04)}
-    .blog-full h2{color:var(--dark);margin-top:0}
-    .blog-full h3{color:#0a4b42}
-    .author-note{margin-top:18px;padding-top:12px;border-top:1px solid #eef6f4;color:var(--dark);font-weight:700}
-
-    /* small helpers */
-    .error{color:#c33;padding:12px;background:#fff0f0;border-radius:8px}
-    .loading-line{color:var(--muted);font-size:0.95rem;margin:8px 0}
-    .preview .small-meta{font-size:0.88rem;color:#7c8a86;margin-top:8px}
-    footer{margin:36px 0;text-align:center;color:#6a726f}
-
-    /* collapsed/expand animation (simple) */
-    .collapse { display: none; }
+    /* Navigation */
+    nav{background:#06493f;padding:14px 20px}
+    nav .menu{max-width:900px;margin:auto;display:flex;gap:20px;flex-wrap:wrap}
+    nav a{color:#fff;text-decoration:none;font-weight:600}
+    nav a:hover{text-decoration:underline}
+    @media(max-width:600px){nav .menu{flex-direction:column;gap:10px}}
   </style>
 </head>
 <body>
-  <!-- Nav -->
+
+  <!-- Navigation -->
   <nav>
-    <div class="menu" role="navigation" aria-label="main">
+    <div class="menu">
       <a href="index.html">🏠 Home</a>
       <a href="author.html">👤 Author</a>
       <a href="blog.html">📝 Blogs</a>
     </div>
   </nav>
 
-  <main class="wrap">
+  <div class="wrap">
     <h1>📖 Blogs by Jeet S Singh</h1>
-    <div class="top-note">Short, practical & actionable posts — discipline, habits and daily growth. Read preview, expand the full post when you want.</div>
+    <div id="blog-list">Loading blogs...</div>
+  </div>
 
-    <!-- previews injected here -->
-    <section id="posts-preview" aria-live="polite"></section>
+  <footer>© 2025 Jeet S Singh — Discipline • Faith • Success</footer>
 
-    <hr class="sep">
-
-    <!-- full posts will be injected here below their previews when expanded -->
-    <div id="posts-full" aria-live="polite"></div>
-
-    <div id="loader-note" class="loading-line">Loading posts…</div>
-
-    <footer>
-      © 2025 Jeet S. Singh — Discipline • Faith • Success
-    </footer>
-  </main>
-
-  <!-- Script: fetch posts.json, render previews. Lazy-load fragment on Read More. -->
   <script>
-  (function(){
-    const previewEl = document.getElementById('posts-preview');
-    const fullEl = document.getElementById('posts-full');
-    const loaderNote = document.getElementById('loader-note');
-
-    // cache fetched fragments to avoid re-fetch
-    const fragmentCache = {};
-
-    function createEl(tag, props = {}, children = []) {
-      const el = document.createElement(tag);
-      for (const k in props) {
-        if (k === 'class') el.className = props[k];
-        else if (k === 'html') el.innerHTML = props[k];
-        else el.setAttribute(k, props[k]);
-      }
-      children.forEach(c => el.appendChild(c));
-      return el;
-    }
-
-    function showError(msg){
-      loaderNote.style.display = 'none';
-      const err = createEl('div',{class:'error'},[]);
-      err.textContent = msg;
-      fullEl.parentNode.insertBefore(err, fullEl);
-      console.error(msg);
-    }
-
-    // safe fetch wrapper
-    async function safeFetch(url) {
+    async function loadPosts(){
       try {
-        const r = await fetch(url, {cache: 'no-store'});
-        if (!r.ok) throw new Error('Status ' + r.status);
-        return await r.text();
-      } catch (e) {
-        throw e;
-      }
-    }
+        const res = await fetch('posts.json');
+        const posts = await res.json();
+        const list = document.getElementById('blog-list');
+        list.innerHTML = '';
 
-    // initialize
-    (async function init(){
-      let raw;
-      try {
-        raw = await safeFetch('/posts.json');
-      } catch (e) {
-        // try relative path (useful if site is on GitHub Pages under repo path)
-        try {
-          raw = await safeFetch('posts.json');
-        } catch (err) {
-          showError('Cannot load posts.json. Check that posts.json is present at site root.');
-          return;
-        }
-      }
+        posts.forEach((p, idx)=>{
+          const card = document.createElement('div');
+          card.className = 'preview';
 
-      let posts;
-      try {
-        posts = JSON.parse(raw);
-      } catch (e) {
-        showError('posts.json parse error — ensure valid JSON.');
-        return;
-      }
+          const h2 = document.createElement('h2');
+          h2.textContent = p.title;
+          card.appendChild(h2);
 
-      if (!Array.isArray(posts) || posts.length === 0) {
-        showError('posts.json is empty — add entries for each blog.');
-        return;
-      }
+          const snippet = document.createElement('p');
+          snippet.textContent = p.preview;
+          card.appendChild(snippet);
 
-      // render previews
-      posts.forEach((p, idx) => {
-        // container
-        const card = createEl('article',{class:'preview'});
+          // actions
+          const actions = document.createElement('div');
+          actions.className = 'actions';
 
-        // title
-        const title = createEl('h2',{html: p.title || 'Untitled'});
-        card.appendChild(title);
+          const readBtn = document.createElement('button');
+          readBtn.className = 'btn btn-read';
+          readBtn.type = 'button';
+          readBtn.dataset.file = p.file;
+          readBtn.dataset.id = 'post' + (idx+1);
+          readBtn.textContent = 'Read More →';
+          actions.appendChild(readBtn);
 
-        // preview text (from manifest)
-        const pr = createEl('p',{class:'muted', html: p.preview || ''});
-        card.appendChild(pr);
+          card.appendChild(actions);
 
-        // small meta line
-        const meta = createEl('div',{class:'small-meta', html: `Post ${idx+1}`});
-        card.appendChild(meta);
+          const expandedWrapper = document.createElement('div');
+          expandedWrapper.className = 'collapse';
+          expandedWrapper.id = 'post' + (idx+1);
+          card.appendChild(expandedWrapper);
 
-        // actions
-        const actions = createEl('div',{class:'actions'});
-        const readBtn = createEl('button',{class:'btn btn-read', type:'button', 'data-file': p.file, 'data-id': p.id || ('post' + (idx+1))});
-        readBtn.textContent = 'Read More →';
-        actions.appendChild(readBtn);
+          list.appendChild(card);
+        });
 
-        // optional: a secondary button to go to author or buy etc (kept generic)
-        const buyBtn = createEl('a',{class:'btn btn-secondary', href:'https://www.amazon.in/dp/B0FPHVNRBK', target:'_blank'});
-        buyBtn.textContent = 'Buy Book ₹99';
-        actions.appendChild(buyBtn);
+        // attach click listeners
+        document.querySelectorAll('.btn-read').forEach(btn=>{
+          btn.addEventListener('click', async ()=>{
+            const file = btn.dataset.file;
+            const target = document.getElementById(btn.dataset.id);
 
-        card.appendChild(actions);
-
-        // placeholder for expanded content (initially empty & hidden)
-        const expandedWrapper = createEl('div',{id: p.id || ('post' + (idx+1)), class: 'collapse'});
-        card.appendChild(expandedWrapper);
-
-        // append card
-        previewEl.appendChild(card);
-
-        // event: Read More / Read Less toggle
-        readBtn.addEventListener('click', async function(){
-          const file = this.dataset.file;
-          const id = this.dataset.id;
-          const targetSelector = '#' + id;
-          const target = card.querySelector('#' + id);
-
-          // if already expanded -> collapse
-          if (target && target.innerHTML.trim() !== '') {
-            // currently expanded -> collapse
-            if (target.style.display === 'block') {
-              target.style.display = 'none';
-              this.textContent = 'Read More →';
+            if(target.style.display==='block'){
+              target.style.display='none';
+              btn.textContent='Read More →';
               return;
             }
-          }
 
-          // if fragment cached, insert from cache
-          if (fragmentCache[file]) {
-            expandedWrapper.innerHTML = fragmentCache[file];
-            expandedWrapper.style.display = 'block';
-            this.textContent = 'Read Less';
-            // Also scroll smoothly to expanded section
-            expandedWrapper.scrollIntoView({behavior:'smooth', block:'start'});
-            return;
-          }
+            target.style.display='block';
+            btn.textContent='Hide';
 
-          // show temporary loading
-          expandedWrapper.innerHTML = '<div class="loading-line">Loading post…</div>';
-          expandedWrapper.style.display = 'block';
-          try {
-            // try root-relative then relative
-            let html;
-            try {
-              html = await safeFetch(file.startsWith('/') ? file : '/' + file);
-            } catch(err) {
-              html = await safeFetch(file);
+            if(!target.dataset.loaded){
+              target.innerHTML='<em>Loading...</em>';
+              try {
+                const r = await fetch(file);
+                const html = await r.text();
+                target.innerHTML = html;
+                target.dataset.loaded = 'true';
+              } catch(e){
+                target.innerHTML='<em>Error loading blog.</em>';
+              }
             }
-            fragmentCache[file] = html; // cache
-            expandedWrapper.innerHTML = html;
-            // add a Read Less button at end if not present
-            if (!expandedWrapper.querySelector('.read-less')) {
-              const rl = createEl('button',{class:'btn btn-read read-less', type:'button'});
-              rl.textContent = 'Read Less';
-              rl.addEventListener('click', function(){
-                expandedWrapper.style.display = 'none';
-                readBtn.textContent = 'Read More →';
-              });
-              expandedWrapper.appendChild(rl);
-            }
-            readBtn.textContent = 'Read Less';
-            // scroll
-            expandedWrapper.scrollIntoView({behavior:'smooth', block:'start'});
-          } catch (err) {
-            console.error('Error loading fragment', file, err);
-            expandedWrapper.innerHTML = `<div class="error">Cannot load the post (check ${file}).</div>`;
-            readBtn.textContent = 'Read More →';
-          }
+          });
         });
-      });
-
-      // loader done
-      loaderNote.style.display = 'none';
-    })();
-
-    // accessibility: support keyboard toggle (Enter on focused read-more)
-    document.addEventListener('keydown', function(e){
-      if(e.key === 'Enter' || e.key === ' ') {
-        if (document.activeElement && document.activeElement.classList.contains('btn-read')) {
-          document.activeElement.click();
-          e.preventDefault();
-        }
+      } catch(e){
+        document.getElementById('blog-list').textContent = 'Error loading posts.json';
       }
-    });
-  })();
+    }
+    loadPosts();
   </script>
 </body>
 </html>
