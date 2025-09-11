@@ -4,8 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Blogs — Jeet S Singh (Author of Discipline Se Success Tak)</title>
-  <meta name="description" content="Read inspiring blogs by Jeet S Singh, Author of 'Discipline Se Success Tak'. Learn about discipline, success, motivation and daily habits." />
-  <link rel="canonical" href="https://discipline-se-success-tak.vercel.app/blog.html" />
+  <meta name="description" content="Read practical, short & actionable blogs by Jeet S Singh. Build discipline, habits and success." />
 
   <style>
     :root{
@@ -18,30 +17,43 @@
     nav .menu{max-width:var(--maxw);margin:auto;display:flex;gap:18px;align-items:center}
     nav a{color:#fff;text-decoration:none;font-weight:700}
     .wrap{max-width:var(--maxw);margin:26px auto;padding:0 16px}
-    h1{color:var(--dark);text-align:center;margin-bottom:18px}
+    h1{color:var(--dark);text-align:center;margin-bottom:8px}
     .top-note{max-width:var(--maxw);margin:8px auto 22px;padding:12px;background:linear-gradient(90deg,rgba(11,179,150,0.06),rgba(7,138,114,0.02));border-radius:10px;color:var(--dark);font-weight:700;text-align:center}
-    /* Previews */
+
+    /* Previews grid */
     #posts-preview{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
     @media(max-width:880px){#posts-preview{grid-template-columns:1fr}}
     .preview{background:var(--card);padding:16px;border-radius:10px;box-shadow:0 8px 26px rgba(6,18,16,0.05)}
     .preview h2{margin:0 0 8px;color:var(--dark);font-size:18px}
-    .preview p{margin:0 0 10px;color:var(--muted)}
-    .read-more{color:var(--accent);text-decoration:none;font-weight:800}
-    .read-more:hover{text-decoration:underline}
+    .preview p{margin:0 0 12px;color:var(--muted)}
+    .preview .actions{display:flex;gap:10px;align-items:center}
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:8px;border:0;cursor:pointer;font-weight:800;
+    }
+    .btn-read{background:transparent;color:var(--accent);border:2px solid rgba(11,179,150,0.12)}
+    .btn-secondary{background:#eefaf7;color:var(--dark);border:1px solid rgba(6,18,16,0.03)}
+    .muted{color:var(--muted);font-size:0.95rem}
+
     hr.sep{border:0;border-top:1px solid #e6f2ef;margin:26px 0}
-    /* Full posts */
+
+    /* Expanded full post area */
     .blog-full{margin-bottom:34px;padding:22px;background:var(--card);border-radius:12px;box-shadow:0 10px 30px rgba(6,18,16,0.04)}
     .blog-full h2{color:var(--dark);margin-top:0}
     .blog-full h3{color:#0a4b42}
     .author-note{margin-top:18px;padding-top:12px;border-top:1px solid #eef6f4;color:var(--dark);font-weight:700}
-    /* small */
-    .muted{color:var(--muted);font-size:0.95rem}
+
+    /* small helpers */
     .error{color:#c33;padding:12px;background:#fff0f0;border-radius:8px}
+    .loading-line{color:var(--muted);font-size:0.95rem;margin:8px 0}
+    .preview .small-meta{font-size:0.88rem;color:#7c8a86;margin-top:8px}
     footer{margin:36px 0;text-align:center;color:#6a726f}
+
+    /* collapsed/expand animation (simple) */
+    .collapse { display: none; }
   </style>
 </head>
 <body>
-  <!-- Navigation -->
+  <!-- Nav -->
   <nav>
     <div class="menu" role="navigation" aria-label="main">
       <a href="index.html">🏠 Home</a>
@@ -50,146 +62,204 @@
     </div>
   </nav>
 
-  <div class="wrap">
+  <main class="wrap">
     <h1>📖 Blogs by Jeet S Singh</h1>
-    <div class="top-note">Latest: Practical, short and actionable posts to build discipline and achieve results. Read sample chapters and the book on Amazon.</div>
+    <div class="top-note">Short, practical & actionable posts — discipline, habits and daily growth. Read preview, expand the full post when you want.</div>
 
-    <!-- Previews injected here -->
-    <div id="posts-preview" aria-live="polite"></div>
+    <!-- previews injected here -->
+    <section id="posts-preview" aria-live="polite"></section>
 
     <hr class="sep">
 
-    <!-- Full posts injected here -->
-    <main id="posts-full" aria-live="polite"></main>
+    <!-- full posts will be injected here below their previews when expanded -->
+    <div id="posts-full" aria-live="polite"></div>
 
-    <div id="loader-note" class="muted" style="margin-top:18px;">Loading posts…</div>
+    <div id="loader-note" class="loading-line">Loading posts…</div>
 
     <footer>
-      © 2025 Jeet S Singh — Discipline • Faith • Success
+      © 2025 Jeet S. Singh — Discipline • Faith • Success
     </footer>
-  </div>
+  </main>
 
-  <!-- Loader script: reads /posts.json and injects fragments from /posts/*.html -->
+  <!-- Script: fetch posts.json, render previews. Lazy-load fragment on Read More. -->
   <script>
-  (async function(){
+  (function(){
     const previewEl = document.getElementById('posts-preview');
     const fullEl = document.getElementById('posts-full');
     const loaderNote = document.getElementById('loader-note');
 
+    // cache fetched fragments to avoid re-fetch
+    const fragmentCache = {};
+
+    function createEl(tag, props = {}, children = []) {
+      const el = document.createElement(tag);
+      for (const k in props) {
+        if (k === 'class') el.className = props[k];
+        else if (k === 'html') el.innerHTML = props[k];
+        else el.setAttribute(k, props[k]);
+      }
+      children.forEach(c => el.appendChild(c));
+      return el;
+    }
+
     function showError(msg){
-      loaderNote.innerHTML = '';
-      const e = document.createElement('div');
-      e.className = 'error';
-      e.textContent = msg;
-      fullEl.parentNode.insertBefore(e, fullEl);
+      loaderNote.style.display = 'none';
+      const err = createEl('div',{class:'error'},[]);
+      err.textContent = msg;
+      fullEl.parentNode.insertBefore(err, fullEl);
       console.error(msg);
     }
 
-    // fetch posts.json
-    let resp;
-    try {
-      resp = await fetch('/posts.json', {cache:'no-store'});
-    } catch(err){
-      showError('Error fetching posts.json. Check that posts.json exists at repo root and site is deployed.');
-      return;
-    }
-    if(!resp.ok){
-      showError('posts.json not found (404). Place posts.json in site root with correct path entries.');
-      return;
-    }
-
-    let posts;
-    try {
-      posts = await resp.json();
-    } catch(err){
-      showError('posts.json parse error — ensure valid JSON.');
-      return;
-    }
-
-    if(!Array.isArray(posts) || posts.length===0){
-      showError('posts.json is empty or invalid — add entries for each blog.');
-      return;
-    }
-
-    // render preview cards
-    for(const p of posts){
-      const card = document.createElement('article');
-      card.className = 'preview';
-      const title = document.createElement('h2');
-      title.innerText = p.title || 'Untitled';
-      const pr = document.createElement('p');
-      pr.className = 'muted';
-      pr.innerText = p.preview || '';
-      const a = document.createElement('a');
-      a.className = 'read-more';
-      a.href = `#${p.id || p.file.replace(/[^a-z0-9]/gi,'')}`;
-      a.innerText = 'Read More →';
-      card.appendChild(title);
-      card.appendChild(pr);
-      card.appendChild(a);
-      previewEl.appendChild(card);
-    }
-
-    // fetch and inject fragments (in order)
-    for(const p of posts){
+    // safe fetch wrapper
+    async function safeFetch(url) {
       try {
-        const r = await fetch(p.file, {cache:'no-store'});
-        if(!r.ok){
-          console.warn('Failed to fetch', p.file);
-          const warn = document.createElement('div');
-          warn.className = 'error';
-          warn.textContent = `Could not load ${p.file} (check path).`;
-          fullEl.appendChild(warn);
-          continue;
-        }
-        const html = await r.text();
-
-        // Create wrapper section with id (for anchor)
-        const sec = document.createElement('section');
-        // determine id: use p.id if present else derive from filename
-        const safeId = p.id ? String(p.id) : String(p.file).replace(/[^a-z0-9]/gi,'');
-        sec.id = safeId;
-        sec.className = 'blog-full';
-        // Insert the fragment HTML as innerHTML (these fragments must be safe and authored by you)
-        sec.innerHTML = html;
-        fullEl.appendChild(sec);
-      } catch(e){
-        console.error('Error loading fragment', p.file, e);
-        const warn = document.createElement('div');
-        warn.className = 'error';
-        warn.textContent = `Error loading ${p.file}`;
-        fullEl.appendChild(warn);
+        const r = await fetch(url, {cache: 'no-store'});
+        if (!r.ok) throw new Error('Status ' + r.status);
+        return await r.text();
+      } catch (e) {
+        throw e;
       }
     }
 
-    // remove loader
-    loaderNote.style.display = 'none';
-
-    // Smooth scrolling for anchor links to internal ids
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', function(e){
-        const hash = this.getAttribute('href');
-        const target = document.querySelector(hash);
-        if(target){
-          e.preventDefault();
-          target.scrollIntoView({behavior:'smooth', block:'start'});
-          history.replaceState(null,'',hash);
+    // initialize
+    (async function init(){
+      let raw;
+      try {
+        raw = await safeFetch('/posts.json');
+      } catch (e) {
+        // try relative path (useful if site is on GitHub Pages under repo path)
+        try {
+          raw = await safeFetch('posts.json');
+        } catch (err) {
+          showError('Cannot load posts.json. Check that posts.json is present at site root.');
+          return;
         }
-      });
-    });
+      }
 
-    // optional: highlight preview when scrolled into view
-    const previews = Array.from(document.querySelectorAll('.preview'));
-    window.addEventListener('hashchange', ()=>{
-      const id = location.hash.slice(1);
-      if(!id) return;
-      const idx = posts.findIndex(p => String(p.id) === id || String(p.file).includes(id));
-      if(idx>=0 && previews[idx]) {
-        previews[idx].style.boxShadow = '0 12px 30px rgba(11,179,150,0.08)';
-        setTimeout(()=> previews[idx].style.boxShadow = '', 2200);
+      let posts;
+      try {
+        posts = JSON.parse(raw);
+      } catch (e) {
+        showError('posts.json parse error — ensure valid JSON.');
+        return;
+      }
+
+      if (!Array.isArray(posts) || posts.length === 0) {
+        showError('posts.json is empty — add entries for each blog.');
+        return;
+      }
+
+      // render previews
+      posts.forEach((p, idx) => {
+        // container
+        const card = createEl('article',{class:'preview'});
+
+        // title
+        const title = createEl('h2',{html: p.title || 'Untitled'});
+        card.appendChild(title);
+
+        // preview text (from manifest)
+        const pr = createEl('p',{class:'muted', html: p.preview || ''});
+        card.appendChild(pr);
+
+        // small meta line
+        const meta = createEl('div',{class:'small-meta', html: `Post ${idx+1}`});
+        card.appendChild(meta);
+
+        // actions
+        const actions = createEl('div',{class:'actions'});
+        const readBtn = createEl('button',{class:'btn btn-read', type:'button', 'data-file': p.file, 'data-id': p.id || ('post' + (idx+1))});
+        readBtn.textContent = 'Read More →';
+        actions.appendChild(readBtn);
+
+        // optional: a secondary button to go to author or buy etc (kept generic)
+        const buyBtn = createEl('a',{class:'btn btn-secondary', href:'https://www.amazon.in/dp/B0FPHVNRBK', target:'_blank'});
+        buyBtn.textContent = 'Buy Book ₹99';
+        actions.appendChild(buyBtn);
+
+        card.appendChild(actions);
+
+        // placeholder for expanded content (initially empty & hidden)
+        const expandedWrapper = createEl('div',{id: p.id || ('post' + (idx+1)), class: 'collapse'});
+        card.appendChild(expandedWrapper);
+
+        // append card
+        previewEl.appendChild(card);
+
+        // event: Read More / Read Less toggle
+        readBtn.addEventListener('click', async function(){
+          const file = this.dataset.file;
+          const id = this.dataset.id;
+          const targetSelector = '#' + id;
+          const target = card.querySelector('#' + id);
+
+          // if already expanded -> collapse
+          if (target && target.innerHTML.trim() !== '') {
+            // currently expanded -> collapse
+            if (target.style.display === 'block') {
+              target.style.display = 'none';
+              this.textContent = 'Read More →';
+              return;
+            }
+          }
+
+          // if fragment cached, insert from cache
+          if (fragmentCache[file]) {
+            expandedWrapper.innerHTML = fragmentCache[file];
+            expandedWrapper.style.display = 'block';
+            this.textContent = 'Read Less';
+            // Also scroll smoothly to expanded section
+            expandedWrapper.scrollIntoView({behavior:'smooth', block:'start'});
+            return;
+          }
+
+          // show temporary loading
+          expandedWrapper.innerHTML = '<div class="loading-line">Loading post…</div>';
+          expandedWrapper.style.display = 'block';
+          try {
+            // try root-relative then relative
+            let html;
+            try {
+              html = await safeFetch(file.startsWith('/') ? file : '/' + file);
+            } catch(err) {
+              html = await safeFetch(file);
+            }
+            fragmentCache[file] = html; // cache
+            expandedWrapper.innerHTML = html;
+            // add a Read Less button at end if not present
+            if (!expandedWrapper.querySelector('.read-less')) {
+              const rl = createEl('button',{class:'btn btn-read read-less', type:'button'});
+              rl.textContent = 'Read Less';
+              rl.addEventListener('click', function(){
+                expandedWrapper.style.display = 'none';
+                readBtn.textContent = 'Read More →';
+              });
+              expandedWrapper.appendChild(rl);
+            }
+            readBtn.textContent = 'Read Less';
+            // scroll
+            expandedWrapper.scrollIntoView({behavior:'smooth', block:'start'});
+          } catch (err) {
+            console.error('Error loading fragment', file, err);
+            expandedWrapper.innerHTML = `<div class="error">Cannot load the post (check ${file}).</div>`;
+            readBtn.textContent = 'Read More →';
+          }
+        });
+      });
+
+      // loader done
+      loaderNote.style.display = 'none';
+    })();
+
+    // accessibility: support keyboard toggle (Enter on focused read-more)
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' ') {
+        if (document.activeElement && document.activeElement.classList.contains('btn-read')) {
+          document.activeElement.click();
+          e.preventDefault();
+        }
       }
     });
-
   })();
   </script>
 </body>
