@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "title": "Blog 1: Discipline ही असली Superpower",
+    "file": "posts/blog1.html"
+  },
+  {
+    "id": 2,
+    "title": "Blog 2: Motivation vs Discipline",
+    "file": "posts/blog2.html"
+  },
+  {
+    "id": 3,
+    "title": "Blog 3: छोटे Steps, बड़े Results",
+    "file": "posts/blog3.html"
+  },
+  {
+    "id": 4,
+    "title": "Blog 4: Failures से सीखो",
+    "file": "posts/blog4.html"
+  },
+  {
+    "id": 5,
+    "title": "Blog 5: छोटी जीतें ही बड़ी सफलता का रास्ता बनाती हैं",
+    "file": "posts/blog5.html"
+  },
+  {
+    "id": 6,
+    "title": "Blog 6: Consistency ही Success का असली Secret",
+    "file": "posts/blog6.html"
+  },
+  {
+    "id": 7,
+    "title": "Blog 7: Time Management — Success का सबसे बड़ा हथियार",
+    "file": "posts/blog7.html"
+  }
+]
