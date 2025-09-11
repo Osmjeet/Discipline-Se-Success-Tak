@@ -1,50 +1,100 @@
-[
-  {
-    "id": 1,
-    "title": "Blog 1: Discipline ही असली Superpower",
-    "preview": "Talent शुरुआत देता है, लेकिन discipline ही आपको मंज़िल तक ले जाता है — रोज़ के छोटे कदम ही बड़ा फर्क लाते हैं।",
-    "file": "posts/blog1.html"
-  },
-  {
-    "id": 2,
-    "title": "Blog 2: Motivation vs Discipline",
-    "preview": "Motivation spark देता है, लेकिन रोज़ चलने वाला engine है discipline — यही long-term success बनाता है।",
-    "file": "posts/blog2.html"
-  },
-  {
-    "id": 3,
-    "title": "Blog 3: छोटे Steps, बड़े Results",
-    "preview": "Big results छोटे daily steps के compounding से आते हैं — consistency और छोटे actions ही game-changer हैं।",
-    "file": "posts/blog3.html"
-  },
-  {
-    "id": 4,
-    "title": "Blog 4: Failures से सीखो",
-    "preview": "Failure कोई अंत नहीं, बल्कि feedback है — उठो, सीखो और बेहतर तरीके से आगे बढ़ो।",
-    "file": "posts/blog4.html"
-  },
-  {
-    "id": 5,
-    "title": "Blog 5: छोटी जीतें ही बड़ी सफलता का रास्ता बनाती हैं",
-    "preview": "Daily small wins confidence और momentum लाते हैं — यही छोटी जीतें बड़ी सफलता की नींव बनाती हैं।",
-    "file": "posts/blog5.html"
-  },
-  {
-    "id": 6,
-    "title": "Blog 6: Consistency ही Success का असली Secret",
-    "preview": "Motivation आता और जाता है — पर जो रोज़ छोटा action दोहराता है वही सच में आगे बढ़ता है।",
-    "file": "posts/blog6.html"
-  },
-  {
-    "id": 7,
-    "title": "Blog 7: Time Management — Success का सबसे बड़ा हथियार",
-    "preview": "24 घंटे सबको मिलते हैं, फर्क उन्हें कैसे use करते हो — smart planning से productivity double हो सकती है।",
-    "file": "posts/blog7.html"
-  },
-  {
-    "id": 8,
-    "title": "Blog 8: Habits Shape Destiny — आदतें ही किस्मत बदलती हैं",
-    "preview": "छोटी-छोटी आदतें ही लंबे समय में आपकी identity और destiny बदल देती हैं — habits का compounding effect powerful है।",
-    "file": "posts/blog8.html"
-  }
-]
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Blogs — Jeet S Singh (Author of Discipline Se Success Tak)</title>
+  <meta name="description" content="Read inspiring blogs by Jeet S Singh, Author of 'Discipline Se Success Tak'. Learn about discipline, success, motivation and daily habits." />
+  <link rel="canonical" href="https://discipline-se-success-tak.vercel.app/blog.html" />
+
+  <style>
+    body{margin:0;font-family:Inter,Roboto,Arial;background:#f9fbfa;color:#102827;line-height:1.7}
+    .wrap{max-width:900px;margin:0 auto;padding:28px}
+    h1{text-align:center;color:#06493f;margin:28px 0}
+    h2{color:#0a3d36;margin-top:0;margin-bottom:12px}
+    p{margin-bottom:14px;font-size:1.05rem}
+    .blog{margin-bottom:34px;padding:22px;background:#fff;border-radius:14px;box-shadow:0 4px 14px rgba(0,0,0,0.08)}
+    .blog .full{display:none;margin-top:12px}
+    .author{margin-top:18px;padding-top:12px;border-top:1px solid #e0eceb;font-size:0.95rem;color:#333}
+    .author strong{color:#06493f}
+    .btn{display:inline-block;margin-top:8px;padding:8px 14px;border-radius:8px;background:#0bb39a;color:#fff;font-weight:600;text-decoration:none;cursor:pointer}
+    footer{text-align:center;margin-top:28px;padding:16px;font-size:0.9rem;color:#666}
+
+    /* Navigation */
+    nav{background:#06493f;padding:14px 20px}
+    nav .menu{max-width:900px;margin:auto;display:flex;gap:20px;flex-wrap:wrap}
+    nav a{color:#fff;text-decoration:none;font-weight:600}
+    nav a:hover{text-decoration:underline}
+    @media(max-width:600px){nav .menu{flex-direction:column;gap:10px}}
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="menu">
+      <a href="index.html">🏠 Home</a>
+      <a href="author.html">👤 Author</a>
+      <a href="blog.html">📝 Blogs</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <h1>📖 Blogs by Jeet S Singh</h1>
+    <div id="blog-list">Loading blogs...</div>
+  </div>
+
+  <footer>
+    © 2025 Jeet S Singh — Author of 
+    <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">“Discipline Se Success Tak”</a>
+  </footer>
+
+  <script>
+    async function loadBlogs(){
+      try {
+        const res = await fetch('posts.json');
+        const posts = await res.json();
+        const list = document.getElementById('blog-list');
+        list.innerHTML = '';
+
+        for (let post of posts){
+          const card = document.createElement('div');
+          card.className = 'blog';
+
+          card.innerHTML = `
+            <h2>${post.title}</h2>
+            <p>${post.preview}</p>
+            <button class="btn" onclick="toggleFull(this)">Read More</button>
+            <div class="full"></div>
+          `;
+
+          // Load full content from file
+          fetch(post.file)
+            .then(r => r.text())
+            .then(html => {
+              card.querySelector('.full').innerHTML = html;
+            });
+
+          list.appendChild(card);
+        }
+      } catch(e){
+        document.getElementById('blog-list').innerText = 'Failed to load blogs.';
+        console.error(e);
+      }
+    }
+
+    function toggleFull(btn){
+      const full = btn.nextElementSibling;
+      if(full.style.display === 'block'){
+        full.style.display = 'none';
+        btn.textContent = 'Read More';
+      } else {
+        full.style.display = 'block';
+        btn.textContent = 'Show Less';
+      }
+    }
+
+    loadBlogs();
+  </script>
+</body>
+</html>
