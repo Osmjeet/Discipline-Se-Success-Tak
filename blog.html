@@ -8,33 +8,42 @@
   <link rel="canonical" href="https://discipline-se-success-tak.vercel.app/blog.html" />
 
   <style>
-    body{margin:0;font-family:Inter,Roboto,Arial;background:#f9fbfa;color:#102827;line-height:1.75}
-    .wrap{max-width:900px;margin:0 auto;padding:28px}
-    h1{color:#06493f;text-align:center;margin:32px 0}
-    h2{color:#0a3d36;margin-top:20px;margin-bottom:10px}
-    h3{color:#0a3d36;margin-top:16px}
-    p{margin-bottom:14px;font-size:1.05rem}
-    .blog{margin-bottom:44px;padding:24px;background:#fff;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
-    .author{margin-top:18px;padding-top:12px;border-top:1px solid #e0eceb;color:#333;font-size:0.95rem}
-    .author strong{color:#06493f}
-    a{color:#0bb39a;text-decoration:none;font-weight:600}
-    .read-more{display:inline-block;margin-top:8px;font-size:0.9rem;color:#0bb39a}
+    :root{
+      --bg:#f7fbfa; --card:#ffffff; --accent:#0bb39a; --dark:#06493f; --muted:#445b56;
+      --maxw:1100px; --radius:12px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:#0b2b27;line-height:1.7}
+    nav{background:var(--dark);padding:12px 16px}
+    nav .menu{max-width:var(--maxw);margin:auto;display:flex;gap:18px;align-items:center}
+    nav a{color:#fff;text-decoration:none;font-weight:700}
+    .wrap{max-width:var(--maxw);margin:26px auto;padding:0 16px}
+    h1{color:var(--dark);text-align:center;margin-bottom:18px}
+    .top-note{max-width:var(--maxw);margin:8px auto 22px;padding:12px;background:linear-gradient(90deg,rgba(11,179,150,0.06),rgba(7,138,114,0.02));border-radius:10px;color:var(--dark);font-weight:700;text-align:center}
+    /* Previews */
+    #posts-preview{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    @media(max-width:880px){#posts-preview{grid-template-columns:1fr}}
+    .preview{background:var(--card);padding:16px;border-radius:10px;box-shadow:0 8px 26px rgba(6,18,16,0.05)}
+    .preview h2{margin:0 0 8px;color:var(--dark);font-size:18px}
+    .preview p{margin:0 0 10px;color:var(--muted)}
+    .read-more{color:var(--accent);text-decoration:none;font-weight:800}
     .read-more:hover{text-decoration:underline}
-    footer{text-align:center;margin-top:28px;padding:16px;font-size:0.9rem;color:#666}
-
-    /* Navigation */
-    nav{background:#06493f;padding:14px 20px}
-    nav .menu{max-width:900px;margin:auto;display:flex;gap:20px;flex-wrap:wrap}
-    nav a{color:#fff;text-decoration:none;font-weight:600}
-    nav a:hover{text-decoration:underline}
-    @media(max-width:600px){nav .menu{flex-direction:column;gap:10px}}
+    hr.sep{border:0;border-top:1px solid #e6f2ef;margin:26px 0}
+    /* Full posts */
+    .blog-full{margin-bottom:34px;padding:22px;background:var(--card);border-radius:12px;box-shadow:0 10px 30px rgba(6,18,16,0.04)}
+    .blog-full h2{color:var(--dark);margin-top:0}
+    .blog-full h3{color:#0a4b42}
+    .author-note{margin-top:18px;padding-top:12px;border-top:1px solid #eef6f4;color:var(--dark);font-weight:700}
+    /* small */
+    .muted{color:var(--muted);font-size:0.95rem}
+    .error{color:#c33;padding:12px;background:#fff0f0;border-radius:8px}
+    footer{margin:36px 0;text-align:center;color:#6a726f}
   </style>
 </head>
 <body>
-
   <!-- Navigation -->
   <nav>
-    <div class="menu">
+    <div class="menu" role="navigation" aria-label="main">
       <a href="index.html">🏠 Home</a>
       <a href="author.html">👤 Author</a>
       <a href="blog.html">📝 Blogs</a>
@@ -43,137 +52,145 @@
 
   <div class="wrap">
     <h1>📖 Blogs by Jeet S Singh</h1>
+    <div class="top-note">Latest: Practical, short and actionable posts to build discipline and achieve results. Read sample chapters and the book on Amazon.</div>
 
-    <!-- Blog Previews -->
-    <div>
-      <h2>Blog 1: Discipline ही असली Superpower</h2>
-      <p>Talent shuruat deta hai, par discipline मंज़िल तक ले जाता है... </p>
-      <a href="#blog1" class="read-more">Read More →</a>
+    <!-- Previews injected here -->
+    <div id="posts-preview" aria-live="polite"></div>
 
-      <h2>Blog 2: Motivation vs Discipline</h2>
-      <p>Motivation ek spark hai, par discipline ek engine jo रोज़ चलाता है... </p>
-      <a href="#blog2" class="read-more">Read More →</a>
+    <hr class="sep">
 
-      <h2>Blog 3: छोटे Steps, बड़े Results</h2>
-      <p>छोटे-छोटे daily steps ही बड़े बदलाव लाते हैं... </p>
-      <a href="#blog3" class="read-more">Read More →</a>
+    <!-- Full posts injected here -->
+    <main id="posts-full" aria-live="polite"></main>
 
-      <h2>Blog 4: Failures से सीखो</h2>
-      <p>Failure feedback है, जो अगली बार stronger बनाता है... </p>
-      <a href="#blog4" class="read-more">Read More →</a>
+    <div id="loader-note" class="muted" style="margin-top:18px;">Loading posts…</div>
 
-      <h2>Blog 5: छोटी जीतें ही बड़ी सफलता का रास्ता बनाती हैं</h2>
-      <p>Small wins ही compound होकर बड़ा confidence बनाती हैं... </p>
-      <a href="#blog5" class="read-more">Read More →</a>
-
-      <h2>Blog 6: Consistency ही Success का असली Secret</h2>
-      <p>Motivation आता-जाता है, लेकिन consistency ही long-term results देती है... </p>
-      <a href="#blog6" class="read-more">Read More →</a>
-
-      <h2>Blog 7: Time Management — Success का सबसे बड़ा हथियार</h2>
-      <p>हर इंसान के पास 24 घंटे हैं, फर्क बस इतना है कि कौन उन्हें efficiently use करता है... </p>
-      <a href="#blog7" class="read-more">Read More →</a>
-    </div>
-
-    <hr>
-
-    <!-- Full Blogs -->
-
-    <div id="blog1" class="blog">
-      <h2>Blog 1: Discipline ही असली Superpower</h2>
-      <p>दुनिया में बहुत लोग हैं जिनके पास टैलेंट है, लेकिन सिर्फ़ कुछ ही लोग success पाते हैं। क्यों? क्योंकि टैलेंट आपको शुरुआत दिला सकता है, लेकिन discipline आपको मंज़िल तक ले जाता है। Discipline एक ऐसी शक्ति है जो हर दिन आपको छोटे-छोटे कदम उठाने पर मजबूर करती है।</p>
-      <p>अगर आप हर दिन 1% भी improve करते हो तो एक साल बाद आप 37 गुना better हो जाओगे। Discipline boring लग सकता है, लेकिन असली magic वहीं छिपा है। यह superpower है जो average इंसान को extraordinary बना देती है।</p>
-      <div class="author">✍️ Written by <strong>Jeet S Singh</strong>, Author of 
-        <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">“Discipline Se Success Tak”</a>.
-      </div>
-    </div>
-
-    <!-- Blog 2 -->
-    <div id="blog2" class="blog">
-      <h2>Blog 2: Motivation vs Discipline</h2>
-      <p>Motivation spark है, पर spark ज्यादा देर तक नहीं रहता। अगर आप सिर्फ़ motivation पर depend करोगे, तो journey बीच में ही रुक जाएगी।</p>
-      <p>Discipline engine की तरह है — हर दिन चलने वाला, stable और भरोसेमंद। जब motivation गायब हो जाए, तब discipline आपको आगे धकेलता है। Imagine करो अगर आप सिर्फ़ motivated days पर काम करते हो, तो साल में hardly 100 दिन काम करोगे। लेकिन अगर disciplined हो तो पूरे 365 दिन progress करोगे।</p>
-      <p>इसलिए हमेशा याद रखो: Motivation से start करो, लेकिन finish discipline से ही कर सकते हो।</p>
-      <div class="author">✍️ Written by <strong>Jeet S Singh</strong>, Author of 
-        <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">“Discipline Se Success Tak”</a>.
-      </div>
-    </div>
-
-    <!-- Blog 3 -->
-    <div id="blog3" class="blog">
-      <h2>Blog 3: छोटे Steps, बड़े Results</h2>
-      <p>हम अक्सर सोचते हैं कि life बदलने के लिए एक बड़ा step लेना पड़ेगा। लेकिन सच ये है कि छोटे steps ही सबसे बड़े results लाते हैं। अगर आप रोज़ाना सिर्फ़ 15 मिनट invest करते हो किसी नई skill पर, तो एक साल में आप expert बन सकते हो।</p>
-      <p>Consistency छोटे steps का magic है। जैसे हर दिन एक page पढ़ना आपको एक साल में पूरी library पढ़वा सकता है। Discipline यही सिखाता है — बड़ा सपना देखो, लेकिन उसे छोटे-छोटे daily steps में तोड़ दो।</p>
-      <p>हर छोटा step आपके अंदर confidence भी लाता है और धीरे-धीरे impossible भी possible लगता है।</p>
-      <div class="author">✍️ Written by <strong>Jeet S Singh</strong>, Author of 
-        <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">“Discipline Se Success Tak”</a>.
-      </div>
-    </div>
-
-    <!-- Blog 4 -->
-    <div id="blog4" class="blog">
-      <h2>Blog 4: Failures से सीखो</h2>
-      <p>Failure हर किसी को डराता है, लेकिन successful लोग failure से भागते नहीं। वो उसे accept करते हैं और उससे सीखते हैं। हर बार गिरने पर उठना ही discipline का सबसे बड़ा सबक है।</p>
-      <p>जब आप fail होते हो, तो असल में आपको feedback मिलता है — कि क्या काम नहीं कर रहा। अगर आप उस feedback को use करोगे, तो अगली बार और strong हो जाओगे।</p>
-      <p>Discipline ये कहता है: “Fail करो, लेकिन हार मत मानो। हर बार उठो और फिर से कोशिश करो।” यही mindset आपको unbeatable बनाता है।</p>
-      <div class="author">✍️ Written by <strong>Jeet S Singh</strong>, Author of 
-        <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">“Discipline Se Success Tak”</a>.
-      </div>
-    </div>
-
-    <!-- Blog 5 -->
-    <div id="blog5" class="blog">
-      <h2>Blog 5: छोटी जीतें ही बड़ी सफलता का रास्ता बनाती हैं</h2>
-      <p>हम सोचते हैं कि success सिर्फ़ बड़े steps से मिलती है, लेकिन हकीकत ये है कि छोटी-छोटी जीतें ही आपको बड़ा बनाती हैं। जब आप daily छोटे goals achieve करते हो, तो आपका confidence बढ़ता है और यही आपको success की तरफ खींचता है।</p>
-      <h3>🌱 क्यों छोटे कदम ज़रूरी हैं?</h3>
-      <p>एक छोटा action — जैसे सुबह 10 मिनट पढ़ाई करना, 5 मिनट journaling या बस एक healthy habit चुनना — आपके mind को discipline की तरफ set करता है। यही छोटे actions जुड़कर एक साल बाद massive results देते हैं।</p>
-      <h3>🚀 Practical Tip</h3>
-      <p>आज सिर्फ़ एक ऐसा काम चुनो जो 5 मिनट में हो सके। जब आप उसे complete करोगे, तो आपको एक छोटी जीत मिलेगी। यही छोटी जीत आपको अगले काम के लिए inspire करेगी।</p>
-      <p>Small wins compound होकर आपको बड़ी सफलता तक पहुंचाते हैं। Discipline आपको वही compounding का power देता है।</p>
-      <div class="author">✍️ Written by <strong>Jeet S Singh</strong>, Author of 
-        <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">“Discipline Se Success Tak”</a>.
-      </div>
-    </div>
-
-    <!-- Blog 6 -->
-    <div id="blog6" class="blog">
-      <h2>Blog 6: Consistency ही Success का असली Secret</h2>
-      <p>Motivation aata aur jaata hai, लेकिन असली success consistency से आती है। Consistency का मतलब है रोज़ छोटे steps repeat करना, चाहे मन हो या न हो। यही consistency boring लग सकती है, लेकिन यही success की असली guarantee है।</p>
-      <h3>🌱 Consistency क्यों ज़रूरी है?</h3>
-      <p>बीज बोने के बाद रोज़ पानी देना पड़ता है ताकि पेड़ बने। वैसे ही रोज़ के छोटे-छोटे actions long-term growth लाते हैं।</p>
-      <h3>📊 Real-Life Example</h3>
-      <p>अगर आप रोज़ 20 मिनट पढ़ाई करो तो एक साल में 120+ घंटे का extra study हो जाएगा। अगर रोज़ 10 push-ups करो तो 6 महीने में body और stamina बदल जाएगा। यही consistency का magic है।</p>
-      <div class="author">✍️ Written by <strong>Jeet S Singh</strong>, Author of 
-        <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">“Discipline Se Success Tak”</a>.
-      </div>
-    </div>
-
-    <!-- Blog 7 -->
-    <div id="blog7" class="blog">
-      <h2>Blog 7: Time Management — Success का सबसे बड़ा हथियार</h2>
-      <p>हर इंसान के पास 24 घंटे हैं, फर्क सिर्फ इतना है कि कौन उन्हें efficiently use करता है। Time management वो skill है जो productivity double कर देती है और stress कम करती है।</p>
-      <h3>⏳ क्यों ज़रूरी है?</h3>
-      <p>Time currency है — एक बार चला गया तो वापस नहीं आता। अगर आप इसे smartly manage कर लो तो कम समय में ज़्यादा काम कर सकते हो।</p>
-      <h3>⚠️ Common Mistakes</h3>
-      <ul>
-        <li>Priorities clear न करना।</li>
-        <li>Multitasking करना।</li>
-        <li>काम को बार-बार टालना (procrastination)।</li>
-      </ul>
-      <h3>✅ Practical Tips</h3>
-      <ul>
-        <li>To-Do List बनाओ और top 3 काम पहले करो।</li>
-        <li>Pomodoro Technique: 25 min काम + 5 min break।</li>
-        <li>Time Blocking — अलग कामों के लिए slots।</li>
-        <li>No Distractions — notifications और social media कम।</li>
-      </ul>
-      <p><em>"It’s not about having time, it’s about making time."</em></p>
-      <div class="author">✍️ Written by <strong>Jeet S Singh</strong>, Author of 
-        <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">“Discipline Se Success Tak”</a>.
-      </div>
-    </div>
-
-    <footer>© 2025 Jeet S Singh — Discipline • Faith • Success</footer>
+    <footer>
+      © 2025 Jeet S Singh — Discipline • Faith • Success
+    </footer>
   </div>
+
+  <!-- Loader script: reads /posts.json and injects fragments from /posts/*.html -->
+  <script>
+  (async function(){
+    const previewEl = document.getElementById('posts-preview');
+    const fullEl = document.getElementById('posts-full');
+    const loaderNote = document.getElementById('loader-note');
+
+    function showError(msg){
+      loaderNote.innerHTML = '';
+      const e = document.createElement('div');
+      e.className = 'error';
+      e.textContent = msg;
+      fullEl.parentNode.insertBefore(e, fullEl);
+      console.error(msg);
+    }
+
+    // fetch posts.json
+    let resp;
+    try {
+      resp = await fetch('/posts.json', {cache:'no-store'});
+    } catch(err){
+      showError('Error fetching posts.json. Check that posts.json exists at repo root and site is deployed.');
+      return;
+    }
+    if(!resp.ok){
+      showError('posts.json not found (404). Place posts.json in site root with correct path entries.');
+      return;
+    }
+
+    let posts;
+    try {
+      posts = await resp.json();
+    } catch(err){
+      showError('posts.json parse error — ensure valid JSON.');
+      return;
+    }
+
+    if(!Array.isArray(posts) || posts.length===0){
+      showError('posts.json is empty or invalid — add entries for each blog.');
+      return;
+    }
+
+    // render preview cards
+    for(const p of posts){
+      const card = document.createElement('article');
+      card.className = 'preview';
+      const title = document.createElement('h2');
+      title.innerText = p.title || 'Untitled';
+      const pr = document.createElement('p');
+      pr.className = 'muted';
+      pr.innerText = p.preview || '';
+      const a = document.createElement('a');
+      a.className = 'read-more';
+      a.href = `#${p.id || p.file.replace(/[^a-z0-9]/gi,'')}`;
+      a.innerText = 'Read More →';
+      card.appendChild(title);
+      card.appendChild(pr);
+      card.appendChild(a);
+      previewEl.appendChild(card);
+    }
+
+    // fetch and inject fragments (in order)
+    for(const p of posts){
+      try {
+        const r = await fetch(p.file, {cache:'no-store'});
+        if(!r.ok){
+          console.warn('Failed to fetch', p.file);
+          const warn = document.createElement('div');
+          warn.className = 'error';
+          warn.textContent = `Could not load ${p.file} (check path).`;
+          fullEl.appendChild(warn);
+          continue;
+        }
+        const html = await r.text();
+
+        // Create wrapper section with id (for anchor)
+        const sec = document.createElement('section');
+        // determine id: use p.id if present else derive from filename
+        const safeId = p.id ? String(p.id) : String(p.file).replace(/[^a-z0-9]/gi,'');
+        sec.id = safeId;
+        sec.className = 'blog-full';
+        // Insert the fragment HTML as innerHTML (these fragments must be safe and authored by you)
+        sec.innerHTML = html;
+        fullEl.appendChild(sec);
+      } catch(e){
+        console.error('Error loading fragment', p.file, e);
+        const warn = document.createElement('div');
+        warn.className = 'error';
+        warn.textContent = `Error loading ${p.file}`;
+        fullEl.appendChild(warn);
+      }
+    }
+
+    // remove loader
+    loaderNote.style.display = 'none';
+
+    // Smooth scrolling for anchor links to internal ids
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', function(e){
+        const hash = this.getAttribute('href');
+        const target = document.querySelector(hash);
+        if(target){
+          e.preventDefault();
+          target.scrollIntoView({behavior:'smooth', block:'start'});
+          history.replaceState(null,'',hash);
+        }
+      });
+    });
+
+    // optional: highlight preview when scrolled into view
+    const previews = Array.from(document.querySelectorAll('.preview'));
+    window.addEventListener('hashchange', ()=>{
+      const id = location.hash.slice(1);
+      if(!id) return;
+      const idx = posts.findIndex(p => String(p.id) === id || String(p.file).includes(id));
+      if(idx>=0 && previews[idx]) {
+        previews[idx].style.boxShadow = '0 12px 30px rgba(11,179,150,0.08)';
+        setTimeout(()=> previews[idx].style.boxShadow = '', 2200);
+      }
+    });
+
+  })();
+  </script>
 </body>
 </html>
