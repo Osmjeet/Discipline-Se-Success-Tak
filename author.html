@@ -17,6 +17,15 @@
     p{margin:16px 0;font-size:17px;}
     .highlight{font-style:italic;color:#444;font-size:18px;}
     .author-card{background:#fff;padding:28px;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,0.07);}
+    .author-photo-wrap{display:flex;justify-content:center;margin-bottom:18px;}
+    .author-photo{
+      width:160px;
+      height:160px;
+      object-fit:cover;
+      border-radius:12px;
+      box-shadow:0 8px 20px rgba(0,0,0,0.12);
+      border:6px solid #fff;
+    }
     .social{margin-top:24px;}
     .social a{display:inline-block;margin-right:12px;font-weight:600;color:#078a72;text-decoration:none;font-size:16px;}
     .feedback{margin-top:32px;padding:20px;background:#f6fffb;border:1px solid #d8f3e9;border-radius:12px;}
@@ -25,6 +34,12 @@
     .ebook-btn{display:inline-block;margin-top:22px;padding:12px 20px;background:#078a72;color:#fff;font-weight:700;border-radius:8px;text-decoration:none;box-shadow:0 6px 14px rgba(0,0,0,0.12);}
     .ebook-btn:hover{background:#056d59;}
     footer{text-align:center;color:#666;margin:36px 0;font-size:14px;}
+
+    /* Responsive tweaks */
+    @media(max-width:520px){
+      .author-photo{width:128px;height:128px;border-radius:12px;}
+      main{padding:18px;margin:20px auto;}
+    }
   </style>
 </head>
 <body>
@@ -40,6 +55,16 @@
   <!-- MAIN CONTENT -->
   <main>
     <div class="author-card">
+
+      <!-- AUTHOR PHOTO (added) -->
+      <div class="author-photo-wrap">
+        <!--
+          Place your author image file as "author.jpg" next to this HTML file in the repo.
+          If your file has a different name, replace the src value accordingly.
+        -->
+        <img src="author.jpg" alt="Jeet S Singh — Author photo" class="author-photo">
+      </div>
+
       <h1>About the Author</h1>
       <p class="highlight">“Discipline मेरा lifestyle है, consistency मेरी पहचान है, और लिखना मेरी आत्मा की आवाज़।”</p>
       
