@@ -4,97 +4,168 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Blogs — Jeet S Singh (Author of Discipline Se Success Tak)</title>
-  <meta name="description" content="Read inspiring blogs by Jeet S Singh, Author of 'Discipline Se Success Tak'. Learn about discipline, success, motivation and daily habits." />
-  <link rel="canonical" href="https://discipline-se-success-tak.vercel.app/blog.html" />
-
+  <meta name="description" content="Blogs by Jeet S Singh — Discipline, Consistency, Habits, Time Management, Patience and more. Click Read more to expand full article." />
   <style>
-    body{margin:0;font-family:Inter,Roboto,Arial;background:#f9fbfa;color:#102827;line-height:1.7}
-    .wrap{max-width:900px;margin:0 auto;padding:28px}
-    h1{text-align:center;color:#06493f;margin:28px 0}
-    h2{color:#0a3d36;margin-top:0;margin-bottom:12px}
-    p{margin-bottom:14px;font-size:1.05rem}
-    .blog{margin-bottom:34px;padding:22px;background:#fff;border-radius:14px;box-shadow:0 4px 14px rgba(0,0,0,0.08)}
-    .blog .full{display:none;margin-top:12px}
-    .author{margin-top:18px;padding-top:12px;border-top:1px solid #e0eceb;font-size:0.95rem;color:#333}
-    .author strong{color:#06493f}
-    .btn{display:inline-block;margin-top:8px;padding:8px 14px;border-radius:8px;background:#0bb39a;color:#fff;font-weight:600;text-decoration:none;cursor:pointer}
-    footer{text-align:center;margin-top:28px;padding:16px;font-size:0.9rem;color:#666}
-
-    /* Navigation */
-    nav{background:#06493f;padding:14px 20px}
-    nav .menu{max-width:900px;margin:auto;display:flex;gap:20px;flex-wrap:wrap}
-    nav a{color:#fff;text-decoration:none;font-weight:600}
-    nav a:hover{text-decoration:underline}
-    @media(max-width:600px){nav .menu{flex-direction:column;gap:10px}}
+    :root{
+      --accent:#0b9f86;
+      --card-bg:#ffffff;
+      --muted:#516b66;
+      --maxw:920px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Arial;background:#f5fbf9;color:#0b2f2a;line-height:1.7}
+    header{background:linear-gradient(180deg,#062a2a,#0b3f3a);color:white;padding:22px 18px}
+    header .wrap{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+    header h1{margin:0;font-size:20px}
+    header nav{margin-left:auto;display:flex;gap:14px}
+    header a{color:white;text-decoration:none;font-weight:600}
+    main.wrap{max-width:var(--maxw);margin:18px auto;padding:0 14px}
+    .intro{margin-bottom:18px}
+    .grid{display:grid;grid-template-columns:1fr;gap:16px}
+    .card{background:var(--card-bg);border-radius:12px;padding:18px;box-shadow:0 8px 28px rgba(4,20,18,0.06);overflow:hidden}
+    .card h2{margin:0 0 8px 0;color:#06493f;font-size:20px}
+    .tagline{color:var(--muted);margin-bottom:10px;font-size:0.95rem}
+    .preview{color:#133a35;margin-bottom:12px}
+    .actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .btn{background:var(--accent);color:white;padding:10px 14px;border-radius:9px;text-decoration:none;border:0;cursor:pointer;font-weight:700}
+    .btn.ghost{background:transparent;color:var(--accent);border:1px solid rgba(11,159,134,0.12)}
+    .expanded{margin-top:14px;border-top:1px dashed #e6f4ef;padding-top:12px}
+    .meta{font-size:0.9rem;color:var(--muted);margin-top:10px}
+    .author-note{margin-top:12px;color:#06493f;font-weight:600}
+    .small{font-size:0.95rem;color:var(--muted)}
+    details summary{cursor:pointer}
+    .hide{display:none}
+    /* responsive */
+    @media(min-width:860px){
+      .grid{grid-template-columns:1fr 1fr}
+    }
   </style>
 </head>
 <body>
-
-  <!-- Navigation -->
-  <nav>
-    <div class="menu">
-      <a href="index.html">🏠 Home</a>
-      <a href="author.html">👤 Author</a>
-      <a href="blog.html">📝 Blogs</a>
+  <header>
+    <div class="wrap">
+      <h1>📖 Blogs — Jeet S Singh</h1>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="author.html">👤 Author</a>
+        <a href="blog.html" aria-current="page">📝 Blogs</a>
+        <a href="ebook.html">📘 Free Mini eBook</a>
+      </nav>
     </div>
-  </nav>
+  </header>
 
-  <div class="wrap">
-    <h1>📖 Blogs by Jeet S Singh</h1>
-    <div id="blog-list">Loading blogs...</div>
-  </div>
+  <main class="wrap" role="main">
+    <section class="intro">
+      <p class="small">Yahan aapko Discipline, Consistency, Habit aur Time Management se related short, practical aur implementable blogs milenge. Har blog ke saath <strong>Read more</strong> ka option hai — click karte hi uska poora article card ke andar expand ho jayega.</p>
+    </section>
 
-  <footer>
-    © 2025 Jeet S Singh — Author of 
-    <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">“Discipline Se Success Tak”</a>
-  </footer>
+    <section id="posts" class="grid" aria-live="polite">
+      <!-- JS will render cards here -->
+    </section>
+
+    <footer style="margin-top:22px;text-align:center;color:var(--muted);font-size:0.95rem;padding-bottom:36px">
+      © 2025 Jeet S Singh — Discipline • Faith • Success
+    </footer>
+  </main>
 
   <script>
-    async function loadBlogs(){
-      try {
-        const res = await fetch('posts.json');
+    // Utility: fetch JSON and render posts as cards
+    (async function(){
+      const postsEl = document.getElementById('posts');
+      try{
+        const res = await fetch('/posts.json', {cache: "no-store"});
+        if(!res.ok) throw new Error('posts.json not found');
         const posts = await res.json();
-        const list = document.getElementById('blog-list');
-        list.innerHTML = '';
 
-        for (let post of posts){
-          const card = document.createElement('div');
-          card.className = 'blog';
-
+        // Helper to sanitize minimal (we'll trust your inner HTML in posts/*)
+        const createCard = (p) => {
+          const card = document.createElement('article');
+          card.className = 'card';
+          card.dataset.file = p.file || '';
           card.innerHTML = `
-            <h2>${post.title}</h2>
-            <p>${post.preview}</p>
-            <button class="btn" onclick="toggleFull(this)">Read More</button>
-            <div class="full"></div>
+            <h2>${escapeHtml(p.title)}</h2>
+            <div class="tagline">${escapeHtml(p.tagline || '')}</div>
+            <div class="preview">${escapeHtml(p.preview || '')}</div>
+            <div class="actions">
+              <button class="btn read-btn" aria-expanded="false">Read more</button>
+              <button class="btn ghost view-file" title="Open raw file">Open source</button>
+            </div>
+            <div class="expanded hide" aria-hidden="true"></div>
           `;
+          // events
+          const readBtn = card.querySelector('.read-btn');
+          const viewBtn = card.querySelector('.view-file');
+          const expanded = card.querySelector('.expanded');
 
-          // Load full content from file
-          fetch(post.file)
-            .then(r => r.text())
-            .then(html => {
-              card.querySelector('.full').innerHTML = html;
+          readBtn.addEventListener('click', async () => {
+            // close other expanded
+            document.querySelectorAll('.expanded').forEach(el=>{
+              if(el!==expanded){ el.classList.add('hide'); el.previousElementSibling.querySelector('.read-btn')?.setAttribute('aria-expanded','false'); el.setAttribute('aria-hidden','true'); }
             });
 
-          list.appendChild(card);
-        }
-      } catch(e){
-        document.getElementById('blog-list').innerText = 'Failed to load blogs.';
-        console.error(e);
-      }
-    }
+            const isHidden = expanded.classList.contains('hide');
+            if(!isHidden){
+              // collapse
+              expanded.classList.add('hide'); expanded.setAttribute('aria-hidden','true');
+              readBtn.setAttribute('aria-expanded','false'); readBtn.textContent = 'Read more';
+              return;
+            }
 
-    function toggleFull(btn){
-      const full = btn.nextElementSibling;
-      if(full.style.display === 'block'){
-        full.style.display = 'none';
-        btn.textContent = 'Read More';
-      } else {
-        full.style.display = 'block';
-        btn.textContent = 'Show Less';
-      }
-    }
+            // expand: if empty, fetch inner html
+            if(!expanded.dataset.loaded){
+              const file = card.dataset.file;
+              if(!file){
+                expanded.innerHTML = '<p class="small">Content not available.</p>';
+              } else {
+                try{
+                  const r = await fetch(file, {cache:"no-store"});
+                  if(!r.ok) throw new Error('file fetch failed');
+                  let text = await r.text();
+                  // If the returned file contains a full HTML doc, try to extract body inner HTML; else use as-is.
+                  if(/<html/i.test(text)){
+                    const bodyMatch = text.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+                    text = bodyMatch ? bodyMatch[1] : text;
+                  }
+                  // Avoid duplicating the title if posts fragment also contains an H2/H1 matching the card title.
+                  // We'll remove leading h1/h2 if it matches.
+                  const tmp = document.createElement('div'); tmp.innerHTML = text;
+                  const firstHeading = tmp.querySelector('h1,h2');
+                  if(firstHeading){
+                    const headingText = firstHeading.textContent.trim();
+                    if(headingText && headingText === p.title) { firstHeading.remove(); text = tmp.innerHTML; }
+                  }
+                  expanded.innerHTML = text;
+                  expanded.dataset.loaded = '1';
+                }catch(err){
+                  expanded.innerHTML = `<p class="small">Error loading article.</p>`;
+                }
+              }
+            }
+            // show
+            expanded.classList.remove('hide'); expanded.setAttribute('aria-hidden','false');
+            readBtn.setAttribute('aria-expanded','true'); readBtn.textContent = 'Show less';
+            // smooth scroll to expanded on small screens
+            setTimeout(()=> expanded.scrollIntoView({behavior:'smooth', block:'start'}), 80);
+          });
 
-    loadBlogs();
+          viewBtn.addEventListener('click', ()=>{
+            const file = card.dataset.file;
+            if(file) window.open(file, '_blank');
+          });
+
+          return card;
+        };
+
+        // render all
+        posts.forEach(p => postsEl.appendChild(createCard(p)));
+
+      }catch(err){
+        postsEl.innerHTML = `<div style="grid-column:1/-1" class="card"><p class="small">Failed to load posts.json — check file path. Error: ${escapeHtml(err.message)}</p></div>`;
+      }
+
+      // small helper
+      function escapeHtml(s){ if(!s && s!==0) return ''; return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;'); }
+    })();
   </script>
 </body>
 </html>
