@@ -2,61 +2,71 @@
   {
     "id": 1,
     "title": "Blog 1: Discipline ही असली Superpower",
-    "preview": "Discipline वो ताक़त है जो average इंसान को extraordinary बना देती है।",
+    "tagline": "Discipline सिर्फ़ नियमों का पालन नहीं — यह अपनी future self से किया वादा है।",
+    "preview": "Talent शुरुआत दिला सकता है, लेकिन discipline रोज़ के छोटे actions को compound कर के आपको मंज़िल तक ले जाता है।",
     "file": "posts/blog1.html"
   },
   {
     "id": 2,
     "title": "Blog 2: Motivation vs Discipline",
-    "preview": "Motivation spark देता है, लेकिन Discipline वो engine है जो मंज़िल तक ले जाता है।",
+    "tagline": "Motivation spark देता है; discipline वह steady engine है जो finish line तक पहुंचाता है।",
+    "preview": "Motivation short-term होता है; discipline systems और routines बनाकर long-term progress deliver करता है।",
     "file": "posts/blog2.html"
   },
   {
     "id": 3,
     "title": "Blog 3: छोटे Steps, बड़े Results",
-    "preview": "छोटे-छोटे daily steps ही compounding से बड़े results लाते हैं।",
+    "tagline": "Big results छोटे-छोटे, daily actions के accumulation से बनते हैं।",
+    "preview": "Daily छोटे steps ही compounding से बड़े outcomes लाते हैं — two-minute rule और weekly review helpful हैं।",
     "file": "posts/blog3.html"
   },
   {
     "id": 4,
     "title": "Blog 4: Failures से सीखो",
-    "preview": "Failure कोई end नहीं — यह feedback है जो आपको बेहतर बनाता है।",
+    "tagline": "Failure feedback है — उसे analyze करो और validated changes implement करो।",
+    "preview": "Failure को personal मत लो; structured reflection (क्या हुआ, क्या control था, next step) से तेजी से सुधरें।",
     "file": "posts/blog4.html"
   },
   {
     "id": 5,
     "title": "Blog 5: छोटी जीतें ही बड़ी सफलता का रास्ता बनाती हैं",
-    "preview": "Small wins confidence और momentum देते हैं, जो बड़ी जीतों की नींव रखते हैं।",
+    "tagline": "Small wins momentum और confidence देती हैं — compounding से बड़ा असर आता है।",
+    "preview": "हर दिन तीन micro-wins लिखो; 30 दिनों में यह practice आपकी identity और momentum बदल देगी।",
     "file": "posts/blog5.html"
   },
   {
     "id": 6,
     "title": "Blog 6: Consistency ही Success का असली Secret",
-    "preview": "Motivation आता-जाता है, लेकिन consistency ही success की असली guarantee है।",
+    "tagline": "Consistency मतलब रोज़ small efforts — perfect नहीं, regular होना ज़रूरी है।",
+    "preview": "Consistency short-term hype नहीं बल्कि long-term advantage है — weekly rhythm और habit stacking से बनती है।",
     "file": "posts/blog6.html"
   },
   {
     "id": 7,
     "title": "Blog 7: Time Management — Success का सबसे बड़ा हथियार",
-    "preview": "24 घंटे सबको मिलते हैं, फर्क बस ये है कि कौन उन्हें wisely manage करता है।",
+    "tagline": "Time finite resource है — जो इसे wisely manage करता है, वही leverage बनता है।",
+    "preview": "Top-3 rule, time-blocking और Pomodoro जैसी techniques आपकी productivity और clarity बढ़ाती हैं।",
     "file": "posts/blog7.html"
   },
   {
     "id": 8,
     "title": "Blog 8: Habit Shapes Destiny (आदतें ही किस्मत बनाती हैं)",
-    "preview": "आप वही बनते हो जो आप रोज़ करते हो — आदतें ही आपकी identity और destiny तय करती हैं।",
+    "tagline": "आप वही बनते हो जो आप रोज़ करते हो — habits आपकी identity define करती हैं।",
+    "preview": "Habit loop (cue→routine→reward), habit stacking और tiny starts से sustainable change आता है।",
     "file": "posts/blog8.html"
   },
   {
     "id": 9,
-    "title": "Blog 9: Self-Belief — Success की सबसे बड़ी नींव",
-    "preview": "अगर आप खुद पर विश्वास रखते हैं तो कोई भी goal बड़ा नहीं होता।",
+    "title": "Blog 9: Self-Belief — Success की नींव",
+    "tagline": "Self-belief छोटे proofs और evidence से बनती है — practice, journal और feedback लाओ।",
+    "preview": "Daily wins और past achievements की list से confidence बनाओ; compare दूसरे से मत, compare past-self से करो।",
     "file": "posts/blog9.html"
   },
   {
     "id": 10,
     "title": "Blog 10: Patience",
-    "preview": "Patience वो strength है जो आपको तब stable रखती है जब दुनिया कहती है छोड़ दो।",
+    "tagline": "Patience वो strength है जो आपको तब stable रखती है जब दुनिया कहती है छोड़ दो।",
+    "preview": "Patience passive waiting नहीं; यह active endurance है — process पर भरोसा और iterative work जरूरी है।",
     "file": "posts/blog10.html"
   }
 ]
