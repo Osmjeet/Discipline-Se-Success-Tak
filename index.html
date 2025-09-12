@@ -1,129 +1,147 @@
 <!doctype html>
 <html lang="hi">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Discipline Se Success Tak — Jeet S. Singh</title>
-  <meta name="description" content="Discipline Se Success Tak — Practical, emotional & interactive self-help guide by Jeet S. Singh. Read sample or read free with Kindle Unlimited.">
+  <meta name="description" content="Discipline Se Success Tak — Practical, emotional & interactive self-help guide by Jeet S. Singh.">
   <meta name="author" content="Jeet S. Singh">
-  <link rel="canonical" href="https://discipline-se-success-tak.vercel.app/">
-
   <meta property="og:title" content="Discipline Se Success Tak — Jeet S. Singh">
   <meta property="og:description" content="Practical, emotional & interactive self-help guide. Read sample or read free with Kindle Unlimited.">
   <meta property="og:image" content="https://m.media-amazon.com/images/I/31jrBAyTDjL._SY445_SX342_.jpg">
-  <meta property="og:type" content="book">
-  <meta property="og:url" content="https://discipline-se-success-tak.vercel.app/">
-
   <style>
     :root{
-      --bg-top:#04212a; --bg-bottom:#071827;
-      --card:#ffffff; --muted:#6b7f82; --accent:#0bb39a; --accent-dark:#078a72;
-      --radius:14px; --maxw:1100px;
-      --nav-height:74px;
+      --bg:#041f24;
+      --nav-bg:linear-gradient(90deg,#053736,#043233);
+      --card:#ffffff;
+      --muted:#6b7f82;
+      --accent:#0bb39a;
+      --accent-2:#078a72;
+      --radius:14px;
+      --maxw:1100px;
+      --nav-h:64px;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
       font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
-      background:linear-gradient(180deg,var(--bg-top),var(--bg-bottom));
+      background:linear-gradient(180deg,var(--bg),#071827);
       color:#08202a;
-      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-      padding:0; display:flex; justify-content:center;
-    }
-    .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:18px}
-    /* TOP NAV: left (brand) | center (links) | right (cta) */
-    header.site-head{position:sticky;top:0;z-index:30;background:linear-gradient(180deg,#083033,#042a2a);padding:12px 18px;border-bottom:1px solid rgba(255,255,255,0.03);backdrop-filter:blur(6px)}
-    .nav-row{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;gap:18px;justify-content:space-between}
-    .brand{display:flex;gap:12px;align-items:center;color:#e6fffb;text-decoration:none}
-    .brand .logo{width:44px;height:44px;border-radius:8px;background:#0bb39a;color:#052926;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px}
-    .brand .meta{line-height:1}
-    .brand .meta .title{font-weight:700;color:#eafff8}
-    .brand .meta .sub{font-size:12px;color:#cfeee6;margin-top:2px}
-    nav.main-nav{display:flex;gap:18px;align-items:center}
-    nav.main-nav a{color:#e6fff9;text-decoration:none;font-weight:700;padding:8px 10px;border-radius:8px}
-    nav.main-nav a:hover{background:rgba(255,255,255,0.03)}
-    .cta{display:flex;align-items:center;gap:10px}
-    .btn{
-      display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;font-weight:800;text-decoration:none;cursor:pointer;border:0;
-      box-shadow:0 8px 20px rgba(2,6,23,0.18)
-    }
-    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-dark));color:white}
-    .btn-ghost{background:transparent;border:2px solid rgba(11,179,150,0.08);color:#e6fff9}
-    @media(max-width:880px){
-      .nav-row{gap:10px}
-      nav.main-nav{display:flex;gap:12px}
-    }
-    @media(max-width:640px){
-      .nav-row{flex-direction:column;align-items:stretch;gap:12px}
-      nav.main-nav{justify-content:center;flex-wrap:wrap}
-      .cta{justify-content:center}
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex; justify-content:center;
     }
 
-    /* Page content */
-    main{padding:18px}
-    .hero{display:grid;grid-template-columns:360px 1fr;gap:26px;align-items:start;margin-top:18px}
+    /* top nav (fixed, compact) */
+    header.site-head{
+      position:fixed; top:0; left:0; right:0; height:var(--nav-h);
+      background:var(--nav-bg); color:#eafff8;
+      display:flex; align-items:center; justify-content:center;
+      z-index:60; box-shadow:0 6px 20px rgba(2,6,23,0.4);
+      padding:0 12px;
+    }
+    .nav-inner{width:100%;max-width:var(--maxw);display:flex;align-items:center;justify-content:space-between;gap:12px}
+    /* brand */
+    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+    .logo{
+      width:42px;height:42px;border-radius:9px;background:#0bb39a;color:#02302b;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;
+      flex:0 0 42px;
+    }
+    .brand .text{line-height:1}
+    .brand .title{font-weight:700;font-size:15px}
+    .brand .sub{font-size:12px;color:rgba(230,255,249,0.9)}
+
+    /* center nav links (compact) */
+    nav.main-nav{display:flex;gap:12px;align-items:center;justify-content:center;flex:1}
+    nav.main-nav a{
+      color:#eafff8;text-decoration:none;font-weight:700;padding:8px 10px;border-radius:8px;font-size:14px;
+      display:inline-flex;gap:8px;align-items:center;
+    }
+    nav.main-nav a:hover{background:rgba(255,255,255,0.03)}
+    /* right CTA */
+    .cta{display:flex;gap:8px;align-items:center}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;font-weight:800;text-decoration:none;cursor:pointer;border:0}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;box-shadow:0 8px 20px rgba(11,179,150,0.12);font-size:14px}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#dff7f0;font-size:13px;padding:7px 10px}
+
+    /* make nav smaller on tiny screens */
+    @media (max-width:680px){
+      .brand .title{font-size:14px}
+      nav.main-nav a{font-size:13px;padding:6px 8px}
+      .btn-primary{padding:7px 10px;font-size:13px}
+    }
+
+    /* page container with top padding to avoid fixed nav */
+    .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:calc(var(--nav-h) + 18px) 20px 36px}
+
+    /* content */
+    .hero{display:grid;grid-template-columns:320px 1fr;gap:26px;align-items:start;margin-top:6px}
     @media(max-width:880px){.hero{grid-template-columns:1fr;text-align:center}}
-    .card{background:var(--card);border-radius:var(--radius);padding:22px;box-shadow:0 18px 50px rgba(2,6,23,0.25)}
-    .cover{border-radius:12px;overflow:hidden;box-shadow:0 18px 60px rgba(2,6,23,0.45)}
+    .card{background:var(--card);border-radius:var(--radius);padding:20px;box-shadow:0 18px 50px rgba(2,6,23,0.22)}
+    .cover{border-radius:12px;overflow:hidden;box-shadow:0 18px 60px rgba(2,6,23,0.35)}
     .cover img{width:100%;height:auto;display:block}
-    h1{margin:0;font-size:32px;color:var(--accent-dark)}
-    .by{color:var(--muted);margin-top:8px;font-size:14px}
+    h1{margin:0;font-size:30px;color:var(--accent-2)}
+    .by{color:var(--muted);margin-top:8px;font-size:13px}
     p.lead{color:#20363b;font-size:15px;line-height:1.6;margin-top:12px}
     .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
     .badge{background:linear-gradient(90deg,#fff3cd,#fff7e6);padding:6px 10px;border-radius:999px;font-weight:700;color:#5a3b00;font-size:13px}
-    .buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
-    .small{font-size:13px;color:var(--muted);margin-top:8px}
-    .section{margin-top:20px}
-    .section h2{margin:0;color:var(--accent-dark);font-size:18px}
+    .buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .small{font-size:12.5px;color:var(--muted);margin-top:8px}
+    .section{margin-top:18px}
+    .section h2{margin:0;color:var(--accent-2);font-size:17px}
     .features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
     @media(max-width:880px){.features{grid-template-columns:1fr}}
-    .feature{background:#f8fffb;border-radius:10px;padding:14px;box-shadow:0 8px 20px rgba(9,20,18,0.03)}
+    .feature{background:#f8fffb;border-radius:10px;padding:12px;box-shadow:0 8px 20px rgba(9,20,18,0.03)}
     .feature h4{margin:0;color:#05584a;font-size:15px}
     .feature p{margin:8px 0 0;font-size:14px;color:#2d4a46}
-    .footer{margin-top:20px;color:var(--muted);font-size:13px;text-align:center;padding-bottom:18px}
-    .contact{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px}
-    .contact a{color:var(--accent-dark);text-decoration:none;font-weight:700}
+    .footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center;padding-bottom:18px}
+    .contact{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+    .contact a{color:var(--accent-2);text-decoration:none;font-weight:700}
 
-    /* make content full width on small screens and readable */
-    .content-wrap{max-width:820px;margin:18px auto}
+    /* smaller card on mobile to show more page */
+    @media(max-width:480px){
+      .card{padding:16px}
+      h1{font-size:26px}
+    }
   </style>
 </head>
 <body>
-  <!-- TOP NAV -->
-  <header class="site-head" role="banner">
-    <div class="nav-row">
-      <!-- LEFT: Brand -->
-      <a class="brand" href="index.html" aria-label="Discipline Se Success Tak — Home">
+  <!-- TOP NAV (fixed, compact) -->
+  <header class="site-head" role="banner" aria-label="Main header">
+    <div class="nav-inner">
+      <!-- left: brand -->
+      <a class="brand" href="index.html" aria-label="Home — Discipline Se Success Tak">
         <div class="logo" aria-hidden="true">JS</div>
-        <div class="meta">
+        <div class="text">
           <div class="title">Discipline Se Success Tak</div>
           <div class="sub">By Jeet S. Singh</div>
         </div>
       </a>
 
-      <!-- CENTER: Links -->
-      <nav class="main-nav" role="navigation" aria-label="Main navigation">
+      <!-- center: links -->
+      <nav class="main-nav" role="navigation" aria-label="Primary">
         <a href="index.html">🏠 Home</a>
         <a href="author.html">👤 Author</a>
         <a href="blog.html">📝 Blogs</a>
       </nav>
 
-      <!-- RIGHT: CTA -->
-      <div class="cta" role="region" aria-label="Actions">
-        <a class="btn btn-primary" href="ebook.html">📘 Free Mini eBook</a>
+      <!-- right: CTA -->
+      <div class="cta" role="region" aria-label="Primary actions">
+        <a class="btn btn-primary" href="ebook.html" title="Free mini eBook">📘 Free Mini eBook</a>
       </div>
     </div>
   </header>
 
+  <!-- PAGE CONTENT -->
   <main class="wrap" role="main">
     <!-- HERO -->
-    <section class="hero">
+    <section class="hero" aria-labelledby="book-title">
       <div class="cover card" aria-hidden="false">
         <img src="https://m.media-amazon.com/images/I/31jrBAyTDjL._SY445_SX342_.jpg" alt="Discipline Se Success Tak — Book cover">
-        <div style="padding:12px;text-align:center;font-size:13px;color:#2f4b46">Discipline • Faith • Success</div>
+        <div style="padding:10px;text-align:center;font-size:13px;color:#2f4b46">Discipline • Faith • Success</div>
       </div>
 
-      <div class="card" aria-labelledby="book-title">
+      <div class="card" id="book-card">
         <h1 id="book-title">Discipline Se Success Tak</h1>
         <div class="by">By <strong>Jeet S. Singh</strong></div>
         <p class="lead">
@@ -138,7 +156,7 @@
         <div class="buttons" role="group" aria-label="Primary actions">
           <a class="btn btn-primary" href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank" rel="noopener noreferrer">Buy on Amazon — ₹99</a>
           <a class="btn btn-ghost" href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank" rel="noopener noreferrer">Read Sample</a>
-          <a class="btn btn-primary" href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank" rel="noopener noreferrer">Read Free with Kindle Unlimited</a>
+          <a class="btn btn-primary" href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank" rel="noopener noreferrer">Read on Kindle Unlimited</a>
           <a class="btn btn-ghost" href="#feedback">Give Feedback</a>
         </div>
 
@@ -146,7 +164,7 @@
       </div>
     </section>
 
-    <!-- ABOUT / FEATURES -->
+    <!-- ABOUT -->
     <section class="card section" aria-labelledby="about">
       <h2 id="about">📖 About the Book</h2>
       <p>
@@ -169,14 +187,14 @@
       </div>
     </section>
 
-    <!-- LINK TO BLOG -->
+    <!-- BLOGS LINK -->
     <section class="card section">
       <h2>📝 Explore Blogs</h2>
       <p>Discipline aur success se related free blogs yahan padh sakte ho.</p>
       <a class="btn btn-primary" href="blog.html">Read Blogs</a>
     </section>
 
-    <!-- LINK TO AUTHOR -->
+    <!-- AUTHOR LINK -->
     <section class="card section">
       <h2>👤 About the Author</h2>
       <p>Jeet S Singh ke baare me detail profile aur journey ke liye author page visit karein.</p>
