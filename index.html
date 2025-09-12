@@ -41,20 +41,10 @@
       padding:0 12px;
     }
     .nav-inner{width:100%;max-width:var(--maxw);display:flex;align-items:center;justify-content:space-between;gap:12px}
-    /* brand */
-    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
-    .logo{
-      width:42px;height:42px;border-radius:9px;background:#0bb39a;color:#02302b;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;
-      flex:0 0 42px;
-    }
-    .brand .text{line-height:1}
-    .brand .title{font-weight:700;font-size:15px}
-    .brand .sub{font-size:12px;color:rgba(230,255,249,0.9)}
-
     /* center nav links (compact) */
     nav.main-nav{display:flex;gap:12px;align-items:center;justify-content:center;flex:1}
     nav.main-nav a{
-      color:#eafff8;text-decoration:none;font-weight:700;padding:8px 10px;border-radius:8px;font-size:14px;
+      color:#eafff8;text-decoration:none;font-weight:700;padding:8px 12px;border-radius:8px;font-size:14px;
       display:inline-flex;gap:8px;align-items:center;
     }
     nav.main-nav a:hover{background:rgba(255,255,255,0.03)}
@@ -64,9 +54,7 @@
     .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;box-shadow:0 8px 20px rgba(11,179,150,0.12);font-size:14px}
     .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#dff7f0;font-size:13px;padding:7px 10px}
 
-    /* make nav smaller on tiny screens */
     @media (max-width:680px){
-      .brand .title{font-size:14px}
       nav.main-nav a{font-size:13px;padding:6px 8px}
       .btn-primary{padding:7px 10px;font-size:13px}
     }
@@ -98,25 +86,19 @@
     .contact{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
     .contact a{color:var(--accent-2);text-decoration:none;font-weight:700}
 
-    /* smaller card on mobile to show more page */
     @media(max-width:480px){
       .card{padding:16px}
       h1{font-size:26px}
+      .hero{gap:18px}
     }
   </style>
 </head>
 <body>
-  <!-- TOP NAV (fixed, compact) -->
+  <!-- TOP NAV (fixed, no left brand) -->
   <header class="site-head" role="banner" aria-label="Main header">
     <div class="nav-inner">
-      <!-- left: brand -->
-      <a class="brand" href="index.html" aria-label="Home — Discipline Se Success Tak">
-        <div class="logo" aria-hidden="true">JS</div>
-        <div class="text">
-          <div class="title">Discipline Se Success Tak</div>
-          <div class="sub">By Jeet S. Singh</div>
-        </div>
-      </a>
+      <!-- empty left slot to keep center alignment (no brand) -->
+      <div style="width:48px"></div>
 
       <!-- center: links -->
       <nav class="main-nav" role="navigation" aria-label="Primary">
