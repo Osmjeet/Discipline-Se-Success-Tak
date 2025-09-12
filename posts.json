@@ -2,55 +2,61 @@
   {
     "id": 1,
     "title": "Blog 1: Discipline ही असली Superpower",
-    "preview": "Talent आपको शुरुआत दिला सकता है, लेकिन discipline ही आपको मंज़िल तक ले जाता है। यह superpower average इंसान को extraordinary बना देती है।",
+    "preview": "Discipline वो ताक़त है जो average इंसान को extraordinary बना देती है।",
     "file": "posts/blog1.html"
   },
   {
     "id": 2,
     "title": "Blog 2: Motivation vs Discipline",
-    "preview": "Motivation एक spark है, लेकिन discipline वो engine है जो आपको हर दिन आगे बढ़ाता है।",
+    "preview": "Motivation spark देता है, लेकिन Discipline वो engine है जो मंज़िल तक ले जाता है।",
     "file": "posts/blog2.html"
   },
   {
     "id": 3,
     "title": "Blog 3: छोटे Steps, बड़े Results",
-    "preview": "Life बदलने के लिए बड़े steps नहीं, बल्कि छोटे daily steps ही असली results लाते हैं।",
+    "preview": "छोटे-छोटे daily steps ही compounding से बड़े results लाते हैं।",
     "file": "posts/blog3.html"
   },
   {
     "id": 4,
     "title": "Blog 4: Failures से सीखो",
-    "preview": "Failure कोई end नहीं है, बल्कि एक feedback है। हर गलती आपको success के और करीब ले जाती है।",
+    "preview": "Failure कोई end नहीं — यह feedback है जो आपको बेहतर बनाता है।",
     "file": "posts/blog4.html"
   },
   {
     "id": 5,
     "title": "Blog 5: छोटी जीतें ही बड़ी सफलता का रास्ता बनाती हैं",
-    "preview": "Daily छोटी जीतें आपके confidence को बढ़ाती हैं और compounding की तरह success तक पहुँचाती हैं।",
+    "preview": "Small wins confidence और momentum देते हैं, जो बड़ी जीतों की नींव रखते हैं।",
     "file": "posts/blog5.html"
   },
   {
     "id": 6,
     "title": "Blog 6: Consistency ही Success का असली Secret",
-    "preview": "Motivation आता-जाता है, लेकिन consistency ही वो ताक़त है जो छोटे-छोटे actions को बड़े results में बदल देती है।",
+    "preview": "Motivation आता-जाता है, लेकिन consistency ही success की असली guarantee है।",
     "file": "posts/blog6.html"
   },
   {
     "id": 7,
     "title": "Blog 7: Time Management — Success का सबसे बड़ा हथियार",
-    "preview": "24 घंटे सबके पास होते हैं, फर्क सिर्फ़ इतना है कि कौन उन्हें smart तरीके से manage करता है।",
+    "preview": "24 घंटे सबको मिलते हैं, फर्क बस ये है कि कौन उन्हें wisely manage करता है।",
     "file": "posts/blog7.html"
   },
   {
     "id": 8,
     "title": "Blog 8: Habit Shapes Destiny (आदतें ही किस्मत बनाती हैं)",
-    "preview": "आपकी habits ही आपकी destiny तय करती हैं। सही आदतें आपकी success की foundation बनाती हैं।",
+    "preview": "आप वही बनते हो जो आप रोज़ करते हो — आदतें ही आपकी identity और destiny तय करती हैं।",
     "file": "posts/blog8.html"
   },
   {
     "id": 9,
     "title": "Blog 9: Self-Belief — Success की सबसे बड़ी नींव",
-    "preview": "अगर आप खुद पर विश्वास रखते हैं, तो कोई भी goal बड़ा नहीं होता। Self-belief हर achievement की पहली सीढ़ी है।",
+    "preview": "अगर आप खुद पर विश्वास रखते हैं तो कोई भी goal बड़ा नहीं होता।",
     "file": "posts/blog9.html"
+  },
+  {
+    "id": 10,
+    "title": "Blog 10: Patience",
+    "preview": "Patience वो strength है जो आपको तब stable रखती है जब दुनिया कहती है छोड़ दो।",
+    "file": "posts/blog10.html"
   }
 ]
