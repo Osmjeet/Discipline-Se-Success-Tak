@@ -17,36 +17,61 @@
   <style>
     :root{
       --bg-top:#04212a; --bg-bottom:#071827;
-      --card:#ffffff; --muted:#5b6b73; --accent:#0bb39a; --accent-dark:#078a72;
-      --radius:14px;
-      --maxw:1100px;
+      --card:#ffffff; --muted:#6b7f82; --accent:#0bb39a; --accent-dark:#078a72;
+      --radius:14px; --maxw:1100px;
+      --nav-height:74px;
     }
     *{box-sizing:border-box}
     body{
-      margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
       background:linear-gradient(180deg,var(--bg-top),var(--bg-bottom));
-      color:#08202a; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-      padding:28px; display:flex; justify-content:center;
+      color:#08202a;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      padding:0; display:flex; justify-content:center;
     }
-    .wrap{width:100%;max-width:var(--maxw);margin:auto}
-    .hero{
-      display:grid;grid-template-columns:360px 1fr;gap:26px;align-items:center;margin-bottom:22px;
+    .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:18px}
+    /* TOP NAV: left (brand) | center (links) | right (cta) */
+    header.site-head{position:sticky;top:0;z-index:30;background:linear-gradient(180deg,#083033,#042a2a);padding:12px 18px;border-bottom:1px solid rgba(255,255,255,0.03);backdrop-filter:blur(6px)}
+    .nav-row{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;gap:18px;justify-content:space-between}
+    .brand{display:flex;gap:12px;align-items:center;color:#e6fffb;text-decoration:none}
+    .brand .logo{width:44px;height:44px;border-radius:8px;background:#0bb39a;color:#052926;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px}
+    .brand .meta{line-height:1}
+    .brand .meta .title{font-weight:700;color:#eafff8}
+    .brand .meta .sub{font-size:12px;color:#cfeee6;margin-top:2px}
+    nav.main-nav{display:flex;gap:18px;align-items:center}
+    nav.main-nav a{color:#e6fff9;text-decoration:none;font-weight:700;padding:8px 10px;border-radius:8px}
+    nav.main-nav a:hover{background:rgba(255,255,255,0.03)}
+    .cta{display:flex;align-items:center;gap:10px}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;font-weight:800;text-decoration:none;cursor:pointer;border:0;
+      box-shadow:0 8px 20px rgba(2,6,23,0.18)
     }
-    @media(max-width:880px){.hero{grid-template-columns:1fr; text-align:center}}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-dark));color:white}
+    .btn-ghost{background:transparent;border:2px solid rgba(11,179,150,0.08);color:#e6fff9}
+    @media(max-width:880px){
+      .nav-row{gap:10px}
+      nav.main-nav{display:flex;gap:12px}
+    }
+    @media(max-width:640px){
+      .nav-row{flex-direction:column;align-items:stretch;gap:12px}
+      nav.main-nav{justify-content:center;flex-wrap:wrap}
+      .cta{justify-content:center}
+    }
+
+    /* Page content */
+    main{padding:18px}
+    .hero{display:grid;grid-template-columns:360px 1fr;gap:26px;align-items:start;margin-top:18px}
+    @media(max-width:880px){.hero{grid-template-columns:1fr;text-align:center}}
+    .card{background:var(--card);border-radius:var(--radius);padding:22px;box-shadow:0 18px 50px rgba(2,6,23,0.25)}
     .cover{border-radius:12px;overflow:hidden;box-shadow:0 18px 60px rgba(2,6,23,0.45)}
     .cover img{width:100%;height:auto;display:block}
-    .card{
-      background:var(--card);border-radius:var(--radius);padding:22px;box-shadow:0 18px 50px rgba(2,6,23,0.25);
-    }
-    h1{margin:0;font-size:28px;color:var(--accent-dark)}
+    h1{margin:0;font-size:32px;color:var(--accent-dark)}
     .by{color:var(--muted);margin-top:8px;font-size:14px}
     p.lead{color:#20363b;font-size:15px;line-height:1.6;margin-top:12px}
     .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
     .badge{background:linear-gradient(90deg,#fff3cd,#fff7e6);padding:6px 10px;border-radius:999px;font-weight:700;color:#5a3b00;font-size:13px}
     .buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
-    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:10px;font-weight:800;text-decoration:none;cursor:pointer}
-    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-dark));color:white;box-shadow:0 12px 30px rgba(11,179,150,0.12)}
-    .btn-ghost{background:transparent;border:2px solid rgba(7,14,12,0.06);color:var(--accent-dark)}
     .small{font-size:13px;color:var(--muted);margin-top:8px}
     .section{margin-top:20px}
     .section h2{margin:0;color:var(--accent-dark);font-size:18px}
@@ -55,51 +80,42 @@
     .feature{background:#f8fffb;border-radius:10px;padding:14px;box-shadow:0 8px 20px rgba(9,20,18,0.03)}
     .feature h4{margin:0;color:#05584a;font-size:15px}
     .feature p{margin:8px 0 0;font-size:14px;color:#2d4a46}
-    .reviews{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
-    @media(max-width:880px){.reviews{grid-template-columns:1fr}}
-    .review{background:#fffefb;border-radius:10px;padding:12px;border:1px solid #f0efe8}
-    .author{display:flex;gap:10px;align-items:center;margin-top:10px}
-    .author img{width:46px;height:46px;border-radius:999px;object-fit:cover}
-    .cta-strip{margin-top:18px;padding:18px;border-radius:10px;background:linear-gradient(90deg,rgba(11,179,150,0.08),rgba(7,138,114,0.04));display:flex;align-items:center;justify-content:space-between;gap:12px}
-    @media(max-width:680px){.cta-strip{flex-direction:column;align-items:center;text-align:center}}
-    .cta-strip .text{font-weight:700;color:#06493f}
-    .meta{font-size:13px;color:var(--muted)}
     .footer{margin-top:20px;color:var(--muted);font-size:13px;text-align:center;padding-bottom:18px}
     .contact{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px}
     .contact a{color:var(--accent-dark);text-decoration:none;font-weight:700}
-    .faq{margin-top:10px}
-    details{background:#fbfffc;border-radius:8px;padding:10px;margin-top:8px}
-    summary{font-weight:700;cursor:pointer}
-    /* top navigation row (keeps buttons visible in a row) */
-    .topnav{display:flex;gap:18px;align-items:center;justify-content:space-between;margin-bottom:18px;color:#fff}
-    .topnav .left{display:flex;gap:12px;align-items:center}
-    .topnav a{color:#e6fffb;text-decoration:none;font-weight:700;padding:8px 12px;border-radius:10px}
-    .topnav .actions{display:flex;gap:8px;align-items:center}
-    @media(max-width:760px){.topnav{flex-direction:column;align-items:stretch}.topnav .left{width:100%;justify-content:space-between}}
+
+    /* make content full width on small screens and readable */
+    .content-wrap{max-width:820px;margin:18px auto}
   </style>
 </head>
 <body>
-  <main class="wrap" role="main">
+  <!-- TOP NAV -->
+  <header class="site-head" role="banner">
+    <div class="nav-row">
+      <!-- LEFT: Brand -->
+      <a class="brand" href="index.html" aria-label="Discipline Se Success Tak — Home">
+        <div class="logo" aria-hidden="true">JS</div>
+        <div class="meta">
+          <div class="title">Discipline Se Success Tak</div>
+          <div class="sub">By Jeet S. Singh</div>
+        </div>
+      </a>
 
-    <!-- TOP NAV -->
-    <div class="topnav">
-      <div class="left" aria-hidden="false">
-        <a href="index.html" style="display:flex;align-items:center;gap:10px">
-          <div style="width:40px;height:40px;border-radius:8px;background:#0bb39a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900">JS</div>
-          <div style="color:#e6fffb">
-            <div style="font-weight:800">Discipline Se Success Tak</div>
-            <div style="font-size:12px;color:#d6efe9">By Jeet S. Singh</div>
-          </div>
-        </a>
-      </div>
+      <!-- CENTER: Links -->
+      <nav class="main-nav" role="navigation" aria-label="Main navigation">
+        <a href="index.html">🏠 Home</a>
+        <a href="author.html">👤 Author</a>
+        <a href="blog.html">📝 Blogs</a>
+      </nav>
 
-      <div style="display:flex;align-items:center;gap:12px" class="actions">
-        <a class="btn btn-ghost" href="author.html">👤 Author</a>
-        <a class="btn btn-ghost" href="blog.html">📝 Blogs</a>
+      <!-- RIGHT: CTA -->
+      <div class="cta" role="region" aria-label="Actions">
         <a class="btn btn-primary" href="ebook.html">📘 Free Mini eBook</a>
       </div>
     </div>
+  </header>
 
+  <main class="wrap" role="main">
     <!-- HERO -->
     <section class="hero">
       <div class="cover card" aria-hidden="false">
@@ -178,5 +194,11 @@
     </section>
 
     <footer class="footer">
-      © 2025 Jeet S. Singh — For full book visit Amazon: 
-      <a href="https://www.amazon.in/dp/B
+      © 2025 Jeet S. Singh — For full book visit Amazon:
+      <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">Discipline Se Success Tak</a> • Discipline • Faith • Success
+      <br>
+      <a href="author.html">About the Author: Jeet S Singh</a>
+    </footer>
+  </main>
+</body>
+</html>
