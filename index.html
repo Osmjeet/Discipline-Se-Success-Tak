@@ -4,232 +4,272 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Discipline Se Success Tak — Jeet S. Singh</title>
-  <meta name="description" content="Discipline Se Success Tak — Practical, emotional & interactive self-help guide by Jeet S. Singh. Read sample or read free with Kindle Unlimited." />
-  <meta name="author" content="Jeet S. Singh" />
+  <meta name="description" content="Discipline Se Success Tak — Practical, emotional & interactive self-help guide by Jeet S. Singh. Read free mini eBook or buy on Amazon." />
   <link rel="canonical" href="https://discipline-se-success-tak.vercel.app/" />
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
-
   <style>
+    /* Simple, clean & professional styles */
     :root{
-      --bg-1:#021f23; --bg-2:#062f33;
-      --card:#ffffff; --muted:#647d7a;
-      --accent:#0eb89b; --accent-2:#067a61;
-      --radius:14px; --maxw:1120px;
-      --shadow: 0 18px 50px rgba(3,10,12,0.35);
-      --text:#072b28;
-      --focus: 3px solid rgba(11,179,150,0.18);
+      --page-max:1100px;
+      --bg:#052425;            /* dark teal background */
+      --card:#ffffff;
+      --muted:#6b7a78;
+      --accent:#0a7a63;        /* teal accent */
+      --accent-2:#0bb39a;
+      --radius:16px;
+      --shadow: 0 12px 40px rgba(2,6,10,0.35);
     }
     *{box-sizing:border-box}
-    html,body{height:100%}
     body{
-      margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
-      background: linear-gradient(180deg,var(--bg-1), var(--bg-2));
-      color:var(--text); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-      display:flex; justify-content:center; padding:20px;
+      margin:0;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      background:linear-gradient(180deg,var(--bg),#042525 60%);
+      color: #072525;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:18px;
+      display:flex;
+      justify-content:center;
     }
-    .wrap{width:100%;max-width:var(--maxw);margin:0 auto}
-
-    /* Topbar */
-    .topbar{
-      display:flex;justify-content:space-between;align-items:center;padding:10px 14px;
-      border-radius:12px;margin-bottom:18px;position:sticky;top:12px;z-index:50;
-      background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      box-shadow:0 6px 20px rgba(0,0,0,0.25);backdrop-filter: blur(6px);
+    .wrap{width:100%;max-width:var(--page-max);margin:auto}
+    
+    /* Top navigation (compact, left-to-right) */
+    header.topbar{
+      display:flex;align-items:center;gap:18px;justify-content:space-between;margin-bottom:18px;
     }
-    .nav-center{display:flex;justify-content:center;flex:1}
-    .nav-right{display:flex;gap:16px;align-items:center}
-    .nav-right a{color:#e6fff9;text-decoration:none;font-weight:700;padding:8px 10px;border-radius:8px;font-size:15px}
-    .nav-right a:hover{background:rgba(255,255,255,0.03)}
-    .nav-right a:focus{outline:none;box-shadow:var(--focus);border-radius:8px}
+    .brand{
+      display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none;
+    }
+    .brand .logo{
+      width:44px;height:44px;border-radius:8px;background:#083a35;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px;box-shadow:0 6px 18px rgba(0,0,0,0.25)
+    }
+    nav.topnav{display:flex;gap:14px;align-items:center}
+    nav.topnav a{color:#e9f6f2;text-decoration:none;font-weight:700;padding:8px 12px;border-radius:10px}
+    nav.topnav a:hover{background:rgba(255,255,255,0.03)}
+    .actions{display:flex;gap:10px;align-items:center}
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;font-weight:800;text-decoration:none;cursor:pointer;border:none;
+    }
+    .btn-primary{background:linear-gradient(90deg,var(--accent-2),var(--accent));color:white;box-shadow:0 12px 28px rgba(11,179,150,0.12)}
+    .btn-ghost{background:transparent;color:#dff6f0;border:1px solid rgba(255,255,255,0.06)}
+    .mobile-menu{display:none}
 
-    /* Layout */
-    .hero{display:grid;grid-template-columns:380px 1fr;gap:28px;align-items:start}
-    @media(max-width:980px){.hero{grid-template-columns:1fr;padding:0 8px}}
-    .book-card{background:var(--card);border-radius:18px;padding:14px;box-shadow:var(--shadow);overflow:hidden}
-    .cover-wrap{border-radius:12px;background:linear-gradient(180deg,#fff,#fbfffe);padding:14px;display:flex;justify-content:center}
-    .cover{display:block;width:100%;border-radius:8px;box-shadow:0 12px 30px rgba(4,10,12,0.08);max-width:320px;height:auto}
-    .cover-caption{margin-top:12px;color:var(--muted);text-align:center;font-size:13px}
+    /* HERO area */
+    .hero{display:grid;grid-template-columns:360px 1fr;gap:26px;align-items:start;margin-bottom:26px}
+    @media(max-width:980px){.hero{grid-template-columns:1fr;padding:0 6px}}
+    .card{background:var(--card);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);overflow:hidden}
+    .cover{border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:18px;background:#fff}
+    .cover img{width:100%;height:auto;display:block;max-width:300px;border-radius:6px}
+    .cover .caption{text-align:center;color:var(--muted);margin-top:10px;font-size:14px}
 
-    .main-card{background:var(--card);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow)}
-    .title{font-family:Merriweather, serif;font-size:34px;margin:0;color:var(--accent-2);line-height:1.05}
+    .book-info h1{margin:0;font-size:28px;color:var(--accent);line-height:1.05}
     .by{color:var(--muted);margin-top:8px;font-size:14px}
-    .lead{color:#183a38;font-size:15px;line-height:1.68;margin-top:14px}
+    p.lead{color:#123a36;font-size:15px;line-height:1.6;margin-top:14px}
     .badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    .badge{padding:8px 12px;border-radius:999px;font-weight:800;font-size:13px;background:linear-gradient(90deg,#fff7e6,#fff3cd);color:#5d3e00}
-
-    .actions{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
-    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:10px;font-weight:800;text-decoration:none;border:0;cursor:pointer;font-size:14px;transition:transform .12s ease, box-shadow .12s ease}
-    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 10px 30px rgba(11,179,150,0.12)}
-    .btn-primary:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(11,179,150,0.18)}
-    .btn-primary:focus{outline:none;box-shadow:var(--focus), 0 18px 40px rgba(11,179,150,0.18)}
-    .btn-secondary{background:transparent;border:2px solid rgba(7,14,12,0.06);color:var(--accent-2)}
-    .btn-secondary:hover{transform:translateY(-2px)}
-    .meta-small{font-size:13px;color:var(--muted);margin-top:10px}
+    .badge{background:#f5fffb;padding:8px 12px;border-radius:999px;font-weight:700;color:#0a3a2f;font-size:13px;box-shadow:inset 0 -4px 0 rgba(10,58,47,0.02)}
+    .meta{font-size:13px;color:var(--muted);margin-top:10px}
 
     /* sections */
-    .section{margin-top:22px}
-    .section h2{margin:0;color:var(--accent-2);font-size:18px}
+    .section{margin-top:18px}
+    .section h2{margin:0;color:var(--accent);font-size:18px}
     .features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
     @media(max-width:880px){.features{grid-template-columns:1fr}}
-    .feature{background:#f8fffb;border-radius:10px;padding:14px;box-shadow:0 8px 20px rgba(9,20,18,0.03)}
+    .feature{background:#f1fffb;border-radius:10px;padding:12px}
     .feature h4{margin:0;color:#05584a;font-size:15px}
     .feature p{margin:8px 0 0;font-size:14px;color:#2d4a46}
 
-    .author-intro{display:flex;gap:14px;align-items:center;margin-top:12px;padding:12px;border-radius:12px;background:linear-gradient(180deg,#fbfffe,#f3fff9);border:1px solid #e6f6ef}
-    .author-intro img{width:76px;height:76px;border-radius:12px;object-fit:cover}
-    .author-intro .txt{font-size:14px;color:#123}
-
-    .cta-strip{margin-top:18px;padding:18px;border-radius:12px;background:linear-gradient(90deg, rgba(14,179,150,0.06), rgba(7,138,114,0.03));display:flex;align-items:center;justify-content:space-between;gap:12px}
+    /* CTA strip */
+    .cta-strip{margin-top:18px;padding:16px;border-radius:10px;background:linear-gradient(90deg,rgba(11,179,150,0.06),rgba(7,138,114,0.03));display:flex;align-items:center;justify-content:space-between;gap:12px}
     @media(max-width:680px){.cta-strip{flex-direction:column;align-items:center;text-align:center}}
-    .cta-strip .text{font-weight:800;color:#06493f}
-    .footer{margin-top:20px;color:var(--muted);font-size:13px;text-align:center;padding-bottom:18px}
+    .cta-strip .text{font-weight:700;color:#06493f}
 
-    /* small utilities */
-    .contact{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px}
-    .contact a{color:var(--accent-2);text-decoration:none;font-weight:700}
-    details{background:#fffefb;border-radius:8px;padding:10px;margin-top:10px}
-    summary{font-weight:700;cursor:pointer}
-    .center{display:flex;justify-content:center}
-    .pill{padding:6px 10px;border-radius:999px;background:#e9fffa;color:#075a46;font-weight:700;font-size:13px}
+    /* Footer & small print */
+    .footer{margin-top:22px;color:#dff6f2;font-size:13px;text-align:center;padding-bottom:18px}
+    .contact{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;justify-content:center}
+    .contact a{color:var(--accent);text-decoration:none;font-weight:700}
 
-    /* focus visibility for keyboard users */
-    a:focus, button:focus {outline:none; box-shadow: var(--focus); border-radius:8px;}
-
+    /* make entire page visible with comfortable paddings on mobile */
     @media(max-width:520px){
-      .title{font-size:26px}
-      .hero{gap:18px}
-      .cover{max-width:260px;margin:0 auto}
+      body{padding:12px}
+      nav.topnav{display:none}
+      .mobile-menu{display:block;color:#fff}
+      .hero{gap:14px}
+      .cover img{max-width:280px}
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
+  <main class="wrap" role="main">
 
-    <!-- top navigation (only Home/Author/Blogs as requested) -->
-    <div class="topbar" role="banner" aria-label="Top navigation">
-      <div style="width:14px"></div> <!-- left space (dot removed) -->
-
-      <div class="nav-center" role="navigation" aria-label="Main menu">
-        <div class="nav-right" style="gap:24px">
-          <a href="index.html">🏠 Home</a>
-          <a href="author.html">👤 Author</a>
-          <a href="blog.html">📝 Blogs</a>
-        </div>
+    <!-- TOP NAV -->
+    <header class="topbar" role="banner">
+      <div style="display:flex;align-items:center;gap:14px">
+        <a class="brand" href="index.html" aria-label="Home">
+          <div class="logo" aria-hidden="true">JS</div>
+          <div style="color:#e9f6f2;line-height:1">
+            <div style="font-weight:800">Discipline Se Success Tak</div>
+            <div style="font-size:12px;color:#d6efe9">By Jeet S. Singh</div>
+          </div>
+        </a>
       </div>
 
-      <div style="width:44px"></div>
+      <nav class="topnav" role="navigation" aria-label="Primary">
+        <a href="index.html">🏠 Home</a>
+        <a href="author.html">👤 Author</a>
+        <a href="blog.html">📝 Blogs</a>
+      </nav>
+
+      <div class="actions" aria-hidden="false">
+        <!-- primary actions: Buy + Read mini eBook -->
+        <a class="btn btn-ghost" href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank" rel="noopener">Buy on Amazon — ₹99</a>
+        <a class="btn btn-primary" href="ebook.html" id="mini-ebook-link">Free Mini eBook</a>
+      </div>
+    </header>
+
+    <!-- HERO: COVER + BOOK INFO -->
+    <section class="hero" aria-labelledby="book-title">
+      <div class="card cover" aria-hidden="false">
+        <img src="https://m.media-amazon.com/images/I/31jrBAyTDjL._SY445_SX342_.jpg" alt="Discipline Se Success Tak — Book cover by Jeet S. Singh">
+        <div class="cover caption">Discipline • Faith • Success</div>
+      </div>
+
+      <div class="card book-info" aria-labelledby="book-title">
+        <h1 id="book-title">Discipline Se Success Tak</h1>
+        <div class="by">By <strong>Jeet S. Singh</strong></div>
+
+        <p class="lead">
+          Ek practical, emotional aur interactive guide — chhote steps, daily habits aur faith se consistent success ka roadmap. 
+          Short exercises, real-life examples, aur ek 30-day starter plan ke saath, ye book busy life me results lane ke liye likhi gayi hai.
+        </p>
+
+        <div class="badges" aria-hidden="true">
+          <div class="badge">Practical Guide</div>
+          <div class="badge">30-Day Starter Plan</div>
+        </div>
+
+        <div style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap">
+          <a class="btn btn-primary" href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank" rel="noopener noreferrer">Buy on Amazon — ₹99</a>
+          <a class="btn btn-ghost" href="ebook.html">Read Free Mini eBook</a>
+        </div>
+
+        <div class="meta">Launch date: 9 September 2025 • Kindle Unlimited available</div>
+      </div>
+    </section>
+
+    <!-- WHAT YOU'LL GET -->
+    <section class="card section" aria-labelledby="what-you-get">
+      <h2 id="what-you-get">📚 What you'll get</h2>
+      <div class="features" role="list">
+        <div class="feature" role="listitem">
+          <h4>30-Day Starter Plan</h4>
+          <p>Daily micro-actions to convert habits into results — step-by-step roadmap designed for busy schedules.</p>
+        </div>
+        <div class="feature" role="listitem">
+          <h4>Short Practical Exercises</h4>
+          <p>Actionable tasks you can do today — no long theory, just practice and accountability.</p>
+        </div>
+        <div class="feature" role="listitem">
+          <h4>Real-Life Stories</h4>
+          <p>Author ke experiences, mistakes aur wins — honest lessons jo aap replicate kar sakte ho.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPANDED SECTIONS: BLOGS PREVIEW + AUTHOR -->
+    <section class="card section" aria-labelledby="blogs">
+      <h2 id="blogs">📝 Popular Blogs</h2>
+      <p style="margin-top:10px;color:var(--muted)">Quick highlights — click to read full article.</p>
+
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:12px">
+        <div style="background:#f6fffb;padding:14px;border-radius:10px">
+          <strong>Blog 1:</strong> Discipline ही असली Superpower<br>
+          <a href="posts/blog1.html" style="display:inline-block;margin-top:8px;color:var(--accent)">Read full →</a>
+        </div>
+        <div style="background:#f6fffb;padding:14px;border-radius:10px">
+          <strong>Blog 2:</strong> Motivation vs Discipline<br>
+          <a href="posts/blog2.html" style="display:inline-block;margin-top:8px;color:var(--accent)">Read full →</a>
+        </div>
+
+        <div style="background:#f6fffb;padding:14px;border-radius:10px">
+          <strong>Blog 3:</strong> छोटे Steps, बड़े Results<br>
+          <a href="posts/blog3.html" style="display:inline-block;margin-top:8px;color:var(--accent)">Read full →</a>
+        </div>
+        <div style="background:#f6fffb;padding:14px;border-radius:10px">
+          <strong>Blog 4:</strong> Failures से सीखो<br>
+          <a href="posts/blog4.html" style="display:inline-block;margin-top:8px;color:var(--accent)">Read full →</a>
+        </div>
+
+        <div style="background:#f6fffb;padding:14px;border-radius:10px">
+          <strong>Blog 5:</strong> छोटी जीतें बड़ी सफलता बनाती हैं<br>
+          <a href="posts/blog5.html" style="display:inline-block;margin-top:8px;color:var(--accent)">Read full →</a>
+        </div>
+        <div style="background:#f6fffb;padding:14px;border-radius:10px">
+          <strong>Blog 6:</strong> Consistency ही Success का असली Secret<br>
+          <a href="posts/blog6.html" style="display:inline-block;margin-top:8px;color:var(--accent)">Read full →</a>
+        </div>
+
+        <div style="background:#f6fffb;padding:14px;border-radius:10px">
+          <strong>Blog 7:</strong> Time Management — Success का हथियार<br>
+          <a href="posts/blog7.html" style="display:inline-block;margin-top:8px;color:var(--accent)">Read full →</a>
+        </div>
+        <div style="background:#f6fffb;padding:14px;border-radius:10px">
+          <strong>Blog 8:</strong> Habit Shapes Destiny (आदतें ही किस्मत बनाती हैं)<br>
+          <a href="posts/blog8.html" style="display:inline-block;margin-top:8px;color:var(--accent)">Read full →</a>
+        </div>
+
+        <div style="background:#f6fffb;padding:14px;border-radius:10px">
+          <strong>Blog 9:</strong> Self-Belief — Success की नींव<br>
+          <a href="posts/blog9.html" style="display:inline-block;margin-top:8px;color:var(--accent)">Read full →</a>
+        </div>
+        <div style="background:#f6fffb;padding:14px;border-radius:10px">
+          <strong>Blog 10:</strong> Patience — वो strength जो आपको stable रखती है<br>
+          <a href="posts/blog10.html" style="display:inline-block;margin-top:8px;color:var(--accent)">Read full →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- AUTHOR -->
+    <section class="card section" aria-labelledby="author">
+      <h2 id="author">👤 About the Author</h2>
+      <p class="small" style="color:var(--muted);margin-top:8px">
+        Jeet S. Singh — From Himachal. Author • Speaker • Habit coach. Simple, practical systems se readers ko daily progress lana sikhata hoon.
+      </p>
+
+      <div style="display:flex;gap:12px;align-items:center;margin-top:12px">
+        <div style="width:64px;height:64px;border-radius:999px;background:#eaf9f5;display:flex;align-items:center;justify-content:center;font-weight:800;color:#05584a">JS</div>
+        <div>
+          <div style="font-weight:800;color:#072525">Jeet S. Singh</div>
+          <div style="color:var(--muted);font-size:14px">Author of "Discipline Se Success Tak"</div>
+        </div>
+        <div style="margin-left:auto">
+          <a class="btn btn-ghost" href="author.html">About the Author</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA STRIP -->
+    <div class="cta-strip" role="region" aria-label="Call to action">
+      <div class="text">Free mini eBook — Read now (HTML / convert to PDF)</div>
+      <div>
+        <a class="btn btn-primary" href="ebook.html">Read Mini eBook</a>
+      </div>
     </div>
 
-    <!-- HERO -->
-    <main>
-      <section class="hero" aria-labelledby="book-title">
-        <!-- left: cover -->
-        <aside class="book-card">
-          <div class="cover-wrap">
-            <!-- local-first cover: upload 'assets/cover.jpg' in repo root; if not found, this falls back to Amazon image -->
-            <picture>
-              <source srcset="assets/cover.jpg" />
-              <img class="cover" src="https://m.media-amazon.com/images/I/31jrBAyTDjL._SY445_SX342_.jpg" alt="Discipline Se Success Tak — Book cover by Jeet S. Singh">
-            </picture>
-          </div>
+    <!-- FEEDBACK & CONTACT -->
+    <section class="card section" aria-labelledby="feedback">
+      <h2 id="feedback">✨ Give Feedback</h2>
+      <p class="small" style="color:var(--muted);margin-top:8px">Aapka 1-line feedback bahut valuable hai. Aap directly email kar sakte hain ya WhatsApp pe bhej dijiye.</p>
+      <div class="contact">
+        <a href="mailto:jeetssinghbooks@gmail.com">Email: jeetssinghbooks@gmail.com</a>
+        <a href="https://wa.me/917018085440" target="_blank" rel="noopener">WhatsApp: +91 70180 85440</a>
+      </div>
+    </section>
 
-          <div class="cover-caption">Discipline • Faith • Success</div>
+    <footer class="footer">
+      © 2025 Jeet S. Singh — Discipline • Faith • Success
+      <div style="margin-top:6px;font-size:13px;color:var(--muted)">Full book on Amazon: <a href="https://www.amazon.in/dp/B0FPHVNRBK" style="color:var(--accent)">Discipline Se Success Tak</a></div>
+    </footer>
+  </main>
 
-          <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
-            <div class="pill">Bestseller</div>
-            <div class="pill">Practical Guide</div>
-          </div>
-        </aside>
-
-        <!-- right: main content -->
-        <article class="main-card" aria-labelledby="book-title">
-          <h1 id="book-title" class="title">Discipline Se Success Tak</h1>
-          <div class="by">By <strong>Jeet S. Singh</strong></div>
-
-          <p class="lead">
-            Ek practical, emotional aur interactive guide — chhote steps, daily habits aur faith se consistent success ka roadmap.
-            Ye book short exercises, real examples aur ek 30-day starter plan deti hai jo busy life mein daily progress lana asaan banati hai.
-          </p>
-
-          <div class="badges" aria-hidden="true">
-            <div class="badge">🔥 Bestseller — Hot New Releases</div>
-            <div class="badge">🚀 Launch Live</div>
-            <div class="badge">🧭 30-Day Starter Plan</div>
-          </div>
-
-          <div class="actions" role="group" aria-label="Primary book actions">
-            <a class="btn btn-primary" href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank" rel="noopener noreferrer">Buy on Amazon — ₹99</a>
-            <a class="btn btn-secondary" href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank" rel="noopener noreferrer">Read Sample</a>
-            <a class="btn btn-primary" href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank" rel="noopener noreferrer">Read Free with Kindle Unlimited</a>
-          </div>
-
-          <div class="meta-small">Launch date: 9 September 2025 • Price: ₹99 • Kindle Unlimited available</div>
-
-          <!-- features -->
-          <div class="section" aria-labelledby="about-heading">
-            <h2 id="about-heading">📖 What you'll get</h2>
-            <div class="features" role="list">
-              <div class="feature" role="listitem">
-                <h4>30-Day Starter Plan</h4>
-                <p>Daily micro-actions to convert habits into results — step-by-step roadmap.</p>
-              </div>
-              <div class="feature" role="listitem">
-                <h4>Short Practical Exercises</h4>
-                <p>Actionable tasks you can do today — no long theory, just practice.</p>
-              </div>
-              <div class="feature" role="listitem">
-                <h4>Real-Life Stories</h4>
-                <p>Author's journey, mistakes and wins — honest lessons to replicate.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- quick author preview -->
-          <div class="section">
-            <div class="author-intro" role="region" aria-label="About the author">
-              <img src="https://via.placeholder.com/150" alt="Jeet S. Singh photo">
-              <div class="txt">
-                <strong>Jeet S. Singh</strong><br>
-                From Himachal — Author • Speaker • Habit coach<br>
-                <div style="margin-top:8px">
-                  <a class="btn btn-secondary" href="author.html">About the Author</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </article>
-      </section>
-
-      <!-- CTA strip -->
-      <section class="cta-strip" aria-hidden="false">
-        <div class="text">Free sample & 30-day checklist available — start building momentum today</div>
-        <div class="meta-small">Read sample • Buy on Amazon • Kindle Unlimited</div>
-      </section>
-
-      <!-- Feedback / Contact -->
-      <section class="section" aria-labelledby="feedback-heading">
-        <div class="book-card" style="padding:18px;">
-          <h2 id="feedback-heading">✨ Give Feedback</h2>
-          <p class="meta-small">Aapka 1-line feedback bahut valuable hai. Aap directly email kar sakte hain ya WhatsApp pe bhej dijiye:</p>
-          <div class="contact" style="margin-top:10px">
-            <a href="mailto:jeetssinghbooks@gmail.com">Email: jeetssinghbooks@gmail.com</a>
-            <a href="https://wa.me/917018085440" target="_blank">WhatsApp: +91 70180 85440</a>
-          </div>
-          <details style="margin-top:12px">
-            <summary>Author social</summary>
-            <p style="margin:10px 0">Instagram: <a href="https://instagram.com/jeetssingh9" target="_blank">@jeetssingh9</a></p>
-          </details>
-        </div>
-      </section>
-
-      <!-- Footer -->
-      <footer class="footer">
-        © 2025 Jeet S. Singh — Discipline • Faith • Success • <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">Buy on Amazon</a>
-      </footer>
-    </main>
-  </div>
 </body>
 </html>
