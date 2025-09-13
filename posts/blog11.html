@@ -16,7 +16,7 @@
       --radius:14px;
       --maxw:820px;
     }
-    html,body{height:100%;margin:0;background:#fbfdfc;font-family:Inter, 'Noto Sans Devanagari', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color:var(--text); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
+    html,body{height:100%;margin:0;background:#fbfdfc;font-family:Inter, 'Noto Sans Devanagari', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color:var(--text);}
     .wrap{max-width:var(--maxw);margin:28px auto;padding:20px;}
     .card{background:var(--bg);padding:26px;border-radius:var(--radius);box-shadow:0 8px 30px rgba(6,20,18,0.06);border:1px solid #ecf7f4;}
     header{display:flex;flex-direction:column;gap:6px;margin-bottom:18px}
@@ -27,7 +27,6 @@
     p{margin:12px 0;font-size:15px;line-height:1.7;color:#123532}
     ul{margin:10px 0 18px 20px}
     li{margin:8px 0}
-    code{background:#f1f8f5;padding:4px 8px;border-radius:6px;color:var(--accent-dark);font-weight:600}
     .check{background:#f0fff9;border-left:4px solid var(--accent);padding:12px 14px;border-radius:8px;margin:14px 0}
     .exercise{background:#fffef8;border-left:4px solid #f0b429;padding:12px 14px;border-radius:8px;margin:14px 0}
     .note{font-size:14px;color:var(--muted);margin-top:10px}
@@ -35,6 +34,8 @@
     .preview{margin-top:22px;padding:14px;border-radius:10px;background:#f7fefb;border:1px solid #e6f7ef}
     .preview h3{margin:0;font-size:16px;color:#044b3f}
     .preview p{margin:8px 0 0;color:#2c4e48}
+    .author-note{margin-top:20px;padding-top:14px;border-top:1px solid #e6f7ef;font-size:14px;color:#2d423f}
+    .author-note a{color:var(--accent-dark);font-weight:600;text-decoration:none}
     footer{margin-top:28px;color:var(--muted);font-size:13px;text-align:center}
     @media(min-width:900px){ .wrap{padding:36px} h1{font-size:28px} }
   </style>
@@ -106,6 +107,11 @@
       <div class="preview" aria-label="Next blog preview">
         <h3>अगला: Blog 12 — Negative लोगों से Deal कैसे करें</h3>
         <p><em>“हर कोई आपके सपनों का supporter नहीं होगा, और यह ठीक है।”</em> — अगले ब्लॉग में हम boundaries, respectful distance और energy-protection के practical तरीके देखेंगे।</p>
+      </div>
+
+      <div class="author-note">
+        ✍️ Written by <strong>Jeet S Singh</strong>, Author of  
+        <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank" rel="noopener noreferrer">“Discipline Se Success Tak”</a>
       </div>
 
       <footer>
