@@ -68,5 +68,11 @@
     "tagline": "Patience वो strength है जो आपको तब stable रखती है जब दुनिया कहती है छोड़ दो।",
     "preview": "Patience passive waiting नहीं; यह active endurance है — process पर भरोसा और iterative work जरूरी है।",
     "file": "posts/blog10.html"
-  }
+  },
+  {
+  "id": 11,
+  "title": "Blog 11: Negativity ko Identify karo",
+  "preview": "Problem का पहला solution है उसे पहचानना। इस blog में आप सीखेंगे कैसे negative सोच, toxic patterns और hidden signals को पहचानकर उनसे बाहर निकला जाए।",
+  "file": "posts/blog11.html"
+}
 ]
