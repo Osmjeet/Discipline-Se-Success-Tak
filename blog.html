@@ -4,168 +4,300 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Blogs — Jeet S Singh (Author of Discipline Se Success Tak)</title>
-  <meta name="description" content="Blogs by Jeet S Singh — Discipline, Consistency, Habits, Time Management, Patience and more. Click Read more to expand full article." />
+  <meta name="description" content="Read inspiring blogs by Jeet S Singh, Author of 'Discipline Se Success Tak'. Learn about discipline, success, motivation and daily habits." />
+  <link rel="canonical" href="https://discipline-se-success-tak.vercel.app/blog.html" />
+
   <style>
+    /* ====== Layout basics ====== */
     :root{
-      --accent:#0b9f86;
-      --card-bg:#ffffff;
-      --muted:#516b66;
-      --maxw:920px;
+      --bg:#f7fbfa;
+      --card:#ffffff;
+      --accent:#0bb39a;
+      --accent-dark:#078a72;
+      --muted:#5b6b73;
+      --maxw:1100px;
+      --radius:12px;
+      --text:#0e2b26;
+      --nav-h:64px;
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,system-ui,Arial;background:#f5fbf9;color:#0b2f2a;line-height:1.7}
-    header{background:linear-gradient(180deg,#062a2a,#0b3f3a);color:white;padding:22px 18px}
-    header .wrap{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-    header h1{margin:0;font-size:20px}
-    header nav{margin-left:auto;display:flex;gap:14px}
-    header a{color:white;text-decoration:none;font-weight:600}
-    main.wrap{max-width:var(--maxw);margin:18px auto;padding:0 14px}
-    .intro{margin-bottom:18px}
-    .grid{display:grid;grid-template-columns:1fr;gap:16px}
-    .card{background:var(--card-bg);border-radius:12px;padding:18px;box-shadow:0 8px 28px rgba(4,20,18,0.06);overflow:hidden}
-    .card h2{margin:0 0 8px 0;color:#06493f;font-size:20px}
-    .tagline{color:var(--muted);margin-bottom:10px;font-size:0.95rem}
-    .preview{color:#133a35;margin-bottom:12px}
-    .actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-    .btn{background:var(--accent);color:white;padding:10px 14px;border-radius:9px;text-decoration:none;border:0;cursor:pointer;font-weight:700}
-    .btn.ghost{background:transparent;color:var(--accent);border:1px solid rgba(11,159,134,0.12)}
-    .expanded{margin-top:14px;border-top:1px dashed #e6f4ef;padding-top:12px}
-    .meta{font-size:0.9rem;color:var(--muted);margin-top:10px}
-    .author-note{margin-top:12px;color:#06493f;font-weight:600}
-    .small{font-size:0.95rem;color:var(--muted)}
-    details summary{cursor:pointer}
-    .hide{display:none}
-    /* responsive */
-    @media(min-width:860px){
-      .grid{grid-template-columns:1fr 1fr}
+    body{margin:0;font-family:Inter, "Noto Sans Devanagari", system-ui, -apple-system, "Segoe UI", Roboto, Arial; background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
+    a{color:var(--accent-dark); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    /* ====== Top nav ====== */
+    header.sitebar{background:#06493f;padding:10px 18px;position:sticky;top:0;z-index:50;box-shadow:0 4px 14px rgba(2,6,10,0.08)}
+    .navwrap{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;color:#fff}
+    .nav-left{display:flex;align-items:center;gap:14px}
+    .brand{font-weight:800;font-size:16px}
+    .navlinks{display:flex;gap:14px;align-items:center}
+    .navlinks a{color:#fff;font-weight:700;font-size:14px;padding:8px 10px;border-radius:8px}
+    .navlinks a:hover{background:rgba(255,255,255,0.06)}
+    .top-actions{display:flex;gap:10px;align-items:center}
+    .btn{background:var(--accent);color:#fff;padding:8px 12px;border-radius:8px;font-weight:800}
+    .btn.ghost{background:transparent;border:2px solid rgba(255,255,255,0.08);color:#fff}
+
+    /* ====== Main area ====== */
+    .wrap{max-width:var(--maxw);margin:22px auto;padding:0 18px;display:grid;grid-template-columns:320px 1fr;gap:22px;align-items:start}
+    @media(max-width:980px){.wrap{grid-template-columns:1fr;padding:12px}}
+    /* sidebar */
+    aside.sidebar{position:relative}
+    .card{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:0 10px 30px rgba(8,18,16,0.05);border:1px solid #eef9f5}
+    .search input{width:100%;padding:10px 12px;border-radius:10px;border:1px solid #e9f6f1;font-size:14px;color:var(--text)}
+    .series-filter{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+    .tag{background:#f0fff9;color:#045740;padding:6px 10px;border-radius:999px;font-weight:700;font-size:13px;cursor:pointer}
+    .tag.active{background:linear-gradient(90deg,var(--accent),var(--accent-dark));color:#fff}
+    ul.posts-list{list-style:none;padding:0;margin:12px 0;display:flex;flex-direction:column;gap:8px;max-height:64vh;overflow:auto}
+    ul.posts-list li{padding:10px;border-radius:10px}
+    .post-btn{display:flex;flex-direction:column;align-items:flex-start;background:transparent;border:0;padding:8px;width:100%;text-align:left;cursor:pointer}
+    .post-btn strong{display:block;color:#06493f}
+    .post-btn .preview{font-size:13px;color:var(--muted);margin-top:6px}
+    .post-btn.active{background:#f0fff9;border-left:4px solid var(--accent);padding-left:12px}
+
+    /* main content */
+    main.content{min-height:60vh}
+    .post-card{background:var(--card);border-radius:var(--radius);padding:22px;box-shadow:0 12px 30px rgba(8,18,16,0.06);border:1px solid #eef9f5}
+    .post-card h1{margin:0;font-size:24px;color:var(--accent-dark)}
+    .post-sub{color:var(--muted);margin-top:8px}
+    .post-card p{line-height:1.75;font-size:15px;color:#123532}
+    .post-meta{margin-top:18px;color:var(--muted);font-size:14px}
+    .post-actions{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap}
+    .small-link{background:transparent;border:1px solid #eef9f5;padding:8px 10px;border-radius:8px}
+
+    /* responsive adjustments */
+    @media(max-width:980px){
+      .post-btn{align-items:center}
+      .post-btn .preview{display:none}
+      aside.sidebar{order:2}
+      main.content{order:1}
     }
+
+    /* misc */
+    .empty{padding:40px;text-align:center;color:var(--muted)}
   </style>
 </head>
 <body>
-  <header>
-    <div class="wrap">
-      <h1>📖 Blogs — Jeet S Singh</h1>
-      <nav>
-        <a href="index.html">🏠 Home</a>
-        <a href="author.html">👤 Author</a>
-        <a href="blog.html" aria-current="page">📝 Blogs</a>
-        <a href="ebook.html">📘 Free Mini eBook</a>
-      </nav>
+
+  <!-- TOP NAV -->
+  <header class="sitebar" role="banner">
+    <div class="navwrap">
+      <div class="nav-left">
+        <div class="brand">Jeet S Singh</div>
+        <nav class="navlinks" aria-label="Primary">
+          <a href="index.html">🏠 Home</a>
+          <a href="blog.html" aria-current="page">📝 Blogs</a>
+        </nav>
+      </div>
+
+      <div class="top-actions">
+        <a class="btn" href="ebook.html" target="_blank">📘 Read Free Mini eBook</a>
+        <a class="btn ghost" href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">Buy on Amazon</a>
+      </div>
     </div>
   </header>
 
-  <main class="wrap" role="main">
-    <section class="intro">
-      <p class="small">Yahan aapko Discipline, Consistency, Habit aur Time Management se related short, practical aur implementable blogs milenge. </p>
-    </section>
+  <!-- PAGE WRAPPER -->
+  <div class="wrap" role="main">
 
-    <section id="posts" class="grid" aria-live="polite">
-      <!-- JS will render cards here -->
-    </section>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="card" aria-labelledby="sidebar-heading">
+        <h3 id="sidebar-heading" style="margin:0 0 10px 0;color:#06493f">All Posts</h3>
 
-    <footer style="margin-top:22px;text-align:center;color:var(--muted);font-size:0.95rem;padding-bottom:36px">
-      © 2025 Jeet S Singh — Discipline • Faith • Success
-    </footer>
-  </main>
+        <div class="search">
+          <input id="post-search" type="search" placeholder="Search posts by title or preview…" aria-label="Search posts">
+        </div>
 
+        <div class="series-filter" id="series-filter" aria-hidden="false" style="margin-top:12px">
+          <!-- dynamic series tags inserted here -->
+        </div>
+
+        <ul id="posts-list" class="posts-list" role="list" aria-live="polite">
+          <!-- posts inserted here by script -->
+        </ul>
+
+        <div style="margin-top:12px;font-size:13px;color:var(--muted)">Tip: Click a post to read — direct links supported (example: <code>blog.html#13</code>).</div>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+      <div id="post-content" class="post-card">
+        <div class="empty">Loading posts…</div>
+      </div>
+    </main>
+  </div>
+
+  <!-- AJAX + Rendering Script -->
   <script>
-    // Utility: fetch JSON and render posts as cards
-    (async function(){
-      const postsEl = document.getElementById('posts');
-      try{
-        const res = await fetch('/posts.json', {cache: "no-store"});
-        if(!res.ok) throw new Error('posts.json not found');
-        const posts = await res.json();
+  (function(){
+    const POSTS_JSON = 'posts.json'; // manifest file (root)
+    const postsListEl = document.getElementById('posts-list');
+    const contentEl = document.getElementById('post-content');
+    const searchInput = document.getElementById('post-search');
+    const seriesFilterWrap = document.getElementById('series-filter');
 
-        // Helper to sanitize minimal (we'll trust your inner HTML in posts/*)
-        const createCard = (p) => {
-          const card = document.createElement('article');
-          card.className = 'card';
-          card.dataset.file = p.file || '';
-          card.innerHTML = `
-            <h2>${escapeHtml(p.title)}</h2>
-            <div class="tagline">${escapeHtml(p.tagline || '')}</div>
-            <div class="preview">${escapeHtml(p.preview || '')}</div>
-            <div class="actions">
-              <button class="btn read-btn" aria-expanded="false">Read more</button>
-              <button class="btn ghost view-file" title="Open raw file">Open source</button>
-            </div>
-            <div class="expanded hide" aria-hidden="true"></div>
-          `;
-          // events
-          const readBtn = card.querySelector('.read-btn');
-          const viewBtn = card.querySelector('.view-file');
-          const expanded = card.querySelector('.expanded');
+    let POSTS = []; // manifest
+    let ACTIVE_SERIES = null;
 
-          readBtn.addEventListener('click', async () => {
-            // close other expanded
-            document.querySelectorAll('.expanded').forEach(el=>{
-              if(el!==expanded){ el.classList.add('hide'); el.previousElementSibling.querySelector('.read-btn')?.setAttribute('aria-expanded','false'); el.setAttribute('aria-hidden','true'); }
-            });
+    // fetch manifest and init
+    async function init(){
+      try {
+        const res = await fetch(POSTS_JSON + '?ts=' + Date.now());
+        if (!res.ok) throw new Error('Could not fetch posts.json');
+        POSTS = await res.json();
 
-            const isHidden = expanded.classList.contains('hide');
-            if(!isHidden){
-              // collapse
-              expanded.classList.add('hide'); expanded.setAttribute('aria-hidden','true');
-              readBtn.setAttribute('aria-expanded','false'); readBtn.textContent = 'Read more';
-              return;
-            }
+        // build series list
+        buildSeriesFilter(POSTS);
 
-            // expand: if empty, fetch inner html
-            if(!expanded.dataset.loaded){
-              const file = card.dataset.file;
-              if(!file){
-                expanded.innerHTML = '<p class="small">Content not available.</p>';
-              } else {
-                try{
-                  const r = await fetch(file, {cache:"no-store"});
-                  if(!r.ok) throw new Error('file fetch failed');
-                  let text = await r.text();
-                  // If the returned file contains a full HTML doc, try to extract body inner HTML; else use as-is.
-                  if(/<html/i.test(text)){
-                    const bodyMatch = text.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-                    text = bodyMatch ? bodyMatch[1] : text;
-                  }
-                  // Avoid duplicating the title if posts fragment also contains an H2/H1 matching the card title.
-                  // We'll remove leading h1/h2 if it matches.
-                  const tmp = document.createElement('div'); tmp.innerHTML = text;
-                  const firstHeading = tmp.querySelector('h1,h2');
-                  if(firstHeading){
-                    const headingText = firstHeading.textContent.trim();
-                    if(headingText && headingText === p.title) { firstHeading.remove(); text = tmp.innerHTML; }
-                  }
-                  expanded.innerHTML = text;
-                  expanded.dataset.loaded = '1';
-                }catch(err){
-                  expanded.innerHTML = `<p class="small">Error loading article.</p>`;
-                }
-              }
-            }
-            // show
-            expanded.classList.remove('hide'); expanded.setAttribute('aria-hidden','false');
-            readBtn.setAttribute('aria-expanded','true'); readBtn.textContent = 'Show less';
-            // smooth scroll to expanded on small screens
-            setTimeout(()=> expanded.scrollIntoView({behavior:'smooth', block:'start'}), 80);
-          });
+        // render sidebar
+        renderSidebar(POSTS);
 
-          viewBtn.addEventListener('click', ()=>{
-            const file = card.dataset.file;
-            if(file) window.open(file, '_blank');
-          });
-
-          return card;
-        };
-
-        // render all
-        posts.forEach(p => postsEl.appendChild(createCard(p)));
-
-      }catch(err){
-        postsEl.innerHTML = `<div style="grid-column:1/-1" class="card"><p class="small">Failed to load posts.json — check file path. Error: ${escapeHtml(err.message)}</p></div>`;
+        // handle initial hash (direct link)
+        const idFromHash = location.hash.replace('#','');
+        if (idFromHash) {
+          const p = POSTS.find(x=>String(x.id)===String(idFromHash));
+          if (p) return loadPost(p);
+        }
+        if (POSTS.length) loadPost(POSTS[0]);
+      } catch (err) {
+        console.error(err);
+        postsListEl.innerHTML = '<li class="empty">Failed to load posts manifest.</li>';
+        contentEl.innerHTML = '<div class="empty">Content unavailable — check posts.json in repo.</div>';
       }
+    }
 
-      // small helper
-      function escapeHtml(s){ if(!s && s!==0) return ''; return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;'); }
-    })();
+    // build unique series tags
+    function buildSeriesFilter(posts){
+      const series = Array.from(new Set(posts.map(p => p.series || 'General')));
+      series.unshift('All');
+      series.forEach(s => {
+        const but = document.createElement('button');
+        but.type = 'button';
+        but.className = 'tag';
+        but.textContent = s;
+        but.dataset.series = s === 'All' ? '' : s;
+        if (s === 'All') but.classList.add('active');
+        but.addEventListener('click', () => {
+          document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
+          but.classList.add('active');
+          ACTIVE_SERIES = but.dataset.series || null;
+          filterAndRender();
+        });
+        seriesFilterWrap.appendChild(but);
+      });
+    }
+
+    // filter posts by search & series
+    function filterAndRender(){
+      const q = (searchInput.value || '').trim().toLowerCase();
+      let filtered = POSTS.slice();
+      if (ACTIVE_SERIES) filtered = filtered.filter(p => (p.series || '') === ACTIVE_SERIES);
+      if (q) filtered = filtered.filter(p => (p.title + ' ' + p.preview).toLowerCase().includes(q));
+      renderSidebar(filtered);
+    }
+
+    // render sidebar list
+    function renderSidebar(list){
+      postsListEl.innerHTML = '';
+      if (!list.length) {
+        postsListEl.innerHTML = '<li class="empty">No posts found.</li>';
+        return;
+      }
+      list.forEach(post => {
+        const li = document.createElement('li');
+        const btn = document.createElement('button');
+        btn.className = 'post-btn';
+        btn.dataset.id = post.id;
+        btn.innerHTML = '<strong>' + escapeHtml(post.title) + '</strong>' +
+                        (post.preview ? ('<div class="preview">' + escapeHtml(post.preview) + '</div>') : '');
+        btn.addEventListener('click', ()=> loadPost(post));
+        li.appendChild(btn);
+        postsListEl.appendChild(li);
+      });
+      // try to set active based on current hash
+      const currentHash = location.hash.replace('#','');
+      if (currentHash) {
+        const activeBtn = Array.from(document.querySelectorAll('.post-btn')).find(b => b.dataset.id === currentHash);
+        if (activeBtn) {
+          document.querySelectorAll('.post-btn').forEach(x=>x.classList.remove('active'));
+          activeBtn.classList.add('active');
+        }
+      }
+    }
+
+    // load a post file and inject into content area
+    async function loadPost(post){
+      try {
+        // active state in sidebar
+        document.querySelectorAll('.post-btn').forEach(b=>b.classList.remove('active'));
+        const btn = document.querySelector(`.post-btn[data-id="${post.id}"]`);
+        if (btn) btn.classList.add('active');
+
+        // update URL
+        history.replaceState(null, '', '#'+post.id);
+
+        // temporary loading state
+        contentEl.innerHTML = '<div class="empty">Loading article…</div>';
+
+        const r = await fetch(post.file + '?ts=' + Date.now());
+        if (!r.ok) throw new Error('Post file not found: ' + post.file);
+        let html = await r.text();
+
+        // ensure the fragment has author footer; if not, append small footer
+        if (!/<footer[\s>]/i.test(html)) {
+          html += `<footer class="post-meta" style="margin-top:18px">
+                    <p>✍️ Written by <strong>Jeet S Singh</strong>, Author of
+                      <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">“Discipline Se Success Tak”</a>
+                    </p>
+                   </footer>`;
+        } else {
+          // add amazon link if not present
+          if (!/amazon\.in\/dp\/B0FPHVNRBK/i.test(html)) {
+            html += `<div style="margin-top:14px;"><a class="small-link" href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">Buy on Amazon — Discipline Se Success Tak</a></div>`;
+          }
+        }
+
+        contentEl.innerHTML = html;
+
+        // optional: scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (err) {
+        console.error(err);
+        contentEl.innerHTML = '<div class="empty">Failed to load article. Check console for errors.</div>';
+      }
+    }
+
+    // escape helper to avoid html injection when rendering titles/previews
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, function(m) {
+        return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]);
+      });
+    }
+
+    // search input
+    searchInput.addEventListener('input', function(){ filterAndRender(); });
+
+    // keyboard: navigate next/prev with n / p
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'n') { navigateOffset(1); }
+      if (e.key === 'p') { navigateOffset(-1); }
+    });
+    function navigateOffset(offset){
+      const visibleBtns = Array.from(document.querySelectorAll('.post-btn'));
+      if (!visibleBtns.length) return;
+      const activeIndex = visibleBtns.findIndex(b => b.classList.contains('active'));
+      let next = (activeIndex === -1) ? 0 : activeIndex + offset;
+      if (next < 0) next = 0;
+      if (next >= visibleBtns.length) next = visibleBtns.length - 1;
+      visibleBtns[next].click();
+      visibleBtns[next].scrollIntoView({block:'nearest'});
+    }
+
+    // init on DOM ready
+    document.addEventListener('DOMContentLoaded', init);
+  })();
   </script>
+
 </body>
 </html>
