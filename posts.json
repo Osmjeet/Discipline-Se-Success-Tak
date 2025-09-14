@@ -74,5 +74,11 @@
   "title": "Blog 11: Negativity ko Identify karo",
   "preview": "Problem का पहला solution है उसे पहचानना। इस blog में आप सीखेंगे कैसे negative सोच, toxic patterns और hidden signals को पहचानकर उनसे बाहर निकला जाए।",
   "file": "posts/blog11.html"
-}
+},
+  {
+  "id": 12,
+  "title": "Negative लोगों से Deal कैसे करें",
+  "subtitle": "हर कोई आपके सपनों का supporter नहीं होगा, और यह ठीक है।",
+  "file": "blog12.html"
+  }
 ]
