@@ -1,164 +1,270 @@
-<!doctype html>
+ <!doctype html>
 <html lang="hi">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Blogs — Jeet S Singh (Author of Discipline Se Success Tak)</title>
-  <meta name="description" content="Read inspiring blogs by Jeet S Singh, Author of 'Discipline Se Success Tak'. Learn about discipline, success, motivation and daily habits." />
-  <link rel="canonical" href="https://discipline-se-success-tak.vercel.app/blog.html" />
-
+  <meta name="description" content="Read inspiring blogs by Jeet S Singh. Series-wise, searchable, inline expand — ready." />
   <style>
-    body{margin:0;font-family:Inter,Roboto,Arial;background:#f9fbfa;color:#102827;line-height:1.75}
-    .wrap{max-width:900px;margin:0 auto;padding:28px}
-    h1{color:#06493f;text-align:center;margin:32px 0}
-    h2{color:#0a3d36;margin-top:20px;margin-bottom:10px}
-    p{margin-bottom:14px;font-size:1.05rem}
-    .preview{margin-bottom:44px;padding:24px;background:#fff;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
-    .preview h2{margin-top:0}
-    .actions{margin-top:14px}
-    .btn{display:inline-block;background:#0bb39a;color:#fff;padding:10px 16px;border-radius:8px;font-weight:600;text-decoration:none;cursor:pointer;border:none}
-    .btn:hover{background:#078a72}
-    .collapse{margin-top:16px;padding:12px;background:#fafafa;border-radius:8px;display:none}
-    footer{text-align:center;margin-top:28px;padding:16px;font-size:0.9rem;color:#666}
-
-    /* Navigation */
-    nav{background:#06493f;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
-    nav .menu{display:flex;gap:20px;flex-wrap:wrap}
+    :root{
+      --bg:#f7fbfa; --card:#ffffff; --accent:#0bb39a; --dark:#06493f; --muted:#6b7a75;
+      --maxw:1100px; --radius:12px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;background:var(--bg);color:#122;line-height:1.7}
+    header.top{background:var(--dark);color:#fff;padding:14px 18px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+    .brand{font-weight:800;letter-spacing:0.2px}
+    nav .links{display:flex;gap:14px;align-items:center}
     nav a{color:#fff;text-decoration:none;font-weight:600}
-    nav a:hover{text-decoration:underline}
-
-    /* Search box */
-    .search-box input{
-      padding:6px 10px;
-      border-radius:6px;
-      border:none;
-      font-size:14px;
-      outline:none;
+    .controls{display:flex;gap:12px;align-items:center}
+    .search{
+      display:flex;align-items:center;background:#fff;padding:6px;border-radius:8px;overflow:hidden;
     }
-    @media(max-width:600px){
-      nav{flex-direction:column;align-items:flex-start}
-      .search-box{margin-top:10px;width:100%}
-      .search-box input{width:100%}
-    }
+    .search input{border:0;padding:8px 10px;outline:none;font-size:14px;width:220px}
+    .select{padding:8px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:#fff;font-weight:600}
+    .wrap{max-width:var(--maxw);margin:26px auto;padding:0 18px}
+    h1{color:var(--dark);text-align:center;margin:18px 0 26px;font-size:26px}
+    .series-tabs{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:18px}
+    .series-btn{background:#fff;border:1px solid #e6f4ef;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700;color:var(--dark)}
+    .series-btn.active{background:linear-gradient(90deg,var(--accent),#078a72);color:#fff;box-shadow:0 10px 30px rgba(11,179,150,0.08)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
+    .card{background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:0 8px 30px rgba(10,20,18,0.04);border:1px solid #eef7f4;min-height:160px;display:flex;flex-direction:column;justify-content:space-between}
+    .card h2{margin:0 0 10px;font-size:18px;color:var(--dark)}
+    .card p{margin:0 0 12px;color:#234;flex:0 0 auto;text-align:justify}
+    .meta{font-size:13px;color:var(--muted);margin-bottom:10px}
+    .actions{display:flex;gap:10px;align-items:center}
+    .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:9px;border:0;font-weight:800;cursor:pointer}
+    .btn.ghost{background:transparent;border:1px solid rgba(7,14,12,0.06);color:var(--dark)}
+    .collapse{margin-top:12px;padding:14px;background:#fbfffc;border-radius:10px;border:1px solid #eaf7f0;display:none}
+    .collapse .content{max-width:100%;text-align:left}
+    .author-line{font-size:13px;color:var(--muted);margin-top:12px;text-align:right}
+    .centered-content{max-width:900px;margin:0 auto}
+    /* responsive */
+    @media(max-width:880px){ .search input{width:140px} .card p{font-size:15px} .wrap{padding:0 14px} }
   </style>
 </head>
 <body>
-
-  <!-- Navigation -->
-  <nav>
-    <div class="menu">
-      <a href="index.html">🏠 Home</a>
-      <a href="author.html">👤 Author</a>
-      <a href="blog.html">📝 Blogs</a>
+  <header class="top" role="banner">
+    <div style="display:flex;align-items:center;gap:18px">
+      <div class="brand">Discipline Se Success Tak</div>
+      <nav class="links">
+        <a href="index.html">🏠 Home</a>
+        <a href="author.html">👤 Author</a>
+        <a href="blog.html">📝 Blogs</a>
+      </nav>
     </div>
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="🔍 Search blogs..." />
+
+    <div class="controls">
+      <div class="search" aria-hidden="false">
+        <input id="searchInput" placeholder="Search blogs (title or preview) — type to filter" />
+      </div>
+
+      <select id="seriesSelect" class="select" title="Filter by series">
+        <option value="all">All series</option>
+        <option value="1">Series 1 — Blogs 1–10</option>
+        <option value="2">Series 2 — Blogs 11–20</option>
+      </select>
     </div>
-  </nav>
+  </header>
 
-  <div class="wrap">
-    <h1>📖 Blogs by Jeet S Singh</h1>
-    <div id="blog-list">Loading blogs...</div>
-  </div>
+  <main class="wrap" role="main">
+    <h1 class="centered-content">📚 Blogs by Jeet S Singh</h1>
 
-  <footer>© 2025 Jeet S Singh — Discipline • Faith • Success</footer>
+    <!-- series tabs (auto-filled) -->
+    <div class="series-tabs" id="seriesTabs" role="tablist" aria-label="Series selector"></div>
+
+    <!-- posts grid -->
+    <div class="grid" id="postsGrid" aria-live="polite">
+      <!-- JS fills cards here -->
+      Loading posts...
+    </div>
+
+    <div style="margin-top:26px;text-align:center;color:#556;font-size:14px">
+      Want full book & worksheets? <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank" style="color:var(--dark);font-weight:700">Buy on Amazon</a>
+    </div>
+  </main>
+
+  <footer style="text-align:center;padding:26px 0;color:#667">© 2025 Jeet S Singh — Discipline • Faith • Success</footer>
 
   <script>
-    let postsData = [];
+    // Posts loaded from posts.json (expects "series" numeric field)
+    let POSTS = [];
+    let currentSeries = 'all';
 
     async function loadPosts(){
       try {
-        const res = await fetch('posts.json');
-        postsData = await res.json();
-        renderPosts(postsData);
-      } catch(e){
-        document.getElementById('blog-list').textContent = 'Error loading posts.json';
+        const r = await fetch('posts.json', {cache: "no-store"});
+        POSTS = await r.json();
+        // if posts.json has no series field, try to infer from filename (e.g. blog1 => series 1)
+        POSTS = POSTS.map(p => {
+          if (p.series===undefined){
+            const m = (p.file || '').match(/blog(\d+)/i);
+            if (m) {
+              const n = parseInt(m[1],10);
+              p.series = (n<=10) ? 1 : 2;
+            } else {
+              p.series = 1;
+            }
+          }
+          return p;
+        });
+        buildSeriesTabs();
+        renderGrid();
+      } catch(err){
+        document.getElementById('postsGrid').innerHTML = '<div style="padding:18px;color:#b33">Error loading posts.json</div>';
+        console.error(err);
       }
     }
 
-    function renderPosts(posts){
-      const list = document.getElementById('blog-list');
-      list.innerHTML = '';
-
-      posts.forEach((p, idx)=>{
-        const card = document.createElement('div');
-        card.className = 'preview';
-
-        const h2 = document.createElement('h2');
-        h2.textContent = p.title;
-        card.appendChild(h2);
-
-        const snippet = document.createElement('p');
-        snippet.textContent = p.preview;
-        card.appendChild(snippet);
-
-        // actions
-        const actions = document.createElement('div');
-        actions.className = 'actions';
-
-        const readBtn = document.createElement('button');
-        readBtn.className = 'btn btn-read';
-        readBtn.type = 'button';
-        readBtn.dataset.file = p.file;
-        readBtn.dataset.id = 'post' + (idx+1);
-        readBtn.textContent = 'Read More →';
-        actions.appendChild(readBtn);
-
-        card.appendChild(actions);
-
-        const expandedWrapper = document.createElement('div');
-        expandedWrapper.className = 'collapse';
-        expandedWrapper.id = 'post' + (idx+1);
-        card.appendChild(expandedWrapper);
-
-        list.appendChild(card);
+    function buildSeriesTabs(){
+      const tabs = document.getElementById('seriesTabs');
+      tabs.innerHTML = '';
+      // collect available series numbers
+      const seriesSet = Array.from(new Set(POSTS.map(p=>p.series))).sort((a,b)=>a-b);
+      // always add "All"
+      const allBtn = document.createElement('button');
+      allBtn.className = 'series-btn active';
+      allBtn.textContent = 'All';
+      allBtn.dataset.series = 'all';
+      allBtn.addEventListener('click', ()=>{setSeries('all')});
+      tabs.appendChild(allBtn);
+      seriesSet.forEach(s=>{
+        const b = document.createElement('button');
+        b.className = 'series-btn';
+        b.textContent = (s===1) ? 'Series 1' : (s===2) ? 'Series 2' : 'Series ' + s;
+        b.dataset.series = String(s);
+        b.addEventListener('click', ()=>{setSeries(String(s))});
+        tabs.appendChild(b);
       });
-
-      attachReadEvents();
+      // sync select
+      document.getElementById('seriesSelect').value = 'all';
     }
 
-    function attachReadEvents(){
-      document.querySelectorAll('.btn-read').forEach(btn=>{
-        btn.addEventListener('click', async ()=>{
-          const file = btn.dataset.file;
-          const target = document.getElementById(btn.dataset.id);
+    function setSeries(series){
+      currentSeries = series;
+      // UI highlight tabs
+      document.querySelectorAll('.series-btn').forEach(b=>{
+        b.classList.toggle('active', b.dataset.series===series);
+      });
+      // sync select
+      document.getElementById('seriesSelect').value = series;
+      // render
+      renderGrid();
+      // clear search
+      //document.getElementById('searchInput').value = '';
+    }
 
-          if(target.style.display==='block'){
-            target.style.display='none';
+    function renderGrid(){
+      const q = (document.getElementById('searchInput').value || '').trim().toLowerCase();
+      const grid = document.getElementById('postsGrid');
+      // filter by series
+      let list = POSTS.filter(p=> (currentSeries==='all') ? true : String(p.series)===String(currentSeries));
+      // search filter
+      if (q){
+        list = list.filter(p => {
+          return (p.title || '').toLowerCase().includes(q) || (p.preview || '').toLowerCase().includes(q);
+        });
+      }
+      if (!list.length){
+        grid.innerHTML = '<div style="grid-column:1/-1;padding:22px;text-align:center;color:#546">No posts found.</div>';
+        return;
+      }
+      grid.innerHTML = '';
+      list.forEach((p, idx)=>{
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.innerHTML = `
+          <div>
+            <h2>${escapeHtml(p.title)}</h2>
+            <div class="meta">Series ${escapeHtml(String(p.series))}</div>
+            <p>${escapeHtml(p.preview)}</p>
+          </div>
+          <div>
+            <div class="actions">
+              <button class="btn btn-read" data-file="${escapeAttr(p.file)}" data-idx="${idx}">Read More →</button>
+              <button class="btn ghost" onclick="scrollToTop()">Top</button>
+            </div>
+            <div class="collapse" id="collapse-${idx}" aria-hidden="true"></div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+      attachReadHandlers();
+    }
+
+    function attachReadHandlers(){
+      document.querySelectorAll('.btn-read').forEach(btn=>{
+        btn.onclick = async function(){
+          const idx = btn.dataset.idx;
+          const file = btn.dataset.file;
+          const wrapper = document.getElementById('collapse-' + idx);
+          if (!wrapper) return;
+          if (wrapper.style.display==='block'){
+            wrapper.style.display='none';
+            wrapper.setAttribute('aria-hidden','true');
             btn.textContent='Read More →';
             return;
           }
+          // hide any other open wrappers (single open at a time)
+          document.querySelectorAll('.collapse').forEach(c=>{
+            c.style.display='none'; c.setAttribute('aria-hidden','true');
+            const b = c.parentElement.querySelector('.btn-read');
+            if(b) b.textContent='Read More →';
+          });
 
-          target.style.display='block';
+          wrapper.style.display='block';
+          wrapper.setAttribute('aria-hidden','false');
           btn.textContent='Hide';
 
-          if(!target.dataset.loaded){
-            target.innerHTML='<em>Loading...</em>';
+          if (!wrapper.dataset.loaded){
+            wrapper.innerHTML = '<em style="color:#067b5f">Loading...</em>';
             try {
-              const r = await fetch(file);
-              const html = await r.text();
-              target.innerHTML = html;
-              target.dataset.loaded = 'true';
-            } catch(e){
-              target.innerHTML='<em>Error loading blog.</em>';
+              const res = await fetch(file);
+              const text = await res.text();
+              // sanitize minimal: show inner article content only if full file; here we inject raw HTML as posts are our own
+              wrapper.innerHTML = `<div class="content">${text}</div><div class="author-line">✍️ Written by <strong>Jeet S Singh</strong>, Author of <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">“Discipline Se Success Tak”</a></div>`;
+              wrapper.dataset.loaded = '1';
+              // scroll to wrapper smoothly
+              wrapper.scrollIntoView({behavior:'smooth', block:'center'});
+            } catch(err){
+              wrapper.innerHTML = '<div style="color:#b33">Error loading post.</div>';
+              console.error(err);
             }
+          } else {
+            // already loaded — just scroll
+            wrapper.scrollIntoView({behavior:'smooth', block:'center'});
           }
-        });
+        }
       });
     }
 
-    // Search filter
-    document.addEventListener('input', (e)=>{
-      if(e.target.id==='searchInput'){
-        const q = e.target.value.toLowerCase();
-        const filtered = postsData.filter(p =>
-          p.title.toLowerCase().includes(q) ||
-          p.preview.toLowerCase().includes(q)
-        );
-        renderPosts(filtered);
+    // helpers
+    function escapeHtml(s){
+      if(!s) return '';
+      return String(s).replace(/[&<>"']/g, (m)=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;', "'":'&#39;' })[m]);
+    }
+    function escapeAttr(s){ return escapeHtml(s).replace(/"/g,'&quot;') }
+    function scrollToTop(){ window.scrollTo({top:0,behavior:'smooth'}) }
+
+    // search and select events
+    document.getElementById('searchInput').addEventListener('input', ()=>{
+      renderGrid();
+    });
+    document.getElementById('seriesSelect').addEventListener('change', (e)=>{
+      setSeries(e.target.value);
+    });
+
+    // keyboard: Enter focuses first read button if single result
+    document.getElementById('searchInput').addEventListener('keydown', (e)=>{
+      if(e.key==='Enter'){
+        setTimeout(()=> {
+          const firstBtn = document.querySelector('.btn-read');
+          if(firstBtn) firstBtn.focus();
+        }, 50);
       }
     });
 
+    // initial load
     loadPosts();
   </script>
 </body>
