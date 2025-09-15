@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Blogs — Jeet S Singh (Author of Discipline Se Success Tak)</title>
+  <meta name="description" content="Read inspiring blogs by Jeet S Singh. Series-wise, searchable, inline expand — ready." />
+  <style>
+    :root{
+      --bg:#f7fbfa; --card:#ffffff; --accent:#0bb39a; --dark:#06493f; --muted:#6b7a75;
+      --maxw:1100px; --radius:12px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;background:var(--bg);color:#122;line-height:1.7}
+    header.top{background:var(--dark);color:#fff;padding:14px 18px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+    .brand{font-weight:800;letter-spacing:0.2px}
+    nav .links{display:flex;gap:14px;align-items:center}
+    nav a{color:#fff;text-decoration:none;font-weight:600}
+    .controls{display:flex;gap:12px;align-items:center}
+    .search{
+      display:flex;align-items:center;background:#fff;padding:6px;border-radius:8px;overflow:hidden;
+    }
+    .search input{border:0;padding:8px 10px;outline:none;font-size:14px;width:220px}
+    .select{padding:8px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:#fff;font-weight:600}
+    .wrap{max-width:var(--maxw);margin:26px auto;padding:0 18px}
+    h1{color:var(--dark);text-align:center;margin:18px 0 26px;font-size:26px}
+    .series-tabs{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:18px}
+    .series-btn{background:#fff;border:1px solid #e6f4ef;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700;color:var(--dark)}
+    .series-btn.active{background:linear-gradient(90deg,var(--accent),#078a72);color:#fff;box-shadow:0 10px 30px rgba(11,179,150,0.08)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
+    .card{background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:0 8px 30px rgba(10,20,18,0.04);border:1px solid #eef7f4;min-height:160px;display:flex;flex-direction:column;justify-content:space-between}
+    .card h2{margin:0 0 10px;font-size:18px;color:var(--dark)}
+    .card p{margin:0 0 12px;color:#234;flex:0 0 auto;text-align:justify}
+    .meta{font-size:13px;color:var(--muted);margin-bottom:10px}
+    .actions{display:flex;gap:10px;align-items:center}
+    .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:9px;border:0;font-weight:800;cursor:pointer}
+    .btn.ghost{background:transparent;border:1px solid rgba(7,14,12,0.06);color:var(--dark)}
+    /* collapse with slide animation using max-height */
+    .collapse{
+      margin-top:12px;padding:14px;background:#fbfffc;border-radius:10px;border:1px solid #eaf7f0;
+      max-height:0; overflow:hidden; transition: max-height 350ms ease, opacity 250ms ease; opacity:0;
+    }
+    .collapse.open{opacity:1}
+    .collapse .content{max-width:100%;text-align:left}
+    .author-line{font-size:13px;color:var(--muted);margin-top:12px;text-align:right}
+    .centered-content{max-width:900px;margin:0 auto}
+    .warning-bar{background:#fff4f0;border-left:4px solid #f39c6b;color:#6a2d1a;padding:10px 12px;border-radius:8px;margin:12px 0;font-weight:600}
+    @media(max-width:880px){ .search input{width:140px} .card p{font-size:15px} .wrap{padding:0 14px} }
+  </style>
+</head>
+<body>
+  <header class="top" role="banner">
+    <div style="display:flex;align-items:center;gap:18px">
+      <div class="brand">Discipline Se Success Tak</div>
+      <nav class="links">
+        <a href="index.html">🏠 Home</a>
+        <a href="author.html">👤 Author</a>
+        <a href="blog.html">📝 Blogs</a>
+      </nav>
+    </div>
+
+    <div class="controls">
+      <div class="search" aria-hidden="false">
+        <input id="searchInput" placeholder="Search blogs (title or preview) — type to filter" />
+      </div>
+
+      <select id="seriesSelect" class="select" title="Filter by series">
+        <option value="all">All series</option>
+        <option value="1">Series 1 — Blogs 1–10</option>
+        <option value="2">Series 2 — Blogs 11–20</option>
+      </select>
+    </div>
+  </header>
+
+  <main class="wrap" role="main">
+    <h1 class="centered-content">📚 Blogs by Jeet S Singh</h1>
+
+    <div id="validationWarning" aria-live="polite"></div>
+
+    <!-- series tabs -->
+    <div class="series-tabs" id="seriesTabs" role="tablist" aria-label="Series selector"></div>
+
+    <!-- posts grid -->
+    <div class="grid" id="postsGrid" aria-live="polite">Loading posts...</div>
+
+    <div style="margin-top:26px;text-align:center;color:#556;font-size:14px">
+      Want full book & worksheets? <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank" style="color:var(--dark);font-weight:700">Buy on Amazon</a>
+    </div>
+  </main>
+
+  <footer style="text-align:center;padding:26px 0;color:#667">© 2025 Jeet S Singh — Discipline • Faith • Success</footer>
+
+  <script>
+    // ---------- CONFIG ----------
+    const POSTS_JSON = 'posts.json'; // path to posts.json
+    // ---------- state ----------
+    let POSTS = [];
+    let currentSeries = 'all';
+
+    // ---------- load & validate ----------
+    async function loadPosts(){
+      try {
+        const res = await fetch(POSTS_JSON, {cache:'no-store'});
+        const json = await res.json();
+        const validation = validatePostsArray(json);
+        showValidation(validation);
+        // filter duplicates by file (keep first)
+        const seenFiles = new Set();
+        POSTS = [];
+        json.forEach(p=>{
+          const fileKey = String(p.file || '').trim().toLowerCase();
+          if(!fileKey){
+            // skip invalid entry (already reported by validation)
+            return;
+          }
+          if(seenFiles.has(fileKey)){
+            console.warn('Duplicate file entry ignored:', fileKey);
+            return;
+          }
+          seenFiles.add(fileKey);
+          POSTS.push(p);
+        });
+        inferSeriesIfMissing();
+        buildSeriesTabs();
+        renderGrid();
+      } catch(err){
+        console.error(err);
+        document.getElementById('postsGrid').innerHTML = '<div style="padding:18px;color:#b33">Error loading posts.json</div>';
+      }
+    }
+
+    // Validate posts array: returns object {ok:boolean, messages:[]}
+    function validatePostsArray(arr){
+      const msgs = [];
+      if(!Array.isArray(arr)){
+        msgs.push('posts.json is not an array.');
+        return {ok:false,messages:msgs};
+      }
+      arr.forEach((p, i)=>{
+        if(!p.title) msgs.push(`Missing title at index ${i}`);
+        if(!p.preview) msgs.push(`Missing preview at index ${i}`);
+        if(!p.file) msgs.push(`Missing file at index ${i}`);
+        if(p.file && typeof p.file === 'string' && !p.file.match(/\.(html)$/i)){
+          msgs.push(`File looks non-html at index ${i}: ${p.file}`);
+        }
+      });
+      return {ok: msgs.length===0, messages: msgs};
+    }
+
+    // show validation messages (small banner)
+    function showValidation(v){
+      const el = document.getElementById('validationWarning');
+      if(v.ok){
+        el.innerHTML = ''; // clear
+      } else {
+        el.innerHTML = `<div class="warning-bar">⚠️ posts.json validation problems:<br>${v.messages.slice(0,6).map(x=>'- '+x).join('<br>')} ${v.messages.length>6?'<br>...':'')}</div>`;
+        console.warn('posts.json validation:', v.messages);
+      }
+    }
+
+    // If series missing, infer from filename (blog<number>.html)
+    function inferSeriesIfMissing(){
+      POSTS = POSTS.map(p=>{
+        if(p.series===undefined){
+          const m = (p.file || '').match(/blog(\d+)/i);
+          if(m){
+            const n = parseInt(m[1],10);
+            p.series = (n<=10) ? 1 : 2;
+          } else {
+            p.series = 1;
+          }
+        }
+        return p;
+      });
+    }
+
+    // ---------- UI builders ----------
+    function buildSeriesTabs(){
+      const tabs = document.getElementById('seriesTabs');
+      tabs.innerHTML = '';
+      const seriesSet = Array.from(new Set(POSTS.map(p=>p.series))).sort((a,b)=>a-b);
+      const allBtn = document.createElement('button');
+      allBtn.className = 'series-btn active';
+      allBtn.textContent = 'All';
+      allBtn.dataset.series = 'all';
+      allBtn.addEventListener('click', ()=> setSeries('all'));
+      tabs.appendChild(allBtn);
+      seriesSet.forEach(s=>{
+        const b = document.createElement('button');
+        b.className = 'series-btn';
+        b.textContent = (s===1)? 'Series 1' : (s===2)? 'Series 2' : 'Series '+s;
+        b.dataset.series = String(s);
+        b.addEventListener('click', ()=> setSeries(String(s)));
+        tabs.appendChild(b);
+      });
+      document.getElementById('seriesSelect').value = 'all';
+    }
+
+    function setSeries(series){
+      currentSeries = series;
+      document.querySelectorAll('.series-btn').forEach(b=>{
+        b.classList.toggle('active', b.dataset.series===series);
+      });
+      document.getElementById('seriesSelect').value = series;
+      renderGrid();
+    }
+
+    // Render cards grid
+    function renderGrid(){
+      const q = (document.getElementById('searchInput').value || '').trim().toLowerCase();
+      const grid = document.getElementById('postsGrid');
+      let list = POSTS.filter(p => (currentSeries==='all') ? true : String(p.series)===String(currentSeries));
+      if(q){
+        list = list.filter(p => (p.title||'').toLowerCase().includes(q) || (p.preview||'').toLowerCase().includes(q));
+      }
+      if(!list.length){
+        grid.innerHTML = '<div style="grid-column:1/-1;padding:22px;text-align:center;color:#546">No posts found.</div>';
+        return;
+      }
+      grid.innerHTML = '';
+      list.forEach((p, idx)=>{
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.innerHTML = `
+          <div>
+            <h2>${escapeHtml(p.title)}</h2>
+            <div class="meta">Series ${escapeHtml(String(p.series || '1'))}</div>
+            <p>${escapeHtml(p.preview)}</p>
+          </div>
+          <div>
+            <div class="actions">
+              <button class="btn btn-read" data-file="${escapeAttr(p.file)}" data-idx="${idx}">Read More →</button>
+              <button class="btn ghost" onclick="scrollToTop()">Top</button>
+            </div>
+            <div class="collapse" id="collapse-${idx}" aria-hidden="true"></div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+      attachReadHandlers();
+    }
+
+    // ---------- expand with smooth slide ----------
+    function attachReadHandlers(){
+      document.querySelectorAll('.btn-read').forEach(btn=>{
+        btn.onclick = async function(){
+          const idx = btn.dataset.idx;
+          const file = btn.dataset.file;
+          const wrapper = document.getElementById('collapse-' + idx);
+          if(!wrapper) return;
+
+          // If open -> close
+          if(wrapper.classList.contains('open')){
+            closeCollapse(wrapper, btn);
+            return;
+          }
+
+          // Close others without scrolling (so page doesn't jump)
+          document.querySelectorAll('.collapse.open').forEach(c=>{
+            const b = c.parentElement.querySelector('.btn-read');
+            closeCollapse(c, b, {skipScroll:true});
+          });
+
+          // Open this wrapper
+          openCollapse(wrapper, btn);
+
+          if (!wrapper.dataset.loaded){
+            wrapper.innerHTML = '<em style="color:#067b5f">Loading...</em>';
+            try {
+              const res = await fetch(file);
+              const text = await res.text();
+              wrapper.innerHTML = `<div class="content">${text}</div><div class="author-line">✍️ Written by <strong>Jeet S Singh</strong>, Author of <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">“Discipline Se Success Tak”</a></div>`;
+              wrapper.dataset.loaded = '1';
+              // Expand to show full content smoothly
+              setMaxHeight(wrapper);
+            } catch(err){
+              wrapper.innerHTML = '<div style="color:#b33">Error loading post.</div>';
+              console.error(err);
+            }
+          } else {
+            // Already loaded: ensure fully expanded
+            setMaxHeight(wrapper);
+          }
+        }
+      });
+    }
+
+    // open collapse (animate)
+    function openCollapse(wrapper, btn){
+      wrapper.classList.add('open');
+      wrapper.style.display = 'block';
+      wrapper.setAttribute('aria-hidden','false');
+      // set small timeout so transition works
+      requestAnimationFrame(()=> setMaxHeight(wrapper));
+      if(btn) btn.textContent = 'Hide';
+    }
+
+    // close collapse (animate)
+    function closeCollapse(wrapper, btn, opts = {}){
+      // set to current scrollHeight so transition from that to 0 works
+      wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
+      // allow next frame then collapse to 0
+      requestAnimationFrame(()=> {
+        wrapper.style.maxHeight = '0';
+        wrapper.classList.remove('open');
+        wrapper.setAttribute('aria-hidden','true');
+        if(btn) btn.textContent = 'Read More →';
+        if(!opts.skipScroll){
+          // after transition, optionally scroll to the card top to keep context clean
+          setTimeout(()=> {
+            const card = wrapper.closest('.card');
+            if(card) card.scrollIntoView({behavior:'smooth', block:'center'});
+          }, 360);
+        }
+        // keep content loaded so reopening is instant
+      });
+    }
+
+    // set appropriate maxHeight for wrapper (based on content)
+    function setMaxHeight(wrapper){
+      // allow browser to calculate content height
+      wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
+      wrapper.classList.add('open');
+      wrapper.style.opacity = '1';
+      // clear fixed maxHeight after transition to allow natural height (avoid clipping if content resizes)
+      setTimeout(()=> {
+        if(wrapper.classList.contains('open')){
+          wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
+        }
+      }, 380);
+    }
+
+    // helpers
+    function escapeHtml(s){
+      if(!s) return '';
+      return String(s).replace(/[&<>"']/g, (m)=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;', "'":'&#39;' })[m]);
+    }
+    function escapeAttr(s){ return escapeHtml(s).replace(/"/g,'&quot;') }
+    function scrollToTop(){ window.scrollTo({top:0,behavior:'smooth'}) }
+
+    // search and select events
+    document.getElementById('searchInput').addEventListener('input', ()=> renderGrid());
+    document.getElementById('seriesSelect').addEventListener('change', (e)=> setSeries(e.target.value));
+    document.getElementById('searchInput').addEventListener('keydown', (e)=>{
+      if(e.key==='Enter'){ setTimeout(()=> { const firstBtn = document.querySelector('.btn-read'); if(firstBtn) firstBtn.focus(); }, 50); }
+    });
+
+    // initial load
+    loadPosts();
+  </script>
+</body>
+  </html>
