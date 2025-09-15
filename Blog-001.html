@@ -17,9 +17,7 @@
     nav .links{display:flex;gap:14px;align-items:center}
     nav a{color:#fff;text-decoration:none;font-weight:600}
     .controls{display:flex;gap:12px;align-items:center}
-    .search{
-      display:flex;align-items:center;background:#fff;padding:6px;border-radius:8px;overflow:hidden;
-    }
+    .search{display:flex;align-items:center;background:#fff;padding:6px;border-radius:8px;overflow:hidden;}
     .search input{border:0;padding:8px 10px;outline:none;font-size:14px;width:220px}
     .select{padding:8px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:#fff;font-weight:600}
     .wrap{max-width:var(--maxw);margin:26px auto;padding:0 18px}
@@ -39,7 +37,6 @@
     .collapse .content{max-width:100%;text-align:left}
     .author-line{font-size:13px;color:var(--muted);margin-top:12px;text-align:right}
     .centered-content{max-width:900px;margin:0 auto}
-    /* responsive */
     @media(max-width:880px){ .search input{width:140px} .card p{font-size:15px} .wrap{padding:0 14px} }
   </style>
 </head>
@@ -70,10 +67,8 @@
   <main class="wrap" role="main">
     <h1 class="centered-content">📚 Blogs by Jeet S Singh</h1>
 
-    <!-- series tabs (auto-filled) -->
     <div class="series-tabs" id="seriesTabs" role="tablist" aria-label="Series selector"></div>
 
-    <!-- posts grid -->
     <div class="grid" id="postsGrid" aria-live="polite">
       Loading posts...
     </div>
@@ -86,21 +81,21 @@
   <footer style="text-align:center;padding:26px 0;color:#667">© 2025 Jeet S Singh — Discipline • Faith • Success</footer>
 
   <script>
-    // Posts loaded from posts.json (expects "series" numeric field)
+    // POSTS will come from posts.json — expected fields: title, preview, file, optional series
     let POSTS = [];
     let currentSeries = 'all';
 
     async function loadPosts(){
       try {
-        const r = await fetch('posts.json', {cache: "no-store"});
+        const r = await fetch('posts.json', {cache:'no-store'});
         POSTS = await r.json();
-        // if posts.json has no series field, try to infer from filename (e.g. blog1 => series 1)
+        // infer series if not provided
         POSTS = POSTS.map(p => {
-          if (p.series===undefined){
+          if (p.series === undefined) {
             const m = (p.file || '').match(/blog(\d+)/i);
             if (m) {
               const n = parseInt(m[1],10);
-              p.series = (n<=10) ? 1 : 2;
+              p.series = (n <= 10) ? 1 : 2;
             } else {
               p.series = 1;
             }
@@ -118,56 +113,44 @@
     function buildSeriesTabs(){
       const tabs = document.getElementById('seriesTabs');
       tabs.innerHTML = '';
-      // collect available series numbers
-      const seriesSet = Array.from(new Set(POSTS.map(p=>p.series))).sort((a,b)=>a-b);
-      // always add "All"
+      const seriesSet = Array.from(new Set(POSTS.map(p => p.series))).sort((a,b) => a-b);
       const allBtn = document.createElement('button');
       allBtn.className = 'series-btn active';
       allBtn.textContent = 'All';
       allBtn.dataset.series = 'all';
-      allBtn.addEventListener('click', ()=>{setSeries('all')});
+      allBtn.addEventListener('click', ()=> setSeries('all'));
       tabs.appendChild(allBtn);
-      seriesSet.forEach(s=>{
+      seriesSet.forEach(s => {
         const b = document.createElement('button');
         b.className = 'series-btn';
         b.textContent = (s===1) ? 'Series 1' : (s===2) ? 'Series 2' : 'Series ' + s;
         b.dataset.series = String(s);
-        b.addEventListener('click', ()=>{setSeries(String(s))});
+        b.addEventListener('click', ()=> setSeries(String(s)));
         tabs.appendChild(b);
       });
-      // sync select
       document.getElementById('seriesSelect').value = 'all';
     }
 
     function setSeries(series){
       currentSeries = series;
-      // UI highlight tabs
-      document.querySelectorAll('.series-btn').forEach(b=>{
-        b.classList.toggle('active', b.dataset.series===series);
-      });
-      // sync select
+      document.querySelectorAll('.series-btn').forEach(b => b.classList.toggle('active', b.dataset.series===series));
       document.getElementById('seriesSelect').value = series;
-      // render
       renderGrid();
     }
 
     function renderGrid(){
       const q = (document.getElementById('searchInput').value || '').trim().toLowerCase();
       const grid = document.getElementById('postsGrid');
-      // filter by series
-      let list = POSTS.filter(p=> (currentSeries==='all') ? true : String(p.series)===String(currentSeries));
-      // search filter
+      let list = POSTS.filter(p => (currentSeries==='all') ? true : String(p.series) === String(currentSeries));
       if (q){
-        list = list.filter(p => {
-          return (p.title || '').toLowerCase().includes(q) || (p.preview || '').toLowerCase().includes(q);
-        });
+        list = list.filter(p => (p.title || '').toLowerCase().includes(q) || (p.preview || '').toLowerCase().includes(q));
       }
       if (!list.length){
         grid.innerHTML = '<div style="grid-column:1/-1;padding:22px;text-align:center;color:#546">No posts found.</div>';
         return;
       }
       grid.innerHTML = '';
-      list.forEach((p, idx)=>{
+      list.forEach((p, idx) => {
         const card = document.createElement('article');
         card.className = 'card';
         card.innerHTML = `
@@ -190,48 +173,66 @@
     }
 
     function attachReadHandlers(){
-      document.querySelectorAll('.btn-read').forEach(btn=>{
+      document.querySelectorAll('.btn-read').forEach(btn => {
         btn.onclick = async function(){
           const idx = btn.dataset.idx;
           const file = btn.dataset.file;
           const wrapper = document.getElementById('collapse-' + idx);
           if (!wrapper) return;
 
-          // If currently open, just close it
-          if (wrapper.style.display==='block'){
-            wrapper.style.display='none';
+          // toggle close
+          if (wrapper.style.display === 'block'){
+            wrapper.style.display = 'none';
             wrapper.setAttribute('aria-hidden','true');
-            btn.textContent='Read More →';
+            btn.textContent = 'Read More →';
             return;
           }
 
-          // Close other open wrappers without scrolling
-          document.querySelectorAll('.collapse').forEach(c=>{
-            c.style.display='none'; c.setAttribute('aria-hidden','true');
+          // close others silently (no scrolling)
+          document.querySelectorAll('.collapse').forEach(c => {
+            c.style.display = 'none'; c.setAttribute('aria-hidden','true');
             const b = c.parentElement ? c.parentElement.querySelector('.btn-read') : null;
-            if(b) b.textContent='Read More →';
+            if (b) b.textContent = 'Read More →';
           });
 
-          // Open this wrapper (no page jump)
-          wrapper.style.display='block';
+          // open this wrapper
+          wrapper.style.display = 'block';
           wrapper.setAttribute('aria-hidden','false');
-          btn.textContent='Hide';
+          btn.textContent = 'Hide';
 
           if (!wrapper.dataset.loaded){
             wrapper.innerHTML = '<em style="color:#067b5f">Loading...</em>';
             try {
               const res = await fetch(file);
               const text = await res.text();
-              // Insert the fetched HTML (we assume posts are from same origin and safe)
-              wrapper.innerHTML = `<div class="content">${text}</div><div class="author-line">✍️ Written by <strong>Jeet S Singh</strong>, Author of <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">“Discipline Se Success Tak”</a></div>`;
+
+              // parse and extract only the blog content block
+              const temp = document.createElement('div');
+              temp.innerHTML = text;
+
+              // Prefer .blog-card, fallback to main/article/body innerHTML
+              let extracted = temp.querySelector('.blog-card');
+              if (!extracted) extracted = temp.querySelector('main');
+              if (!extracted) extracted = temp.querySelector('article');
+              if (!extracted) extracted = temp.querySelector('body');
+              if (extracted) {
+                wrapper.innerHTML = `<div class="content">${extracted.outerHTML}</div>
+                  <div class="author-line">✍️ Written by <strong>Jeet S Singh</strong>, Author of <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">“Discipline Se Success Tak”</a></div>`;
+              } else {
+                // last fallback: just insert raw text (but avoid full html tag dupes)
+                // remove full html/head/body tags if present
+                const cleaned = text.replace(/<\/?html[^>]*>/gi,'').replace(/<\/?head[^>]*>[\s\S]*?<\/head>/gi,'').replace(/<\/?body[^>]*>/gi,'').trim();
+                wrapper.innerHTML = `<div class="content">${cleaned}</div>
+                  <div class="author-line">✍️ Written by <strong>Jeet S Singh</strong></div>`;
+              }
               wrapper.dataset.loaded = '1';
             } catch(err){
               wrapper.innerHTML = '<div style="color:#b33">Error loading post.</div>';
               console.error(err);
             }
           }
-          // NO scrollIntoView — prevents page jump
-        }
+          // NO scrollIntoView -> prevents page jump to middle
+        };
       });
     }
 
@@ -243,17 +244,11 @@
     function escapeAttr(s){ return escapeHtml(s).replace(/"/g,'&quot;') }
     function scrollToTop(){ window.scrollTo({top:0,behavior:'smooth'}) }
 
-    // search and select events
-    document.getElementById('searchInput').addEventListener('input', ()=>{
-      renderGrid();
-    });
-    document.getElementById('seriesSelect').addEventListener('change', (e)=>{
-      setSeries(e.target.value);
-    });
-
-    // keyboard: Enter focuses first read button if single result
-    document.getElementById('searchInput').addEventListener('keydown', (e)=>{
-      if(e.key==='Enter'){
+    // events
+    document.getElementById('searchInput').addEventListener('input', renderGrid);
+    document.getElementById('seriesSelect').addEventListener('change', (e) => setSeries(e.target.value));
+    document.getElementById('searchInput').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
         setTimeout(()=> {
           const firstBtn = document.querySelector('.btn-read');
           if(firstBtn) firstBtn.focus();
@@ -261,7 +256,7 @@
       }
     });
 
-    // initial load
+    // initial
     loadPosts();
   </script>
 </body>
