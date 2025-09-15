@@ -1,207 +1,258 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="hi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Discipline Se Success Tak - Blogs</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Discipline Se Success Tak — Blogs</title>
+  <meta name="description" content="Series-wise blogs — Discipline Se Success Tak. Series 1–10 (Discipline) & Series 11–20 (Negativity Se Overcome)." />
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f9f9f9;
-      color: #333;
+    :root{
+      --accent:#0b8f76;
+      --accent-dark:#06664f;
+      --muted:#6b7a75;
+      --bg:#ffffff;
+      --card:#f7fffb;
+      --text:#0e2b26;
+      --radius:12px;
+      --maxw:980px;
     }
-    header {
-      background: #004d40;
-      color: white;
-      padding: 10px;
-      text-align: center;
-      font-size: 20px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    .container {
-      max-width: 900px;
-      margin: 20px auto;
-      padding: 0 15px;
-    }
-    .search-box {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 20px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
-    .series {
-      margin-bottom: 25px;
-    }
-    .series-heading {
-      background: #e0f2f1;
-      padding: 12px;
-      font-size: 18px;
-      font-weight: bold;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    .post {
-      border-bottom: 1px solid #ddd;
-      padding: 12px 0;
-    }
-    .post h3 {
-      margin: 0;
-      font-size: 18px;
-    }
-    .post p {
-      margin: 6px 0;
-      color: #555;
-    }
-    .read-more {
-      color: white;
-      background: #00796b;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .post-content {
-      display: none;
-      margin-top: 10px;
-      line-height: 1.6;
-      text-align: center; /* content center aligned */
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      margin-top: 30px;
-      background: #004d40;
-      color: white;
-    }
-    .author-note {
-      margin-top: 20px;
-      font-style: italic;
-      text-align: right;
-      color: #444;
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, 'Noto Sans Devanagari', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f6f9f7;color:var(--text);-webkit-font-smoothing:antialiased}
+    header{background:var(--accent-dark);color:#fff;padding:14px 16px;position:sticky;top:0;z-index:1000;display:flex;align-items:center;gap:14px}
+    header .brand{font-weight:700;font-size:18px}
+    .container{max-width:var(--maxw);margin:22px auto;padding:0 18px}
+    .top-search{background:#fff;padding:18px;border-radius:14px;box-shadow:0 8px 22px rgba(6,20,18,0.05);border:1px solid #eef6f2}
+    .search-input{width:100%;padding:12px 14px;border-radius:10px;border:1px solid #e6f2ee;font-size:15px}
+    .series-list{margin-top:18px}
+    .series-card{background:#fff;padding:14px;border-radius:12px;margin-top:14px;border:1px solid #eef6f2}
+    .series-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;cursor:pointer}
+    .series-title{font-size:18px;color:var(--accent-dark);font-weight:700}
+    .series-desc{color:var(--muted);margin-top:8px;font-size:14px}
+    .posts-wrap{margin-top:14px}
+    .post-row{display:flex;gap:16px;padding:14px;border-radius:10px;border:1px solid #f0f7f4;background:#fbfffb;margin-top:12px;align-items:flex-start}
+    .post-left{flex:1;min-width:0}
+    .post-right{width:220px;flex-shrink:0}
+    .post-title{font-size:16px;color:var(--accent-dark);margin:0 0 6px 0}
+    .post-preview{color:var(--muted);margin:0 0 10px 0;font-size:14px}
+    .btn-row{display:flex;gap:10px;align-items:center}
+    .read-btn{background:var(--accent);color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:700}
+    .meta{font-size:12px;color:#9aa9a3;margin-top:8px}
+    .post-content{display:none;margin-top:12px;padding:12px 14px;border-radius:10px;background:#ffffff;border:1px solid #eef6f2;line-height:1.7;text-align:center}
+    .author-note{margin-top:12px;text-align:right;font-weight:700;color:#244b43}
+    /* responsive: stack on small screens */
+    @media(max-width:720px){
+      .post-row{flex-direction:column}
+      .post-right{width:100%}
+      .post-content{text-align:center}
     }
   </style>
 </head>
 <body>
-  <header>📚 Discipline Se Success Tak</header>
+  <header>
+    <div class="brand">📘 Discipline Se Success Tak</div>
+    <nav aria-label="top-nav" style="margin-left:auto;color:#fff;font-weight:600;opacity:0.95">
+      🏠 Home &nbsp;&nbsp; 📝 Blogs &nbsp;&nbsp; 👤 Author &nbsp;&nbsp; 📗 Free eBook
+    </nav>
+  </header>
 
-  <div class="container">
-    <input type="text" id="searchBox" class="search-box" placeholder="🔍 Search blogs by title or preview...">
+  <main class="container" id="main">
+    <section class="top-search" aria-labelledby="search-label">
+      <label id="search-label" style="display:block;font-weight:700;color:var(--accent-dark);margin-bottom:8px">Series-wise Blogs — Click a series to open</label>
+      <input id="searchBox" class="search-input" placeholder="🔍 Search titles / previews..." />
+      <div id="seriesContainer" class="series-list"></div>
+    </section>
 
-    <div id="postsWrap"></div>
-  </div>
+    <section id="postsContainer" style="margin-top:20px"></section>
+  </main>
 
-  <footer>© 2025 Jeet S Singh — Discipline • Faith • Success</footer>
+  <footer style="text-align:center;padding:22px;color:#6b7a75">
+    © 2025 JEET S SINGH — Discipline • Faith • Success
+  </footer>
 
   <script>
-    const POSTS_PATH = "posts/posts.json"; // adjust if your json is in root
+  /************************************************************************
+   * FINAL self-contained blog.html
+   * - All posts embedded in `posts` array (no external posts.json needed)
+   * - Each post has: id, title, preview, series (1 or 2), content (HTML string)
+   * - Add new posts by appending to `posts` array (follow same object fields)
+   *************************************************************************/
 
-    async function loadPosts() {
-      try {
-        const res = await fetch(POSTS_PATH);
-        const posts = await res.json();
+  const posts = [
+    /* --- Series 1–10 placeholders (minimal previews) --- */
+    { id:1,  series:1, title:"Blog 1 — Discipline ही असली Superpower", preview:"Talent की जगह discipline रोज़ के छोटे actions को compound करता है।", content:`<h2>Blog 1 — Discipline ही असली Superpower</h2><p style="text-align:center">Discipline का मतलब daily small actions को repeat करना है — वो जो long-term results देते हैं।</p><p class="author-note">Written by JEET S SINGH</p>`},
+    { id:2,  series:1, title:"Blog 2 — Routine बनाओ, जिंदगी बदलाओ", preview:"Simple routine से momentum बनता है।", content:`<h2>Blog 2 — Routine बनाओ, जिंदगी बदलाओ</h2><p style="text-align:center">Routine आपकी willpower बचाता है — structure बनाओ और automate करें।</p><p class="author-note">Written by JEET S SINGH</p>`},
+    { id:3,  series:1, title:"Blog 3 — Focus के micro-habits", preview:"Daily micro-habits से focus build होता है।", content:`<h2>Blog 3 — Focus के micro-habits</h2><p style="text-align:center">Focus trainable है — small sessions, no distractions।</p><p class="author-note">Written by JEET S SINGH</p>`},
+    { id:4,  series:1, title:"Blog 4 — Morning power-routine", preview:"सुबह की आदतें पूरे दिन को shape करती हैं।", content:`<h2>Blog 4 — Morning power-routine</h2><p style="text-align:center">एक short morning ritual आपकी energy set करता है।</p><p class="author-note">Written by JEET S SINGH</p>`},
+    { id:5,  series:1, title:"Blog 5 — Small Wins का momentum", preview:"Daily small wins बड़ी progress बनाते हैं।", content:`<h2>Blog 5 — Small Wins का momentum</h2><p style="text-align:center">Celebrate tiny wins और consistency बनाए रखें।</p><p class="author-note">Written by JEET S SINGH</p>`},
+    { id:6,  series:1, title:"Blog 6 — Deep Work को अपनाओ", preview:"Focus blocks से high-quality output आता है।", content:`<h2>Blog 6 — Deep Work को अपनाओ</h2><p style="text-align:center">Distraction-free time में real progress बनता है।</p><p class="author-note">Written by JEET S SINGH</p>`},
+    { id:7,  series:1, title:"Blog 7 — Habit stacking", preview:"New habit को existing habit के साथ जोड़ो।", content:`<h2>Blog 7 — Habit stacking</h2><p style="text-align:center">Simple technique जिससे habit बनाना आसान होता है।</p><p class="author-note">Written by JEET S SINGH</p>`},
+    { id:8,  series:1, title:"Blog 8 — Time Audit और Productivity", preview:"अपने time को track करो, waste हटाओ।", content:`<h2>Blog 8 — Time Audit</h2><p style="text-align:center">Time tracking से reality दिखती है और सुधार आता है।</p><p class="author-note">Written by JEET S SINGH</p>`},
+    { id:9,  series:1, title:"Blog 9 — Faith और Consistency", preview:"Faith छोटी जीतों पर भरोसा है।", content:`<h2>Blog 9 — Faith और Consistency</h2><p style="text-align:center">Faith का मतलब vision पे stick रहना, मुश्किल में भी।</p><p class="author-note">Written by JEET S SINGH</p>`},
+    { id:10, series:1, title:"Blog 10 — Patience", preview:"Patience active endurance है — action लेते हुए hold करो।", content:`<h2>Blog 10 — Patience</h2><p style="text-align:center">Patience का मतलब इंतज़ार नहीं, process पर भरोसा और consistent action है।</p><p class="author-note">Written by JEET S SINGH</p>`},
 
-        const wrap = document.getElementById("postsWrap");
-        wrap.innerHTML = "";
+    /* --- Series 11–20: Negativity Se Overcome (we include full detailed posts for 11,12,13) --- */
+    { id:11, series:2, title:"Blog 11 — Negativity को Identify करो", preview:"Problem का पहला solution है उसे पहचानना।", content:
+      `<h2>Blog 11 — Negativity को Identify करो</h2>
+       <p style="text-align:center">यह नया mini-series <strong>“Negativity Se Overcome”</strong> उन लोगों के लिए है जो समझते हैं कि external problems से पहले internal barriers साफ़ करना ज़रूरी है। Negativity अक्सर धीरे-धीरे आती है — false excuses, repeating doubts, और micro-habits के रूप में। इस series की शुरुआत में हम सबसे पहले यही सीखेंगे: <strong>negativity को कैसे पहचानें</strong>, ताकि अगले कदम पर आप उसे प्रभावी तरीके से neutralize कर सकें।</p>
+       <h3 style="color:#0b8f76">Negativity को पहचानना क्यों ज़रूरी है?</h3>
+       <p style="text-align:center">एक doctor जब patient की बीमारी पहचान लेता है तभी effective इलाज कर सकता है। उसी तरह, जब आप अपनी सोच और रोज़मर्रा के व्यवहार में negativity के patterns पहचान लेते हो, तभी आप उनके लिए सही remedies चुन सकते हो। Negativity अक्सर loud नहीं होती — यह एक धीमी erosive process है जो confidence, energy और focus को धीरे-धीरे कम कर देती है।</p>
+       <h3 style="color:#0b8f76">Negativity के Common Signals</h3>
+       <ul style="text-align:left;max-width:760px;margin:0 auto 10px">
+         <li><strong>बार-बार शिकायत करना</strong> — छोटी-छोटी चीज़ें भी हमेशा खराब लगना।</li>
+         <li><strong>Excuses और blame</strong> — अपनी responsibility दूसरों पर डालना।</li>
+         <li><strong>दिन की शुरुआत low-energy से</strong> — motivation गायब रहना।</li>
+         <li><strong>Overthinking</strong> — एक ही issue को बार-बार सोचकर stuck रह जाना।</li>
+         <li><strong>Negative self-talk</strong> — “मैं कर नहीं पाऊँगा” जैसी repeated lines।</li>
+       </ul>
+       <div style="background:#f0fff9;border-left:4px solid var(--accent);padding:10px;border-radius:8px;max-width:760px;margin:10px auto">
+         <strong>Quick mirror-check:</strong> अगर आप रोज़ के छोटे decisions में गिरावट महसूस करते हो — meetings मिटा देना, important emails postpone करना, daily practice miss करना — तो यह संकेत है कि negativity आपके action पर असर डाल रही है।
+       </div>
+       <h3 style="color:#0b8f76">Self-Check Exercise</h3>
+       <p style="text-align:center">1 दिन के लिए अपने दिन भर के 10 thoughts लिखो — फिर negative vs positive ratio निकालो और repeat होने वाले negative patterns circle करो। इससे साफ़ दिखेगा कि negativity किन contexts में आती है — work, relationships या self-image।</p>
+       <h3 style="color:#0b8f76">पहचान के बाद अगला कदम</h3>
+       <p style="text-align:center">Negativity पहचानना half-battle है। आगे का तरीका simple पर structured होना चाहिए: (1) evidence-based small action (2) environmental tweak (3) micro-reward loop। शुरुआत में छोटे targets लो, फिर scale करो।</p>
+       <p class="author-note">Written by JEET S SINGH</p>`
+    },
 
-        // group by series (1–10, 11–20)
-        const seriesGroups = {
-          "Series 1–10 — Discipline Se Success Tak": posts.filter(p => p.id >= 1 && p.id <= 10),
-          "Series 11–20 — Negativity Se Overcome": posts.filter(p => p.id >= 11 && p.id <= 20)
-        };
+    { id:12, series:2, title:"Blog 12 — Negative लोगों से Deal कैसे करें", preview:"हर कोई आपके सपनों का supporter नहीं होगा, और यह ठीक है।", content:
+      `<h2>Blog 12 — Negative लोगों से Deal कैसे करें</h2>
+       <p style="text-align:center"><em>“हर कोई आपके सपनों का supporter नहीं होगा, और यह ठीक है।”</em></p>
+       <h3 style="color:#0b8f76">Negative लोगों का असर क्यों खतरनाक है?</h3>
+       <p style="text-align:center">हम सबकी ज़िंदगी में ऐसे लोग होते हैं जो बार-बार doubt या discourage करते हैं — ये लोग धीरे-धीरे आपके confidence और energy को drain कर देते हैं। अगर इन्हें handle करना न आए तो आप अपने ही सपनों पर doubt करने लगते हो।</p>
+       <h3 style="color:#0b8f76">Boundaries बनाना ज़रूरी क्यों है?</h3>
+       <p style="text-align:center">Boundaries का मतलब है respect के साथ distance रखना — यह नफ़रत नहीं, बल्कि अपनी mental space की सुरक्षा है। जब आप clear limits रखेंगे तो negative remarks कम असर करेंगे।</p>
+       <h3 style="color:#0b8f76">Practical तरीके — कैसे deal करें</h3>
+       <ul style="text-align:left;max-width:760px;margin:0 auto 10px">
+         <li><strong>Limit Exposure:</strong> ऐसे लोगों के साथ समय घटाओ — बातचीत का वक्त सीमित कर दो।</li>
+         <li><strong>Neutral Response:</strong> हर बात पर argument की जरूरत नहीं — शांत 'ठीक है' से आगे बढ़ जाओ।</li>
+         <li><strong>Shift Topic:</strong> Negativity आते ही topic बदल दो — इससे signal जाता है कि आप entertain नहीं कर रहे।</li>
+         <li><strong>Positive Circle Build करो:</strong> अपने आसपास supportive लोगों की दायरा बढ़ाओ।</li>
+         <li><strong>Self-Reminder:</strong> "यह उनकी limitation है, मेरी नहीं" — बार-बार याद दिलाओ।</li>
+       </ul>
+       <p style="text-align:center">Example: अगर close friend कहे "तेरे बस का नहीं", तो calm रहो और action पर ध्यान दो — results आने पर चीजें बदलती हैं।</p>
+       <p class="author-note">Written by JEET S SINGH</p>`
+    },
 
-        for (const [seriesName, seriesPosts] of Object.entries(seriesGroups)) {
-          const seriesDiv = document.createElement("div");
-          seriesDiv.className = "series";
+    { id:13, series:2, title:"Blog 13 — Overthinking का इलाज", preview:"Action ही असली इलाज है — जितना सोचो, उतना फँसते हो।", content:
+      `<h2>Blog 13 — Overthinking का इलाज</h2>
+       <p style="text-align:center"><em>“जितना सोचते हो, उतना ही फँसते हो — Action ही असली इलाज है।”</em></p>
+       <h3 style="color:#0b8f76">Overthinking क्यों खतरनाक है?</h3>
+       <p style="text-align:center">छोटा-सा decision लेने में घंटों फँस जाना — "क्या सही होगा?", "अगर fail हुआ तो?" — ये सब energy और समय बर्बाद करते हैं। Overthinking एक invisible jail है जो action को रोकता है और progress रोकता है।</p>
+       <h3 style="color:#0b8f76">क्यों फँसते हैं?</h3>
+       <ul style="text-align:left;max-width:760px;margin:0 auto 10px">
+         <li>Fear of Failure</li>
+         <li>Perfectionism</li>
+         <li>Past Mistakes</li>
+         <li>Too Many Choices</li>
+       </ul>
+       <h3 style="color:#0b8f76">Practical तरीके — Overthinking से बाहर</h3>
+       <ul style="text-align:left;max-width:760px;margin:0 auto 10px">
+         <li><strong>Time-limit set करो:</strong> 10–15 मिनट की सोच, फिर निर्णय लो।</li>
+         <li><strong>छोटे steps लो:</strong> पूरे सफर की बजाय अगला छोटा action करो और execute करो।</li>
+         <li><strong>Journaling:</strong> विचारों को लिखो — clarity आती है।</li>
+         <li><strong>Action = Medicine:</strong> जितनी जल्दी action लोगे, उतनी जल्दी clarity और momentum मिलेंगे।</li>
+         <li><strong>What if? को Positive में बदलो:</strong> "What if I fail?" → "What if I succeed?"</li>
+       </ul>
+       <p style="text-align:center">Real example: YouTube चैनल — पहला phone video डालो। जो action लेता है, वही आगे बढ़ता है।</p>
+       <p class="author-note">Written by JEET S SINGH</p>`
+    },
 
-          const heading = document.createElement("div");
-          heading.className = "series-heading";
-          heading.textContent = `${seriesName}`;
-          seriesDiv.appendChild(heading);
+    /* --- placeholders for 14–20 --- */
+    { id:14, series:2, title:"Blog 14 — Criticism को Fuel बनाओ", preview:"Criticism को अपनी growth का tool बनाओ।", content:`<h2>Blog 14 — Criticism को Fuel बनाओ</h2><p style="text-align:center">Criticism को ignore नहीं, बल्कि learn करके energy बनाओ।</p><p class="author-note">Written by JEET S SINGH</p>`},
+    { id:15, series:2, title:"Blog 15 — Fear of Failure को तोड़ो", preview:"डर को action से break करो।", content:`<h2>Blog 15 — Fear of Failure को तोड़ो</h2><p style="text-align:center">Small tests करो और feedback लो — fear घटेगा।</p><p class="author-note">Written by JEET S SINGH</p>`},
+    { id:16, series:2, title:"Blog 16 — Comparison से छुटकारा", preview:"Compare न करो — compete अपने आप से करो।", content:`<h2>Blog 16 — Comparison से छुटकारा</h2><p style="text-align:center">Social media detox और self-measure बनाओ।</p><p class="author-note">Written by JEET S SINGH</p>`},
+    { id:17, series:2, title:"Blog 17 — Negative Self-Talk को Replace करो", preview:"Self-script बदलो, reality बदलेगी।", content:`<h2>Blog 17 — Negative Self-Talk को Replace करो</h2><p style="text-align:center">Affirmations और reframing से internal script बदलो।</p><p class="author-note">Written by JEET S SINGH</p>`},
+    { id:18, series:2, title:"Blog 18 — Toxic Habits से Breakup", preview:"Buri habits आपकी growth खा लेती हैं।", content:`<h2>Blog 18 — Toxic Habits से Breakup</h2><p style="text-align:center">Habit replacement और environment tweak से बाहर निकलो।</p><p class="author-note">Written by JEET S SINGH</p>`},
+    { id:19, series:2, title:"Blog 19 — Negativity को Creativity में बदलो", preview:"Energy को नया रास्ता दो।", content:`<h2>Blog 19 — Negativity को Creativity में बदलो</h2><p style="text-align:center">Writing, art या workout से channelize करो।</p><p class="author-note">Written by JEET S SINGH</p>`},
+    { id:20, series:2, title:"Blog 20 — Positivity को Shield बनाओ", preview:"Positive habits ही असली protection हैं।", content:`<h2>Blog 20 — Positivity को Shield बनाओ</h2><p style="text-align:center">Gratitude और environment design से shield बनाओ।</p><p class="author-note">Written by JEET S SINGH</p>`},
+  ];
 
-          seriesPosts.forEach(p => {
-            const postDiv = document.createElement("div");
-            postDiv.className = "post";
+  // Helpers
+  function mkSeriesName(series) {
+    if(series === 1) return "Series 1–10 — Discipline Se Success Tak";
+    if(series === 2) return "Series 11–20 — Negativity Se Overcome";
+    return "Other Series";
+  }
 
-            postDiv.innerHTML = `
-              <h3>${p.title}</h3>
-              <p>${p.preview}</p>
-              <button class="read-more">Read More</button>
-              <div class="post-content" id="content-${p.id}"></div>
-            `;
+  // Render series list + posts
+  function renderUI(initialQuery="") {
+    const seriesContainer = document.getElementById('seriesContainer');
+    const postsContainer = document.getElementById('postsContainer');
+    seriesContainer.innerHTML = "";
+    postsContainer.innerHTML = "";
 
-            const btn = postDiv.querySelector(".read-more");
-            btn.addEventListener("click", async () => {
-              const contentBox = document.getElementById(`content-${p.id}`);
-              if (contentBox.style.display === "block") {
-                contentBox.style.display = "none";
-                btn.textContent = "Read More";
-                return;
-              }
-              try {
-                const htmlRes = await fetch(p.file);
-                const html = await htmlRes.text();
-                contentBox.innerHTML = html + `<div class="author-note">Written by Jeet S Singh</div>`;
-                contentBox.style.display = "block";
-                btn.textContent = "Hide";
-              } catch {
-                contentBox.innerHTML = "<p style='color:red;'>Unable to load blog content.</p>";
-                contentBox.style.display = "block";
-              }
-            });
+    const grouped = {};
+    posts.forEach(p => {
+      const key = mkSeriesName(p.series);
+      if(!grouped[key]) grouped[key] = [];
+      grouped[key].push(p);
+    });
 
-            seriesDiv.appendChild(postDiv);
-          });
+    // Series listing (top) — clickable headings that scroll to posts area
+    Object.keys(grouped).forEach((seriesName) => {
+      const card = document.createElement('div');
+      card.className = 'series-card';
+      const heading = document.createElement('div');
+      heading.className = 'series-heading';
+      heading.innerHTML = `<div class="series-title">${seriesName}</div><div style="color:var(--muted);font-weight:700">${grouped[seriesName].length}</div>`;
+      card.appendChild(heading);
+      const desc = document.createElement('div');
+      desc.className = 'series-desc';
+      desc.textContent = seriesName.includes('1–10') ? 'यह पहली सीरीज़ discipline, consistency और रोज़ के छोटे actions पर केंद्रित है — practical lessons जो daily routine में apply होते हैं।' : 'इस सीरीज़ का मकसद negativity को पहचानना, boundaries बनाना और उसे positive energy में बदलना।';
+      card.appendChild(desc);
 
-          wrap.appendChild(seriesDiv);
-        }
-
-        // search filter
-        document.getElementById("searchBox").addEventListener("input", function () {
-          const q = this.value.toLowerCase();
-          document.querySelectorAll(".post").forEach(post => {
-            const text = post.textContent.toLowerCase();
-            post.style.display = text.includes(q) ? "" : "none";
-          });
-        });
-
-      } catch (err) {
-        document.getElementById("postsWrap").innerHTML = "<p style='color:red;'>Unable to load blogs. Check posts/posts.json path.</p>";
-      }
-    }
-
-    // Fixed expandSeries
-    function expandSeries(seriesName){
-      const tryFindAndScroll = ()=>{
-        const postsWrap = document.getElementById('postsWrap');
-        if(!postsWrap) return false;
-        const headings = Array.from(postsWrap.querySelectorAll('.series-heading'));
-        const match = headings.find(h => h.textContent && h.textContent.trim().includes(seriesName));
-        if(match){
+      heading.addEventListener('click', () => {
+        // scroll to the posts section for this series (render posts below)
+        const targetId = 'posts-' + seriesName.replace(/\s+/g,'-').replace(/[^a-zA-Z0-9\-_]/g,'');
+        const target = document.getElementById(targetId);
+        if(target){
           const header = document.querySelector('header');
-          const headerHeight = header ? header.offsetHeight : 0;
-          const rect = match.getBoundingClientRect();
+          const offset = header ? header.offsetHeight + 12 : 0;
+          const rect = target.getBoundingClientRect();
           const absoluteTop = window.pageYOffset + rect.top;
-          const target = Math.max(absoluteTop - headerHeight - 12, 0);
-          window.scrollTo({ top: target, behavior: 'smooth' });
-          return true;
+          window.scrollTo({top: Math.max(absoluteTop - offset,0), behavior:'smooth'});
         }
-        return false;
-      };
-      if(tryFindAndScroll()) return;
-      const start = Date.now();
-      const iv = setInterval(()=>{
-        if(tryFindAndScroll() || (Date.now() - start) > 2000){
-          clearInterval(iv);
-        }
-      }, 120);
-    }
+      });
 
-    loadPosts();
-  </script>
-</body>
-</html>
+      seriesContainer.appendChild(card);
+    });
+
+    // Render each series as a posts block
+    Object.entries(grouped).forEach(([seriesName, items]) => {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'series-card';
+      const idFriendly = 'posts-' + seriesName.replace(/\s+/g,'-').replace(/[^a-zA-Z0-9\-_]/g,'');
+      wrapper.id = idFriendly;
+
+      const head = document.createElement('div');
+      head.className = 'series-heading';
+      head.innerHTML = `<div class="series-title">${seriesName}</div><div style="color:var(--muted);font-weight:700">${items.length}</div>`;
+      wrapper.appendChild(head);
+
+      const postsWrap = document.createElement('div');
+      postsWrap.className = 'posts-wrap';
+
+      items.forEach(p => {
+        // If search query present, filter
+        const q = initialQuery.trim().toLowerCase();
+        const combined = (p.title + " " + p.preview + " " + (p.content || "")).toLowerCase();
+        if(q && !combined.includes(q)) return;
+
+        const row = document.createElement('div');
+        row.className = 'post-row';
+
+        const left = document.createElement('div');
+        left.className = 'post-left';
+        left.innerHTML = `<h3 class="post-title">${p.title}</h3><p class="post-preview">${p.preview}</p>
+                          <div class="meta">ID: ${p.id} &nbsp;—&nbsp; Series: ${p.series} &nbsp;—&nbsp; File: embedded</div>`;
+
+        const right = document.createElement('div');
+        right.className = 'post-right';
+        const btn = document.createElement('button');
+        btn.className = 'read-btn';
+        btn.textContent = 'Read';
+        right.appendChild(btn);
+
+        const contentBox = document.createElement('div');
+        contentBox.className = 'post-content';
+        contentBox.id = `post-
