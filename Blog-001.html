@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Blogs — Jeet S Singh (Author of Discipline Se Success Tak)</title>
+  <meta name="description" content="Read inspiring blogs by Jeet S Singh, Author of 'Discipline Se Success Tak'. Learn about discipline, success, motivation and daily habits." />
+  <link rel="canonical" href="https://discipline-se-success-tak.vercel.app/blog.html" />
+
+  <style>
+    body{margin:0;font-family:Inter,Roboto,Arial;background:#f9fbfa;color:#102827;line-height:1.75}
+    .wrap{max-width:900px;margin:0 auto;padding:28px}
+    h1{color:#06493f;text-align:center;margin:32px 0}
+    h2{color:#0a3d36;margin-top:20px;margin-bottom:10px;text-align:center}
+    p{margin-bottom:14px;font-size:1.05rem;text-align:center}
+    .post-card{margin-bottom:44px;padding:24px;background:#fff;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+    .post-card h3{margin:0 0 12px;text-align:center}
+    .post-actions{text-align:center;margin-top:14px}
+    .btn{display:inline-block;background:#0bb39a;color:#fff;padding:10px 16px;border-radius:8px;font-weight:600;text-decoration:none;cursor:pointer;border:none}
+    .btn:hover{background:#078a72}
+    .expanded{margin-top:16px;padding:12px;background:#fafafa;border-radius:8px;display:none}
+    footer{text-align:center;margin-top:28px;padding:16px;font-size:0.9rem;color:#666}
+
+    /* Navigation */
+    nav{background:#06493f;padding:14px 20px}
+    nav .menu{max-width:900px;margin:auto;display:flex;gap:20px;flex-wrap:wrap;justify-content:center}
+    nav a{color:#fff;text-decoration:none;font-weight:600}
+    nav a:hover{text-decoration:underline}
+    @media(max-width:600px){nav .menu{flex-direction:column;gap:10px;text-align:center}}
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="menu">
+      <a href="index.html">🏠 Home</a>
+      <a href="author.html">👤 Author</a>
+      <a href="blog.html">📝 Blogs</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <h1>📖 Blogs by Jeet S Singh</h1>
+    <div id="blog-list">Loading blogs...</div>
+  </div>
+
+  <footer>© 2025 Jeet S Singh — Discipline • Faith • Success</footer>
+
+  <script>
+    async function loadPosts(){
+      try {
+        const res = await fetch('posts.json');
+        const posts = await res.json();
+        const list = document.getElementById('blog-list');
+        list.innerHTML = '';
+
+        posts.forEach((p, idx)=>{
+          const card = document.createElement('div');
+          card.className = 'post-card';
+
+          const h3 = document.createElement('h3');
+          h3.textContent = p.title;
+          card.appendChild(h3);
+
+          const snippet = document.createElement('p');
+          snippet.textContent = p.preview;
+          card.appendChild(snippet);
+
+          const actions = document.createElement('div');
+          actions.className = 'post-actions';
+
+          const readBtn = document.createElement('button');
+          readBtn.className = 'btn btn-read';
+          readBtn.type = 'button';
+          readBtn.dataset.file = p.file;
+          readBtn.dataset.id = 'post' + (idx+1);
+          readBtn.textContent = 'Read More →';
+          actions.appendChild(readBtn);
+
+          card.appendChild(actions);
+
+          const expandedWrapper = document.createElement('div');
+          expandedWrapper.className = 'expanded';
+          expandedWrapper.id = 'post' + (idx+1);
+          card.appendChild(expandedWrapper);
+
+          list.appendChild(card);
+        });
+
+        document.querySelectorAll('.btn-read').forEach(btn=>{
+          btn.addEventListener('click', async ()=>{
+            const file = btn.dataset.file;
+            const target = document.getElementById(btn.dataset.id);
+
+            if(target.style.display==='block'){
+              target.style.display='none';
+              btn.textContent='Read More →';
+              return;
+            }
+
+            target.style.display='block';
+            btn.textContent='Hide';
+
+            if(!target.dataset.loaded){
+              target.innerHTML='<em>Loading...</em>';
+              try {
+                const r = await fetch(file);
+                const html = await r.text();
+                target.innerHTML = html;
+                target.dataset.loaded = 'true';
+              } catch(e){
+                target.innerHTML='<em>Error loading blog.</em>';
+              }
+            }
+          });
+        });
+      } catch(e){
+        document.getElementById('blog-list').textContent = 'Error loading posts.json';
+      }
+    }
+    loadPosts();
+  </script>
+</body>
+</html>
