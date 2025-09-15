@@ -1,345 +1,309 @@
- <!doctype html>
+<!doctype html>
 <html lang="hi">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Blogs — Discipline Se Success Tak</title>
-  <meta name="description" content="Series-wise blogs by Jeet S Singh. Click Read to expand a post inline." />
+  <title>Discipline Se Success Tak — Blogs</title>
+  <meta name="description" content="Series-wise blog list — click a title to expand a full post inline." />
+  <link rel="icon" href="author.jpg" />
   <style>
     :root{
       --accent:#0b8f76;
-      --accent-dark:#06664f;
-      --bg:#f7fffc;
+      --accent-dark:#065744;
+      --muted:#6b7a75;
+      --bg:#fbfffc;
       --card:#ffffff;
-      --muted:#60786f;
-      --text:#0b2f29;
-      --radius:12px;
+      --radius:14px;
       --maxw:980px;
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Inter, "Noto Sans Devanagari", system-ui, -apple-system, "Segoe UI", Roboto, Arial;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
-    header{background:var(--accent-dark);color:#fff;padding:12px 18px;position:sticky;top:0;z-index:60}
-    .nav{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-    .brand{font-weight:800}
-    nav.links{margin-left:auto}
-    nav.links a{color:#fff;text-decoration:none;margin-right:12px;font-weight:600}
-    main{max-width:var(--maxw);margin:22px auto;padding:18px}
-    .panel{background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:0 8px 22px rgba(6,18,16,0.04);border:1px solid #e7f6f0}
-    .search{margin-bottom:16px;display:flex;gap:12px;align-items:center}
-    .search input{flex:1;padding:12px 14px;border-radius:10px;border:1px solid #e5f4ed;font-size:15px}
-    .search .filter{padding:10px 12px;border-radius:10px;border:1px solid #e5f4ed;background:#f6fffb;color:var(--accent-dark);font-weight:700}
-    .series{margin-top:18px}
-    .series .series-head{font-size:16px;color:var(--accent-dark);font-weight:800;margin:18px 6px}
-    .list{margin-top:8px;display:flex;flex-direction:column;gap:12px}
-    .item{display:flex;flex-wrap:wrap;gap:12px;padding:16px;border-radius:12px;border:1px solid #eef8f3;background:linear-gradient(180deg,#ffffff,#fbfffd);position:relative;align-items:flex-start}
-    .info{flex:1;min-width:240px}
-    .title{font-size:18px;color:var(--accent-dark);margin:0 0 8px 0;font-weight:700}
-    .preview{color:var(--muted);line-height:1.6}
-    .meta{font-size:13px;color:#9fb3aa;margin-top:8px}
-    .actions{min-width:120px;display:flex;align-items:center;justify-content:flex-end}
-    .read{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700;cursor:pointer;border:0}
-    .read:hover{background:var(--accent-dark)}
-    .expanded-wrap{margin-top:16px;padding:0;text-align:center;width:100%}
-    .expanded-card{max-width:820px;margin:10px auto 0 auto;text-align:left;padding:18px;border-radius:12px;background:#fff;border:1px solid #eef9f5;box-shadow:0 12px 40px rgba(6,18,16,0.05)}
-    .expanded-card h3{margin:0 0 14px 0;color:var(--accent-dark)}
-    .expanded-card .content{line-height:1.7;color:#123532}
-    .byline{margin-top:18px;font-size:14px;color:var(--muted);font-weight:600}
-    .note{color:var(--muted);font-size:13px;margin-top:10px}
-    .no-posts{padding:22px;text-align:center;color:var(--muted)}
-    footer{max-width:var(--maxw);margin:26px auto;text-align:center;color:var(--muted);font-size:14px}
-    @media(max-width:800px){
-      .actions{justify-content:flex-start;width:100%}
-      .read{width:100%}
+    html,body{height:100%;margin:0;background:var(--bg);font-family:Inter, 'Noto Sans Devanagari', system-ui, -apple-system, "Segoe UI", Roboto, Arial;color:#0e2b26;-webkit-font-smoothing:antialiased;}
+    header{background:var(--accent-dark);color:#fff;padding:14px 20px;position:sticky;top:0;z-index:80;box-shadow:0 2px 6px rgba(2,10,8,0.12)}
+    .nav{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;gap:18px}
+    .brand{font-weight:800;letter-spacing:-0.4px}
+    .nav a{color:#fff;text-decoration:none;font-weight:600}
+    .wrap{max-width:var(--maxw);margin:26px auto;padding:18px;}
+    .top-controls{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:18px}
+    .search{flex:1}
+    .search input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid #e6f4ef;background:#fffefc;font-size:15px}
+    .series-list{display:flex;gap:12px;flex-direction:column}
+    .series-card{background:linear-gradient(180deg,#f7fff9,#ffffff);padding:16px;border-radius:12px;border:1px solid #e6f7ef}
+    .series-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .series-title{font-weight:800;color:var(--accent-dark);font-size:18px}
+    .series-desc{color:var(--muted);margin-top:8px}
+    .posts-wrap{margin-top:18px;display:grid;grid-template-columns:1fr;gap:18px}
+    .panel{background:var(--card);padding:18px;border-radius:14px;border:1px solid #ecf7f4;box-shadow:0 8px 20px rgba(6,20,18,0.03)}
+    .panel h3{margin:0;color:var(--accent-dark);font-size:18px}
+    .post-row{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;padding:14px;border-radius:10px;border:1px solid #f0f8f5;background:#fff}
+    .preview{flex:1;min-width:220px}
+    .preview p{margin:8px 0;color:#2f514a}
+    .read-btn{background:var(--accent);color:#fff;padding:8px 12px;border-radius:14px;text-decoration:none;font-weight:700;display:inline-block}
+    .read-btn:active{transform:translateY(1px)}
+    .content-area{margin-top:12px}
+    .post-full{padding:18px;border-radius:10px;background:#f7fffb;border:1px solid #e6f8f0}
+    .post-full h1{margin:0;color:var(--accent-dark);font-size:22px}
+    .post-full .sub{color:var(--muted);margin-top:6px}
+    .post-full p{margin:12px 0;line-height:1.7;color:#123532}
+    .post-full ul{margin:10px 0 18px 20px}
+    .post-full li{margin:8px 0}
+    .author-credit{margin-top:18px;padding-top:12px;border-top:1px dashed #e6f3ee;color:var(--muted);font-weight:700}
+    .series-block{margin-top:20px}
+    .series-heading{background:#f2fff7;border-radius:10px;padding:12px 14px;border:1px solid #e6f7ef;color:var(--accent-dark);font-weight:800}
+    footer{text-align:center;color:var(--muted);margin:26px 0;font-size:13px}
+    /* responsive */
+    @media(min-width:880px){
+      .posts-wrap{grid-template-columns:1fr}
+      .post-row{align-items:center}
+      .preview{max-width:520px}
+      .post-full h1{font-size:28px}
     }
   </style>
 </head>
 <body>
-
   <header>
     <div class="nav">
-      <div class="brand">📚 Discipline Se Success Tak</div>
-      <nav class="links">
+      <div style="display:flex;gap:12px;align-items:center;">
+        <div style="width:36px;height:36px;border-radius:8px;background:#0f6b58;display:flex;align-items:center;justify-content:center;font-weight:800">JS</div>
+        <div class="brand">Discipline Se Success Tak</div>
+      </div>
+      <div style="margin-left:auto;display:flex;gap:14px;align-items:center;">
         <a href="index.html">🏠 Home</a>
         <a href="blog.html">📝 Blogs</a>
         <a href="author.html">👤 Author</a>
         <a href="ebook.html">📘 Free eBook</a>
-      </nav>
+      </div>
     </div>
   </header>
 
-  <main>
-    <div class="panel" role="main" aria-live="polite">
-      <div class="search" aria-label="Search and filter posts">
-        <input id="q" placeholder="Search title or preview..." aria-label="Search blogs">
-        <select id="seriesFilter" class="filter" aria-label="Filter by series">
-          <option value="">All Series</option>
-        </select>
-      </div>
-
-      <div id="container"></div>
-      <div id="load-error" class="no-posts" style="display:none;margin-top:12px">
-        Unable to load posts. Check <code>posts.json</code> path and content.
+  <main class="wrap" id="main">
+    <div class="top-controls">
+      <div class="search">
+        <input id="searchInput" placeholder="Search blogs by title or preview..." />
       </div>
     </div>
+
+    <!-- Series selector -->
+    <div class="series-list">
+      <div class="series-card">
+        <div class="series-row">
+          <div>
+            <div class="series-title">Series 1–10 — Discipline Se Success Tak</div>
+            <div class="series-desc">यह पहली सीरीज़ discipline, consistency और छोटे रोजना के actions पर केंद्रित है — practical lessons जो daily routine में apply होते हैं।</div>
+          </div>
+          <div style="align-self:center">
+            <button class="read-btn" data-series="Series 1–10" onclick="expandSeries('Series 1–10')">Open</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="series-card" style="margin-top:10px">
+        <div class="series-row">
+          <div>
+            <div class="series-title">Series 11–20 — Negativity Se Overcome</div>
+            <div class="series-desc">इस सीरीज़ का मक़सद है negativity को पहचानना, boundaries बनाना और उसे positive energy में बदलना।</div>
+          </div>
+          <div style="align-self:center">
+            <button class="read-btn" data-series="Series 11–20" onclick="expandSeries('Series 11–20')">Open</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Posts list -->
+    <div class="posts-wrap" id="postsWrap" aria-live="polite" style="margin-top:22px">
+      <!-- populated by JS -->
+    </div>
+
+    <footer>
+      © 2025 Jeet S Singh — Discipline • Faith • Success
+    </footer>
   </main>
 
-  <footer>© 2025 Jeet S Singh — Discipline • Faith • Success</footer>
+  <script>
+    // CONFIG: path to posts JSON
+    const POSTS_PATH = 'posts/posts.json'; // change to 'posts.json' if needed
 
-<script>
-/*
-  Final blog.html with series grouping.
-  Expects posts.json at same folder level and posts files referenced in it.
-  posts.json items example:
-  {
-    "id": 11,
-    "title": "Blog 11 — Negativity को Identify करो",
-    "preview": "...",
-    "file": "posts/blog11.html",
-    "series": "Series 2"
-  }
-*/
-
-(function(){
-  const POSTS_JSON = './posts.json';
-  const container = document.getElementById('container');
-  const errEl = document.getElementById('load-error');
-  const qEl = document.getElementById('q');
-  const seriesSelect = document.getElementById('seriesFilter');
-
-  let posts = [];
-  let expandedId = null;
-
-  function uniqSeries(list){
-    const s = Array.from(new Set(list.map(p => p.series || 'Series 1')));
-    return s;
-  }
-
-  function groupBySeries(list){
-    const groups = {};
-    list.forEach(p=>{
-      const key = p.series || 'Series 1';
-      groups[key] = groups[key] || [];
-      groups[key].push(p);
-    });
-    // keep series order as seen in original posts array
-    const order = uniqSeries(list);
-    return {groups, order};
-  }
-
-  function createItemNode(p){
-    const item = document.createElement('div');
-    item.className = 'item';
-    item.dataset.id = p.id;
-
-    const info = document.createElement('div');
-    info.className = 'info';
-
-    const title = document.createElement('div');
-    title.className = 'title';
-    title.textContent = p.title;
-
-    const preview = document.createElement('div');
-    preview.className = 'preview';
-    preview.textContent = p.preview || '';
-
-    const meta = document.createElement('div');
-    meta.className = 'meta';
-    meta.textContent = p.meta || '';
-
-    info.appendChild(title);
-    info.appendChild(preview);
-    info.appendChild(meta);
-
-    const actions = document.createElement('div');
-    actions.className = 'actions';
-    const read = document.createElement('button');
-    read.className = 'read';
-    read.textContent = 'Read';
-    read.addEventListener('click', ()=>toggleExpand(p, item));
-    actions.appendChild(read);
-
-    item.appendChild(info);
-    item.appendChild(actions);
-    return item;
-  }
-
-  function render(groupsObj){
-    container.innerHTML = '';
-    const {groups, order} = groupsObj;
-    if(order.length === 0){
-      container.innerHTML = '<div class="no-posts">No posts available.</div>';
-      return;
+    // helper
+    function el(tag, attrs={}, ...ch){
+      const e = document.createElement(tag);
+      for(const k in attrs) {
+        if(k==='class') e.className = attrs[k];
+        else if(k==='html') e.innerHTML = attrs[k];
+        else e.setAttribute(k, attrs[k]);
+      }
+      ch.flat().forEach(c=>{
+        if(c==null) return;
+        if(typeof c === 'string') e.appendChild(document.createTextNode(c));
+        else e.appendChild(c);
+      });
+      return e;
     }
 
-    order.forEach(seriesName=>{
-      const seriesList = groups[seriesName];
-      if(!seriesList || seriesList.length===0) return;
-      const sec = document.createElement('section');
-      sec.className = 'series';
-      const head = document.createElement('div');
-      head.className = 'series-head';
-      head.textContent = seriesName;
-      sec.appendChild(head);
+    // fetch posts
+    async function loadPosts(){
+      try{
+        const res = await fetch(POSTS_PATH, {cache:'no-store'});
+        if(!res.ok) throw new Error('posts json not found');
+        const posts = await res.json();
+        return posts;
+      }catch(e){
+        console.error(e);
+        document.getElementById('postsWrap').innerHTML = '<div style="color:#c23">Unable to load blogs. Check posts/posts.json path.</div>';
+        return [];
+      }
+    }
 
-      const list = document.createElement('div');
-      list.className = 'list';
+    // render list grouped by series
+    function groupBySeries(items){
+      const map = {};
+      items.forEach(p=>{
+        const s = p.series || 'Series 1–10';
+        if(!map[s]) map[s]=[];
+        map[s].push(p);
+      });
+      return map;
+    }
 
-      seriesList.forEach(p=>{
-        const item = createItemNode(p);
-        list.appendChild(item);
-        // if was expanded, re-open
-        if(String(p.id) === String(expandedId)){
-          loadIntoItem(p, item);
-        }
+    // render UI
+    async function render(){
+      const posts = await loadPosts();
+      const grouped = groupBySeries(posts);
+      const wrap = document.getElementById('postsWrap');
+      wrap.innerHTML = '';
+
+      // order: Series 1–10 then Series 11–20 then others
+      const order = ['Series 1–10','Series 11–20', ...Object.keys(grouped).filter(k=>!['Series 1–10','Series 11–20'].includes(k))];
+
+      order.forEach(seriesName=>{
+        if(!grouped[seriesName]) return;
+        const panel = el('div',{class:'panel'});
+        const heading = el('div',{class:'series-block'});
+        heading.appendChild(el('div',{class:'series-heading'}, seriesName));
+        panel.appendChild(heading);
+
+        grouped[seriesName].forEach(post=>{
+          const row = el('div',{class:'post-row', 'data-id': post.id});
+          const left = el('div',{class:'preview'});
+          left.appendChild(el('h3',{}, post.title));
+          left.appendChild(el('p',{}, post.preview));
+          left.appendChild(el('div',{style:'color:#a0b8b1;font-size:13px;margin-top:8px'}, `ID: ${post.id} — File: ${post.file}`));
+
+          const right = el('div',{style:'display:flex;align-items:center;gap:10px'});
+          const read = el('a',{href:'#', class:'read-btn'}, 'Read');
+          read.addEventListener('click', (ev)=>{
+            ev.preventDefault();
+            loadIntoItem(post, row);
+          });
+
+          right.appendChild(read);
+          row.appendChild(left);
+          row.appendChild(right);
+
+          // placeholder for expanded content
+          const contentArea = el('div',{class:'content-area'});
+          row.appendChild(contentArea);
+
+          panel.appendChild(row);
+        });
+
+        wrap.appendChild(panel);
+      });
+    }
+
+    // Expand/collapse series (scrolls to first post)
+    function expandSeries(seriesName){
+      const postsWrap = document.getElementById('postsWrap');
+      const firstCard = Array.from(postsWrap.querySelectorAll('.series-heading')).find(h=>h.textContent.trim()===seriesName);
+      if(firstCard){
+        // toggle: if already visible, collapse by scrolling a bit up
+        const rect = firstCard.getBoundingClientRect();
+        const absoluteTop = window.pageYOffset + rect.top - 12;
+        window.scrollTo({top:absoluteTop, behavior:'smooth'});
+      }
+    }
+
+    // Load post content into the row's content area (inline)
+    async function loadIntoItem(post, row){
+      const area = row.querySelector('.content-area');
+      // if already loaded, toggle visibility
+      if(area.dataset.loaded === String(post.id)){
+        area.innerHTML = '';
+        area.dataset.loaded = '';
+        return;
+      }
+      // clear other expanded posts
+      document.querySelectorAll('.content-area').forEach(a=>{
+        a.innerHTML=''; a.dataset.loaded='';
       });
 
-      sec.appendChild(list);
-      container.appendChild(sec);
-    });
-  }
+      // fetch the post file (assume HTML snippet or markdown converted)
+      try{
+        const res = await fetch(post.file, {cache:'no-store'});
+        let html = '';
+        if(res.ok){
+          html = await res.text();
+        } else {
+          // fallback: build from post.content if available
+          if(post.content) {
+            html = `<div class="post-full">${post.content}</div>`;
+          } else {
+            html = `<div class="post-full"><p>Post content not found (${post.file})</p></div>`;
+          }
+        }
 
-  function collapseCurrent(){
-    if(!expandedId) return;
-    const prev = container.querySelector('.item[data-id="'+expandedId+'"]');
-    if(prev){
-      const ex = prev.querySelector('.expanded-wrap');
-      if(ex) ex.remove();
-      const btn = prev.querySelector('.read');
-      if(btn) btn.textContent = 'Read';
-      prev.style.boxShadow = 'none';
+        // wrap content and ensure final 'Written by' appears at bottom
+        const wrapper = document.createElement('div');
+        wrapper.className = 'post-full';
+        wrapper.innerHTML = html;
+
+        // ensure author credit (append if not present)
+        if(!/Written by/i.test(wrapper.textContent) && !/Jeet S Singh/i.test(wrapper.textContent)){
+          const credit = document.createElement('div');
+          credit.className = 'author-credit';
+          credit.textContent = 'Written by Jeet S Singh — Author of "Discipline Se Success Tak"';
+          wrapper.appendChild(credit);
+        }
+
+        area.appendChild(wrapper);
+        area.dataset.loaded = String(post.id);
+
+        // SCROLL: bring the expanded wrapper into view but offset by header
+        setTimeout(()=>{
+          try {
+            const header = document.querySelector('header');
+            const headerHeight = header ? header.offsetHeight : 0;
+            const rect = wrapper.getBoundingClientRect();
+            const absoluteTop = window.pageYOffset + rect.top;
+            const target = Math.max(absoluteTop - headerHeight - 12, 0);
+            window.scrollTo({ top: target, behavior: 'smooth' });
+          } catch(e){
+            wrapper.scrollIntoView({behavior:'smooth', block:'center'});
+          }
+        }, 80);
+
+      }catch(err){
+        area.innerHTML = `<div style="color:#c23">Error loading post: ${err.message}</div>`;
+      }
     }
-    expandedId = null;
-  }
 
-  function toggleExpand(post, itemNode){
-    if(String(expandedId) === String(post.id)){
-      collapseCurrent();
-      return;
+    // search feature
+    function attachSearch(){
+      const input = document.getElementById('searchInput');
+      input.addEventListener('input', ()=>{
+        const q = input.value.trim().toLowerCase();
+        document.querySelectorAll('.post-row').forEach(row=>{
+          const title = row.querySelector('h3')?.textContent.toLowerCase() || '';
+          const preview = row.querySelector('.preview p')?.textContent.toLowerCase() || '';
+          row.style.display = (title.includes(q) || preview.includes(q)) ? '' : 'none';
+        });
+      });
     }
-    collapseCurrent();
-    // add small highlight
-    container.querySelectorAll('.item').forEach(n=>n.style.boxShadow='none');
-    itemNode.style.boxShadow = '0 10px 30px rgba(11,143,118,0.06)';
-    const btn = itemNode.querySelector('.read');
-    if(btn) btn.textContent = 'Loading...';
-    loadIntoItem(post, itemNode);
-  }
 
-  function loadIntoItem(post, itemNode){
-    fetch(post.file).then(r=>{
-      if(!r.ok) throw new Error('file-not-found');
-      return r.text();
-    }).then(html=>{
-      const wrap = document.createElement('div');
-      wrap.className = 'expanded-wrap';
-      const card = document.createElement('div');
-      card.className = 'expanded-card';
-
-      const h = document.createElement('h3');
-      h.textContent = post.title;
-      const content = document.createElement('div');
-      content.className = 'content';
-      // the loaded html might contain full doc; if it's full html, we should extract body inner.
-      // Simple heuristic: if contains <body>, extract between <body> tags
-      let parsed = html;
-      const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-      if(bodyMatch && bodyMatch[1]) parsed = bodyMatch[1];
-      content.innerHTML = parsed;
-
-      // Byline
-      const by = document.createElement('div');
-      by.className = 'byline';
-      by.textContent = '— Written by Jeet S Singh, Author of "Discipline Se Success Tak"';
-
-      card.appendChild(h);
-      card.appendChild(content);
-      card.appendChild(by);
-      wrap.appendChild(card);
-
-      // remove existing expanded or error nodes inside this item
-      const existing = itemNode.querySelector('.expanded-wrap');
-      if(existing) existing.remove();
-      const err = itemNode.querySelector('.err-inline');
-      if(err) err.remove();
-
-      // insert before actions (so card appears below preview)
-      itemNode.appendChild(wrap);
-      expandedId = post.id;
-      const btn = itemNode.querySelector('.read');
-      if(btn) btn.textContent = 'Close';
-      // smooth scroll to expanded card
-      setTimeout(()=>{ wrap.scrollIntoView({behavior:'smooth', block:'center'}); }, 50);
-    }).catch(err=>{
-      // show inline error
-      const em = document.createElement('div');
-      em.className = 'err-inline';
-      em.style.color = '#c0392b';
-      em.style.marginTop = '12px';
-      em.textContent = 'Unable to load post. Check file path: '+post.file;
-      const existing = itemNode.querySelector('.expanded-wrap');
-      if(existing) existing.remove();
-      itemNode.appendChild(em);
-      const btn = itemNode.querySelector('.read');
-      if(btn) btn.textContent = 'Read';
-      expandedId = null;
-    });
-  }
-
-  // build series select options
-  function populateSeriesSelect(uniqueSeries){
-    // clear and add All
-    seriesSelect.innerHTML = '<option value="">All Series</option>';
-    uniqueSeries.forEach(s=>{
-      const opt = document.createElement('option');
-      opt.value = s;
-      opt.textContent = s;
-      seriesSelect.appendChild(opt);
-    });
-  }
-
-  // render based on filters: search & series filter
-  function renderFiltered(){
-    const q = qEl.value.trim().toLowerCase();
-    const sfilter = seriesSelect.value;
-    let filtered = posts.slice();
-    if(sfilter) filtered = filtered.filter(p => (p.series || 'Series 1') === sfilter);
-    if(q){
-      filtered = filtered.filter(p => ((p.title||'')+' '+(p.preview||'')).toLowerCase().includes(q));
-    }
-    const grouped = groupBySeries(filtered);
-    render(grouped);
-  }
-
-  // initial load
-  fetch(POSTS_JSON).then(r=>{
-    if(!r.ok) throw new Error('missing posts.json');
-    return r.json();
-  }).then(data=>{
-    if(!Array.isArray(data)) throw new Error('invalid posts.json');
-    // sort by id ascending for stable order
-    posts = data.slice().sort((a,b)=> (Number(a.id) || 0) - (Number(b.id) || 0) );
-    const unique = uniqSeries(posts);
-    populateSeriesSelect(unique);
-    renderFiltered();
-    errEl.style.display = 'none';
-  }).catch(e=>{
-    console.error(e);
-    errEl.style.display = 'block';
-    container.innerHTML = '';
-  });
-
-  // events
-  qEl.addEventListener('input', ()=>{
-    collapseCurrent();
-    renderFiltered();
-  });
-  seriesSelect.addEventListener('change', ()=>{
-    collapseCurrent();
-    renderFiltered();
-  });
-
-})();
-</script>
-
+    // initial
+    (async function init(){
+      await render();
+      attachSearch();
+    })();
+  </script>
 </body>
 </html>
