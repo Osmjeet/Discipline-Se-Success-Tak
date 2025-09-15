@@ -3,270 +3,375 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Blogs — Jeet S Singh (Author of Discipline Se Success Tak)</title>
-  <meta name="description" content="Blogs by Jeet S Singh — grouped series (1-10 and 11-20). Click a title to expand the full post inline." />
+  <title>Blogs — Discipline Se Success Tak</title>
+  <meta name="description" content="Blog series — Discipline Se Success Tak. Series-wise blog list. Click to expand inline. Easy to add new posts via posts.json + posts/*.html" />
   <style>
     :root{
-      --bg:#f7fbfa; --card:#ffffff; --accent:#0bb39a; --accent-dark:#078a72;
-      --muted:#5b6b73; --maxw:1100px; --radius:12px; --text:#0e2b26;
+      --bg: #f6fdfb;
+      --card: #ffffff;
+      --accent: #0b8f76;
+      --accent-dark: #045a45;
+      --muted: #5f6d69;
+      -- radius: 12px;
+      --maxw: 980px;
+      --shadow: 0 8px 24px rgba(6,20,18,0.06);
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Inter, "Noto Sans Devanagari", system-ui, -apple-system, "Segoe UI", Roboto, Arial; background:var(--bg); color:var(--text)}
-    a{color:var(--accent-dark);text-decoration:none}
-    header.top{background:#06493f;padding:12px 18px;position:sticky;top:0;z-index:30}
-    .nav{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;color:#fff}
-    .brand{font-weight:800;font-size:16px}
-    .nav a{color:#fff;margin-left:12px;font-weight:700;text-decoration:none}
-    .wrap{max-width:var(--maxw);margin:20px auto;padding:0 18px}
-    .grid{display:grid;grid-template-columns:360px 1fr;gap:20px}
-    @media(max-width:900px){.grid{grid-template-columns:1fr}}
-    .panel{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:0 10px 30px rgba(8,18,16,0.05);border:1px solid #eef9f5}
-    .series-header{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:10px;background:#f0fff9;color:#044b3f;font-weight:800;cursor:pointer;margin-bottom:8px}
-    .posts-list{list-style:none;padding:6px 0;margin:8px 0 0 0}
-    .post-item{border-radius:8px;padding:8px;margin-bottom:8px;border:1px solid #f1fbf7;background:#fff}
-    .post-title{display:flex;justify-content:space-between;align-items:center;gap:10px;cursor:pointer}
-    .post-title strong{font-size:15px;color:#06493f}
-    .post-preview{display:block;color:var(--muted);font-size:13px;margin-top:6px}
-    .expand-area{margin-top:10px;padding:12px;border-radius:8px;background:#fbfffb;border:1px solid #eaf8f1;display:none}
-    .small-meta{font-size:13px;color:var(--muted);margin-top:10px}
-    .empty{padding:28px;text-align:center;color:var(--muted)}
-    .controls{display:flex;gap:8px;align-items:center}
-    .btn{background:var(--accent);color:#fff;padding:8px 12px;border-radius:8px;font-weight:800;text-decoration:none}
-    .search{margin-bottom:10px}
-    .search input{width:100%;padding:10px;border-radius:8px;border:1px solid #e8f6f2;font-size:14px}
-    footer{margin-top:22px;text-align:center;color:var(--muted);font-size:13px}
+    body{margin:0;background:var(--bg);font-family:Inter, 'Noto Sans Devanagari', system-ui, -apple-system, "Segoe UI", Roboto, Arial;color:#123532}
+    .site{max-width:var(--maxw);margin:18px auto;padding:18px}
+    header{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+    header .brand{display:flex;flex-direction:column}
+    header h1{margin:0;font-size:18px;color:var(--accent-dark)}
+    header p{margin:0;font-size:13px;color:var(--muted)}
+    nav{margin-left:auto;display:flex;gap:12px;align-items:center}
+    nav a{color:#fff;text-decoration:none;background:var(--accent);padding:8px 12px;border-radius:10px;font-weight:700}
+    .layout{display:grid;grid-template-columns:320px 1fr;gap:18px}
+    @media(max-width:880px){ .layout{grid-template-columns:1fr; } nav{display:none} }
+
+    /* LEFT SIDEBAR */
+    .sidebar{background:var(--card);padding:16px;border-radius:12px;box-shadow:var(--shadow);border:1px solid #ecf7f4}
+    .search{display:block;width:100%;padding:10px 12px;border-radius:10px;border:1px solid #e6f7f0;background:#fbfffd;color:#123532;font-size:14px}
+    .series-list{margin-top:14px}
+    .series-btn{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:10px;background:#f4fffb;border:1px solid #e6f7f0;margin-bottom:8px;cursor:pointer}
+    .series-btn strong{color:var(--accent-dark)}
+    .count{color:var(--muted);font-size:13px}
+
+    /* MAIN */
+    .main{min-height:300px}
+    .panel{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow);border:1px solid #ecf7f4}
+    .series-block{margin-bottom:18px}
+    .series-title{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:10px;background:#f7fff9;border:1px solid #e6f7f0}
+    .series-title h2{margin:0;font-size:16px;color:var(--accent-dark)}
+    .list{margin-top:12px}
+    .post-item{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;padding:14px;border-radius:10px;border:1px solid #eef7f1;background:#ffffff;margin-bottom:10px}
+    .post-left{flex:1}
+    .post-title{margin:0;font-size:16px;color:#0b6b55}
+    .post-preview{margin-top:6px;color:var(--muted);font-size:14px}
+    .post-actions{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+    .btn{background:var(--accent);color:#fff;padding:8px 12px;border-radius:10px;text-decoration:none;font-weight:700;cursor:pointer;border:none}
+    .btn.ghost{background:#f1fff8;color:var(--accent);border:1px solid #d8f3ea}
+    .expand-area{margin-top:12px;padding:14px;background:#fbfffd;border-radius:10px;border:1px solid #edf9f3}
+    .post-content{color:#123532;line-height:1.7}
+    .meta{font-size:13px;color:var(--muted);margin-top:10px}
+
+    /* highlight */
+    mark.search-hit{background: #fff08a;color:#15492a;padding:0 4px;border-radius:4px}
+
+    /* small helper */
+    .small{font-size:13px;color:var(--muted)}
+
+    footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px}
   </style>
 </head>
 <body>
+  <div class="site">
 
-  <!-- TOP NAV -->
-  <header class="top" role="banner">
-    <div class="nav">
-      <div style="display:flex;align-items:center;gap:14px">
-        <div class="brand">Jeet S Singh</div>
-        <nav aria-label="main-nav">
-          <a href="index.html">🏠 Home</a>
-          <a href="blog.html">📝 Blogs</a>
-          <a href="author.html">👤 Author</a>
-        </nav>
+    <header>
+      <div class="brand">
+        <h1>Discipline Se Success Tak</h1>
+        <p>Series-wise Blogs — Click to expand inline</p>
       </div>
-      <div>
-        <a class="btn" href="ebook.html" target="_blank">📘 Free Mini eBook</a>
-      </div>
-    </div>
-  </header>
 
-  <main class="wrap" role="main">
-    <div class="grid">
-      <!-- LEFT: Series / List -->
-      <aside class="panel" aria-labelledby="series-title">
-        <h3 id="series-title" style="margin:0 0 10px 0;color:#06493f">Series</h3>
+      <nav aria-hidden>
+        <a href="index.html">🏠 Home</a>
+        <a href="author.html">👤 Author</a>
+        <a href="ebook.html">📘 Free Mini eBook</a>
+      </nav>
+    </header>
 
-        <div class="search">
-          <input id="search" type="search" placeholder="Search titles / previews..." aria-label="Search posts">
+    <div class="layout">
+      <!-- LEFT: Sidebar -->
+      <aside class="sidebar" aria-label="Series & search">
+        <input id="searchBox" class="search" placeholder="Search titles / previews..." />
+
+        <div class="series-list" id="seriesList">
+          <!-- series buttons will be injected here -->
         </div>
 
-        <!-- Series A: 1-10 -->
-        <div id="seriesA">
-          <div class="series-header" data-series="A">
-            <span>Series 1–10</span><span class="count" id="countA">(loading)</span>
-          </div>
-          <ul id="listA" class="posts-list" aria-live="polite"></ul>
-        </div>
-
-        <!-- Series B: 11-20 -->
-        <div id="seriesB" style="margin-top:12px">
-          <div class="series-header" data-series="B">
-            <span>Series 11–20</span><span class="count" id="countB">(loading)</span>
-          </div>
-          <ul id="listB" class="posts-list" aria-live="polite"></ul>
-        </div>
-
-        <div style="margin-top:12px;color:var(--muted);font-size:13px">Tip: Click a title to expand the full post inline. Direct links like <code>blog.html#13</code> open that post.</div>
+        <div class="small" style="margin-top:10px">Tip: Click series to expand, then Read to load post inline.</div>
       </aside>
 
-      <!-- RIGHT: Content / fallback area -->
-      <section id="content-area" class="panel">
-        <div id="fallback" class="empty">Choose a post from left — content will expand inline below the title.</div>
-      </section>
+      <!-- RIGHT: Main content -->
+      <main class="main">
+        <div class="panel" id="contentPanel">
+          <!-- series blocks will be injected here -->
+          <div id="placeholder" class="small" style="padding:20px;text-align:center;color:var(--muted)">
+            Choose a post from left — content will expand inline below the title.
+          </div>
+        </div>
+      </main>
     </div>
 
     <footer>
       © 2025 Jeet S Singh — Discipline • Faith • Success
     </footer>
-  </main>
+  </div>
 
-  <script>
-  (function(){
-    const MANIFEST = 'posts.json';
-    const listA = document.getElementById('listA');
-    const listB = document.getElementById('listB');
-    const countA = document.getElementById('countA');
-    const countB = document.getElementById('countB');
-    const searchInput = document.getElementById('search');
-    const fallback = document.getElementById('fallback');
+<script>
+/*
+  blog.html — dynamic loader.
+  REQUIREMENTS:
+   - posts.json in same folder (or adjust path)
+   - posts/blog11.html, posts/blog12.html ... actual HTML content files
+   - posts.json entries example:
+     {
+       "id": 11,
+       "title": "Blog 11 — Negativity को Identify करो",
+       "preview": "Problem का पहला solution है उसे पहचानना। ...",
+       "file": "posts/blog11.html"
+     }
+*/
 
-    let POSTS = [];
+const POSTS_JSON = 'posts.json'; // change path if needed
 
-    // helper: escape HTML for safe display inside title/preview (we store raw in manifest)
-    function esc(s){ return String(s || '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m])); }
+let posts = [];
+let grouped = {}; // { "1-10": [post,...], "11-20": [...] }
+const contentPanel = document.getElementById('contentPanel');
+const seriesListEl = document.getElementById('seriesList');
+const searchBox = document.getElementById('searchBox');
 
-    // load manifest and build lists
-    async function init(){
-      try {
-        const res = await fetch(MANIFEST + '?ts=' + Date.now());
-        if (!res.ok) throw new Error('Could not fetch posts.json');
-        POSTS = await res.json();
+function groupKeyFromId(id){
+  const groupStart = Math.floor((id-1)/10)*10 + 1;
+  const groupEnd = groupStart + 9;
+  return `${groupStart}-${groupEnd}`;
+}
 
-        // Partition into series A (id 1-10) and B (11-20). If manifest uses series field, prefer that.
-        const A = POSTS.filter(p => Number(p.id) >=1 && Number(p.id) <=10);
-        const B = POSTS.filter(p => Number(p.id) >=11 && Number(p.id) <=9999);
+function niceSeriesLabel(key){
+  const [s,e] = key.split('-');
+  return `Series ${s}–${e}`;
+}
 
-        fillList(A, listA);
-        fillList(B, listB);
+function safeHTML(text){
+  // minimal escape to avoid injection if JSON untrusted
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
 
-        countA.textContent = `(${A.length})`;
-        countB.textContent = `(${B.length})`;
+/* highlight helper: wraps matches in <mark class="search-hit"> */
+function highlightText(html, term){
+  if(!term) return html;
+  const esc = term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  const re = new RegExp(`(${esc})`, 'ig');
+  return html.replace(re, '<mark class="search-hit">$1</mark>');
+}
 
-        // Expand series headers toggle
-        document.querySelectorAll('.series-header').forEach(h=>{
-          h.addEventListener('click', ()=> {
-            const series = h.dataset.series;
-            const ul = series === 'A' ? listA : listB;
-            ul.style.display = (ul.style.display === 'block') ? 'none' : 'block';
-          });
-        });
+async function loadPosts(){
+  try{
+    const r = await fetch(POSTS_JSON, {cache: 'no-store'});
+    if(!r.ok) throw new Error('posts.json fetch failed');
+    posts = await r.json();
 
-        // if hash present, open that post
-        const h = location.hash.replace('#','');
-        if (h) {
-          const post = POSTS.find(p => String(p.id) === String(h));
-          if (post) {
-            // ensure correct list visible
-            if (Number(h) <= 10) listA.style.display = 'block'; else listB.style.display = 'block';
-            // load inline (simulate click)
-            const btn = document.querySelector(`.post-toggle[data-id="${h}"]`);
-            if (btn) btn.click();
-          }
-        }
-      } catch (err) {
-        console.error(err);
-        fallback.textContent = 'Error loading posts.json — check that posts.json exists in repo root and is valid JSON.';
-      }
+    // sort by id
+    posts.sort((a,b)=>a.id-b.id);
+
+    grouped = {};
+    for(const p of posts){
+      const key = groupKeyFromId(p.id);
+      if(!grouped[key]) grouped[key]=[];
+      grouped[key].push(p);
     }
 
-    // fill a specific UL with posts entries
-    function fillList(arr, ul){
-      ul.innerHTML = '';
-      if (!arr || arr.length === 0){
-        const li = document.createElement('li');
-        li.className = 'post-item';
-        li.innerHTML = '<div class="post-title"><strong>No posts</strong></div>';
-        ul.appendChild(li);
-        return;
+    renderSidebar();
+    renderSeriesBlocks();
+  }catch(err){
+    console.error(err);
+    contentPanel.innerHTML = `<div style="padding:18px;color:#b02a2a">Error loading posts.json — check path and file. (${err.message})</div>`;
+  }
+}
+
+/* Sidebar: list series with counts; clicking toggles scroll to series block */
+function renderSidebar(){
+  seriesListEl.innerHTML = '';
+  const keys = Object.keys(grouped).sort((a,b)=> Number(a.split('-')[0]) - Number(b.split('-')[0]));
+  for(const key of keys){
+    const btn = document.createElement('div');
+    btn.className='series-btn';
+    btn.innerHTML = `<strong>${niceSeriesLabel(key)}</strong><span class="count">(${grouped[key].length})</span>`;
+    btn.addEventListener('click', ()=> {
+      // scroll to series block
+      const target = document.querySelector(`[data-series="${key}"]`);
+      if(target){
+        target.scrollIntoView({behavior:'smooth',block:'start'});
+        // optionally expand series (we keep all visible)
       }
-      arr.forEach(p => {
-        const li = document.createElement('li');
-        li.className = 'post-item';
-        li.dataset.postId = p.id;
-        li.innerHTML = `
-          <div class="post-title" role="button">
-            <div>
-              <strong>${esc(p.title)}</strong>
-              ${p.preview ? `<div class="post-preview">${esc(p.preview)}</div>` : ''}
-            </div>
-            <div class="controls">
-              <button class="post-toggle btn" data-id="${p.id}" aria-expanded="false">Read</button>
-            </div>
-          </div>
-          <div class="expand-area" id="expand-${p.id}" aria-hidden="true"></div>
-        `;
-        ul.appendChild(li);
-      });
-
-      // attach click handlers for toggles (delegation safe)
-      ul.querySelectorAll('.post-toggle').forEach(btn => {
-        btn.addEventListener('click', async function(e){
-          const id = this.dataset.id;
-          const expandArea = document.getElementById('expand-' + id);
-          const isOpen = expandArea.style.display === 'block';
-
-          // close any other open expand areas
-          document.querySelectorAll('.expand-area').forEach(x => {
-            if (x.id !== 'expand-' + id) { x.style.display = 'none'; x.setAttribute('aria-hidden','true'); }
-          });
-          document.querySelectorAll('.post-toggle').forEach(t => t.setAttribute('aria-expanded','false'));
-
-          if (isOpen) {
-            // close this
-            expandArea.style.display = 'none';
-            expandArea.setAttribute('aria-hidden','true');
-            this.setAttribute('aria-expanded','false');
-            // update hash to none
-            history.replaceState(null, '', ' ');
-            return;
-          }
-
-          // open this: fetch fragment and inject
-          this.textContent = 'Loading...';
-          try {
-            const post = POSTS.find(p=>String(p.id)===String(id));
-            const r = await fetch(post.file + '?ts=' + Date.now());
-            if (!r.ok) throw new Error('Could not fetch post file: ' + post.file);
-            let html = await r.text();
-
-            // avoid duplicate author/footer: if fragment already contains author or "Written by" or "Jeet S Singh" or amazon link, don't append footer
-            const lower = html.toLowerCase();
-            const hasAuthor = /written by|✍️|jeet s singh|author of|amazon\.in\/dp\/b0fphvnrbk/.test(lower);
-
-            if (!hasAuthor) {
-              html += `<footer class="small-meta" style="margin-top:12px">
-                        ✍️ Written by <strong>Jeet S Singh</strong> — Author of
-                        <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">“Discipline Se Success Tak”</a>
-                       </footer>`;
-            } else if (!/amazon\.in\/dp\/b0fphvnrbk/.test(lower)) {
-              html += `<div style="margin-top:10px"><a class="small-meta" href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">Buy on Amazon — Discipline Se Success Tak</a></div>`;
-            }
-
-            expandArea.innerHTML = html;
-            expandArea.style.display = 'block';
-            expandArea.setAttribute('aria-hidden','false');
-            this.setAttribute('aria-expanded','true');
-
-            // update hash for direct linking
-            history.replaceState(null, '', '#'+id);
-
-            // scroll to the opened area smoothly
-            setTimeout(()=> {
-              expandArea.scrollIntoView({behavior:'smooth', block:'center'});
-            },120);
-
-          } catch (err) {
-            console.error(err);
-            expandArea.innerHTML = '<div style="color:#a33">Failed to load article. Check console.</div>';
-            expandArea.style.display = 'block';
-            expandArea.setAttribute('aria-hidden','false');
-          } finally {
-            this.textContent = 'Read';
-          }
-        });
-      });
-    }
-
-    // simple search filter
-    searchInput.addEventListener('input', function(){
-      const q = (this.value || '').toLowerCase().trim();
-      document.querySelectorAll('.post-item').forEach(li=>{
-        const title = (li.querySelector('strong')?.textContent || '').toLowerCase();
-        const preview = (li.querySelector('.post-preview')?.textContent || '').toLowerCase();
-        const show = q === '' ? true : (title + ' ' + preview).includes(q);
-        li.style.display = show ? 'block' : 'none';
-      });
     });
+    seriesListEl.appendChild(btn);
+  }
+}
 
-    // init
-    document.addEventListener('DOMContentLoaded', init);
-  })();
-  </script>
+/* Main: render series blocks and items */
+function renderSeriesBlocks(filterTerm=''){
+  // remove placeholder if any
+  const placeholder = document.getElementById('placeholder');
+  if(placeholder) placeholder.remove();
+
+  const keys = Object.keys(grouped).sort((a,b)=> Number(a.split('-')[0]) - Number(b.split('-')[0]));
+  // clear existing series blocks (but keep panel)
+  // We'll recreate everything for simplicity (filtering easier)
+  // But keep scroll position? it's okay.
+  // Remove all children except maybe new content
+  const existingBlocks = contentPanel.querySelectorAll('.series-block');
+  existingBlocks.forEach(n=>n.remove());
+
+  for(const key of keys){
+    const postsArr = grouped[key];
+    // filter titles/previews by term
+    const visible = postsArr.filter(p=>{
+      if(!filterTerm) return true;
+      const t = (p.title + ' ' + p.preview).toLowerCase();
+      return t.includes(filterTerm.toLowerCase());
+    });
+    if(visible.length===0) continue; // hide series if nothing matches
+
+    const block = document.createElement('section');
+    block.className='series-block';
+    block.dataset.series = key;
+
+    const titleBar = document.createElement('div');
+    titleBar.className='series-title';
+    titleBar.innerHTML = `<h2>${niceSeriesLabel(key)}</h2><div class="small">(${visible.length})</div>`;
+    block.appendChild(titleBar);
+
+    const list = document.createElement('div');
+    list.className='list';
+
+    for(const p of visible){
+      const item = document.createElement('div');
+      item.className='post-item';
+      item.id = `post-${p.id}`;
+
+      const left = document.createElement('div');
+      left.className='post-left';
+      left.innerHTML = `<h3 class="post-title">${safeHTML(p.title)}</h3>
+                        <div class="post-preview">${safeHTML(p.preview)}</div>
+                        <div class="meta small">ID: ${p.id} — File: ${p.file}</div>`;
+
+      const actions = document.createElement('div');
+      actions.className='post-actions';
+      const readBtn = document.createElement('button');
+      readBtn.className='btn';
+      readBtn.textContent = 'Read';
+      readBtn.addEventListener('click', ()=> toggleOpenPost(p, item, filterTerm));
+      actions.appendChild(readBtn);
+
+      const openHolder = document.createElement('div');
+      openHolder.className='expand-area';
+      openHolder.style.display='none';
+      openHolder.innerHTML = `<div class="small">Loading...</div>`;
+      openHolder.setAttribute('aria-hidden','true');
+
+      item.appendChild(left);
+      item.appendChild(actions);
+      item.appendChild(openHolder);
+
+      // replace preview highlight if filterTerm exists
+      if(filterTerm){
+        left.querySelector('.post-title').innerHTML = highlightText(left.querySelector('.post-title').innerHTML, filterTerm);
+        left.querySelector('.post-preview').innerHTML = highlightText(left.querySelector('.post-preview').innerHTML, filterTerm);
+      }
+
+      list.appendChild(item);
+    }
+
+    block.appendChild(list);
+    contentPanel.appendChild(block);
+  }
+
+  // If nothing matched at all, show message
+  const anyBlocks = contentPanel.querySelectorAll('.series-block');
+  if(anyBlocks.length===0){
+    const msg = document.createElement('div');
+    msg.className='small';
+    msg.style.padding='20px;text-align:center;color:var(--muted)';
+    msg.textContent = 'Koi result nahi mila. Search term hata kar dobara try karein.';
+    contentPanel.appendChild(msg);
+  }
+}
+
+/* toggle open: fetch post file and insert into expand area. Only one open at a time. */
+async function toggleOpenPost(postMeta, itemEl, filterTerm){
+  // close any other open
+  const openAreas = document.querySelectorAll('.expand-area');
+  openAreas.forEach(area=>{
+    if(area!==itemEl.querySelector('.expand-area')){
+      area.style.display='none';
+      area.setAttribute('aria-hidden','true');
+      area.innerHTML = '';
+    }
+  });
+
+  const holder = itemEl.querySelector('.expand-area');
+  const isVisible = holder.style.display !== 'none';
+
+  if(isVisible){
+    // close
+    holder.style.display='none';
+    holder.setAttribute('aria-hidden','true');
+    holder.innerHTML='';
+    return;
+  }
+
+  // open: fetch content
+  holder.style.display = 'block';
+  holder.setAttribute('aria-hidden','false');
+  holder.innerHTML = `<div class="small">Loading...</div>`;
+
+  try{
+    const res = await fetch(postMeta.file, {cache: 'no-store'});
+    if(!res.ok) throw new Error('file fetch failed');
+    let html = await res.text();
+
+    // Optional: strip full html wrapper if the file is a full HTML page.
+    // We'll try to extract content inside <main> or body.
+    // First check for marker <!-- POST CONTENT START --> to allow clean insert (you can add this marker).
+    if(html.includes('<!-- POST CONTENT START -->')){
+      html = html.split('<!-- POST CONTENT START -->')[1].split('<!-- POST CONTENT END -->')[0];
+    } else {
+      // fallback: try to extract inner of <main> or <article>
+      const mainMatch = html.match(/<main[^>]*>([\s\S]*?)<\/main>/i);
+      const articleMatch = html.match(/<article[^>]*>([\s\S]*?)<\/article>/i);
+      const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+      if(mainMatch) html = mainMatch[1];
+      else if(articleMatch) html = articleMatch[1];
+      else if(bodyMatch) html = bodyMatch[1];
+      // else leave whole file (could be only inner fragment)
+    }
+
+    // highlight search term in loaded content if filterTerm present
+    if(filterTerm){
+      html = highlightText(html, filterTerm);
+    }
+
+    // sanitize minimal: we will place as innerHTML (assumes posts are trusted).
+    holder.innerHTML = `<div class="post-content">${html}</div>
+                        <div class="meta small">Written by Jeet S Singh — Author of <a href="https://www.amazon.in/s?k=Discipline+Se+Success+Tak" target="_blank">Discipline Se Success Tak</a></div>`;
+
+    // scroll so expanded content's top aligns with viewport (fixes the complaint)
+    setTimeout(()=>{
+      const top = itemEl.getBoundingClientRect().top + window.scrollY - 24; // offset a bit
+      window.scrollTo({top, behavior:'smooth'});
+    }, 60);
+
+  }catch(err){
+    console.error(err);
+    holder.innerHTML = `<div style="color:#b02a2a">Error loading post content. (${err.message})</div>`;
+  }
+}
+
+/* search handler */
+let searchTimer = null;
+searchBox.addEventListener('input', (e)=>{
+  const v = e.target.value.trim();
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(()=>{
+    renderSeriesBlocks(v);
+    // also update sidebar visibility (we keep sidebar same; user can click series)
+  }, 200);
+});
+
+/* initial load */
+loadPosts();
+</script>
 </body>
 </html>
