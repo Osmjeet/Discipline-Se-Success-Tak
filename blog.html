@@ -5,283 +5,121 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Blogs — Jeet S Singh (Author of Discipline Se Success Tak)</title>
   <meta name="description" content="Read inspiring blogs by Jeet S Singh, Author of 'Discipline Se Success Tak'. Learn about discipline, success, motivation and daily habits." />
+  <link rel="canonical" href="https://discipline-se-success-tak.vercel.app/blog.html" />
+
   <style>
-    :root{
-      --accent:#0b8f76;
-      --accent-dark:#06493f;
-      --muted:#6b7a75;
-      --bg:#f7fffb;
-      --card:#ffffff;
-      --maxw:920px;
-      --radius:12px;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter, "Noto Sans Devanagari", system-ui, -apple-system, "Segoe UI", Roboto, Arial;background:#f6fbf9;color:#102827;line-height:1.7}
-    nav{background:var(--accent-dark);padding:12px 18px;position:sticky;top:0;z-index:20}
-    nav .menu{max-width:var(--maxw);margin:auto;display:flex;gap:18px;align-items:center;color:#fff}
+    body{margin:0;font-family:Inter,Roboto,Arial;background:#f9fbfa;color:#102827;line-height:1.75}
+    .wrap{max-width:900px;margin:0 auto;padding:28px}
+    h1{color:#06493f;text-align:center;margin:32px 0}
+    h2{color:#0a3d36;margin-top:20px;margin-bottom:10px;text-align:center}
+    p{margin-bottom:14px;font-size:1.05rem;text-align:center}
+    .post-card{margin-bottom:44px;padding:24px;background:#fff;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+    .post-card h3{margin:0 0 12px;text-align:center}
+    .post-actions{text-align:center;margin-top:14px}
+    .btn{display:inline-block;background:#0bb39a;color:#fff;padding:10px 16px;border-radius:8px;font-weight:600;text-decoration:none;cursor:pointer;border:none}
+    .btn:hover{background:#078a72}
+    .expanded{margin-top:16px;padding:12px;background:#fafafa;border-radius:8px;display:none}
+    footer{text-align:center;margin-top:28px;padding:16px;font-size:0.9rem;color:#666}
+
+    /* Navigation */
+    nav{background:#06493f;padding:14px 20px}
+    nav .menu{max-width:900px;margin:auto;display:flex;gap:20px;flex-wrap:wrap;justify-content:center}
     nav a{color:#fff;text-decoration:none;font-weight:600}
-    .container{max-width:var(--maxw);margin:22px auto;padding:18px}
-    header{text-align:center;margin-bottom:18px}
-    header h1{margin:0;color:var(--accent-dark);font-size:28px}
-    header p{margin:6px 0 0;color:var(--muted)}
-    .controls{display:flex;gap:10px;align-items:center;justify-content:center;margin:18px 0;flex-wrap:wrap}
-    .search{flex:1;max-width:620px;display:flex;gap:8px}
-    .search input{flex:1;padding:12px 14px;border-radius:10px;border:1px solid #e6f5ef;font-size:16px}
-    .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;border:none;font-weight:700;cursor:pointer}
-    .btn.ghost{background:#eef9f5;color:var(--accent);border:1px solid #e0f3ec}
-    .series-list{margin-top:12px}
-    .series-card{background:#f7fffb;padding:12px;border-radius:12px;margin-bottom:12px;border:1px solid #e6f7f0}
-    .series-row{display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer}
-    .series-title{font-weight:700;color:var(--accent-dark);font-size:18px}
-    .series-count{color:var(--muted)}
-    .chev{font-size:20px;color:var(--muted)}
-    .posts-wrapper{margin-top:12px;display:none;padding-top:8px}
-    .post-card{background:var(--card);padding:16px;border-radius:10px;margin-bottom:12px;box-shadow:0 8px 24px rgba(6,20,18,0.04);border:1px solid #eef7f3}
-    .post-card h3{margin:0;color:var(--accent-dark);font-size:18px;text-align:center}
-    .post-card p{margin:12px 0 0;color:#123532;text-align:center}
-    .post-actions{text-align:center;margin-top:12px}
-    .post-actions .btn{padding:8px 12px}
-    .expanded{margin-top:12px;padding:14px;background:#ffffff;border-radius:10px;border:1px solid #f0f8f6}
-    .expanded .content{color:#123532}
-    footer{text-align:center;color:var(--muted);margin:32px 0 80px}
-    @media(min-width:900px){
-      .post-card{display:flex;gap:20px;align-items:center}
-      .post-card h3,.post-card p{text-align:left}
-      .post-card .meta{flex:1}
-      .post-card .preview-col{width:320px}
-    }
+    nav a:hover{text-decoration:underline}
+    @media(max-width:600px){nav .menu{flex-direction:column;gap:10px;text-align:center}}
   </style>
 </head>
 <body>
 
+  <!-- Navigation -->
   <nav>
-    <div class="menu" role="navigation" aria-label="Main">
+    <div class="menu">
       <a href="index.html">🏠 Home</a>
       <a href="author.html">👤 Author</a>
       <a href="blog.html">📝 Blogs</a>
-      <div style="flex:1"></div>
-      <a href="ebook.html">📘 Free eBook</a>
     </div>
   </nav>
 
-  <main class="container">
-    <header>
-      <h1>📖 Blogs by Jeet S Singh</h1>
-      <p>Author of “Discipline Se Success Tak” — Series-wise blogs, click to expand inline.</p>
-    </header>
+  <div class="wrap">
+    <h1>📖 Blogs by Jeet S Singh</h1>
+    <div id="blog-list">Loading blogs...</div>
+  </div>
 
-    <div class="controls" aria-hidden="false">
-      <div class="search" role="search">
-        <input id="search" placeholder="Search by title or preview — type & press Enter" aria-label="Search blogs">
-        <button id="clearSearch" class="btn ghost">Clear</button>
-      </div>
-      <button id="expandAll" class="btn">Expand All</button>
-      <button id="collapseAll" class="btn ghost">Collapse All</button>
-    </div>
-
-    <section id="seriesContainer" class="series-list" aria-live="polite">
-      <!-- series injected here -->
-      <div style="text-align:center;color:var(--muted);padding:26px;border-radius:10px;background:#fbfffb;border:1px solid #eef8f3">
-        Loading posts...
-      </div>
-    </section>
-
-    <footer>© 2025 Jeet S Singh — Discipline • Faith • Success</footer>
-  </main>
+  <footer>© 2025 Jeet S Singh — Discipline • Faith • Success</footer>
 
   <script>
-    // blog.html dynamic renderer
-    async function fetchPostsJson(){
-      const res = await fetch('posts.json', {cache: "no-store"});
-      if(!res.ok) throw new Error('posts.json not found');
-      return await res.json();
-    }
+    async function loadPosts(){
+      try {
+        const res = await fetch('posts.json');
+        const posts = await res.json();
+        const list = document.getElementById('blog-list');
+        list.innerHTML = '';
 
-    function groupBySeries(posts){
-      const map = new Map();
-      posts.forEach(p=>{
-        const s = p.series ?? 1;
-        if(!map.has(s)) map.set(s, []);
-        map.get(s).push(p);
-      });
-      // sort series numeric ascending
-      return Array.from(map.entries()).sort((a,b)=>a[0]-b[0]);
-    }
+        posts.forEach((p, idx)=>{
+          const card = document.createElement('div');
+          card.className = 'post-card';
 
-    function createSeriesCard(seriesNo, posts){
-      const card = document.createElement('div');
-      card.className = 'series-card';
-      const row = document.createElement('div');
-      row.className = 'series-row';
-      row.setAttribute('role','button');
-      row.setAttribute('aria-expanded','false');
-      row.tabIndex = 0;
+          const h3 = document.createElement('h3');
+          h3.textContent = p.title;
+          card.appendChild(h3);
 
-      const left = document.createElement('div');
-      left.innerHTML = `<div class="series-title">Series ${seriesNo}</div><div class="series-count">${posts.length} posts</div>`;
+          const snippet = document.createElement('p');
+          snippet.textContent = p.preview;
+          card.appendChild(snippet);
 
-      const right = document.createElement('div');
-      right.innerHTML = `<div class="chev">▾</div>`;
+          const actions = document.createElement('div');
+          actions.className = 'post-actions';
 
-      row.appendChild(left);
-      row.appendChild(right);
-      card.appendChild(row);
+          const readBtn = document.createElement('button');
+          readBtn.className = 'btn btn-read';
+          readBtn.type = 'button';
+          readBtn.dataset.file = p.file;
+          readBtn.dataset.id = 'post' + (idx+1);
+          readBtn.textContent = 'Read More →';
+          actions.appendChild(readBtn);
 
-      const postsWrap = document.createElement('div');
-      postsWrap.className = 'posts-wrapper';
-      posts.forEach((p, idx)=>{
-        const pc = document.createElement('div');
-        pc.className = 'post-card';
-        // markup: preview left (on wide screens), meta right
-        const meta = document.createElement('div');
-        meta.className = 'meta';
-        meta.innerHTML = `<h3>${p.title}</h3><p>${p.preview}</p>`;
-        const previewCol = document.createElement('div');
-        previewCol.className = 'preview-col';
-        previewCol.style.textAlign = 'center';
-        const readBtn = document.createElement('button');
-        readBtn.className = 'btn';
-        readBtn.textContent = 'Read';
-        readBtn.dataset.file = p.file;
-        readBtn.dataset.series = seriesNo;
-        readBtn.dataset.index = idx;
-        previewCol.appendChild(readBtn);
+          card.appendChild(actions);
 
-        // expanded area
-        const expanded = document.createElement('div');
-        expanded.className = 'expanded';
-        expanded.style.display = 'none';
-        expanded.dataset.loaded = 'false';
-        expanded.innerHTML = `<div class="content">—</div>`;
+          const expandedWrapper = document.createElement('div');
+          expandedWrapper.className = 'expanded';
+          expandedWrapper.id = 'post' + (idx+1);
+          card.appendChild(expandedWrapper);
 
-        // assemble card
-        // for narrow screens stacking is natural: previewCol then meta
-        pc.appendChild(previewCol);
-        pc.appendChild(meta);
-        pc.appendChild(expanded);
-        postsWrap.appendChild(pc);
-      });
-
-      card.appendChild(postsWrap);
-
-      // toggle handlers
-      function toggle(open){
-        const isOpen = postsWrap.style.display === 'block';
-        const toOpen = (open === undefined) ? !isOpen : open;
-        postsWrap.style.display = toOpen ? 'block' : 'none';
-        row.setAttribute('aria-expanded', toOpen ? 'true' : 'false');
-        right.querySelector('.chev').textContent = toOpen ? '▴' : '▾';
-      }
-
-      row.addEventListener('click', ()=> toggle());
-      row.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); toggle(); } });
-
-      // expose control
-      card.toggle = toggle;
-      return card;
-    }
-
-    function centerParagraphs(container){
-      // center paragraphs in previews and expanded content
-      container.querySelectorAll('.post-card p, .post-card h3').forEach(el=>{
-        el.style.textAlign = 'center';
-      });
-    }
-
-    // load posts and render
-    async function init(){
-      try{
-        const posts = await fetchPostsJson();
-        const grouped = groupBySeries(posts);
-        const seriesContainer = document.getElementById('seriesContainer');
-        seriesContainer.innerHTML = '';
-
-        const cards = [];
-        grouped.forEach(([seriesNo, posts])=>{
-          const card = createSeriesCard(seriesNo, posts);
-          seriesContainer.appendChild(card);
-          cards.push(card);
+          list.appendChild(card);
         });
 
-        // attach read button listeners (delegation)
-        seriesContainer.addEventListener('click', async (e)=>{
-          const btn = e.target.closest('button.btn');
-          if(!btn) return;
-          if(!btn.dataset.file) return;
-          // find expanded element nearest
-          const postCard = btn.closest('.post-card');
-          const expanded = postCard.querySelector('.expanded');
-          const contentDiv = expanded.querySelector('.content');
+        document.querySelectorAll('.btn-read').forEach(btn=>{
+          btn.addEventListener('click', async ()=>{
+            const file = btn.dataset.file;
+            const target = document.getElementById(btn.dataset.id);
 
-          // toggle
-          if(expanded.style.display === 'block'){
-            expanded.style.display = 'none';
-            btn.textContent = 'Read';
-            return;
-          }
-          expanded.style.display = 'block';
-          btn.textContent = 'Hide';
-
-          if(expanded.dataset.loaded === 'false'){
-            contentDiv.innerHTML = '<em>Loading...</em>';
-            try {
-              const r = await fetch(btn.dataset.file);
-              if(!r.ok) throw new Error('file not found');
-              const html = await r.text();
-              // wrap HTML inside a container to avoid duplicate nav/footer
-              contentDiv.innerHTML = html;
-              expanded.dataset.loaded = 'true';
-              centerParagraphs(postCard);
-              // ensure "Written by" appears only at bottom of post files (they should include it)
-            } catch(err){
-              contentDiv.innerHTML = '<em>Error loading post.</em>';
+            if(target.style.display==='block'){
+              target.style.display='none';
+              btn.textContent='Read More →';
+              return;
             }
-          }
+
+            target.style.display='block';
+            btn.textContent='Hide';
+
+            if(!target.dataset.loaded){
+              target.innerHTML='<em>Loading...</em>';
+              try {
+                const r = await fetch(file);
+                const html = await r.text();
+                target.innerHTML = html;
+                target.dataset.loaded = 'true';
+              } catch(e){
+                target.innerHTML='<em>Error loading blog.</em>';
+              }
+            }
+          });
         });
-
-        // search
-        const searchInput = document.getElementById('search');
-        const clearBtn = document.getElementById('clearSearch');
-        function performSearch(q){
-          q = (q||'').trim().toLowerCase();
-          const allPostCards = seriesContainer.querySelectorAll('.post-card');
-          if(!q){
-            allPostCards.forEach(pc=>pc.style.display='block');
-            return;
-          }
-          allPostCards.forEach(pc=>{
-            const title = pc.querySelector('h3').textContent.toLowerCase();
-            const preview = pc.querySelector('p').textContent.toLowerCase();
-            if(title.includes(q) || preview.includes(q)) pc.style.display='block';
-            else pc.style.display='none';
-          });
-          // auto expand series that contain visible posts
-          cards.forEach(card=>{
-            const anyVisible = Array.from(card.querySelectorAll('.post-card')).some(pc=>pc.style.display!=='none');
-            card.querySelector('.posts-wrapper').style.display = anyVisible ? 'block' : 'none';
-            card.querySelector('.series-row').setAttribute('aria-expanded', anyVisible ? 'true' : 'false');
-            const che = card.querySelector('.chev');
-            if(che) che.textContent = anyVisible ? '▴' : '▾';
-          });
-        }
-        searchInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ performSearch(searchInput.value); }});
-        clearBtn.addEventListener('click', ()=>{ searchInput.value=''; performSearch(''); });
-
-        // Expand All / Collapse All
-        document.getElementById('expandAll').addEventListener('click', ()=>{ cards.forEach(c=>c.toggle(true)); });
-        document.getElementById('collapseAll').addEventListener('click', ()=>{ cards.forEach(c=>c.toggle(false)); });
-
-        // final paragraph centering for initial layout
-        centerParagraphs(seriesContainer);
-
-      }catch(err){
-        document.getElementById('seriesContainer').innerHTML = `<div style="color:#b00;background:#fff3f3;padding:18px;border-radius:10px;border:1px solid #ffdede;text-align:center">Unable to load posts.json — check path and name (must be posts.json at site root).</div>`;
-        console.error(err);
+      } catch(e){
+        document.getElementById('blog-list').textContent = 'Error loading posts.json';
       }
     }
-
-    // init on load
-    init();
+    loadPosts();
   </script>
 </body>
 </html>
