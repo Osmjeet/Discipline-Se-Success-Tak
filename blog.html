@@ -22,11 +22,24 @@
     footer{text-align:center;margin-top:28px;padding:16px;font-size:0.9rem;color:#666}
 
     /* Navigation */
-    nav{background:#06493f;padding:14px 20px}
-    nav .menu{max-width:900px;margin:auto;display:flex;gap:20px;flex-wrap:wrap}
+    nav{background:#06493f;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
+    nav .menu{display:flex;gap:20px;flex-wrap:wrap}
     nav a{color:#fff;text-decoration:none;font-weight:600}
     nav a:hover{text-decoration:underline}
-    @media(max-width:600px){nav .menu{flex-direction:column;gap:10px}}
+
+    /* Search box */
+    .search-box input{
+      padding:6px 10px;
+      border-radius:6px;
+      border:none;
+      font-size:14px;
+      outline:none;
+    }
+    @media(max-width:600px){
+      nav{flex-direction:column;align-items:flex-start}
+      .search-box{margin-top:10px;width:100%}
+      .search-box input{width:100%}
+    }
   </style>
 </head>
 <body>
@@ -38,6 +51,9 @@
       <a href="author.html">👤 Author</a>
       <a href="blog.html">📝 Blogs</a>
     </div>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="🔍 Search blogs..." />
+    </div>
   </nav>
 
   <div class="wrap">
@@ -48,79 +64,101 @@
   <footer>© 2025 Jeet S Singh — Discipline • Faith • Success</footer>
 
   <script>
+    let postsData = [];
+
     async function loadPosts(){
       try {
         const res = await fetch('posts.json');
-        const posts = await res.json();
-        const list = document.getElementById('blog-list');
-        list.innerHTML = '';
-
-        posts.forEach((p, idx)=>{
-          const card = document.createElement('div');
-          card.className = 'preview';
-
-          const h2 = document.createElement('h2');
-          h2.textContent = p.title;
-          card.appendChild(h2);
-
-          const snippet = document.createElement('p');
-          snippet.textContent = p.preview;
-          card.appendChild(snippet);
-
-          // actions
-          const actions = document.createElement('div');
-          actions.className = 'actions';
-
-          const readBtn = document.createElement('button');
-          readBtn.className = 'btn btn-read';
-          readBtn.type = 'button';
-          readBtn.dataset.file = p.file;
-          readBtn.dataset.id = 'post' + (idx+1);
-          readBtn.textContent = 'Read More →';
-          actions.appendChild(readBtn);
-
-          card.appendChild(actions);
-
-          const expandedWrapper = document.createElement('div');
-          expandedWrapper.className = 'collapse';
-          expandedWrapper.id = 'post' + (idx+1);
-          card.appendChild(expandedWrapper);
-
-          list.appendChild(card);
-        });
-
-        // attach click listeners
-        document.querySelectorAll('.btn-read').forEach(btn=>{
-          btn.addEventListener('click', async ()=>{
-            const file = btn.dataset.file;
-            const target = document.getElementById(btn.dataset.id);
-
-            if(target.style.display==='block'){
-              target.style.display='none';
-              btn.textContent='Read More →';
-              return;
-            }
-
-            target.style.display='block';
-            btn.textContent='Hide';
-
-            if(!target.dataset.loaded){
-              target.innerHTML='<em>Loading...</em>';
-              try {
-                const r = await fetch(file);
-                const html = await r.text();
-                target.innerHTML = html;
-                target.dataset.loaded = 'true';
-              } catch(e){
-                target.innerHTML='<em>Error loading blog.</em>';
-              }
-            }
-          });
-        });
+        postsData = await res.json();
+        renderPosts(postsData);
       } catch(e){
         document.getElementById('blog-list').textContent = 'Error loading posts.json';
       }
     }
+
+    function renderPosts(posts){
+      const list = document.getElementById('blog-list');
+      list.innerHTML = '';
+
+      posts.forEach((p, idx)=>{
+        const card = document.createElement('div');
+        card.className = 'preview';
+
+        const h2 = document.createElement('h2');
+        h2.textContent = p.title;
+        card.appendChild(h2);
+
+        const snippet = document.createElement('p');
+        snippet.textContent = p.preview;
+        card.appendChild(snippet);
+
+        // actions
+        const actions = document.createElement('div');
+        actions.className = 'actions';
+
+        const readBtn = document.createElement('button');
+        readBtn.className = 'btn btn-read';
+        readBtn.type = 'button';
+        readBtn.dataset.file = p.file;
+        readBtn.dataset.id = 'post' + (idx+1);
+        readBtn.textContent = 'Read More →';
+        actions.appendChild(readBtn);
+
+        card.appendChild(actions);
+
+        const expandedWrapper = document.createElement('div');
+        expandedWrapper.className = 'collapse';
+        expandedWrapper.id = 'post' + (idx+1);
+        card.appendChild(expandedWrapper);
+
+        list.appendChild(card);
+      });
+
+      attachReadEvents();
+    }
+
+    function attachReadEvents(){
+      document.querySelectorAll('.btn-read').forEach(btn=>{
+        btn.addEventListener('click', async ()=>{
+          const file = btn.dataset.file;
+          const target = document.getElementById(btn.dataset.id);
+
+          if(target.style.display==='block'){
+            target.style.display='none';
+            btn.textContent='Read More →';
+            return;
+          }
+
+          target.style.display='block';
+          btn.textContent='Hide';
+
+          if(!target.dataset.loaded){
+            target.innerHTML='<em>Loading...</em>';
+            try {
+              const r = await fetch(file);
+              const html = await r.text();
+              target.innerHTML = html;
+              target.dataset.loaded = 'true';
+            } catch(e){
+              target.innerHTML='<em>Error loading blog.</em>';
+            }
+          }
+        });
+      });
+    }
+
+    // Search filter
+    document.addEventListener('input', (e)=>{
+      if(e.target.id==='searchInput'){
+        const q = e.target.value.toLowerCase();
+        const filtered = postsData.filter(p =>
+          p.title.toLowerCase().includes(q) ||
+          p.preview.toLowerCase().includes(q)
+        );
+        renderPosts(filtered);
+      }
+    });
+
     loadPosts();
   </script>
 </body>
