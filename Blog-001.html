@@ -81,7 +81,6 @@
   <footer style="text-align:center;padding:26px 0;color:#667">© 2025 Jeet S Singh — Discipline • Faith • Success</footer>
 
   <script>
-    // POSTS will come from posts.json — expected fields: title, preview, file, optional series
     let POSTS = [];
     let currentSeries = 'all';
 
@@ -89,7 +88,6 @@
       try {
         const r = await fetch('posts.json', {cache:'no-store'});
         POSTS = await r.json();
-        // infer series if not provided
         POSTS = POSTS.map(p => {
           if (p.series === undefined) {
             const m = (p.file || '').match(/blog(\d+)/i);
@@ -180,7 +178,6 @@
           const wrapper = document.getElementById('collapse-' + idx);
           if (!wrapper) return;
 
-          // toggle close
           if (wrapper.style.display === 'block'){
             wrapper.style.display = 'none';
             wrapper.setAttribute('aria-hidden','true');
@@ -188,14 +185,14 @@
             return;
           }
 
-          // close others silently (no scrolling)
+          // close others silently
           document.querySelectorAll('.collapse').forEach(c => {
             c.style.display = 'none'; c.setAttribute('aria-hidden','true');
             const b = c.parentElement ? c.parentElement.querySelector('.btn-read') : null;
             if (b) b.textContent = 'Read More →';
           });
 
-          // open this wrapper
+          // open
           wrapper.style.display = 'block';
           wrapper.setAttribute('aria-hidden','false');
           btn.textContent = 'Hide';
@@ -206,35 +203,79 @@
               const res = await fetch(file);
               const text = await res.text();
 
-              // parse and extract only the blog content block
+              // parse into temp DOM
               const temp = document.createElement('div');
               temp.innerHTML = text;
 
-              // Prefer .blog-card, fallback to main/article/body innerHTML
-              let extracted = temp.querySelector('.blog-card');
-              if (!extracted) extracted = temp.querySelector('main');
-              if (!extracted) extracted = temp.querySelector('article');
-              if (!extracted) extracted = temp.querySelector('body');
-              if (extracted) {
-                wrapper.innerHTML = `<div class="content">${extracted.outerHTML}</div>
-              } else {
-                // last fallback: just insert raw text (but avoid full html tag dupes)
-                // remove full html/head/body tags if present
-                const cleaned = text.replace(/<\/?html[^>]*>/gi,'').replace(/<\/?head[^>]*>[\s\S]*?<\/head>/gi,'').replace(/<\/?body[^>]*>/gi,'').trim();
-                wrapper.innerHTML = `<div class="content">${cleaned}</div>
+              // prefer inner blog wrapper candidates in order
+              const preferSelectors = ['.blog-card', '.card', 'article', 'main', 'section.post', '.post', '.content', '#content', 'body'];
+              let extracted = null;
+              for (const sel of preferSelectors){
+                extracted = temp.querySelector(sel);
+                if (extracted) break;
               }
+
+              // If selected element is <body> or a very large wrapper, try to find a more specific child article/main inside it
+              if (extracted && (extracted.tagName && extracted.tagName.toLowerCase() === 'body')){
+                const inner = extracted.querySelector('article, main, .blog-card, .post, .content');
+                if (inner) extracted = inner;
+              }
+
+              // final fallback: if nothing found, use entire temp but remove <head> if present
+              if (!extracted) {
+                // remove <head> content if any
+                const stripped = text.replace(/<head[\s\S]*?<\/head>/gi,'').replace(/<\/?html[^>]*>/gi,'').trim();
+                wrapper.innerHTML = `<div class="content">${stripped}</div>`;
+              } else {
+                // avoid duplicating author/footer: detect if extracted already has author/footer text
+                const extractedClone = extracted.cloneNode(true);
+
+                const hasAuthorNote = !!(extractedClone.querySelector('.author-note') || /written by|✍️|Author of|Buy on Amazon/i.test(extractedClone.textContent));
+                // if extracted contains full HTML (like includes header/preview) try to remove duplicate preview lines: if extracted contains the same preview as in POSTS[idx].preview, remove the first occurrence
+                const previewText = (POSTS[idx].preview || '').trim();
+                if (previewText){
+                  // remove first text node match of preview inside extractedClone
+                  removeFirstTextMatch(extractedClone, previewText);
+                }
+
+                wrapper.innerHTML = `<div class="content">${extractedClone.innerHTML}</div>`;
+                // append author-line only if not already present
+                if (!hasAuthorNote){
+                  wrapper.innerHTML += `<div class="author-line">✍️ Written by <strong>Jeet S Singh</strong>, Author of <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">“Discipline Se Success Tak”</a></div>`;
+                }
+              }
+
               wrapper.dataset.loaded = '1';
             } catch(err){
               wrapper.innerHTML = '<div style="color:#b33">Error loading post.</div>';
               console.error(err);
             }
           }
-          // NO scrollIntoView -> prevents page jump to middle
+          // note: intentionally NO scrollIntoView to avoid jump
         };
       });
     }
 
-    // helpers
+    // helper to remove first occurrence of a text chunk inside a node (to avoid duplicate preview)
+    function removeFirstTextMatch(rootNode, textChunk){
+      const walker = document.createTreeWalker(rootNode, NodeFilter.SHOW_TEXT, null, false);
+      let node;
+      textChunk = textChunk.replace(/\s+/g,' ').trim();
+      while(node = walker.nextNode()){
+        const nodeText = (node.nodeValue || '').replace(/\s+/g,' ').trim();
+        if (!nodeText) continue;
+        const idx = nodeText.toLowerCase().indexOf(textChunk.toLowerCase());
+        if (idx !== -1){
+          // found - remove that substring from the text node (first occurrence)
+          const before = nodeText.slice(0, idx);
+          const after = nodeText.slice(idx + textChunk.length);
+          node.nodeValue = (before + ' ' + after).trim();
+          return true;
+        }
+      }
+      return false;
+    }
+
     function escapeHtml(s){
       if(!s) return '';
       return String(s).replace(/[&<>"']/g, (m)=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;', "'":'&#39;' })[m]);
@@ -242,7 +283,6 @@
     function escapeAttr(s){ return escapeHtml(s).replace(/"/g,'&quot;') }
     function scrollToTop(){ window.scrollTo({top:0,behavior:'smooth'}) }
 
-    // events
     document.getElementById('searchInput').addEventListener('input', renderGrid);
     document.getElementById('seriesSelect').addEventListener('change', (e) => setSeries(e.target.value));
     document.getElementById('searchInput').addEventListener('keydown', (e) => {
@@ -254,7 +294,6 @@
       }
     });
 
-    // initial
     loadPosts();
   </script>
 </body>
