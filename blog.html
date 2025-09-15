@@ -1,4 +1,4 @@
- <!doctype html>
+<!doctype html>
 <html lang="hi">
 <head>
   <meta charset="utf-8" />
@@ -13,92 +13,187 @@
       --bg:#ffffff;
       --card:#f8fffc;
       --text:#102c27;
-      --radius:14px;
-      --maxw:960px;
+      --radius:12px;
+      --maxw:980px;
     }
-    html,body{margin:0;background:#f4f9f7;font-family:Inter,'Noto Sans Devanagari',system-ui; color:var(--text);}
-    header{background:#06493f;padding:14px 20px;text-align:center}
-    header h1{color:#fff;margin:0;font-size:22px}
+    *{box-sizing:border-box}
+    html,body{margin:0;background:#f4f9f7;font-family:Inter,'Noto Sans Devanagari',system-ui; color:var(--text); -webkit-font-smoothing:antialiased;}
+    header{background:#06493f;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
+    .logo{color:#fff;font-weight:700;font-size:18px}
+    nav a{color:#fff;text-decoration:none;margin-left:16px;font-size:15px;font-weight:600}
+    nav a:hover{text-decoration:underline}
+    .search-bar{margin:20px auto;max-width:var(--maxw);padding:0 20px;text-align:center}
+    .search-bar input{width:100%;max-width:520px;padding:12px;border:1px solid #dceee9;border-radius:10px;font-size:15px}
     .wrap{max-width:var(--maxw);margin:28px auto;padding:20px;}
-    h2.series-title{margin-top:40px;font-size:20px;color:var(--accent-dark);border-bottom:2px solid #e6f6f0;padding-bottom:6px}
-    .blog-card{background:var(--bg);margin:18px 0;padding:20px;border-radius:var(--radius);box-shadow:0 6px 18px rgba(0,0,0,0.06);border:1px solid #e7f6f2}
+    .series-row{display:flex;gap:12px;align-items:center;margin-top:40px}
+    .series-icon{width:46px;height:46px;flex:0 0 46px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#f7fffb,#eafaf2);box-shadow:0 6px 18px rgba(6,20,18,0.04);border:1px solid #e6f7ef}
+    h2.series-title{margin:0;font-size:20px;color:var(--accent-dark)}
+    .series-intro{margin:10px 0 20px;font-size:15px;color:#2c4640;line-height:1.6;padding-left:62px}
+    .blog-card{background:var(--bg);margin:18px 0;padding:18px;border-radius:var(--radius);box-shadow:0 6px 18px rgba(0,0,0,0.06);border:1px solid #e7f6f2}
     .blog-card h3{margin:0;font-size:18px;color:var(--accent-dark)}
-    .blog-card p.sub{margin:6px 0 12px;color:var(--muted);font-size:15px}
-    .blog-card button{background:var(--accent);color:#fff;border:none;padding:10px 14px;border-radius:8px;font-weight:600;cursor:pointer}
-    .blog-card button:hover{background:#056d59}
+    .blog-card p.sub{margin:8px 0 12px;color:var(--muted);font-size:15px}
+    .blog-meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .btn{background:var(--accent);color:#fff;border:none;padding:9px 12px;border-radius:8px;font-weight:700;cursor:pointer}
+    .btn.ghost{background:transparent;color:var(--accent);border:1px solid rgba(7,14,12,0.06)}
+    .btn:hover{filter:brightness(.95)}
     .content{display:none;margin-top:14px;font-size:15px;line-height:1.7;color:#123732}
+    .content .inner{padding-top:6px;border-top:1px dashed #e6f7ef}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#f1fbf8;color:#05664f;font-weight:700;font-size:13px}
     footer{text-align:center;margin:40px 0;color:#777;font-size:14px}
+    @media(max-width:820px){ .series-intro{padding-left:0} .series-row{flex-direction:row;align-items:center} }
   </style>
 </head>
 <body>
+  <!-- NAV -->
   <header>
-    <h1>📚 Blogs — Discipline Se Success Tak</h1>
+    <div class="logo">📚 Discipline Se Success Tak</div>
+    <nav>
+      <a href="index.html">🏠 Home</a>
+      <a href="blog.html">📝 Blogs</a>
+      <a href="author.html">👤 Author</a>
+      <a href="ebook.html">📘 Free eBook</a>
+    </nav>
   </header>
 
-  <div class="wrap" id="blog-container">
-    <!-- Series 1–10 -->
-    <h2 class="series-title">Series 1–10 — Discipline Se Success Tak</h2>
+  <!-- SEARCH -->
+  <div class="search-bar">
+    <input id="search" type="text" placeholder="🔍 Search blogs by title or preview..." oninput="filterBlogs()" />
+  </div>
+
+  <main class="wrap" id="blog-container">
+    <!-- SERIES 1 -->
+    <div class="series-row" aria-hidden="true">
+      <div class="series-icon" title="Series 1–10">
+        <!-- Book SVG -->
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 5.5C3 4.12 4.12 3 5.5 3h10.5v14H5.5C4.12 17 3 15.88 3 14.5V5.5Z" stroke="#0b8f76" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M19 6v12c0 1.38-1.12 2.5-2.5 2.5H11" stroke="#05664f" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div>
+        <h2 class="series-title">Series 1–10 — Discipline Se Success Tak</h2>
+      </div>
+    </div>
+    <p class="series-intro">यह पहली सीरीज़ discipline, consistency और छोटे रोज़ के actions पर केंद्रित है — practical lessons जो daily routine में apply होते हैं और धीरे-धीरे बड़े results देते हैं.</p>
+
     <div id="series1"></div>
 
-    <!-- Series 11–20 -->
-    <h2 class="series-title">Series 11–20 — Negativity Se Overcome</h2>
+    <!-- SERIES 2 -->
+    <div class="series-row" aria-hidden="true">
+      <div class="series-icon" title="Series 11–20">
+        <!-- Shield SVG -->
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 3l7 3v5c0 5-3.5 9.4-7 10-3.5-.6-7-5-7-10V6l7-3z" stroke="#0b8f76" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M9 12l2 2 4-4" stroke="#05664f" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div>
+        <h2 class="series-title">Series 11–20 — Negativity Se Overcome</h2>
+      </div>
+    </div>
+    <p class="series-intro">इस सीरीज़ का मकसद है negativity को पहचानना, boundaries बनाना और उसे positive energy में बदलना — ताकि आपकी inner strength और focus मजबूत रहे।</p>
+
     <div id="series2"></div>
-  </div>
+  </main>
 
   <footer>
     © 2025 Jeet S Singh — Discipline • Faith • Success
   </footer>
 
   <script>
+    // Load posts manifest and render into series containers
+    let allBlogs = [];
+
     async function loadBlogs(){
       try{
-        const res = await fetch("posts/posts.json");
-        const blogs = await res.json();
-
-        const series1 = document.getElementById("series1");
-        const series2 = document.getElementById("series2");
-
-        blogs.forEach(blog=>{
-          const card = document.createElement("div");
-          card.className = "blog-card";
-
-          const title = document.createElement("h3");
-          title.textContent = blog.title;
-          card.appendChild(title);
-
-          const sub = document.createElement("p");
-          sub.className = "sub";
-          sub.textContent = blog.preview;
-          card.appendChild(sub);
-
-          const btn = document.createElement("button");
-          btn.textContent = "Read More";
-          btn.onclick = async ()=>{
-            if(card.querySelector(".content")) {
-              card.querySelector(".content").remove();
-              btn.textContent = "Read More";
-              return;
-            }
-            const contentRes = await fetch(blog.file);
-            const contentHtml = await contentRes.text();
-            const contentDiv = document.createElement("div");
-            contentDiv.className = "content";
-            contentDiv.innerHTML = contentHtml;
-            card.appendChild(contentDiv);
-            btn.textContent = "Hide";
-          };
-          card.appendChild(btn);
-
-          if(blog.id <= 10){
-            series1.appendChild(card);
-          } else {
-            series2.appendChild(card);
-          }
-        });
-      } catch(e){
-        console.error("Error loading blogs:", e);
+        const res = await fetch('posts/posts.json', {cache: "no-store"});
+        allBlogs = await res.json();
+        renderBlogs(allBlogs);
+      } catch(err){
+        console.error("Failed to load posts.json", err);
+        document.getElementById('series1').innerHTML = '<p style="color:#b00">Unable to load blogs. Check posts/posts.json path.</p>';
       }
     }
+
+    function renderBlogs(data){
+      const s1 = document.getElementById('series1');
+      const s2 = document.getElementById('series2');
+      s1.innerHTML = ''; s2.innerHTML = '';
+
+      data.forEach(blog => {
+        const card = document.createElement('article');
+        card.className = 'blog-card';
+        card.setAttribute('data-title', blog.title.toLowerCase());
+        card.setAttribute('data-preview', blog.preview.toLowerCase());
+
+        // title
+        const h = document.createElement('h3');
+        h.textContent = blog.title;
+        card.appendChild(h);
+
+        // preview
+        const sub = document.createElement('p');
+        sub.className = 'sub';
+        sub.textContent = blog.preview;
+        card.appendChild(sub);
+
+        // meta row
+        const meta = document.createElement('div');
+        meta.className = 'blog-meta';
+
+        const readBtn = document.createElement('button');
+        readBtn.className = 'btn';
+        readBtn.textContent = 'Read More';
+        meta.appendChild(readBtn);
+
+        const authorPill = document.createElement('span');
+        authorPill.className = 'pill';
+        authorPill.textContent = blog.author || 'Jeet S Singh';
+        meta.appendChild(authorPill);
+
+        card.appendChild(meta);
+
+        // read/hide behavior
+        readBtn.addEventListener('click', async () => {
+          const existing = card.querySelector('.content');
+          if(existing){
+            existing.remove();
+            readBtn.textContent = 'Read More';
+            window.scrollTo({top: card.offsetTop - 80, behavior: 'smooth'});
+            return;
+          }
+          // fetch file and insert
+          try{
+            const res = await fetch(blog.file);
+            const html = await res.text();
+            const content = document.createElement('div');
+            content.className = 'content';
+            // wrap inner to avoid double htmldoc issues
+            content.innerHTML = `<div class="inner">${html}</div><p style="margin-top:8px;font-style:italic;color:#556">${blog.closing || '— Written by Jeet S Singh, author of \"Discipline Se Success Tak\"'}</p>`;
+            card.appendChild(content);
+            readBtn.textContent = 'Hide';
+            // scroll to content start
+            window.scrollTo({top: card.offsetTop - 80, behavior: 'smooth'});
+          } catch(e){
+            console.error('Failed to fetch blog file', e);
+            alert('Error loading article content.');
+          }
+        });
+
+        // append to correct series
+        if(blog.id && Number(blog.id) <= 10) s1.appendChild(card);
+        else s2.appendChild(card);
+      });
+    }
+
+    function filterBlogs(){
+      const q = document.getElementById('search').value.trim().toLowerCase();
+      if(!q) return renderBlogs(allBlogs);
+      const filtered = allBlogs.filter(b => (b.title + ' ' + b.preview).toLowerCase().includes(q));
+      renderBlogs(filtered);
+    }
+
+    // initial load
     loadBlogs();
   </script>
 </body>
