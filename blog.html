@@ -1,267 +1,105 @@
-<!doctype html>
+ <!doctype html>
 <html lang="hi">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Blogs — Discipline Se Success Tak</title>
-  <meta name="description" content="Series-wise blogs — load posts from files so editing is easy."/>
+  <meta name="description" content="Series-wise motivational blogs by Jeet S Singh — Discipline, Habits, Success & Negativity Se Overcome." />
   <style>
     :root{
       --accent:#0b8f76;
-      --accent-dark:#06664f;
+      --accent-dark:#064a3d;
       --muted:#6b7a75;
-      --bg:#f7fffb;
-      --card:#ffffff;
-      --text:#0d2b26;
-      --radius:12px;
-      --maxw:980px;
+      --bg:#ffffff;
+      --card:#f8fffc;
+      --text:#102c27;
+      --radius:14px;
+      --maxw:960px;
     }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter, 'Noto Sans Devanagari', system-ui, -apple-system, "Segoe UI", Roboto, Arial;background:linear-gradient(180deg,#f8fffb,#eef7f3);color:var(--text);-webkit-font-smoothing:antialiased}
-    .wrap{max-width:var(--maxw);margin:24px auto;padding:18px}
-    header{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap}
-    header h1{margin:0;font-size:20px;color:var(--accent-dark)}
-    .search{flex:1;min-width:220px}
-    .search input{width:100%;padding:12px 14px;border-radius:10px;border:1px solid #e4f3ec;background:#fff}
-    .series-panel{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
-    .series-btn{background:#e9fbf5;border-radius:10px;padding:10px 14px;border:1px solid #dff5ee;color:var(--accent-dark);cursor:pointer;font-weight:700}
-    .series-count{opacity:.7;margin-left:8px;font-weight:600}
-    .container{background:var(--card);padding:18px;border-radius:14px;box-shadow:0 12px 36px rgba(6,20,18,0.06);border:1px solid #e6f9f2}
-    .list{display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
-    .post-row{display:flex;gap:16px;align-items:flex-start;padding:12px;border-radius:10px;background:#fbfffc;border:1px solid #eef9f3}
-    .meta{flex-basis:320px;min-width:240px}
-    .meta h3{margin:0;font-size:16px;color:var(--accent-dark)}
-    .meta p{margin:10px 0 0;color:var(--muted);line-height:1.6}
-    .read-btn{display:inline-block;margin-top:10px;padding:8px 12px;background:var(--accent);color:#fff;border-radius:8px;text-decoration:none;font-weight:700;cursor:pointer;border:none}
-    .content-wrap{flex:1;min-width:220px}
-    .post-content{display:none;padding:14px;border-radius:10px;background:#ffffff;border:1px solid #eef8f6;box-shadow:0 6px 20px rgba(6,20,18,0.03)}
-    .post-content.open{display:block;border-left:4px solid var(--accent)}
-    .author{margin-top:14px;padding-top:10px;border-top:1px dashed #e6f3ee;color:var(--muted);font-size:14px}
-    .preview-note{color:var(--muted);font-size:13px;margin-top:14px}
-    footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
-    .no-posts{padding:14px;color:var(--muted)}
-    @media(min-width:900px){ .meta{flex-basis:360px} header h1{font-size:24px} }
+    html,body{margin:0;background:#f4f9f7;font-family:Inter,'Noto Sans Devanagari',system-ui; color:var(--text);}
+    header{background:#06493f;padding:14px 20px;text-align:center}
+    header h1{color:#fff;margin:0;font-size:22px}
+    .wrap{max-width:var(--maxw);margin:28px auto;padding:20px;}
+    h2.series-title{margin-top:40px;font-size:20px;color:var(--accent-dark);border-bottom:2px solid #e6f6f0;padding-bottom:6px}
+    .blog-card{background:var(--bg);margin:18px 0;padding:20px;border-radius:var(--radius);box-shadow:0 6px 18px rgba(0,0,0,0.06);border:1px solid #e7f6f2}
+    .blog-card h3{margin:0;font-size:18px;color:var(--accent-dark)}
+    .blog-card p.sub{margin:6px 0 12px;color:var(--muted);font-size:15px}
+    .blog-card button{background:var(--accent);color:#fff;border:none;padding:10px 14px;border-radius:8px;font-weight:600;cursor:pointer}
+    .blog-card button:hover{background:#056d59}
+    .content{display:none;margin-top:14px;font-size:15px;line-height:1.7;color:#123732}
+    footer{text-align:center;margin:40px 0;color:#777;font-size:14px}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <h1>Discipline Se Success Tak — Series-wise Blogs</h1>
-      <div class="search" aria-hidden="false">
-        <input id="searchInput" placeholder="Search titles / previews..." />
-      </div>
-    </header>
+  <header>
+    <h1>📚 Blogs — Discipline Se Success Tak</h1>
+  </header>
 
-    <div class="series-panel" id="seriesPanel">
-      <!-- series buttons injected here -->
-    </div>
+  <div class="wrap" id="blog-container">
+    <!-- Series 1–10 -->
+    <h2 class="series-title">Series 1–10 — Discipline Se Success Tak</h2>
+    <div id="series1"></div>
 
-    <div class="container" id="mainContainer">
-      <div id="postsList" class="list" aria-live="polite"></div>
-      <div class="preview-note" id="emptyNote">बाएँ से series चुनें — पोस्ट नीचे inline खुलकर दिखेगी।</div>
-    </div>
-
-    <footer>© 2025 Jeet S Singh — Discipline • Faith • Success</footer>
+    <!-- Series 11–20 -->
+    <h2 class="series-title">Series 11–20 — Negativity Se Overcome</h2>
+    <div id="series2"></div>
   </div>
 
-<script>
-/*
-  Expected supporting file: posts/posts.json
-  Format: an array of objects:
-  [
-    {
-      "id": 11,
-      "series": 2,
-      "title": "Blog 11 — Negativity को Identify करो",
-      "preview": "Problem का पहला solution है उसे पहचानना।",
-      "file": "posts/blog11.html"
-    },
-    ...
-  ]
-  (file points to the relative path of the HTML content)
-*/
+  <footer>
+    © 2025 Jeet S Singh — Discipline • Faith • Success
+  </footer>
 
-const seriesPanel = document.getElementById('seriesPanel');
-const postsList = document.getElementById('postsList');
-const searchInput = document.getElementById('searchInput');
-const emptyNote = document.getElementById('emptyNote');
+  <script>
+    async function loadBlogs(){
+      try{
+        const res = await fetch("posts/posts.json");
+        const blogs = await res.json();
 
-let posts = [];         // will hold posts.json content
-let seriesMap = {};     // id => {label, ids...}
+        const series1 = document.getElementById("series1");
+        const series2 = document.getElementById("series2");
 
-/* fetch posts metadata on load */
-async function loadPostsMeta(){
-  try{
-    const res = await fetch('posts/posts.json', {cache: "no-store"});
-    if(!res.ok) throw new Error('posts.json not found');
-    posts = await res.json();
-    // build seriesMap (group by series)
-    seriesMap = {};
-    posts.forEach(p=>{
-      const s = p.series || 1;
-      if(!seriesMap[s]) seriesMap[s] = {id:s, label:`Series ${s*10-9}–${s*10}`, posts:[]};
-      seriesMap[s].posts.push(p);
-    });
-    renderSeriesButtons();
-  }catch(err){
-    postsList.innerHTML = `<div class="no-posts">Error loading posts metadata. Ensure <code>posts/posts.json</code> exists and is valid JSON.</div>`;
-    console.error(err);
-  }
-}
+        blogs.forEach(blog=>{
+          const card = document.createElement("div");
+          card.className = "blog-card";
 
-function renderSeriesButtons(){
-  seriesPanel.innerHTML = '';
-  // sort by series id
-  const keys = Object.keys(seriesMap).map(Number).sort((a,b)=>a-b);
-  keys.forEach(k=>{
-    const s = seriesMap[k];
-    const btn = document.createElement('button');
-    btn.className = 'series-btn';
-    btn.textContent = s.label;
-    const span = document.createElement('span');
-    span.className = 'series-count';
-    span.textContent = `(${s.posts.length})`;
-    btn.appendChild(span);
-    btn.addEventListener('click', ()=> renderPostsForSeries(k));
-    seriesPanel.appendChild(btn);
-  });
-}
+          const title = document.createElement("h3");
+          title.textContent = blog.title;
+          card.appendChild(title);
 
-/* render posts list for a series */
-function renderPostsForSeries(seriesId, filterText=''){
-  postsList.innerHTML = '';
-  emptyNote.style.display = 'none';
-  const s = seriesMap[seriesId];
-  if(!s || !s.posts.length){
-    postsList.innerHTML = '<div class="no-posts">No posts found in this series.</div>';
-    return;
-  }
-  let list = s.posts.slice();
-  if(filterText){
-    const t = filterText.toLowerCase();
-    list = list.filter(p=> (p.title||'').toLowerCase().includes(t) || (p.preview||'').toLowerCase().includes(t) );
-  }
-  if(list.length===0){
-    postsList.innerHTML = '<div class="no-posts">कोई पोस्ट नहीं मिली।</div>';
-    return;
-  }
+          const sub = document.createElement("p");
+          sub.className = "sub";
+          sub.textContent = blog.preview;
+          card.appendChild(sub);
 
-  list.forEach(p=>{
-    const row = document.createElement('div');
-    row.className = 'post-row';
-    row.innerHTML = `
-      <div class="meta">
-        <h3>${escapeHtml(p.title)}</h3>
-        <p>${escapeHtml(p.preview || '')}</p>
-        <div style="margin-top:10px;color:var(--muted);font-size:12px">ID: ${p.id} — File: ${p.file ? p.file : 'inline'}</div>
-        <button class="read-btn" data-id="${p.id}">Read</button>
-      </div>
-      <div class="content-wrap">
-        <div class="post-content" id="content-${p.id}" aria-live="polite"></div>
-      </div>
-    `;
-    postsList.appendChild(row);
+          const btn = document.createElement("button");
+          btn.textContent = "Read More";
+          btn.onclick = async ()=>{
+            if(card.querySelector(".content")) {
+              card.querySelector(".content").remove();
+              btn.textContent = "Read More";
+              return;
+            }
+            const contentRes = await fetch(blog.file);
+            const contentHtml = await contentRes.text();
+            const contentDiv = document.createElement("div");
+            contentDiv.className = "content";
+            contentDiv.innerHTML = contentHtml;
+            card.appendChild(contentDiv);
+            btn.textContent = "Hide";
+          };
+          card.appendChild(btn);
 
-    const btn = row.querySelector('.read-btn');
-    const contentEl = row.querySelector('.post-content');
-
-    btn.addEventListener('click', async ()=>{
-      // toggle close if open
-      if(contentEl.classList.contains('open')){
-        contentEl.classList.remove('open');
-        contentEl.innerHTML = '';
-        btn.textContent = 'Read';
-        return;
+          if(blog.id <= 10){
+            series1.appendChild(card);
+          } else {
+            series2.appendChild(card);
+          }
+        });
+      } catch(e){
+        console.error("Error loading blogs:", e);
       }
-
-      // close other open contents
-      document.querySelectorAll('.post-content.open').forEach(c=>{
-        c.classList.remove('open'); c.innerHTML='';
-        const rid = c.id.replace('content-','');
-        const rb = document.querySelector(`.read-btn[data-id="${rid}"]`);
-        if(rb) rb.textContent='Read';
-      });
-
-      // load file
-      if(p.file){
-        try{
-          const res = await fetch(p.file);
-          if(!res.ok) throw new Error('file not found');
-          const html = await res.text();
-          contentEl.innerHTML = html;
-        }catch(e){
-          contentEl.innerHTML = '<p style="color:#a33">Content load failed. Check file path.</p>';
-          console.error(e);
-        }
-      } else if(p.content){
-        // fallback if someone accidentally put content in JSON (not recommended)
-        contentEl.innerHTML = p.content;
-      } else {
-        contentEl.innerHTML = '<p style="color:var(--muted)">Content not available.</p>';
-      }
-
-      // ensure author line exists exactly once
-      if(!contentEl.querySelector('.author')){
-        const d = document.createElement('div');
-        d.className = 'author';
-        d.innerHTML = '✍️ Written by Jeet S Singh — Author of <a href="https://www.amazon.in/s?k=Discipline+Se+Success+Tak" target="_blank" rel="noopener">Discipline Se Success Tak</a>';
-        contentEl.appendChild(d);
-      }
-
-      contentEl.classList.add('open');
-      btn.textContent = 'Close';
-      // smooth scroll top of content into view
-      contentEl.scrollIntoView({behavior:'smooth', block:'center'});
-    });
-  });
-}
-
-/* search across all posts */
-searchInput.addEventListener('input', ()=>{
-  const q = searchInput.value.trim();
-  if(!q){
-    postsList.innerHTML = ''; emptyNote.style.display='block'; return;
-  }
-  postsList.innerHTML = ''; emptyNote.style.display='none';
-  const t = q.toLowerCase();
-  const list = posts.filter(p=> (p.title||'').toLowerCase().includes(t) || (p.preview||'').toLowerCase().includes(t));
-  if(list.length===0){ postsList.innerHTML = '<div class="no-posts">कोई पोस्ट नहीं मिली।</div>'; return; }
-  // render search results (like renderPostsForSeries)
-  list.forEach(p=>{
-    const row = document.createElement('div');
-    row.className = 'post-row';
-    row.innerHTML = `
-      <div class="meta">
-        <h3>${escapeHtml(p.title)}</h3>
-        <p>${escapeHtml(p.preview || '')}</p>
-        <div style="margin-top:10px;color:var(--muted);font-size:12px">Series: ${p.series} — ID: ${p.id}</div>
-        <button class="read-btn" data-id="${p.id}">Read</button>
-      </div>
-      <div class="content-wrap">
-        <div class="post-content" id="content-${p.id}" aria-live="polite"></div>
-      </div>
-    `;
-    postsList.appendChild(row);
-    const btn = row.querySelector('.read-btn');
-    const contentEl = row.querySelector('.post-content');
-    btn.addEventListener('click', async ()=>{
-      if(contentEl.classList.contains('open')){ contentEl.classList.remove('open'); contentEl.innerHTML=''; btn.textContent='Read'; return; }
-      document.querySelectorAll('.post-content.open').forEach(c=>{c.classList.remove('open'); c.innerHTML=''; const rid=c.id.replace('content-',''); const rb=document.querySelector(`.read-btn[data-id="${rid}"]`); if(rb) rb.textContent='Read';});
-      if(p.file){ try{ const res = await fetch(p.file); if(!res.ok) throw new Error('file not found'); contentEl.innerHTML = await res.text(); }catch(e){ contentEl.innerHTML = '<p style="color:#a33">Content load failed.</p>'; console.error(e); } }
-      else if(p.content) contentEl.innerHTML = p.content;
-      else contentEl.innerHTML = '<p style="color:var(--muted)">Content not available.</p>';
-      if(!contentEl.querySelector('.author')){ const d=document.createElement('div'); d.className='author'; d.innerHTML='✍️ Written by Jeet S Singh — Author of <a href="https://www.amazon.in/s?k=Discipline+Se+Success+Tak" target="_blank" rel="noopener">Discipline Se Success Tak</a>'; contentEl.appendChild(d); }
-      contentEl.classList.add('open'); btn.textContent='Close'; contentEl.scrollIntoView({behavior:'smooth', block:'center'});
-    });
-  });
-});
-
-/* small helper */
-function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
-
-/* init */
-loadPostsMeta();
-
-</script>
+    }
+    loadBlogs();
+  </script>
 </body>
 </html>
