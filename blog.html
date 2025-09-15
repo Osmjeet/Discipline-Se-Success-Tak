@@ -4,67 +4,89 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Blogs — Discipline Se Success Tak</title>
-  <meta name="description" content="Read inspiring blogs from Jeet S Singh — discipline, habits, time management, self-belief, patience, and overcoming negativity.">
+  <meta name="description" content="Series-wise blogs by Jeet S Singh — discipline, habits, overcoming negativity and practical action steps." />
   <style>
-    body{margin:0;font-family:Georgia,serif;background:#fdfdfd;color:#222;line-height:1.7;}
-    header{background:#06493f;padding:14px 20px;}
-    nav{max-width:1000px;margin:auto;display:flex;gap:20px;align-items:center;}
-    nav a{color:#fff;text-decoration:none;font-weight:600;font-size:15px;}
-    nav a:hover{text-decoration:underline;}
-    .search-box{margin-left:auto;display:flex;gap:6px;}
-    .search-box input{padding:6px 8px;border-radius:6px;border:none;outline:none;font-size:14px;}
-    .search-box button{padding:6px 10px;background:#078a72;color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:600;}
-    .search-box button:hover{background:#056d59;}
-    main{max-width:900px;margin:32px auto;padding:0 20px;}
-    h1{text-align:center;color:#06493f;font-size:32px;margin-bottom:24px;}
-    .blog-card{background:#fff;padding:22px;margin:18px 0;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.07);}
-    .blog-card h2{margin:0;font-size:20px;color:#05584a;}
-    .blog-card p{margin:12px 0;font-size:16px;color:#333;}
-    .read-more{color:#078a72;font-weight:600;text-decoration:none;cursor:pointer;font-size:15px;}
-    .full-content{display:none;margin-top:12px;color:#222;}
-    footer{text-align:center;margin:40px 0;color:#666;font-size:14px;}
+    :root{
+      --brand:#06493f;
+      --accent:#078a72;
+      --muted:#577368;
+      --card:#ffffff;
+      --bg:#f6fbf9;
+      --radius:12px;
+      --container:980px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:"Noto Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:var(--bg); color:#123; -webkit-font-smoothing:antialiased;}
+    header{background:var(--brand);color:#fff;padding:12px 16px;position:sticky;top:0;z-index:40;box-shadow:0 2px 6px rgba(6,20,18,0.06);}
+    .nav{max-width:var(--container);margin:0 auto;display:flex;align-items:center;gap:18px;}
+    .brand{font-weight:700;font-size:18px;}
+    .nav a{color:#fff;text-decoration:none;font-weight:600;}
+    .nav a:hover{text-decoration:underline}
+    .search-wrap{margin-left:auto;display:flex;gap:8px;align-items:center;}
+    .search-wrap input{padding:8px 10px;border-radius:10px;border:none;min-width:180px}
+    .search-wrap button{background:var(--accent);color:#fff;border:none;padding:8px 12px;border-radius:10px;font-weight:700;cursor:pointer}
+    main{max-width:var(--container);margin:26px auto;padding:0 16px;}
+    h1{color:var(--brand);font-size:26px;margin:6px 0 18px}
+    .overview{background:#fff;padding:18px;border-radius:var(--radius);box-shadow:0 8px 20px rgba(6,20,18,0.05);margin-bottom:18px}
+    .series-list{display:flex;flex-direction:column;gap:10px}
+    .series-item{display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:12px;background:linear-gradient(180deg,#f7fffb,#ffffff);border:1px solid #e6f7f1;cursor:pointer}
+    .series-item .left{display:flex;gap:12px;align-items:center}
+    .series-count{color:var(--muted);font-weight:700}
+    .series-content{margin-top:14px;display:none;gap:14px;flex-direction:column}
+    .post-row{display:flex;gap:18px;align-items:flex-start;padding:14px;border-radius:12px;background:var(--card);border:1px solid #eef7f4}
+    .post-meta{width:42%;min-width:220px}
+    .post-title{font-size:18px;color:var(--brand);margin:0 0 8px}
+    .post-preview{color:#3b4f49;margin:0;font-size:15px}
+    .read-btn{display:inline-block;margin-top:10px;padding:8px 14px;background:var(--accent);color:#fff;border-radius:10px;font-weight:700;text-decoration:none;cursor:pointer}
+    .post-body{flex:1;padding:8px 12px;max-height:none}
+    .post-body .content{display:none}
+    .post-body .content.open{display:block}
+    .post-footer{margin-top:12px;color:var(--muted);font-size:14px}
+    .small{font-size:13px;color:var(--muted)}
+    footer{max-width:var(--container);margin:30px auto 60px;text-align:center;color:var(--muted)}
+    /* responsive */
+    @media(max-width:900px){
+      .post-row{flex-direction:column}
+      .post-meta{width:100%}
+    }
   </style>
 </head>
 <body>
-
-  <!-- NAVIGATION -->
   <header>
-    <nav>
+    <div class="nav" role="navigation" aria-label="main nav">
+      <div class="brand">📚 Discipline Se Success Tak</div>
       <a href="index.html">🏠 Home</a>
       <a href="author.html">👤 Author</a>
-      <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Search blogs..." onkeyup="searchBlogs()" />
-        <button onclick="searchBlogs()">🔍</button>
+      <a href="ebook.html">📘 Free eBook</a>
+
+      <div class="search-wrap" title="Search">
+        <input id="q" placeholder="Search blogs by title or preview..." aria-label="Search blogs" />
+        <button id="qbtn">🔍</button>
       </div>
-    </nav>
+    </div>
   </header>
 
   <main>
-    <h1>📚 Blogs</h1>
+    <h1>Series-wise Blogs — Click series to expand</h1>
 
-    <!-- BLOG TEMPLATE -->
-    <div class="blog-card">
-      <h2>Blog 1: Discipline ही असली Superpower</h2>
-      <p class="preview">Talent आपको शुरुआत दिला सकता है, लेकिन discipline ही आपको मंज़िल तक ले जाता है...</p>
-      <span class="read-more" onclick="toggleContent(this)">Read More</span>
-      <div class="full-content">
-        <p>यहाँ पूरा content आएगा Blog 1 का...</p>
-        <p><em>— Written by Jeet S Singh</em></p>
+    <section class="overview" aria-labelledby="series-heading">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;gap:12px;align-items:center">
+          <strong style="font-size:16px;color:#234841">Series</strong>
+        </div>
+
+        <div id="seriesContainer" class="series-list">
+          <!-- series populated by JS -->
+          <div class="small">Loading posts…</div>
+        </div>
       </div>
+    </section>
+
+    <div id="postsArea" style="margin-top:18px">
+      <!-- Expanded post content appears inline here when user clicks Read -->
     </div>
 
-    <div class="blog-card">
-      <h2>Blog 2: Motivation vs Discipline</h2>
-      <p class="preview">Motivation एक spark है, लेकिन discipline वो engine है जो आपको हर दिन आगे बढ़ाता है...</p>
-      <span class="read-more" onclick="toggleContent(this)">Read More</span>
-      <div class="full-content">
-        <p>यहाँ पूरा content आएगा Blog 2 का...</p>
-        <p><em>— Written by Jeet S Singh</em></p>
-      </div>
-    </div>
-
-    <!-- इसी तरह Blog 3–20 तक add करना है -->
-
+    <div style="height:12px"></div>
   </main>
 
   <footer>
@@ -72,32 +94,218 @@
   </footer>
 
   <script>
-    function toggleContent(btn){
-      const content = btn.nextElementSibling;
-      if(content.style.display==="block"){
-        content.style.display="none";
-        btn.textContent="Read More";
+    // CONFIG
+    const POSTS_JSON = '/posts.json'; // make sure this exists in repo root
+    const POSTS_PATH = '/posts/';     // post files live in posts/*.html
+
+    // STATE
+    let posts = []; // loaded posts array
+    let groups = {}; // series groups
+    let seriesOrder = []; // order of series keys
+
+    // UTIL
+    const el = (sel, ctx=document) => ctx.querySelector(sel);
+    const elAll = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
+
+    async function init(){
+      try {
+        const r = await fetch(POSTS_JSON, {cache: "no-store"});
+        if(!r.ok) throw new Error('posts.json not found or network error');
+        posts = await r.json(); // expected array of posts objects
+        /*
+          expected each post object minimal:
+          {
+            "id": 11,
+            "title": "Blog 11 — Negativity ko Identify karo",
+            "preview": "Problem का पहला solution है उसे पहचानना। ...",
+            "series": "Series 11–20",
+            "file": "posts/blog11.html"
+          }
+        */
+        if(!Array.isArray(posts)) throw new Error('posts.json must be an array');
+        buildGroups();
+        renderSeriesList();
+      } catch(err){
+        document.getElementById('seriesContainer').innerHTML = '<div style="color:#c23">Unable to load blogs. Check posts.json path.</div>';
+        console.error(err);
+      }
+    }
+
+    function buildGroups(){
+      groups = {};
+      seriesOrder = [];
+      posts.forEach(p => {
+        const s = p.series || 'Uncategorized';
+        if(!groups[s]){ groups[s]=[]; seriesOrder.push(s); }
+        groups[s].push(p);
+      });
+      // sort posts inside group by id ascending
+      seriesOrder.forEach(s => groups[s].sort((a,b)=> (a.id||0)-(b.id||0)));
+    }
+
+    function renderSeriesList(){
+      const container = document.getElementById('seriesContainer');
+      container.innerHTML = '';
+      seriesOrder.forEach(seriesName => {
+        const items = groups[seriesName] || [];
+        const serWrap = document.createElement('div');
+        serWrap.className = 'series-block';
+        serWrap.innerHTML = `
+          <div class="series-item" role="button" tabindex="0">
+            <div class="left">
+              <div style="width:36px;height:36px;border-radius:8px;background:#f0fff9;border:1px solid #e2f6ee;display:flex;align-items:center;justify-content:center;color:#056d59">📑</div>
+              <div>
+                <div style="font-weight:700">${seriesName}</div>
+                <div class="small" style="margin-top:4px;color:var(--muted)">${items[0]?.seriesDescription || ''}</div>
+              </div>
+            </div>
+            <div class="series-count">${items.length ? '('+items.length+')' : '(0)'}</div>
+          </div>
+          <div class="series-content" aria-hidden="true"></div>
+        `;
+        container.appendChild(serWrap);
+
+        const btn = serWrap.querySelector('.series-item');
+        const content = serWrap.querySelector('.series-content');
+        // populate content with posts preview
+        content.innerHTML = items.map(p => {
+          return `
+            <div class="post-row" data-id="${p.id}">
+              <div class="post-meta">
+                <div class="post-title">${escapeHtml(p.title)}</div>
+                <p class="post-preview">${escapeHtml(p.preview || '')}</p>
+                <div style="margin-top:8px">
+                  <button class="read-btn" data-file="${escapeHtml(p.file)}">Read</button>
+                </div>
+              </div>
+              <div class="post-body">
+                <div class="content" data-loaded="false" id="post-content-${p.id}">
+                  <!-- loaded content will be inserted here -->
+                </div>
+                <div class="post-footer small">ID: ${p.id} — File: ${p.file}</div>
+              </div>
+            </div>
+          `;
+        }).join('');
+        // toggle series
+        btn.addEventListener('click', ()=> toggleSeries(content));
+        btn.addEventListener('keyup', (e)=>{ if(e.key==='Enter') toggleSeries(content) });
+        // attach read handlers
+        content.querySelectorAll('.read-btn').forEach(b=>{
+          b.addEventListener('click', onReadClick);
+        });
+      });
+    }
+
+    function toggleSeries(contentEl){
+      const open = contentEl.style.display === 'flex';
+      // close all
+      document.querySelectorAll('.series-content').forEach(c=> c.style.display = 'none');
+      if(!open){
+        contentEl.style.display = 'flex';
+        contentEl.style.flexDirection = 'column';
       } else {
-        content.style.display="block";
-        btn.textContent="Read Less";
+        contentEl.style.display = 'none';
       }
     }
 
-    function searchBlogs(){
-      const input = document.getElementById("searchInput").value.toLowerCase();
-      const cards = document.getElementsByClassName("blog-card");
+    async function onReadClick(e){
+      const btn = e.currentTarget;
+      const file = btn.dataset.file;
+      const row = btn.closest('.post-row');
+      const id = row.dataset.id;
+      const contentBox = document.getElementById('post-content-'+id);
 
-      for(let i=0; i<cards.length; i++){
-        const title = cards[i].getElementsByTagName("h2")[0].innerText.toLowerCase();
-        const preview = cards[i].getElementsByClassName("preview")[0].innerText.toLowerCase();
+      // if already open, close it
+      const wasOpen = contentBox.classList.contains('open');
+      closeAllOpenPosts();
+      if(wasOpen){
+        return; // now closed
+      }
 
-        if(title.includes(input) || preview.includes(input)){
-          cards[i].style.display = "block";
+      // show loading placeholder
+      contentBox.innerHTML = '<div style="padding:14px;color:var(--muted)">Loading post…</div>';
+      contentBox.classList.add('open');
+      // fetch post html
+      try {
+        const res = await fetch(file, {cache:"no-store"});
+        if(!res.ok) throw new Error('Post file not found: ' + file);
+        let text = await res.text();
+        // insert post content — ensure single "Written by Jeet S Singh" at end
+        // If the loaded HTML includes full page, try to extract main content heuristically.
+        const extracted = extractMainFromHTML(text) || text;
+        // Append written by only once (if not present)
+        if(!/Written by Jeet S Singh/i.test(extracted)){
+          text = extracted + `<p style="margin-top:14px"><em>— Written by Jeet S Singh</em></p>`;
         } else {
-          cards[i].style.display = "none";
+          text = extracted;
         }
+        contentBox.innerHTML = text;
+        // scroll the post-row into view smoothly
+        row.scrollIntoView({behavior:'smooth', block:'start'});
+      } catch(err){
+        contentBox.innerHTML = `<div style="padding:14px;color:#c23">Unable to load post. Check file path.</div>`;
+        console.error(err);
       }
     }
+
+    function closeAllOpenPosts(){
+      document.querySelectorAll('.post-body .content.open').forEach(c=>{
+        c.classList.remove('open'); 
+        c.style.display = 'none';
+        c.dataset.loaded = 'false';
+      });
+      // also collapse all content boxes (we will use class open when showing)
+      document.querySelectorAll('.post-body .content').forEach(cb=>{
+        cb.classList.remove('open');
+        cb.style.display = '';
+      });
+    }
+
+    // search
+    document.getElementById('qbtn').addEventListener('click', search);
+    document.getElementById('q').addEventListener('input', debounce(search, 220));
+
+    function search(){
+      const q = document.getElementById('q').value.trim().toLowerCase();
+      // loop through post rows, filter by title or preview
+      document.querySelectorAll('.post-row').forEach(row=>{
+        const title = (row.querySelector('.post-title')?.innerText || '').toLowerCase();
+        const preview = (row.querySelector('.post-preview')?.innerText || '').toLowerCase();
+        const visible = !q || title.includes(q) || preview.includes(q);
+        row.style.display = visible ? '' : 'none';
+      });
+      // If search is active, expand series that have any visible posts
+      document.querySelectorAll('.series-block').forEach(block=>{
+        const content = block.querySelector('.series-content');
+        if(!content) return;
+        const anyVisible = Array.from(content.querySelectorAll('.post-row')).some(r => r.style.display !== 'none');
+        content.style.display = anyVisible ? 'flex' : 'none';
+      });
+    }
+
+    // small helpers
+    function escapeHtml(s){ if(!s) return ''; return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
+    function debounce(fn, ms=200){ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), ms); } }
+
+    // Try to extract main fragment from fetched HTML (handles pages where you wrapped content in <main> or <article>)
+    function extractMainFromHTML(html){
+      // create DOMParser
+      try{
+        const parser = new DOMParser();
+        const d = parser.parseFromString(html, 'text/html');
+        const selectors = ['article','main','.post','.content','.author-card'];
+        for(const s of selectors){
+          const node = d.querySelector(s);
+          if(node) return node.innerHTML;
+        }
+        // fallback: body inner
+        return d.body.innerHTML;
+      }catch(e){ return html; }
+    }
+
+    // init on load
+    window.addEventListener('load', init);
   </script>
 </body>
 </html>
