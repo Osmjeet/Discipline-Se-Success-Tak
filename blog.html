@@ -3,266 +3,98 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Blogs — Discipline Se Success Tak</title>
-  <meta name="description" content="Series-wise blogs by Jeet S Singh — discipline, habits, overcoming negativity and practical action steps." />
+  <title>Blogs — Jeet S Singh (Author of Discipline Se Success Tak)</title>
+  <meta name="description" content="Read inspiring blogs by Jeet S Singh, Author of 'Discipline Se Success Tak'. Learn about discipline, success, motivation and daily habits." />
+  <link rel="canonical" href="https://discipline-se-success-tak.vercel.app/blog.html" />
+
   <style>
-    :root{
-      --brand:#06493f;
-      --accent:#078a72;
-      --muted:#577368;
-      --card:#ffffff;
-      --bg:#f6fbf9;
-      --radius:12px;
-      --container:980px;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:"Noto Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:var(--bg); color:#123; -webkit-font-smoothing:antialiased;}
-    header{background:var(--brand);color:#fff;padding:12px 16px;position:sticky;top:0;z-index:40;box-shadow:0 2px 6px rgba(6,20,18,0.06);}
-    .nav{max-width:var(--container);margin:0 auto;display:flex;align-items:center;gap:18px;}
-    .brand{font-weight:700;font-size:18px;}
-    .nav a{color:#fff;text-decoration:none;font-weight:600;}
-    .nav a:hover{text-decoration:underline}
-    .search-wrap{margin-left:auto;display:flex;gap:8px;align-items:center;}
-    .search-wrap input{padding:8px 10px;border-radius:10px;border:none;min-width:180px}
-    .search-wrap button{background:var(--accent);color:#fff;border:none;padding:8px 12px;border-radius:10px;font-weight:700;cursor:pointer}
-    main{max-width:var(--container);margin:26px auto;padding:0 16px;}
-    h1{color:var(--brand);font-size:26px;margin:6px 0 18px}
-    .overview{background:#fff;padding:18px;border-radius:var(--radius);box-shadow:0 8px 20px rgba(6,20,18,0.05);margin-bottom:18px}
-    .series-block{margin-top:18px}
-    .series-header{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-radius:10px;background:linear-gradient(180deg,#f7fffb,#ffffff);border:1px solid #e6f7f1}
-    .series-title{font-weight:800;color:var(--brand);font-size:16px}
-    .series-note{color:var(--muted);font-size:13px}
-    .cards-row{display:flex;gap:12px;overflow:auto;padding:14px 6px}
-    .card{min-width:260px;max-width:320px;background:var(--card);border-radius:10px;padding:12px;border:1px solid #eef7f4;box-shadow:0 8px 20px rgba(6,20,18,0.03);flex:0 0 auto}
-    .card h3{margin:0 0 8px;font-size:16px;color:var(--brand)}
-    .card p{margin:0;color:#344f48;font-size:14px;line-height:1.5}
-    .card .meta{margin-top:10px;display:flex;justify-content:space-between;align-items:center}
-    .read-btn{background:var(--accent);color:#fff;border:none;padding:8px 12px;border-radius:10px;font-weight:700;cursor:pointer}
-    /* area where expanded post will be injected */
-    .expanded-area{margin-top:10px;padding:16px;border-radius:10px;background:#fff;border:1px solid #e9f7f2;box-shadow:0 8px 20px rgba(6,20,18,0.03)}
-    .small{font-size:13px;color:var(--muted)}
-    footer{max-width:var(--container);margin:30px auto 60px;text-align:center;color:var(--muted)}
-    /* responsive */
-    @media(max-width:900px){
-      .cards-row{padding-left:6px}
-      .card{min-width:220px}
-    }
+    body{margin:0;font-family:Inter,Roboto,Arial;background:#f9fbfa;color:#102827;line-height:1.7}
+    .wrap{max-width:900px;margin:0 auto;padding:28px}
+    h1{text-align:center;color:#06493f;margin:28px 0}
+    h2{color:#0a3d36;margin-top:0;margin-bottom:12px}
+    p{margin-bottom:14px;font-size:1.05rem}
+    .blog{margin-bottom:34px;padding:22px;background:#fff;border-radius:14px;box-shadow:0 4px 14px rgba(0,0,0,0.08)}
+    .blog .full{display:none;margin-top:12px}
+    .author{margin-top:18px;padding-top:12px;border-top:1px solid #e0eceb;font-size:0.95rem;color:#333}
+    .author strong{color:#06493f}
+    .btn{display:inline-block;margin-top:8px;padding:8px 14px;border-radius:8px;background:#0bb39a;color:#fff;font-weight:600;text-decoration:none;cursor:pointer}
+    footer{text-align:center;margin-top:28px;padding:16px;font-size:0.9rem;color:#666}
+
+    /* Navigation */
+    nav{background:#06493f;padding:14px 20px}
+    nav .menu{max-width:900px;margin:auto;display:flex;gap:20px;flex-wrap:wrap}
+    nav a{color:#fff;text-decoration:none;font-weight:600}
+    nav a:hover{text-decoration:underline}
+    @media(max-width:600px){nav .menu{flex-direction:column;gap:10px}}
   </style>
 </head>
 <body>
-  <header>
-    <div class="nav" role="navigation" aria-label="main nav">
-      <div class="brand">📚 Discipline Se Success Tak</div>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="menu">
       <a href="index.html">🏠 Home</a>
       <a href="author.html">👤 Author</a>
-      <a href="ebook.html">📘 Free eBook</a>
-
-      <div class="search-wrap" title="Search">
-        <input id="q" placeholder="Search blogs by title or preview..." aria-label="Search blogs" />
-        <button id="qbtn">🔍</button>
-      </div>
+      <a href="blog.html">📝 Blogs</a>
     </div>
-  </header>
+  </nav>
 
-  <main>
-    <h1>Series-wise Blogs</h1>
-
-    <section class="overview" aria-labelledby="series-heading">
-      <div>
-        <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
-          <strong style="font-size:15px;color:#234841">Available Series</strong>
-          <div class="small" style="margin-left:10px;color:var(--muted)">Click "Read" on a card to open that post inline</div>
-        </div>
-
-        <div id="seriesContainer">
-          <!-- series will be injected here by JS -->
-          <div class="small">Loading posts…</div>
-        </div>
-      </div>
-    </section>
-
-    <div id="debug" style="display:none"></div>
-  </main>
+  <div class="wrap">
+    <h1>📖 Blogs by Jeet S Singh</h1>
+    <div id="blog-list">Loading blogs...</div>
+  </div>
 
   <footer>
-    © 2025 Jeet S Singh — Discipline • Faith • Success
+    © 2025 Jeet S Singh — Author of 
+    <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">“Discipline Se Success Tak”</a>
   </footer>
 
   <script>
-    // CONFIG
-    const POSTS_JSON = '/posts.json'; // ensure posts.json exists at repo root
-    // STATE
-    let posts = [];
-    let groups = {};
-    let order = [];
-
-    // DOM helpers
-    const $ = (s, ctx=document) => ctx.querySelector(s);
-    const $$ = (s, ctx=document) => Array.from(ctx.querySelectorAll(s));
-
-    async function init(){
+    async function loadBlogs(){
       try {
-        const resp = await fetch(POSTS_JSON, {cache:'no-store'});
-        if(!resp.ok) throw new Error('Cannot fetch posts.json');
-        posts = await resp.json();
-        if(!Array.isArray(posts)) throw new Error('posts.json must be an array');
-        buildGroups();
-        renderSeries();
-        attachSearch();
-      } catch(err){
-        document.getElementById('seriesContainer').innerHTML = `<div style="color:#c23">Unable to load blogs. Check posts.json path.</div>`;
-        console.error(err);
-      }
-    }
+        const res = await fetch('posts.json');
+        const posts = await res.json();
+        const list = document.getElementById('blog-list');
+        list.innerHTML = '';
 
-    function buildGroups(){
-      groups = {};
-      order = [];
-      posts.forEach(p=>{
-        const s = p.series || 'Uncategorized';
-        if(!groups[s]){ groups[s]=[]; order.push(s); }
-        groups[s].push(p);
-      });
-      // sort by id
-      for(const s of order) groups[s].sort((a,b)=>(a.id||0)-(b.id||0));
-    }
-
-    function renderSeries(){
-      const container = document.getElementById('seriesContainer');
-      container.innerHTML = '';
-      order.forEach(seriesName => {
-        const items = groups[seriesName];
-        const seriesEl = document.createElement('div');
-        seriesEl.className = 'series-block';
-        seriesEl.innerHTML = `
-          <div class="series-header">
-            <div>
-              <div class="series-title">${escape(seriesName)}</div>
-              <div class="series-note">${escape(items[0]?.seriesDescription || '')}</div>
-            </div>
-            <div class="small">(${items.length})</div>
-          </div>
-          <div class="cards-row" role="list"></div>
-          <div class="expanded-area" data-series="${escape(seriesName)}" style="display:none"></div>
-        `;
-        container.appendChild(seriesEl);
-        const row = seriesEl.querySelector('.cards-row');
-        const expandedArea = seriesEl.querySelector('.expanded-area');
-
-        items.forEach(p => {
+        for (let post of posts){
           const card = document.createElement('div');
-          card.className = 'card';
-          card.setAttribute('role','listitem');
+          card.className = 'blog';
+
           card.innerHTML = `
-            <h3>${escape(p.title)}</h3>
-            <p>${escape(p.preview || '')}</p>
-            <div class="meta">
-              <div class="small">ID: ${p.id}</div>
-              <button class="read-btn" data-file="${escape(p.file)}" data-id="${p.id}">Read</button>
-            </div>
+            <h2>${post.title}</h2>
+            <p>${post.preview}</p>
+            <button class="btn" onclick="toggleFull(this)">Read More</button>
+            <div class="full"></div>
           `;
-          row.appendChild(card);
-          const btn = card.querySelector('.read-btn');
-          btn.addEventListener('click', async (e)=>{
-            await openPostInline(seriesName, p, expandedArea);
-          });
-        });
-      });
-    }
 
-    // open post html into expanded area below the series
-    async function openPostInline(seriesName, post, expandedArea){
-      // toggle: if already open same post => close
-      if(expandedArea.dataset.openFor == post.id){
-        expandedArea.style.display = 'none';
-        expandedArea.innerHTML = '';
-        expandedArea.dataset.openFor = '';
-        return;
-      }
-      // close any other expanded areas
-      document.querySelectorAll('.expanded-area').forEach(a=>{
-        a.style.display = 'none'; a.innerHTML=''; a.dataset.openFor='';
-      });
-      // show loading
-      expandedArea.style.display = 'block';
-      expandedArea.innerHTML = `<div class="small">Loading post…</div>`;
-      expandedArea.dataset.openFor = post.id;
-      try {
-        const res = await fetch(post.file, {cache:'no-store'});
-        if(!res.ok) throw new Error('Post file not found: ' + post.file);
-        const txt = await res.text();
-        const main = extractHTMLFragment(txt);
-        // ensure single Written by at end
-        let contentHtml = main;
-        if(!/Written by Jeet S Singh/i.test(contentHtml)){
-          contentHtml += `<p style="margin-top:16px"><em>— Written by Jeet S Singh</em></p>`;
-        }
-        expandedArea.innerHTML = contentHtml;
-        // scroll into view smoothly
-        expandedArea.scrollIntoView({behavior:'smooth', block:'start'});
-      } catch(err){
-        expandedArea.innerHTML = `<div style="color:#c23">Unable to load post. Check file path.</div>`;
-        console.error(err);
-      }
-    }
+          // Load full content from file
+          fetch(post.file)
+            .then(r => r.text())
+            .then(html => {
+              card.querySelector('.full').innerHTML = html;
+            });
 
-    // try to parse a meaningful fragment from an HTML page (article/main/etc.)
-    function extractHTMLFragment(html){
-      try {
-        const parser = new DOMParser();
-        const d = parser.parseFromString(html, 'text/html');
-        const selectors = ['article','main','#main','.post','.author-card','.card','section'];
-        for(const s of selectors){
-          const node = d.querySelector(s);
-          if(node && node.innerHTML.trim()) return node.innerHTML;
+          list.appendChild(card);
         }
-        // fallback to body
-        return d.body.innerHTML || html;
       } catch(e){
-        return html;
+        document.getElementById('blog-list').innerText = 'Failed to load blogs.';
+        console.error(e);
       }
     }
 
-    // search implementation: filters visible cards and opens series if match
-    function attachSearch(){
-      const input = document.getElementById('q');
-      const btn = document.getElementById('qbtn');
-      btn.addEventListener('click', doSearch);
-      input.addEventListener('input', debounce(doSearch, 200));
-    }
-
-    function doSearch(){
-      const q = document.getElementById('q').value.trim().toLowerCase();
-      document.querySelectorAll('.cards-row').forEach(row=>{
-        let anyVisible = false;
-        row.querySelectorAll('.card').forEach(card=>{
-          const title = (card.querySelector('h3')?.innerText || '').toLowerCase();
-          const preview = (card.querySelector('p')?.innerText || '').toLowerCase();
-          const show = !q || title.includes(q) || preview.includes(q);
-          card.style.display = show ? '' : 'none';
-          if(show) anyVisible = true;
-        });
-        // if any card visible, leave series expanded region (do nothing), else hide expanded area
-        const seriesBlock = row.closest('.series-block');
-        const expanded = seriesBlock.querySelector('.expanded-area');
-        // optionally collapse expanded area if no match
-        if(!anyVisible){
-          expanded.style.display = 'none'; expanded.innerHTML=''; expanded.dataset.openFor='';
-        }
-      });
-      // (nice UX) scroll to first visible card if search non-empty
-      if(q){
-        const first = document.querySelector('.card[style*="display: block"], .card:not([style*="display: none"])');
-        if(first) first.scrollIntoView({behavior:'smooth', block:'center'});
+    function toggleFull(btn){
+      const full = btn.nextElementSibling;
+      if(full.style.display === 'block'){
+        full.style.display = 'none';
+        btn.textContent = 'Read More';
+      } else {
+        full.style.display = 'block';
+        btn.textContent = 'Show Less';
       }
     }
 
-    // helpers
-    function escape(s){ if(!s && s!==0) return ''; return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
-    function debounce(fn, ms=200){ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), ms); } }
-
-    // kick off
-    window.addEventListener('load', init);
+    loadBlogs();
   </script>
 </body>
 </html>
