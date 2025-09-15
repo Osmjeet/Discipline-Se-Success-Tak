@@ -8,16 +8,17 @@
   <link rel="canonical" href="https://discipline-se-success-tak.vercel.app/blog.html" />
 
   <style>
-    body{margin:0;font-family:Inter,Roboto,Arial;background:#f9fbfa;color:#102827;line-height:1.7}
+    body{margin:0;font-family:Inter,Roboto,Arial;background:#f9fbfa;color:#102827;line-height:1.75}
     .wrap{max-width:900px;margin:0 auto;padding:28px}
-    h1{text-align:center;color:#06493f;margin:28px 0}
-    h2{color:#0a3d36;margin-top:0;margin-bottom:12px}
+    h1{color:#06493f;text-align:center;margin:32px 0}
+    h2{color:#0a3d36;margin-top:20px;margin-bottom:10px}
     p{margin-bottom:14px;font-size:1.05rem}
-    .blog{margin-bottom:34px;padding:22px;background:#fff;border-radius:14px;box-shadow:0 4px 14px rgba(0,0,0,0.08)}
-    .blog .full{display:none;margin-top:12px}
-    .author{margin-top:18px;padding-top:12px;border-top:1px solid #e0eceb;font-size:0.95rem;color:#333}
-    .author strong{color:#06493f}
-    .btn{display:inline-block;margin-top:8px;padding:8px 14px;border-radius:8px;background:#0bb39a;color:#fff;font-weight:600;text-decoration:none;cursor:pointer}
+    .preview{margin-bottom:44px;padding:24px;background:#fff;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+    .preview h2{margin-top:0}
+    .actions{margin-top:14px}
+    .btn{display:inline-block;background:#0bb39a;color:#fff;padding:10px 16px;border-radius:8px;font-weight:600;text-decoration:none;cursor:pointer;border:none}
+    .btn:hover{background:#078a72}
+    .collapse{margin-top:16px;padding:12px;background:#fafafa;border-radius:8px;display:none}
     footer{text-align:center;margin-top:28px;padding:16px;font-size:0.9rem;color:#666}
 
     /* Navigation */
@@ -44,57 +45,83 @@
     <div id="blog-list">Loading blogs...</div>
   </div>
 
-  <footer>
-    © 2025 Jeet S Singh — Author of 
-    <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">“Discipline Se Success Tak”</a>
-  </footer>
+  <footer>© 2025 Jeet S Singh — Discipline • Faith • Success</footer>
 
   <script>
-    async function loadBlogs(){
+    async function loadPosts(){
       try {
         const res = await fetch('posts.json');
         const posts = await res.json();
         const list = document.getElementById('blog-list');
         list.innerHTML = '';
 
-        for (let post of posts){
+        posts.forEach((p, idx)=>{
           const card = document.createElement('div');
-          card.className = 'blog';
+          card.className = 'preview';
 
-          card.innerHTML = `
-            <h2>${post.title}</h2>
-            <p>${post.preview}</p>
-            <button class="btn" onclick="toggleFull(this)">Read More</button>
-            <div class="full"></div>
-          `;
+          const h2 = document.createElement('h2');
+          h2.textContent = p.title;
+          card.appendChild(h2);
 
-          // Load full content from file
-          fetch(post.file)
-            .then(r => r.text())
-            .then(html => {
-              card.querySelector('.full').innerHTML = html;
-            });
+          const snippet = document.createElement('p');
+          snippet.textContent = p.preview;
+          card.appendChild(snippet);
+
+          // actions
+          const actions = document.createElement('div');
+          actions.className = 'actions';
+
+          const readBtn = document.createElement('button');
+          readBtn.className = 'btn btn-read';
+          readBtn.type = 'button';
+          readBtn.dataset.file = p.file;
+          readBtn.dataset.id = 'post' + (idx+1);
+          readBtn.textContent = 'Read More →';
+          actions.appendChild(readBtn);
+
+          card.appendChild(actions);
+
+          const expandedWrapper = document.createElement('div');
+          expandedWrapper.className = 'collapse';
+          expandedWrapper.id = 'post' + (idx+1);
+          card.appendChild(expandedWrapper);
 
           list.appendChild(card);
-        }
+        });
+
+        // attach click listeners
+        document.querySelectorAll('.btn-read').forEach(btn=>{
+          btn.addEventListener('click', async ()=>{
+            const file = btn.dataset.file;
+            const target = document.getElementById(btn.dataset.id);
+
+            if(target.style.display==='block'){
+              target.style.display='none';
+              btn.textContent='Read More →';
+              return;
+            }
+
+            target.style.display='block';
+            btn.textContent='Hide';
+
+            if(!target.dataset.loaded){
+              target.innerHTML='<em>Loading...</em>';
+              try {
+                const r = await fetch(file);
+                const html = await r.text();
+                target.innerHTML = html;
+                target.dataset.loaded = 'true';
+              } catch(e){
+                target.innerHTML='<em>Error loading blog.</em>';
+              }
+            }
+          });
+        });
       } catch(e){
-        document.getElementById('blog-list').innerText = 'Failed to load blogs.';
-        console.error(e);
+        document.getElementById('blog-list').textContent = 'Error loading posts.json';
       }
     }
-
-    function toggleFull(btn){
-      const full = btn.nextElementSibling;
-      if(full.style.display === 'block'){
-        full.style.display = 'none';
-        btn.textContent = 'Read More';
-      } else {
-        full.style.display = 'block';
-        btn.textContent = 'Show Less';
-      }
-    }
-
-    loadBlogs();
+    loadPosts();
   </script>
 </body>
 </html>
