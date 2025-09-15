@@ -1,295 +1,140 @@
 <!doctype html>
 <html lang="hi">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Discipline Se Success Tak — Series-wise Blogs</title>
-  <meta name="description" content="Series-wise blog list — click a post to expand inline. Use posts.json in repo root and posts/*.html files for content."/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>About the Author — Jeet S Singh</title>
+  <meta name="description" content="Jeet S Singh — Author of Discipline Se Success Tak. Discover his journey, vision, and inspiring mission behind writing for discipline, habits, and success.">
   <style>
-    :root{
-      --accent:#0b8f76;
-      --accent-2:#06664f;
-      --muted:#6b7a75;
-      --bg:#f6fffb;
-      --card:#ffffff;
-      --text:#083731;
-      --soft:#e9faf5;
-      --radius:14px;
-      --maxw:980px;
+    body{margin:0;font-family:Georgia,serif;line-height:1.8;color:#1a1a1a;background:#fdfdfd;}
+    header{background:#06493f;padding:14px 20px;}
+    nav{max-width:1000px;margin:auto;display:flex;gap:20px;flex-wrap:wrap;}
+    nav a{color:#fff;text-decoration:none;font-weight:600;font-size:15px;}
+    nav a:hover{text-decoration:underline;}
+    main{max-width:900px;margin:32px auto;padding:24px;}
+    h1{color:#06493f;font-size:32px;margin-bottom:10px;}
+    h2{color:#078a72;font-size:20px;margin-top:30px;}
+    p{margin:16px 0;font-size:17px;}
+    .highlight{font-style:italic;color:#444;font-size:18px;}
+    .author-card{background:#fff;padding:28px;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,0.07);}
+    .author-photo-wrap{display:flex;justify-content:center;margin-bottom:18px;}
+    .author-photo{
+      width:160px;
+      height:160px;
+      object-fit:cover;
+      border-radius:12px;
+      box-shadow:0 8px 20px rgba(0,0,0,0.12);
+      border:6px solid #fff;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter, "Noto Sans Devanagari", system-ui, -apple-system, "Segoe UI", Roboto, Arial; background:linear-gradient(180deg,#f8fffb,#f0fcf8); color:var(--text); -webkit-font-smoothing:antialiased;}
-    header{background:var(--accent-2);color:#fff;padding:12px 18px;position:sticky;top:0;z-index:100;box-shadow:0 4px 12px rgba(6,16,14,0.08)}
-    .nav{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-    .brand{font-weight:700;display:flex;gap:12px;align-items:center}
-    .brand img{height:30px;border-radius:4px}
-    nav a{color:#fff;text-decoration:none;font-weight:600;font-size:15px;opacity:.96}
-    nav a:hover{opacity:1}
-    main{max-width:var(--maxw);margin:26px auto;padding:18px}
-    .panel{background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(6,20,18,0.04);border:1px solid #e9fbf5}
-    .top-search{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-    .search{flex:1;min-width:240px}
-    .search input{width:100%;padding:14px 16px;border-radius:12px;border:1px solid #dff4ec;background:transparent;font-size:15px}
-    .series-list{margin-top:18px}
-    .series-btn{display:flex;justify-content:space-between;align-items:center;padding:14px;border-radius:12px;background:var(--soft);border:1px solid #e2f6ef;margin-bottom:10px;cursor:pointer}
-    .series-btn h3{margin:0;font-size:16px;color:var(--accent-2)}
-    .series-count{color:var(--muted);font-weight:700}
-    .cards{margin-top:12px}
-    .card-row{display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap;margin-bottom:14px;border-radius:12px;padding:12px;border:1px solid #eef8f4;background:#fff}
-    .card-left{flex:1;min-width:240px}
-    .card-right{width:360px;max-width:45%;min-width:220px}
-    .card-title{font-size:18px;color:var(--accent-2);margin:0 0 8px 0}
-    .card-preview{color:var(--muted);font-size:15px;line-height:1.6}
-    .meta{margin-top:8px;color:#9aa9a3;font-size:13px}
-    .read-btn{display:inline-block;background:var(--accent);color:#fff;padding:8px 14px;border-radius:12px;text-decoration:none;font-weight:700;box-shadow:0 8px 16px rgba(11,143,118,0.12)}
-    .read-btn:hover{background:var(--accent-2)}
-    .inline-post{margin-top:12px;padding:16px;border-radius:12px;background:linear-gradient(180deg,#ffffff,#fbfff9);border:1px solid #e6f7ef}
-    .inline-post h2{margin-top:0;color:var(--accent-2)}
-    .note{color:var(--muted);font-size:14px;margin-top:12px}
-    .err{color:#c0392b;font-weight:700;margin-top:12px}
-    .preview-list{margin-top:18px}
-    .highlight{outline:4px solid rgba(11,143,118,0.08);box-shadow:0 8px 18px rgba(6,20,18,0.04)}
-    footer{max-width:var(--maxw);margin:28px auto;text-align:center;color:var(--muted);font-size:14px}
-    /* responsive */
-    @media(max-width:900px){
-      .card-right{width:100%;max-width:100%}
-      .card-row{flex-direction:column}
+    .social{margin-top:24px;}
+    .social a{display:inline-block;margin-right:12px;font-weight:600;color:#078a72;text-decoration:none;font-size:16px;}
+    .feedback{margin-top:32px;padding:20px;background:#f6fffb;border:1px solid #d8f3e9;border-radius:12px;}
+    .feedback h2{margin-top:0;font-size:19px;color:#05584a;}
+    .feedback a{color:#0b9f86;font-weight:600;text-decoration:none;}
+    .ebook-btn{display:inline-block;margin-top:22px;padding:12px 20px;background:#078a72;color:#fff;font-weight:700;border-radius:8px;text-decoration:none;box-shadow:0 6px 14px rgba(0,0,0,0.12);}
+    .ebook-btn:hover{background:#056d59;}
+    footer{text-align:center;color:#666;margin:36px 0;font-size:14px;}
+
+    /* Responsive tweaks */
+    @media(max-width:520px){
+      .author-photo{width:128px;height:128px;border-radius:12px;}
+      main{padding:18px;margin:20px auto;}
     }
   </style>
 </head>
 <body>
+
+  <!-- NAVIGATION -->
   <header>
-    <div class="nav">
-      <div class="brand">
-        <span style="font-size:18px">📚</span>
-        <div>
-          <div style="font-weight:800">Discipline Se Success Tak</div>
-          <div style="font-size:12px;opacity:.9">Series-wise Blogs — Click to expand inline</div>
-        </div>
-      </div>
-      <div style="margin-left:auto;display:flex;gap:14px;align-items:center">
-        <nav>
-          <a href="index.html">🏠 Home</a> &nbsp; <a href="blog.html">📝 Blogs</a> &nbsp; <a href="author.html">👤 Author</a> &nbsp; <a href="ebook.html">📘 Free eBook</a>
-        </nav>
-      </div>
-    </div>
+    <nav>
+      <a href="index.html">🏠 Home</a>
+      <a href="blog.html">📝 Blogs</a>
+    </nav>
   </header>
 
+  <!-- MAIN CONTENT -->
   <main>
-    <section class="panel" aria-labelledby="series-heading">
-      <div class="top-search">
-        <div class="search">
-          <input id="search" placeholder="Search blogs by title or preview..." aria-label="Search blogs by title or preview">
-        </div>
+    <div class="author-card">
+
+      <!-- AUTHOR PHOTO (added) -->
+      <div class="author-photo-wrap">
+        <!--
+          Place your author image file as "author.jpg" next to this HTML file in the repo.
+          If your file has a different name, replace the src value accordingly.
+        -->
+        <img src="author.jpg" alt="Jeet S Singh — Author photo" class="author-photo">
       </div>
 
-      <div id="series-container" class="series-list" aria-live="polite">
-        <!-- Series accordion generated by JS -->
+      <h1>About the Author</h1>
+      <p class="highlight">“Discipline मेरा lifestyle है, consistency मेरी पहचान है, और लिखना मेरी आत्मा की आवाज़।”</p>
+      
+      <p>
+        मैं हूँ <strong>Jeet S Singh</strong>, <em>“Discipline Se Success Tak”</em> का लेखक और एक ऐसे इंसान
+        की आवाज़ जो believe करता है कि success का असली secret किताबों या theories में नहीं, बल्कि हमारे daily actions में छिपा है।  
+        मेरी जड़ें Himachal की सादगी और संघर्ष से जुड़ी हैं, जहाँ मैंने सीखा कि resources कम हो सकते हैं लेकिन
+        अगर mindset और determination मजबूत हो तो कोई भी सपना दूर नहीं।
+      </p>
+
+      <p>
+        मेरी writing journey की शुरुआत तब हुई जब मैंने महसूस किया कि लोग motivation ढूँढते हैं, लेकिन
+        असल problem consistency और discipline की कमी है।  
+        इसीलिए मैंने अपने experiences, failures और learnings को words में ढालकर एक ऐसा framework बनाया जो हर किसी की daily life में fit बैठ सके।  
+        मेरा उद्देश्य सिर्फ़ inspire करना नहीं है, बल्कि आपको action लेने के practical tools देना है ताकि आप आज से बदलाव शुरू कर सको।
+      </p>
+
+      <p>
+        <strong>“Discipline Se Success Tak”</strong> सिर्फ़ एक किताब नहीं, बल्कि एक blueprint है —
+        छोटे steps, clear action plans और mindset shifts का।  
+        इसी सोच को आगे बढ़ाते हुए मैंने blogs लिखने शुरू किए ताकि हर कोई free में भी वो lessons पढ़ सके
+        जो उनकी journey आसान बना दें।  
+        चाहे आप student हो, professional या entrepreneur — मेरे words का मक़सद है आपको remind करना कि
+        <em>success कोई accident नहीं, बल्कि daily choices का result है।</em>
+      </p>
+
+      <h2>🌟 Vision & Mission</h2>
+      <p>
+        मेरा vision है कि discipline और consistency को हर इंसान की daily life का हिस्सा बनाया जाए —
+        ताकि success केवल कुछ लोगों तक सीमित न रहे, बल्कि हर कोई उसे अपनी मेहनत और आदतों से हासिल कर सके।  
+        मेरा mission simple है: लोगों को ऐसे practical systems और emotional strength देना जो long-term growth और self-belief को sustain कर सकें।
+      </p>
+      <p>
+        आने वाले समय में मेरा सपना है कि मैं और भी free resources, workshops और guiding content launch करूँ
+        जिससे हर reader अपने खुद के best version तक पहुँच सके।
+      </p>
+
+      <p>
+        आज जब भी कोई reader मुझे message करता है कि मेरी लिखी lines ने उसकी life बदलने में मदद की,
+        तो मुझे लगता है कि यही मेरी असली जीत है। Writing मेरे लिए सिर्फ़ passion नहीं, बल्कि एक जिम्मेदारी है —
+        एक आवाज़ जो हर उस इंसान तक पहुँचे जो हार मानने की कगार पर है।
+      </p>
+
+      <div class="social">
+        👉 Follow on Instagram: 
+        <a href="https://instagram.com/jeetssingh9" target="_blank">@jeetssingh9</a>
       </div>
 
-      <div id="error" class="err" role="alert" style="display:none">Unable to load blogs. Check <code>posts.json</code> path and file.</div>
-    </section>
+      <!-- FEEDBACK SECTION -->
+      <div class="feedback">
+        <h2>✨ Share Your Feedback</h2>
+        <p>
+          आपकी राय मेरे लिए बहुत मायने रखती है।  
+          अगर मेरी writing से आपको help मिली है, तो अपना 1-line feedback या suggestion भेज सकते हैं:
+        </p>
+        <p>
+          📧 <a href="mailto:jeetssinghbooks@gmail.com">jeetssinghbooks@gmail.com</a><br>
+          💬 <a href="https://wa.me/917018085440" target="_blank">WhatsApp: +91 70180 85440</a>
+        </p>
+      </div>
 
-    <section id="posts-output" style="margin-top:20px">
-      <!-- Expanded post content will appear here -->
-    </section>
+      <!-- MINI EBOOK BUTTON -->
+      <a href="ebook.html" class="ebook-btn">📘 Read Free Mini eBook</a>
+    </div>
   </main>
 
   <footer>
-    © 2025 Jeet S Singh — Discipline • Faith • Success
+    © 2025 Jeet S Singh — Author of “Discipline Se Success Tak”  
+    <br>Discipline • Faith • Success
   </footer>
 
-<script>
-(function(){
-  const POSTS_JSON = './posts.json'; // ensure file at repo root
-  const seriesContainer = document.getElementById('series-container');
-  const output = document.getElementById('posts-output');
-  const searchEl = document.getElementById('search');
-  const errorEl = document.getElementById('error');
-  let posts = [];
-
-  // helper: group by series preserving order
-  function groupBySeries(arr){
-    const map = new Map();
-    for(const p of arr){
-      const s = p.series || 'Uncategorized';
-      if(!map.has(s)) map.set(s, []);
-      map.get(s).push(p);
-    }
-    return Array.from(map.entries()); // [ [seriesName, [posts...]], ... ]
-  }
-
-  function createSeriesNode(seriesName, items){
-    const wrapper = document.createElement('div');
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'series-btn';
-    btn.setAttribute('aria-expanded','false');
-
-    const h = document.createElement('h3');
-    h.textContent = seriesName;
-    const c = document.createElement('div');
-    c.className = 'series-count';
-    c.textContent = `(${items.length})`;
-
-    btn.appendChild(h);
-    btn.appendChild(c);
-
-    const cardsWrap = document.createElement('div');
-    cardsWrap.className = 'cards';
-    cardsWrap.style.display = 'none';
-    cardsWrap.setAttribute('data-series', seriesName);
-
-    // create cards
-    items.forEach(p => {
-      const row = document.createElement('div');
-      row.className = 'card-row';
-      row.setAttribute('data-id', p.id);
-      // left
-      const left = document.createElement('div');
-      left.className = 'card-left';
-      const title = document.createElement('div');
-      title.className = 'card-title';
-      title.textContent = p.title;
-      const preview = document.createElement('div');
-      preview.className = 'card-preview';
-      preview.textContent = p.preview;
-      const meta = document.createElement('div');
-      meta.className = 'meta';
-      meta.textContent = `ID: ${p.id} — File: ${p.file}`;
-      left.appendChild(title);
-      left.appendChild(preview);
-      left.appendChild(meta);
-
-      // right
-      const right = document.createElement('div');
-      right.className = 'card-right';
-      const readBtn = document.createElement('a');
-      readBtn.href = '#';
-      readBtn.className = 'read-btn';
-      readBtn.textContent = 'Read';
-      readBtn.addEventListener('click', (e)=>{
-        e.preventDefault();
-        // remove existing highlights
-        document.querySelectorAll('.card-row').forEach(n=>n.classList.remove('highlight'));
-        row.classList.add('highlight');
-        loadPostInline(p);
-      });
-
-      right.appendChild(readBtn);
-
-      row.appendChild(left);
-      row.appendChild(right);
-      cardsWrap.appendChild(row);
-    });
-
-    btn.addEventListener('click', ()=>{
-      const visible = cardsWrap.style.display !== 'none';
-      // collapse any other open series? keep independent — but we toggle btn aria
-      cardsWrap.style.display = visible ? 'none' : 'block';
-      btn.setAttribute('aria-expanded', visible ? 'false' : 'true');
-      // scroll into view a bit for better mobile UX
-      if(!visible) btn.scrollIntoView({behavior:'smooth',block:'start'});
-    });
-
-    wrapper.appendChild(btn);
-    wrapper.appendChild(cardsWrap);
-    return wrapper;
-  }
-
-  function renderSeries(list){
-    seriesContainer.innerHTML = '';
-    if(!list.length){
-      seriesContainer.innerHTML = '<div class="note">No blogs found.</div>';
-      return;
-    }
-    list.forEach(([seriesName, items])=>{
-      seriesContainer.appendChild(createSeriesNode(seriesName, items));
-    });
-  }
-
-  function loadPostInline(post){
-    // clear previous output and fetch file
-    output.innerHTML = '';
-    const container = document.createElement('div');
-    container.className = 'panel inline-post';
-    const loading = document.createElement('div');
-    loading.textContent = 'Loading post...';
-    loading.className = 'note';
-    container.appendChild(loading);
-    output.appendChild(container);
-    // fetch the post file (relative)
-    fetch(post.file).then(res=>{
-      if(!res.ok) throw new Error('Not found');
-      return res.text();
-    }).then(html=>{
-      container.innerHTML = '';
-      // insert a heading & author line like previous posts
-      const h = document.createElement('h2');
-      h.textContent = post.title;
-      container.appendChild(h);
-      // add small author / written by line
-      const byline = document.createElement('div');
-      byline.className = 'meta';
-      byline.textContent = `Written by Jeet S Singh — Author of "Discipline Se Success Tak"`;
-      container.appendChild(byline);
-      // insert fetched html safely
-      const contentWrapper = document.createElement('div');
-      contentWrapper.innerHTML = html;
-      // ensure images / links keep relative behaviour
-      container.appendChild(contentWrapper);
-      // smooth scroll to the post container top
-      container.scrollIntoView({behavior:'smooth',block:'start'});
-    }).catch(err=>{
-      container.innerHTML = '';
-      const em = document.createElement('div');
-      em.className = 'err';
-      em.textContent = 'Unable to load post content. Check file path: ' + post.file;
-      container.appendChild(em);
-    });
-  }
-
-  // search
-  function applySearch(q){
-    q = q.trim().toLowerCase();
-    if(!q){
-      const grouped = groupBySeries(posts);
-      renderSeries(grouped);
-      return;
-    }
-    // filter posts where title or preview contains query
-    const filtered = posts.filter(p => (p.title + ' ' + p.preview).toLowerCase().includes(q));
-    const grouped = groupBySeries(filtered);
-    renderSeries(grouped);
-  }
-
-  // initial fetch posts.json
-  fetch(POSTS_JSON).then(r=>{
-    if(!r.ok) throw new Error('posts.json missing');
-    return r.json();
-  }).then(data=>{
-    if(!Array.isArray(data)) throw new Error('posts.json must be an array');
-    posts = data.sort((a,b)=> (a.id||0) - (b.id||0)); // sort by id for consistent order
-    const grouped = groupBySeries(posts);
-    renderSeries(grouped);
-    errorEl.style.display = 'none';
-  }).catch(err=>{
-    console.error(err);
-    errorEl.style.display = 'block';
-  });
-
-  // events
-  searchEl.addEventListener('input', e => applySearch(e.target.value));
-
-  // keyboard: pressing enter on search focuses first read button if any visible
-  searchEl.addEventListener('keydown', (e)=>{
-    if(e.key === 'Enter'){
-      const firstRead = document.querySelector('.read-btn');
-      if(firstRead) { firstRead.focus(); firstRead.click(); }
-    }
-  });
-
-})();
-</script>
 </body>
 </html>
