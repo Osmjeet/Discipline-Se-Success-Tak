@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Blogs — Jeet S Singh (Author of Discipline Se Success Tak)</title>
-  <meta name="description" content="Read inspiring blogs by Jeet S Singh, Author of 'Discipline Se Success Tak'." />
+  <meta name="description" content="Blogs by Jeet S Singh — grouped series (1-10 and 11-20). Click a title to expand the full post inline." />
   <style>
     :root{
       --bg:#f7fbfa; --card:#ffffff; --accent:#0bb39a; --accent-dark:#078a72;
@@ -13,262 +13,260 @@
     *{box-sizing:border-box}
     body{margin:0;font-family:Inter, "Noto Sans Devanagari", system-ui, -apple-system, "Segoe UI", Roboto, Arial; background:var(--bg); color:var(--text)}
     a{color:var(--accent-dark);text-decoration:none}
-    header.sitebar{background:#06493f;padding:10px 18px;position:sticky;top:0;z-index:50}
-    .navwrap{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;color:#fff}
+    header.top{background:#06493f;padding:12px 18px;position:sticky;top:0;z-index:30}
+    .nav{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;color:#fff}
     .brand{font-weight:800;font-size:16px}
-    .navlinks{display:flex;gap:12px}
-    .navlinks a{color:#fff;font-weight:700;padding:8px 10px;border-radius:8px}
-    .top-actions{display:flex;gap:10px;align-items:center}
-    .btn{background:var(--accent);color:#fff;padding:8px 12px;border-radius:8px;font-weight:800}
-    .btn.ghost{background:transparent;border:2px solid rgba(255,255,255,0.08);color:#fff}
-
-    .wrap{max-width:var(--maxw);margin:20px auto;display:grid;grid-template-columns:320px 1fr;gap:22px;padding:0 18px}
-    @media(max-width:980px){.wrap{grid-template-columns:1fr;padding:12px}}
-    aside.sidebar .card, main.content .post-card{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:0 10px 30px rgba(8,18,16,0.05);border:1px solid #eef9f5}
-
-    .search input{width:100%;padding:10px 12px;border-radius:10px;border:1px solid #e9f6f1;font-size:14px}
-    .series-list{margin-top:12px}
-    .series-item{margin-bottom:8px}
-    .series-header{display:flex;justify-content:space-between;align-items:center;padding:8px;border-radius:8px;background:#f0fff9;color:#044b3f;font-weight:800;cursor:pointer}
-    .series-header .count{font-size:13px;color:var(--muted);font-weight:600}
-    .posts-list{list-style:none;padding:8px 6px;margin:6px 0 0 0;max-height:44vh;overflow:auto}
-    .posts-list li{padding:6px;border-radius:8px}
-    .post-btn{display:block;background:transparent;border:0;padding:8px 6px;text-align:left;width:100%;cursor:pointer}
-    .post-btn strong{display:block;color:#06493f}
-    .post-btn .preview{font-size:13px;color:var(--muted);margin-top:6px}
-    .post-btn.active{background:#f7fff9;border-left:4px solid var(--accent);padding-left:10px}
-
-    main.content .post-card h1{margin:0;font-size:24px;color:var(--accent-dark)}
-    .post-sub{color:var(--muted);margin-top:8px}
-    .post-card p{line-height:1.75}
-    .post-meta{margin-top:18px;color:var(--muted);font-size:14px}
-    .small-link{display:inline-block;margin-top:12px;padding:8px 10px;border-radius:8px;background:#f3fff9;color:#045740;font-weight:700}
-
-    /* empty */
-    .empty{padding:40px;text-align:center;color:var(--muted)}
-
-    @media(max-width:980px){
-      .post-btn .preview{display:none}
-      .series-header{font-size:15px}
-    }
+    .nav a{color:#fff;margin-left:12px;font-weight:700;text-decoration:none}
+    .wrap{max-width:var(--maxw);margin:20px auto;padding:0 18px}
+    .grid{display:grid;grid-template-columns:360px 1fr;gap:20px}
+    @media(max-width:900px){.grid{grid-template-columns:1fr}}
+    .panel{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:0 10px 30px rgba(8,18,16,0.05);border:1px solid #eef9f5}
+    .series-header{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:10px;background:#f0fff9;color:#044b3f;font-weight:800;cursor:pointer;margin-bottom:8px}
+    .posts-list{list-style:none;padding:6px 0;margin:8px 0 0 0}
+    .post-item{border-radius:8px;padding:8px;margin-bottom:8px;border:1px solid #f1fbf7;background:#fff}
+    .post-title{display:flex;justify-content:space-between;align-items:center;gap:10px;cursor:pointer}
+    .post-title strong{font-size:15px;color:#06493f}
+    .post-preview{display:block;color:var(--muted);font-size:13px;margin-top:6px}
+    .expand-area{margin-top:10px;padding:12px;border-radius:8px;background:#fbfffb;border:1px solid #eaf8f1;display:none}
+    .small-meta{font-size:13px;color:var(--muted);margin-top:10px}
+    .empty{padding:28px;text-align:center;color:var(--muted)}
+    .controls{display:flex;gap:8px;align-items:center}
+    .btn{background:var(--accent);color:#fff;padding:8px 12px;border-radius:8px;font-weight:800;text-decoration:none}
+    .search{margin-bottom:10px}
+    .search input{width:100%;padding:10px;border-radius:8px;border:1px solid #e8f6f2;font-size:14px}
+    footer{margin-top:22px;text-align:center;color:var(--muted);font-size:13px}
   </style>
 </head>
 <body>
 
   <!-- TOP NAV -->
-  <header class="sitebar" role="banner">
-    <div class="navwrap">
-      <div style="display:flex;align-items:center;gap:16px">
+  <header class="top" role="banner">
+    <div class="nav">
+      <div style="display:flex;align-items:center;gap:14px">
         <div class="brand">Jeet S Singh</div>
-        <nav class="navlinks" aria-label="Primary">
+        <nav aria-label="main-nav">
           <a href="index.html">🏠 Home</a>
-          <a href="blog.html" aria-current="page">📝 Blogs</a>
+          <a href="blog.html">📝 Blogs</a>
+          <a href="author.html">👤 Author</a>
         </nav>
       </div>
-
-      <div class="top-actions">
-        <a class="btn" href="ebook.html" target="_blank">📘 Read Free Mini eBook</a>
-        <a class="btn ghost" href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">Buy on Amazon</a>
+      <div>
+        <a class="btn" href="ebook.html" target="_blank">📘 Free Mini eBook</a>
       </div>
     </div>
   </header>
 
-  <div class="wrap" role="main">
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-      <div class="card" aria-labelledby="sidebar-heading">
-        <h3 id="sidebar-heading" style="margin:0 0 10px 0;color:#06493f">All Posts</h3>
+  <main class="wrap" role="main">
+    <div class="grid">
+      <!-- LEFT: Series / List -->
+      <aside class="panel" aria-labelledby="series-title">
+        <h3 id="series-title" style="margin:0 0 10px 0;color:#06493f">Series</h3>
 
-        <div class="search"><input id="post-search" type="search" placeholder="Search posts by title or preview…" aria-label="Search posts"></div>
-
-        <div id="series-list" class="series-list" aria-live="polite">
-          <!-- series groups inserted here -->
+        <div class="search">
+          <input id="search" type="search" placeholder="Search titles / previews..." aria-label="Search posts">
         </div>
 
-        <div style="margin-top:12px;font-size:13px;color:var(--muted)">Tip: Click a post to read — direct links supported (example: <code>blog.html#13</code>).</div>
-      </div>
-    </aside>
+        <!-- Series A: 1-10 -->
+        <div id="seriesA">
+          <div class="series-header" data-series="A">
+            <span>Series 1–10</span><span class="count" id="countA">(loading)</span>
+          </div>
+          <ul id="listA" class="posts-list" aria-live="polite"></ul>
+        </div>
 
-    <!-- MAIN -->
-    <main class="content">
-      <div id="post-content" class="post-card">
-        <div class="empty">Loading posts…</div>
-      </div>
-    </main>
-  </div>
+        <!-- Series B: 11-20 -->
+        <div id="seriesB" style="margin-top:12px">
+          <div class="series-header" data-series="B">
+            <span>Series 11–20</span><span class="count" id="countB">(loading)</span>
+          </div>
+          <ul id="listB" class="posts-list" aria-live="polite"></ul>
+        </div>
 
-  <!-- Script: fetch posts.json, build series groups, load fragments -->
+        <div style="margin-top:12px;color:var(--muted);font-size:13px">Tip: Click a title to expand the full post inline. Direct links like <code>blog.html#13</code> open that post.</div>
+      </aside>
+
+      <!-- RIGHT: Content / fallback area -->
+      <section id="content-area" class="panel">
+        <div id="fallback" class="empty">Choose a post from left — content will expand inline below the title.</div>
+      </section>
+    </div>
+
+    <footer>
+      © 2025 Jeet S Singh — Discipline • Faith • Success
+    </footer>
+  </main>
+
   <script>
   (function(){
     const MANIFEST = 'posts.json';
-    const seriesListEl = document.getElementById('series-list');
-    const contentEl = document.getElementById('post-content');
-    const searchInput = document.getElementById('post-search');
+    const listA = document.getElementById('listA');
+    const listB = document.getElementById('listB');
+    const countA = document.getElementById('countA');
+    const countB = document.getElementById('countB');
+    const searchInput = document.getElementById('search');
+    const fallback = document.getElementById('fallback');
 
-    let POSTS = []; // manifest array
-    let GROUPED = {}; // series -> posts array
+    let POSTS = [];
 
+    // helper: escape HTML for safe display inside title/preview (we store raw in manifest)
+    function esc(s){ return String(s || '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m])); }
+
+    // load manifest and build lists
     async function init(){
       try {
-        const r = await fetch(MANIFEST + '?ts=' + Date.now());
-        if (!r.ok) throw new Error('posts.json not found');
-        POSTS = await r.json();
+        const res = await fetch(MANIFEST + '?ts=' + Date.now());
+        if (!res.ok) throw new Error('Could not fetch posts.json');
+        POSTS = await res.json();
 
-        // group by series (default 'General')
-        GROUPED = POSTS.reduce((acc, p) => {
-          const s = p.series || 'General';
-          if (!acc[s]) acc[s] = [];
-          acc[s].push(p);
-          return acc;
-        }, {});
+        // Partition into series A (id 1-10) and B (11-20). If manifest uses series field, prefer that.
+        const A = POSTS.filter(p => Number(p.id) >=1 && Number(p.id) <=10);
+        const B = POSTS.filter(p => Number(p.id) >=11 && Number(p.id) <=9999);
 
-        buildSeriesUI(GROUPED);
-        // try hash load
+        fillList(A, listA);
+        fillList(B, listB);
+
+        countA.textContent = `(${A.length})`;
+        countB.textContent = `(${B.length})`;
+
+        // Expand series headers toggle
+        document.querySelectorAll('.series-header').forEach(h=>{
+          h.addEventListener('click', ()=> {
+            const series = h.dataset.series;
+            const ul = series === 'A' ? listA : listB;
+            ul.style.display = (ul.style.display === 'block') ? 'none' : 'block';
+          });
+        });
+
+        // if hash present, open that post
         const h = location.hash.replace('#','');
         if (h) {
-          const p = POSTS.find(x=>String(x.id)===String(h));
-          if (p) return loadPost(p);
+          const post = POSTS.find(p => String(p.id) === String(h));
+          if (post) {
+            // ensure correct list visible
+            if (Number(h) <= 10) listA.style.display = 'block'; else listB.style.display = 'block';
+            // load inline (simulate click)
+            const btn = document.querySelector(`.post-toggle[data-id="${h}"]`);
+            if (btn) btn.click();
+          }
         }
-        // default load first post
-        if (POSTS.length) loadPost(POSTS[0]);
       } catch (err) {
         console.error(err);
-        contentEl.innerHTML = '<div class="empty">Could not load posts. Check posts.json.</div>';
+        fallback.textContent = 'Error loading posts.json — check that posts.json exists in repo root and is valid JSON.';
       }
     }
 
-    // Create collapsible series groups
-    function buildSeriesUI(grouped){
-      seriesListEl.innerHTML = '';
-      Object.keys(grouped).forEach(seriesName => {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'series-item';
+    // fill a specific UL with posts entries
+    function fillList(arr, ul){
+      ul.innerHTML = '';
+      if (!arr || arr.length === 0){
+        const li = document.createElement('li');
+        li.className = 'post-item';
+        li.innerHTML = '<div class="post-title"><strong>No posts</strong></div>';
+        ul.appendChild(li);
+        return;
+      }
+      arr.forEach(p => {
+        const li = document.createElement('li');
+        li.className = 'post-item';
+        li.dataset.postId = p.id;
+        li.innerHTML = `
+          <div class="post-title" role="button">
+            <div>
+              <strong>${esc(p.title)}</strong>
+              ${p.preview ? `<div class="post-preview">${esc(p.preview)}</div>` : ''}
+            </div>
+            <div class="controls">
+              <button class="post-toggle btn" data-id="${p.id}" aria-expanded="false">Read</button>
+            </div>
+          </div>
+          <div class="expand-area" id="expand-${p.id}" aria-hidden="true"></div>
+        `;
+        ul.appendChild(li);
+      });
 
-        const header = document.createElement('div');
-        header.className = 'series-header';
-        header.tabIndex = 0;
-        header.setAttribute('role','button');
-        header.innerHTML = `<span>${escapeHtml(seriesName)}</span><span class="count">(${grouped[seriesName].length}) ▾</span>`;
+      // attach click handlers for toggles (delegation safe)
+      ul.querySelectorAll('.post-toggle').forEach(btn => {
+        btn.addEventListener('click', async function(e){
+          const id = this.dataset.id;
+          const expandArea = document.getElementById('expand-' + id);
+          const isOpen = expandArea.style.display === 'block';
 
-        const ul = document.createElement('ul');
-        ul.className = 'posts-list';
-        ul.style.display = 'none'; // collapsed initially
+          // close any other open expand areas
+          document.querySelectorAll('.expand-area').forEach(x => {
+            if (x.id !== 'expand-' + id) { x.style.display = 'none'; x.setAttribute('aria-hidden','true'); }
+          });
+          document.querySelectorAll('.post-toggle').forEach(t => t.setAttribute('aria-expanded','false'));
 
-        // fill posts
-        grouped[seriesName].forEach(post => {
-          const li = document.createElement('li');
-          const btn = document.createElement('button');
-          btn.className = 'post-btn';
-          btn.dataset.id = post.id;
-          btn.innerHTML = `<strong>${escapeHtml(post.title)}</strong>` + (post.preview ? `<div class="preview">${escapeHtml(post.preview)}</div>` : '');
-          btn.addEventListener('click', ()=> loadPost(post));
-          li.appendChild(btn);
-          ul.appendChild(li);
-        });
+          if (isOpen) {
+            // close this
+            expandArea.style.display = 'none';
+            expandArea.setAttribute('aria-hidden','true');
+            this.setAttribute('aria-expanded','false');
+            // update hash to none
+            history.replaceState(null, '', ' ');
+            return;
+          }
 
-        // toggle
-        header.addEventListener('click', ()=> {
-          const open = ul.style.display === 'block';
-          // collapse all others
-          document.querySelectorAll('.posts-list').forEach(x => x.style.display = 'none');
-          document.querySelectorAll('.series-header').forEach(h => h.classList.remove('open'));
-          if (!open) {
-            ul.style.display = 'block';
-            header.classList.add('open');
-          } else {
-            ul.style.display = 'none';
-            header.classList.remove('open');
+          // open this: fetch fragment and inject
+          this.textContent = 'Loading...';
+          try {
+            const post = POSTS.find(p=>String(p.id)===String(id));
+            const r = await fetch(post.file + '?ts=' + Date.now());
+            if (!r.ok) throw new Error('Could not fetch post file: ' + post.file);
+            let html = await r.text();
+
+            // avoid duplicate author/footer: if fragment already contains author or "Written by" or "Jeet S Singh" or amazon link, don't append footer
+            const lower = html.toLowerCase();
+            const hasAuthor = /written by|✍️|jeet s singh|author of|amazon\.in\/dp\/b0fphvnrbk/.test(lower);
+
+            if (!hasAuthor) {
+              html += `<footer class="small-meta" style="margin-top:12px">
+                        ✍️ Written by <strong>Jeet S Singh</strong> — Author of
+                        <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">“Discipline Se Success Tak”</a>
+                       </footer>`;
+            } else if (!/amazon\.in\/dp\/b0fphvnrbk/.test(lower)) {
+              html += `<div style="margin-top:10px"><a class="small-meta" href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">Buy on Amazon — Discipline Se Success Tak</a></div>`;
+            }
+
+            expandArea.innerHTML = html;
+            expandArea.style.display = 'block';
+            expandArea.setAttribute('aria-hidden','false');
+            this.setAttribute('aria-expanded','true');
+
+            // update hash for direct linking
+            history.replaceState(null, '', '#'+id);
+
+            // scroll to the opened area smoothly
+            setTimeout(()=> {
+              expandArea.scrollIntoView({behavior:'smooth', block:'center'});
+            },120);
+
+          } catch (err) {
+            console.error(err);
+            expandArea.innerHTML = '<div style="color:#a33">Failed to load article. Check console.</div>';
+            expandArea.style.display = 'block';
+            expandArea.setAttribute('aria-hidden','false');
+          } finally {
+            this.textContent = 'Read';
           }
         });
-        // also allow keyboard toggle
-        header.addEventListener('keydown', (e)=>{ if (e.key==='Enter' || e.key===' ') header.click(); });
-
-        wrapper.appendChild(header);
-        wrapper.appendChild(ul);
-        seriesListEl.appendChild(wrapper);
       });
     }
 
-    // Load a post fragment into main area
-    async function loadPost(post){
-      try {
-        // set active class (clear existing)
-        document.querySelectorAll('.post-btn').forEach(b=>b.classList.remove('active'));
-        const targetBtn = document.querySelector(`.post-btn[data-id="${post.id}"]`);
-        if (targetBtn) targetBtn.classList.add('active');
-
-        // update URL hash without adding history entry
-        history.replaceState(null,'', '#'+post.id);
-
-        contentEl.innerHTML = '<div class="empty">Loading article…</div>';
-
-        const r = await fetch(post.file + '?ts=' + Date.now());
-        if (!r.ok) throw new Error('Post file not found: ' + post.file);
-        let fragment = await r.text();
-
-        // Normalize: if the fragment already contains author/footer (search for key phrases), do NOT append
-        const normalized = fragment.trim();
-        const lower = normalized.toLowerCase();
-        const hasAuthor = /written by|✍️|jeet s singh|author of|amazon\.in\/dp\/b0fphvnrbk/.test(lower);
-
-        if (!hasAuthor) {
-          fragment += `<footer class="post-meta" style="margin-top:18px">
-                        <p>✍️ Written by <strong>Jeet S Singh</strong>, Author of
-                          <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">“Discipline Se Success Tak”</a>
-                        </p>
-                       </footer>`;
-        } else {
-          // ensure Amazon buy link exists somewhere — only add a subtle link if not present
-          if (!/amazon\.in\/dp\/b0fphvnrbk/.test(lower)) {
-            fragment += `<div style="margin-top:10px"><a class="small-link" href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">Buy on Amazon — Discipline Se Success Tak</a></div>`;
-          }
-        }
-
-        contentEl.innerHTML = fragment;
-        window.scrollTo({top:0, behavior:'smooth'});
-      } catch (err) {
-        console.error(err);
-        contentEl.innerHTML = '<div class="empty">Failed to load article. Check console.</div>';
-      }
-    }
-
-    // Search box filter across all posts (keeps series collapsed/expanded state)
+    // simple search filter
     searchInput.addEventListener('input', function(){
-      const q = (this.value || '').trim().toLowerCase();
-      // for each series, toggle post visibility
-      Object.keys(GROUPED).forEach(seriesName => {
-        const posts = GROUPED[seriesName];
-        const wrapper = Array.from(seriesListEl.children).find(w => w.querySelector('.series-header').textContent.trim().startsWith(seriesName));
-        if (!wrapper) return;
-        const ul = wrapper.querySelector('.posts-list');
-        let anyVisible = false;
-        posts.forEach(p => {
-          const liBtn = ul.querySelector(`.post-btn[data-id="${p.id}"]`);
-          if (!liBtn) return;
-          const txt = (p.title + ' ' + (p.preview||'')).toLowerCase();
-          const show = q === '' ? true : txt.includes(q);
-          liBtn.parentElement.style.display = show ? 'block' : 'none';
-          if (show) anyVisible = true;
-        });
-        // if search active, expand series that have matches; else collapse all
-        if (q !== '') {
-          ul.style.display = anyVisible ? 'block' : 'none';
-          wrapper.querySelector('.series-header').classList.toggle('open', anyVisible);
-        } else {
-          ul.style.display = 'none';
-          wrapper.querySelector('.series-header').classList.remove('open');
-          // reset per-item display
-          ul.querySelectorAll('li').forEach(li=>li.style.display='block');
-        }
+      const q = (this.value || '').toLowerCase().trim();
+      document.querySelectorAll('.post-item').forEach(li=>{
+        const title = (li.querySelector('strong')?.textContent || '').toLowerCase();
+        const preview = (li.querySelector('.post-preview')?.textContent || '').toLowerCase();
+        const show = q === '' ? true : (title + ' ' + preview).includes(q);
+        li.style.display = show ? 'block' : 'none';
       });
     });
 
-    // escape helper
-    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m])); }
-
+    // init
     document.addEventListener('DOMContentLoaded', init);
   })();
   </script>
-
 </body>
 </html>
