@@ -8,9 +8,13 @@
   <style>
     body{margin:0;font-family:Georgia,serif;background:#fdfdfd;color:#222;line-height:1.7;}
     header{background:#06493f;padding:14px 20px;}
-    nav{max-width:1000px;margin:auto;display:flex;gap:20px;}
+    nav{max-width:1000px;margin:auto;display:flex;gap:20px;align-items:center;}
     nav a{color:#fff;text-decoration:none;font-weight:600;font-size:15px;}
     nav a:hover{text-decoration:underline;}
+    .search-box{margin-left:auto;display:flex;gap:6px;}
+    .search-box input{padding:6px 8px;border-radius:6px;border:none;outline:none;font-size:14px;}
+    .search-box button{padding:6px 10px;background:#078a72;color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:600;}
+    .search-box button:hover{background:#056d59;}
     main{max-width:900px;margin:32px auto;padding:0 20px;}
     h1{text-align:center;color:#06493f;font-size:32px;margin-bottom:24px;}
     .blog-card{background:#fff;padding:22px;margin:18px 0;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.07);}
@@ -28,13 +32,17 @@
     <nav>
       <a href="index.html">🏠 Home</a>
       <a href="author.html">👤 Author</a>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search blogs..." onkeyup="searchBlogs()" />
+        <button onclick="searchBlogs()">🔍</button>
+      </div>
     </nav>
   </header>
 
   <main>
     <h1>📚 Blogs</h1>
 
-    <!-- BLOG TEMPLATE (Repeat for all blogs) -->
+    <!-- BLOG TEMPLATE -->
     <div class="blog-card">
       <h2>Blog 1: Discipline ही असली Superpower</h2>
       <p class="preview">Talent आपको शुरुआत दिला सकता है, लेकिन discipline ही आपको मंज़िल तक ले जाता है...</p>
@@ -55,7 +63,7 @@
       </div>
     </div>
 
-    <!-- इसी तरह Blog 3–20 तक copy-paste करना है -->
+    <!-- इसी तरह Blog 3–20 तक add करना है -->
 
   </main>
 
@@ -72,6 +80,22 @@
       } else {
         content.style.display="block";
         btn.textContent="Read Less";
+      }
+    }
+
+    function searchBlogs(){
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const cards = document.getElementsByClassName("blog-card");
+
+      for(let i=0; i<cards.length; i++){
+        const title = cards[i].getElementsByTagName("h2")[0].innerText.toLowerCase();
+        const preview = cards[i].getElementsByClassName("preview")[0].innerText.toLowerCase();
+
+        if(title.includes(input) || preview.includes(input)){
+          cards[i].style.display = "block";
+        } else {
+          cards[i].style.display = "none";
+        }
       }
     }
   </script>
