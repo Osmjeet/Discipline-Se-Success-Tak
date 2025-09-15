@@ -4,76 +4,53 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Blogs — Jeet S Singh (Author of Discipline Se Success Tak)</title>
-  <meta name="description" content="Read inspiring blogs by Jeet S Singh, Author of 'Discipline Se Success Tak'. Learn about discipline, success, motivation and daily habits." />
-  <link rel="canonical" href="https://discipline-se-success-tak.vercel.app/blog.html" />
-
+  <meta name="description" content="Read inspiring blogs by Jeet S Singh, Author of 'Discipline Se Success Tak'." />
   <style>
-    /* ====== Layout basics ====== */
     :root{
-      --bg:#f7fbfa;
-      --card:#ffffff;
-      --accent:#0bb39a;
-      --accent-dark:#078a72;
-      --muted:#5b6b73;
-      --maxw:1100px;
-      --radius:12px;
-      --text:#0e2b26;
-      --nav-h:64px;
+      --bg:#f7fbfa; --card:#ffffff; --accent:#0bb39a; --accent-dark:#078a72;
+      --muted:#5b6b73; --maxw:1100px; --radius:12px; --text:#0e2b26;
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Inter, "Noto Sans Devanagari", system-ui, -apple-system, "Segoe UI", Roboto, Arial; background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
-    a{color:var(--accent-dark); text-decoration:none}
-    a:hover{text-decoration:underline}
-
-    /* ====== Top nav ====== */
-    header.sitebar{background:#06493f;padding:10px 18px;position:sticky;top:0;z-index:50;box-shadow:0 4px 14px rgba(2,6,10,0.08)}
-    .navwrap{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;color:#fff}
-    .nav-left{display:flex;align-items:center;gap:14px}
+    body{margin:0;font-family:Inter, "Noto Sans Devanagari", system-ui, -apple-system, "Segoe UI", Roboto, Arial; background:var(--bg); color:var(--text)}
+    a{color:var(--accent-dark);text-decoration:none}
+    header.sitebar{background:#06493f;padding:10px 18px;position:sticky;top:0;z-index:50}
+    .navwrap{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;color:#fff}
     .brand{font-weight:800;font-size:16px}
-    .navlinks{display:flex;gap:14px;align-items:center}
-    .navlinks a{color:#fff;font-weight:700;font-size:14px;padding:8px 10px;border-radius:8px}
-    .navlinks a:hover{background:rgba(255,255,255,0.06)}
+    .navlinks{display:flex;gap:12px}
+    .navlinks a{color:#fff;font-weight:700;padding:8px 10px;border-radius:8px}
     .top-actions{display:flex;gap:10px;align-items:center}
     .btn{background:var(--accent);color:#fff;padding:8px 12px;border-radius:8px;font-weight:800}
     .btn.ghost{background:transparent;border:2px solid rgba(255,255,255,0.08);color:#fff}
 
-    /* ====== Main area ====== */
-    .wrap{max-width:var(--maxw);margin:22px auto;padding:0 18px;display:grid;grid-template-columns:320px 1fr;gap:22px;align-items:start}
+    .wrap{max-width:var(--maxw);margin:20px auto;display:grid;grid-template-columns:320px 1fr;gap:22px;padding:0 18px}
     @media(max-width:980px){.wrap{grid-template-columns:1fr;padding:12px}}
-    /* sidebar */
-    aside.sidebar{position:relative}
-    .card{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:0 10px 30px rgba(8,18,16,0.05);border:1px solid #eef9f5}
-    .search input{width:100%;padding:10px 12px;border-radius:10px;border:1px solid #e9f6f1;font-size:14px;color:var(--text)}
-    .series-filter{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
-    .tag{background:#f0fff9;color:#045740;padding:6px 10px;border-radius:999px;font-weight:700;font-size:13px;cursor:pointer}
-    .tag.active{background:linear-gradient(90deg,var(--accent),var(--accent-dark));color:#fff}
-    ul.posts-list{list-style:none;padding:0;margin:12px 0;display:flex;flex-direction:column;gap:8px;max-height:64vh;overflow:auto}
-    ul.posts-list li{padding:10px;border-radius:10px}
-    .post-btn{display:flex;flex-direction:column;align-items:flex-start;background:transparent;border:0;padding:8px;width:100%;text-align:left;cursor:pointer}
+    aside.sidebar .card, main.content .post-card{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:0 10px 30px rgba(8,18,16,0.05);border:1px solid #eef9f5}
+
+    .search input{width:100%;padding:10px 12px;border-radius:10px;border:1px solid #e9f6f1;font-size:14px}
+    .series-list{margin-top:12px}
+    .series-item{margin-bottom:8px}
+    .series-header{display:flex;justify-content:space-between;align-items:center;padding:8px;border-radius:8px;background:#f0fff9;color:#044b3f;font-weight:800;cursor:pointer}
+    .series-header .count{font-size:13px;color:var(--muted);font-weight:600}
+    .posts-list{list-style:none;padding:8px 6px;margin:6px 0 0 0;max-height:44vh;overflow:auto}
+    .posts-list li{padding:6px;border-radius:8px}
+    .post-btn{display:block;background:transparent;border:0;padding:8px 6px;text-align:left;width:100%;cursor:pointer}
     .post-btn strong{display:block;color:#06493f}
     .post-btn .preview{font-size:13px;color:var(--muted);margin-top:6px}
-    .post-btn.active{background:#f0fff9;border-left:4px solid var(--accent);padding-left:12px}
+    .post-btn.active{background:#f7fff9;border-left:4px solid var(--accent);padding-left:10px}
 
-    /* main content */
-    main.content{min-height:60vh}
-    .post-card{background:var(--card);border-radius:var(--radius);padding:22px;box-shadow:0 12px 30px rgba(8,18,16,0.06);border:1px solid #eef9f5}
-    .post-card h1{margin:0;font-size:24px;color:var(--accent-dark)}
+    main.content .post-card h1{margin:0;font-size:24px;color:var(--accent-dark)}
     .post-sub{color:var(--muted);margin-top:8px}
-    .post-card p{line-height:1.75;font-size:15px;color:#123532}
+    .post-card p{line-height:1.75}
     .post-meta{margin-top:18px;color:var(--muted);font-size:14px}
-    .post-actions{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap}
-    .small-link{background:transparent;border:1px solid #eef9f5;padding:8px 10px;border-radius:8px}
+    .small-link{display:inline-block;margin-top:12px;padding:8px 10px;border-radius:8px;background:#f3fff9;color:#045740;font-weight:700}
 
-    /* responsive adjustments */
-    @media(max-width:980px){
-      .post-btn{align-items:center}
-      .post-btn .preview{display:none}
-      aside.sidebar{order:2}
-      main.content{order:1}
-    }
-
-    /* misc */
+    /* empty */
     .empty{padding:40px;text-align:center;color:var(--muted)}
+
+    @media(max-width:980px){
+      .post-btn .preview{display:none}
+      .series-header{font-size:15px}
+    }
   </style>
 </head>
 <body>
@@ -81,7 +58,7 @@
   <!-- TOP NAV -->
   <header class="sitebar" role="banner">
     <div class="navwrap">
-      <div class="nav-left">
+      <div style="display:flex;align-items:center;gap:16px">
         <div class="brand">Jeet S Singh</div>
         <nav class="navlinks" aria-label="Primary">
           <a href="index.html">🏠 Home</a>
@@ -96,31 +73,23 @@
     </div>
   </header>
 
-  <!-- PAGE WRAPPER -->
   <div class="wrap" role="main">
-
     <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="card" aria-labelledby="sidebar-heading">
         <h3 id="sidebar-heading" style="margin:0 0 10px 0;color:#06493f">All Posts</h3>
 
-        <div class="search">
-          <input id="post-search" type="search" placeholder="Search posts by title or preview…" aria-label="Search posts">
-        </div>
+        <div class="search"><input id="post-search" type="search" placeholder="Search posts by title or preview…" aria-label="Search posts"></div>
 
-        <div class="series-filter" id="series-filter" aria-hidden="false" style="margin-top:12px">
-          <!-- dynamic series tags inserted here -->
+        <div id="series-list" class="series-list" aria-live="polite">
+          <!-- series groups inserted here -->
         </div>
-
-        <ul id="posts-list" class="posts-list" role="list" aria-live="polite">
-          <!-- posts inserted here by script -->
-        </ul>
 
         <div style="margin-top:12px;font-size:13px;color:var(--muted)">Tip: Click a post to read — direct links supported (example: <code>blog.html#13</code>).</div>
       </div>
     </aside>
 
-    <!-- MAIN CONTENT -->
+    <!-- MAIN -->
     <main class="content">
       <div id="post-content" class="post-card">
         <div class="empty">Loading posts…</div>
@@ -128,173 +97,175 @@
     </main>
   </div>
 
-  <!-- AJAX + Rendering Script -->
+  <!-- Script: fetch posts.json, build series groups, load fragments -->
   <script>
   (function(){
-    const POSTS_JSON = 'posts.json'; // manifest file (root)
-    const postsListEl = document.getElementById('posts-list');
+    const MANIFEST = 'posts.json';
+    const seriesListEl = document.getElementById('series-list');
     const contentEl = document.getElementById('post-content');
     const searchInput = document.getElementById('post-search');
-    const seriesFilterWrap = document.getElementById('series-filter');
 
-    let POSTS = []; // manifest
-    let ACTIVE_SERIES = null;
+    let POSTS = []; // manifest array
+    let GROUPED = {}; // series -> posts array
 
-    // fetch manifest and init
     async function init(){
       try {
-        const res = await fetch(POSTS_JSON + '?ts=' + Date.now());
-        if (!res.ok) throw new Error('Could not fetch posts.json');
-        POSTS = await res.json();
+        const r = await fetch(MANIFEST + '?ts=' + Date.now());
+        if (!r.ok) throw new Error('posts.json not found');
+        POSTS = await r.json();
 
-        // build series list
-        buildSeriesFilter(POSTS);
+        // group by series (default 'General')
+        GROUPED = POSTS.reduce((acc, p) => {
+          const s = p.series || 'General';
+          if (!acc[s]) acc[s] = [];
+          acc[s].push(p);
+          return acc;
+        }, {});
 
-        // render sidebar
-        renderSidebar(POSTS);
-
-        // handle initial hash (direct link)
-        const idFromHash = location.hash.replace('#','');
-        if (idFromHash) {
-          const p = POSTS.find(x=>String(x.id)===String(idFromHash));
+        buildSeriesUI(GROUPED);
+        // try hash load
+        const h = location.hash.replace('#','');
+        if (h) {
+          const p = POSTS.find(x=>String(x.id)===String(h));
           if (p) return loadPost(p);
         }
+        // default load first post
         if (POSTS.length) loadPost(POSTS[0]);
       } catch (err) {
         console.error(err);
-        postsListEl.innerHTML = '<li class="empty">Failed to load posts manifest.</li>';
-        contentEl.innerHTML = '<div class="empty">Content unavailable — check posts.json in repo.</div>';
+        contentEl.innerHTML = '<div class="empty">Could not load posts. Check posts.json.</div>';
       }
     }
 
-    // build unique series tags
-    function buildSeriesFilter(posts){
-      const series = Array.from(new Set(posts.map(p => p.series || 'General')));
-      series.unshift('All');
-      series.forEach(s => {
-        const but = document.createElement('button');
-        but.type = 'button';
-        but.className = 'tag';
-        but.textContent = s;
-        but.dataset.series = s === 'All' ? '' : s;
-        if (s === 'All') but.classList.add('active');
-        but.addEventListener('click', () => {
-          document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
-          but.classList.add('active');
-          ACTIVE_SERIES = but.dataset.series || null;
-          filterAndRender();
+    // Create collapsible series groups
+    function buildSeriesUI(grouped){
+      seriesListEl.innerHTML = '';
+      Object.keys(grouped).forEach(seriesName => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'series-item';
+
+        const header = document.createElement('div');
+        header.className = 'series-header';
+        header.tabIndex = 0;
+        header.setAttribute('role','button');
+        header.innerHTML = `<span>${escapeHtml(seriesName)}</span><span class="count">(${grouped[seriesName].length}) ▾</span>`;
+
+        const ul = document.createElement('ul');
+        ul.className = 'posts-list';
+        ul.style.display = 'none'; // collapsed initially
+
+        // fill posts
+        grouped[seriesName].forEach(post => {
+          const li = document.createElement('li');
+          const btn = document.createElement('button');
+          btn.className = 'post-btn';
+          btn.dataset.id = post.id;
+          btn.innerHTML = `<strong>${escapeHtml(post.title)}</strong>` + (post.preview ? `<div class="preview">${escapeHtml(post.preview)}</div>` : '');
+          btn.addEventListener('click', ()=> loadPost(post));
+          li.appendChild(btn);
+          ul.appendChild(li);
         });
-        seriesFilterWrap.appendChild(but);
+
+        // toggle
+        header.addEventListener('click', ()=> {
+          const open = ul.style.display === 'block';
+          // collapse all others
+          document.querySelectorAll('.posts-list').forEach(x => x.style.display = 'none');
+          document.querySelectorAll('.series-header').forEach(h => h.classList.remove('open'));
+          if (!open) {
+            ul.style.display = 'block';
+            header.classList.add('open');
+          } else {
+            ul.style.display = 'none';
+            header.classList.remove('open');
+          }
+        });
+        // also allow keyboard toggle
+        header.addEventListener('keydown', (e)=>{ if (e.key==='Enter' || e.key===' ') header.click(); });
+
+        wrapper.appendChild(header);
+        wrapper.appendChild(ul);
+        seriesListEl.appendChild(wrapper);
       });
     }
 
-    // filter posts by search & series
-    function filterAndRender(){
-      const q = (searchInput.value || '').trim().toLowerCase();
-      let filtered = POSTS.slice();
-      if (ACTIVE_SERIES) filtered = filtered.filter(p => (p.series || '') === ACTIVE_SERIES);
-      if (q) filtered = filtered.filter(p => (p.title + ' ' + p.preview).toLowerCase().includes(q));
-      renderSidebar(filtered);
-    }
-
-    // render sidebar list
-    function renderSidebar(list){
-      postsListEl.innerHTML = '';
-      if (!list.length) {
-        postsListEl.innerHTML = '<li class="empty">No posts found.</li>';
-        return;
-      }
-      list.forEach(post => {
-        const li = document.createElement('li');
-        const btn = document.createElement('button');
-        btn.className = 'post-btn';
-        btn.dataset.id = post.id;
-        btn.innerHTML = '<strong>' + escapeHtml(post.title) + '</strong>' +
-                        (post.preview ? ('<div class="preview">' + escapeHtml(post.preview) + '</div>') : '');
-        btn.addEventListener('click', ()=> loadPost(post));
-        li.appendChild(btn);
-        postsListEl.appendChild(li);
-      });
-      // try to set active based on current hash
-      const currentHash = location.hash.replace('#','');
-      if (currentHash) {
-        const activeBtn = Array.from(document.querySelectorAll('.post-btn')).find(b => b.dataset.id === currentHash);
-        if (activeBtn) {
-          document.querySelectorAll('.post-btn').forEach(x=>x.classList.remove('active'));
-          activeBtn.classList.add('active');
-        }
-      }
-    }
-
-    // load a post file and inject into content area
+    // Load a post fragment into main area
     async function loadPost(post){
       try {
-        // active state in sidebar
+        // set active class (clear existing)
         document.querySelectorAll('.post-btn').forEach(b=>b.classList.remove('active'));
-        const btn = document.querySelector(`.post-btn[data-id="${post.id}"]`);
-        if (btn) btn.classList.add('active');
+        const targetBtn = document.querySelector(`.post-btn[data-id="${post.id}"]`);
+        if (targetBtn) targetBtn.classList.add('active');
 
-        // update URL
-        history.replaceState(null, '', '#'+post.id);
+        // update URL hash without adding history entry
+        history.replaceState(null,'', '#'+post.id);
 
-        // temporary loading state
         contentEl.innerHTML = '<div class="empty">Loading article…</div>';
 
         const r = await fetch(post.file + '?ts=' + Date.now());
         if (!r.ok) throw new Error('Post file not found: ' + post.file);
-        let html = await r.text();
+        let fragment = await r.text();
 
-        // ensure the fragment has author footer; if not, append small footer
-        if (!/<footer[\s>]/i.test(html)) {
-          html += `<footer class="post-meta" style="margin-top:18px">
-                    <p>✍️ Written by <strong>Jeet S Singh</strong>, Author of
-                      <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">“Discipline Se Success Tak”</a>
-                    </p>
-                   </footer>`;
+        // Normalize: if the fragment already contains author/footer (search for key phrases), do NOT append
+        const normalized = fragment.trim();
+        const lower = normalized.toLowerCase();
+        const hasAuthor = /written by|✍️|jeet s singh|author of|amazon\.in\/dp\/b0fphvnrbk/.test(lower);
+
+        if (!hasAuthor) {
+          fragment += `<footer class="post-meta" style="margin-top:18px">
+                        <p>✍️ Written by <strong>Jeet S Singh</strong>, Author of
+                          <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">“Discipline Se Success Tak”</a>
+                        </p>
+                       </footer>`;
         } else {
-          // add amazon link if not present
-          if (!/amazon\.in\/dp\/B0FPHVNRBK/i.test(html)) {
-            html += `<div style="margin-top:14px;"><a class="small-link" href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">Buy on Amazon — Discipline Se Success Tak</a></div>`;
+          // ensure Amazon buy link exists somewhere — only add a subtle link if not present
+          if (!/amazon\.in\/dp\/b0fphvnrbk/.test(lower)) {
+            fragment += `<div style="margin-top:10px"><a class="small-link" href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">Buy on Amazon — Discipline Se Success Tak</a></div>`;
           }
         }
 
-        contentEl.innerHTML = html;
-
-        // optional: scroll to top
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        contentEl.innerHTML = fragment;
+        window.scrollTo({top:0, behavior:'smooth'});
       } catch (err) {
         console.error(err);
-        contentEl.innerHTML = '<div class="empty">Failed to load article. Check console for errors.</div>';
+        contentEl.innerHTML = '<div class="empty">Failed to load article. Check console.</div>';
       }
     }
 
-    // escape helper to avoid html injection when rendering titles/previews
-    function escapeHtml(str) {
-      return String(str).replace(/[&<>"']/g, function(m) {
-        return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]);
+    // Search box filter across all posts (keeps series collapsed/expanded state)
+    searchInput.addEventListener('input', function(){
+      const q = (this.value || '').trim().toLowerCase();
+      // for each series, toggle post visibility
+      Object.keys(GROUPED).forEach(seriesName => {
+        const posts = GROUPED[seriesName];
+        const wrapper = Array.from(seriesListEl.children).find(w => w.querySelector('.series-header').textContent.trim().startsWith(seriesName));
+        if (!wrapper) return;
+        const ul = wrapper.querySelector('.posts-list');
+        let anyVisible = false;
+        posts.forEach(p => {
+          const liBtn = ul.querySelector(`.post-btn[data-id="${p.id}"]`);
+          if (!liBtn) return;
+          const txt = (p.title + ' ' + (p.preview||'')).toLowerCase();
+          const show = q === '' ? true : txt.includes(q);
+          liBtn.parentElement.style.display = show ? 'block' : 'none';
+          if (show) anyVisible = true;
+        });
+        // if search active, expand series that have matches; else collapse all
+        if (q !== '') {
+          ul.style.display = anyVisible ? 'block' : 'none';
+          wrapper.querySelector('.series-header').classList.toggle('open', anyVisible);
+        } else {
+          ul.style.display = 'none';
+          wrapper.querySelector('.series-header').classList.remove('open');
+          // reset per-item display
+          ul.querySelectorAll('li').forEach(li=>li.style.display='block');
+        }
       });
-    }
-
-    // search input
-    searchInput.addEventListener('input', function(){ filterAndRender(); });
-
-    // keyboard: navigate next/prev with n / p
-    document.addEventListener('keydown', function(e){
-      if (e.key === 'n') { navigateOffset(1); }
-      if (e.key === 'p') { navigateOffset(-1); }
     });
-    function navigateOffset(offset){
-      const visibleBtns = Array.from(document.querySelectorAll('.post-btn'));
-      if (!visibleBtns.length) return;
-      const activeIndex = visibleBtns.findIndex(b => b.classList.contains('active'));
-      let next = (activeIndex === -1) ? 0 : activeIndex + offset;
-      if (next < 0) next = 0;
-      if (next >= visibleBtns.length) next = visibleBtns.length - 1;
-      visibleBtns[next].click();
-      visibleBtns[next].scrollIntoView({block:'nearest'});
-    }
 
-    // init on DOM ready
+    // escape helper
+    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m])); }
+
     document.addEventListener('DOMContentLoaded', init);
   })();
   </script>
