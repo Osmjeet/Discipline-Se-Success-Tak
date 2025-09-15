@@ -1,4 +1,4 @@
- <!doctype html>
+<!doctype html>
 <html lang="hi">
 <head>
   <meta charset="utf-8" />
@@ -35,7 +35,7 @@
     .actions{display:flex;gap:10px;align-items:center}
     .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:9px;border:0;font-weight:800;cursor:pointer}
     .btn.ghost{background:transparent;border:1px solid rgba(7,14,12,0.06);color:var(--dark)}
-    .collapse{margin-top:12px;padding:14px;background:#fbfffc;border-radius:10px;border:1px solid #eaf7f0;display:none}
+    .collapse{margin-top:12px;padding:14px;background:#fbfffc;border-radius:10px;border:1px solid #eaf7f0;display:none;overflow:auto}
     .collapse .content{max-width:100%;text-align:left}
     .author-line{font-size:13px;color:var(--muted);margin-top:12px;text-align:right}
     .centered-content{max-width:900px;margin:0 auto}
@@ -75,7 +75,6 @@
 
     <!-- posts grid -->
     <div class="grid" id="postsGrid" aria-live="polite">
-      <!-- JS fills cards here -->
       Loading posts...
     </div>
 
@@ -150,8 +149,6 @@
       document.getElementById('seriesSelect').value = series;
       // render
       renderGrid();
-      // clear search
-      //document.getElementById('searchInput').value = '';
     }
 
     function renderGrid(){
@@ -199,19 +196,23 @@
           const file = btn.dataset.file;
           const wrapper = document.getElementById('collapse-' + idx);
           if (!wrapper) return;
+
+          // If currently open, just close it
           if (wrapper.style.display==='block'){
             wrapper.style.display='none';
             wrapper.setAttribute('aria-hidden','true');
             btn.textContent='Read More →';
             return;
           }
-          // hide any other open wrappers (single open at a time)
+
+          // Close other open wrappers without scrolling
           document.querySelectorAll('.collapse').forEach(c=>{
             c.style.display='none'; c.setAttribute('aria-hidden','true');
-            const b = c.parentElement.querySelector('.btn-read');
+            const b = c.parentElement ? c.parentElement.querySelector('.btn-read') : null;
             if(b) b.textContent='Read More →';
           });
 
+          // Open this wrapper (no page jump)
           wrapper.style.display='block';
           wrapper.setAttribute('aria-hidden','false');
           btn.textContent='Hide';
@@ -221,19 +222,15 @@
             try {
               const res = await fetch(file);
               const text = await res.text();
-              // sanitize minimal: show inner article content only if full file; here we inject raw HTML as posts are our own
+              // Insert the fetched HTML (we assume posts are from same origin and safe)
               wrapper.innerHTML = `<div class="content">${text}</div><div class="author-line">✍️ Written by <strong>Jeet S Singh</strong>, Author of <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">“Discipline Se Success Tak”</a></div>`;
               wrapper.dataset.loaded = '1';
-              // scroll to wrapper smoothly
-              wrapper.scrollIntoView({behavior:'smooth', block:'center'});
             } catch(err){
               wrapper.innerHTML = '<div style="color:#b33">Error loading post.</div>';
               console.error(err);
             }
-          } else {
-            // already loaded — just scroll
-            wrapper.scrollIntoView({behavior:'smooth', block:'center'});
           }
+          // NO scrollIntoView — prevents page jump
         }
       });
     }
