@@ -28,26 +28,24 @@
     main{max-width:var(--container);margin:26px auto;padding:0 16px;}
     h1{color:var(--brand);font-size:26px;margin:6px 0 18px}
     .overview{background:#fff;padding:18px;border-radius:var(--radius);box-shadow:0 8px 20px rgba(6,20,18,0.05);margin-bottom:18px}
-    .series-list{display:flex;flex-direction:column;gap:10px}
-    .series-item{display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:12px;background:linear-gradient(180deg,#f7fffb,#ffffff);border:1px solid #e6f7f1;cursor:pointer}
-    .series-item .left{display:flex;gap:12px;align-items:center}
-    .series-count{color:var(--muted);font-weight:700}
-    .series-content{margin-top:14px;display:none;gap:14px;flex-direction:column}
-    .post-row{display:flex;gap:18px;align-items:flex-start;padding:14px;border-radius:12px;background:var(--card);border:1px solid #eef7f4}
-    .post-meta{width:42%;min-width:220px}
-    .post-title{font-size:18px;color:var(--brand);margin:0 0 8px}
-    .post-preview{color:#3b4f49;margin:0;font-size:15px}
-    .read-btn{display:inline-block;margin-top:10px;padding:8px 14px;background:var(--accent);color:#fff;border-radius:10px;font-weight:700;text-decoration:none;cursor:pointer}
-    .post-body{flex:1;padding:8px 12px;max-height:none}
-    .post-body .content{display:none}
-    .post-body .content.open{display:block}
-    .post-footer{margin-top:12px;color:var(--muted);font-size:14px}
+    .series-block{margin-top:18px}
+    .series-header{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-radius:10px;background:linear-gradient(180deg,#f7fffb,#ffffff);border:1px solid #e6f7f1}
+    .series-title{font-weight:800;color:var(--brand);font-size:16px}
+    .series-note{color:var(--muted);font-size:13px}
+    .cards-row{display:flex;gap:12px;overflow:auto;padding:14px 6px}
+    .card{min-width:260px;max-width:320px;background:var(--card);border-radius:10px;padding:12px;border:1px solid #eef7f4;box-shadow:0 8px 20px rgba(6,20,18,0.03);flex:0 0 auto}
+    .card h3{margin:0 0 8px;font-size:16px;color:var(--brand)}
+    .card p{margin:0;color:#344f48;font-size:14px;line-height:1.5}
+    .card .meta{margin-top:10px;display:flex;justify-content:space-between;align-items:center}
+    .read-btn{background:var(--accent);color:#fff;border:none;padding:8px 12px;border-radius:10px;font-weight:700;cursor:pointer}
+    /* area where expanded post will be injected */
+    .expanded-area{margin-top:10px;padding:16px;border-radius:10px;background:#fff;border:1px solid #e9f7f2;box-shadow:0 8px 20px rgba(6,20,18,0.03)}
     .small{font-size:13px;color:var(--muted)}
     footer{max-width:var(--container);margin:30px auto 60px;text-align:center;color:var(--muted)}
     /* responsive */
     @media(max-width:900px){
-      .post-row{flex-direction:column}
-      .post-meta{width:100%}
+      .cards-row{padding-left:6px}
+      .card{min-width:220px}
     }
   </style>
 </head>
@@ -67,26 +65,23 @@
   </header>
 
   <main>
-    <h1>Series-wise Blogs — Click series to expand</h1>
+    <h1>Series-wise Blogs</h1>
 
     <section class="overview" aria-labelledby="series-heading">
-      <div style="display:flex;flex-direction:column;gap:10px">
-        <div style="display:flex;gap:12px;align-items:center">
-          <strong style="font-size:16px;color:#234841">Series</strong>
+      <div>
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+          <strong style="font-size:15px;color:#234841">Available Series</strong>
+          <div class="small" style="margin-left:10px;color:var(--muted)">Click "Read" on a card to open that post inline</div>
         </div>
 
-        <div id="seriesContainer" class="series-list">
-          <!-- series populated by JS -->
+        <div id="seriesContainer">
+          <!-- series will be injected here by JS -->
           <div class="small">Loading posts…</div>
         </div>
       </div>
     </section>
 
-    <div id="postsArea" style="margin-top:18px">
-      <!-- Expanded post content appears inline here when user clicks Read -->
-    </div>
-
-    <div style="height:12px"></div>
+    <div id="debug" style="display:none"></div>
   </main>
 
   <footer>
@@ -95,216 +90,178 @@
 
   <script>
     // CONFIG
-    const POSTS_JSON = '/posts.json'; // make sure this exists in repo root
-    const POSTS_PATH = '/posts/';     // post files live in posts/*.html
-
+    const POSTS_JSON = '/posts.json'; // ensure posts.json exists at repo root
     // STATE
-    let posts = []; // loaded posts array
-    let groups = {}; // series groups
-    let seriesOrder = []; // order of series keys
+    let posts = [];
+    let groups = {};
+    let order = [];
 
-    // UTIL
-    const el = (sel, ctx=document) => ctx.querySelector(sel);
-    const elAll = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
+    // DOM helpers
+    const $ = (s, ctx=document) => ctx.querySelector(s);
+    const $$ = (s, ctx=document) => Array.from(ctx.querySelectorAll(s));
 
     async function init(){
       try {
-        const r = await fetch(POSTS_JSON, {cache: "no-store"});
-        if(!r.ok) throw new Error('posts.json not found or network error');
-        posts = await r.json(); // expected array of posts objects
-        /*
-          expected each post object minimal:
-          {
-            "id": 11,
-            "title": "Blog 11 — Negativity ko Identify karo",
-            "preview": "Problem का पहला solution है उसे पहचानना। ...",
-            "series": "Series 11–20",
-            "file": "posts/blog11.html"
-          }
-        */
+        const resp = await fetch(POSTS_JSON, {cache:'no-store'});
+        if(!resp.ok) throw new Error('Cannot fetch posts.json');
+        posts = await resp.json();
         if(!Array.isArray(posts)) throw new Error('posts.json must be an array');
         buildGroups();
-        renderSeriesList();
+        renderSeries();
+        attachSearch();
       } catch(err){
-        document.getElementById('seriesContainer').innerHTML = '<div style="color:#c23">Unable to load blogs. Check posts.json path.</div>';
+        document.getElementById('seriesContainer').innerHTML = `<div style="color:#c23">Unable to load blogs. Check posts.json path.</div>`;
         console.error(err);
       }
     }
 
     function buildGroups(){
       groups = {};
-      seriesOrder = [];
-      posts.forEach(p => {
+      order = [];
+      posts.forEach(p=>{
         const s = p.series || 'Uncategorized';
-        if(!groups[s]){ groups[s]=[]; seriesOrder.push(s); }
+        if(!groups[s]){ groups[s]=[]; order.push(s); }
         groups[s].push(p);
       });
-      // sort posts inside group by id ascending
-      seriesOrder.forEach(s => groups[s].sort((a,b)=> (a.id||0)-(b.id||0)));
+      // sort by id
+      for(const s of order) groups[s].sort((a,b)=>(a.id||0)-(b.id||0));
     }
 
-    function renderSeriesList(){
+    function renderSeries(){
       const container = document.getElementById('seriesContainer');
       container.innerHTML = '';
-      seriesOrder.forEach(seriesName => {
-        const items = groups[seriesName] || [];
-        const serWrap = document.createElement('div');
-        serWrap.className = 'series-block';
-        serWrap.innerHTML = `
-          <div class="series-item" role="button" tabindex="0">
-            <div class="left">
-              <div style="width:36px;height:36px;border-radius:8px;background:#f0fff9;border:1px solid #e2f6ee;display:flex;align-items:center;justify-content:center;color:#056d59">📑</div>
-              <div>
-                <div style="font-weight:700">${seriesName}</div>
-                <div class="small" style="margin-top:4px;color:var(--muted)">${items[0]?.seriesDescription || ''}</div>
-              </div>
+      order.forEach(seriesName => {
+        const items = groups[seriesName];
+        const seriesEl = document.createElement('div');
+        seriesEl.className = 'series-block';
+        seriesEl.innerHTML = `
+          <div class="series-header">
+            <div>
+              <div class="series-title">${escape(seriesName)}</div>
+              <div class="series-note">${escape(items[0]?.seriesDescription || '')}</div>
             </div>
-            <div class="series-count">${items.length ? '('+items.length+')' : '(0)'}</div>
+            <div class="small">(${items.length})</div>
           </div>
-          <div class="series-content" aria-hidden="true"></div>
+          <div class="cards-row" role="list"></div>
+          <div class="expanded-area" data-series="${escape(seriesName)}" style="display:none"></div>
         `;
-        container.appendChild(serWrap);
+        container.appendChild(seriesEl);
+        const row = seriesEl.querySelector('.cards-row');
+        const expandedArea = seriesEl.querySelector('.expanded-area');
 
-        const btn = serWrap.querySelector('.series-item');
-        const content = serWrap.querySelector('.series-content');
-        // populate content with posts preview
-        content.innerHTML = items.map(p => {
-          return `
-            <div class="post-row" data-id="${p.id}">
-              <div class="post-meta">
-                <div class="post-title">${escapeHtml(p.title)}</div>
-                <p class="post-preview">${escapeHtml(p.preview || '')}</p>
-                <div style="margin-top:8px">
-                  <button class="read-btn" data-file="${escapeHtml(p.file)}">Read</button>
-                </div>
-              </div>
-              <div class="post-body">
-                <div class="content" data-loaded="false" id="post-content-${p.id}">
-                  <!-- loaded content will be inserted here -->
-                </div>
-                <div class="post-footer small">ID: ${p.id} — File: ${p.file}</div>
-              </div>
+        items.forEach(p => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.setAttribute('role','listitem');
+          card.innerHTML = `
+            <h3>${escape(p.title)}</h3>
+            <p>${escape(p.preview || '')}</p>
+            <div class="meta">
+              <div class="small">ID: ${p.id}</div>
+              <button class="read-btn" data-file="${escape(p.file)}" data-id="${p.id}">Read</button>
             </div>
           `;
-        }).join('');
-        // toggle series
-        btn.addEventListener('click', ()=> toggleSeries(content));
-        btn.addEventListener('keyup', (e)=>{ if(e.key==='Enter') toggleSeries(content) });
-        // attach read handlers
-        content.querySelectorAll('.read-btn').forEach(b=>{
-          b.addEventListener('click', onReadClick);
+          row.appendChild(card);
+          const btn = card.querySelector('.read-btn');
+          btn.addEventListener('click', async (e)=>{
+            await openPostInline(seriesName, p, expandedArea);
+          });
         });
       });
     }
 
-    function toggleSeries(contentEl){
-      const open = contentEl.style.display === 'flex';
-      // close all
-      document.querySelectorAll('.series-content').forEach(c=> c.style.display = 'none');
-      if(!open){
-        contentEl.style.display = 'flex';
-        contentEl.style.flexDirection = 'column';
-      } else {
-        contentEl.style.display = 'none';
+    // open post html into expanded area below the series
+    async function openPostInline(seriesName, post, expandedArea){
+      // toggle: if already open same post => close
+      if(expandedArea.dataset.openFor == post.id){
+        expandedArea.style.display = 'none';
+        expandedArea.innerHTML = '';
+        expandedArea.dataset.openFor = '';
+        return;
       }
-    }
-
-    async function onReadClick(e){
-      const btn = e.currentTarget;
-      const file = btn.dataset.file;
-      const row = btn.closest('.post-row');
-      const id = row.dataset.id;
-      const contentBox = document.getElementById('post-content-'+id);
-
-      // if already open, close it
-      const wasOpen = contentBox.classList.contains('open');
-      closeAllOpenPosts();
-      if(wasOpen){
-        return; // now closed
-      }
-
-      // show loading placeholder
-      contentBox.innerHTML = '<div style="padding:14px;color:var(--muted)">Loading post…</div>';
-      contentBox.classList.add('open');
-      // fetch post html
+      // close any other expanded areas
+      document.querySelectorAll('.expanded-area').forEach(a=>{
+        a.style.display = 'none'; a.innerHTML=''; a.dataset.openFor='';
+      });
+      // show loading
+      expandedArea.style.display = 'block';
+      expandedArea.innerHTML = `<div class="small">Loading post…</div>`;
+      expandedArea.dataset.openFor = post.id;
       try {
-        const res = await fetch(file, {cache:"no-store"});
-        if(!res.ok) throw new Error('Post file not found: ' + file);
-        let text = await res.text();
-        // insert post content — ensure single "Written by Jeet S Singh" at end
-        // If the loaded HTML includes full page, try to extract main content heuristically.
-        const extracted = extractMainFromHTML(text) || text;
-        // Append written by only once (if not present)
-        if(!/Written by Jeet S Singh/i.test(extracted)){
-          text = extracted + `<p style="margin-top:14px"><em>— Written by Jeet S Singh</em></p>`;
-        } else {
-          text = extracted;
+        const res = await fetch(post.file, {cache:'no-store'});
+        if(!res.ok) throw new Error('Post file not found: ' + post.file);
+        const txt = await res.text();
+        const main = extractHTMLFragment(txt);
+        // ensure single Written by at end
+        let contentHtml = main;
+        if(!/Written by Jeet S Singh/i.test(contentHtml)){
+          contentHtml += `<p style="margin-top:16px"><em>— Written by Jeet S Singh</em></p>`;
         }
-        contentBox.innerHTML = text;
-        // scroll the post-row into view smoothly
-        row.scrollIntoView({behavior:'smooth', block:'start'});
+        expandedArea.innerHTML = contentHtml;
+        // scroll into view smoothly
+        expandedArea.scrollIntoView({behavior:'smooth', block:'start'});
       } catch(err){
-        contentBox.innerHTML = `<div style="padding:14px;color:#c23">Unable to load post. Check file path.</div>`;
+        expandedArea.innerHTML = `<div style="color:#c23">Unable to load post. Check file path.</div>`;
         console.error(err);
       }
     }
 
-    function closeAllOpenPosts(){
-      document.querySelectorAll('.post-body .content.open').forEach(c=>{
-        c.classList.remove('open'); 
-        c.style.display = 'none';
-        c.dataset.loaded = 'false';
-      });
-      // also collapse all content boxes (we will use class open when showing)
-      document.querySelectorAll('.post-body .content').forEach(cb=>{
-        cb.classList.remove('open');
-        cb.style.display = '';
-      });
-    }
-
-    // search
-    document.getElementById('qbtn').addEventListener('click', search);
-    document.getElementById('q').addEventListener('input', debounce(search, 220));
-
-    function search(){
-      const q = document.getElementById('q').value.trim().toLowerCase();
-      // loop through post rows, filter by title or preview
-      document.querySelectorAll('.post-row').forEach(row=>{
-        const title = (row.querySelector('.post-title')?.innerText || '').toLowerCase();
-        const preview = (row.querySelector('.post-preview')?.innerText || '').toLowerCase();
-        const visible = !q || title.includes(q) || preview.includes(q);
-        row.style.display = visible ? '' : 'none';
-      });
-      // If search is active, expand series that have any visible posts
-      document.querySelectorAll('.series-block').forEach(block=>{
-        const content = block.querySelector('.series-content');
-        if(!content) return;
-        const anyVisible = Array.from(content.querySelectorAll('.post-row')).some(r => r.style.display !== 'none');
-        content.style.display = anyVisible ? 'flex' : 'none';
-      });
-    }
-
-    // small helpers
-    function escapeHtml(s){ if(!s) return ''; return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
-    function debounce(fn, ms=200){ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), ms); } }
-
-    // Try to extract main fragment from fetched HTML (handles pages where you wrapped content in <main> or <article>)
-    function extractMainFromHTML(html){
-      // create DOMParser
-      try{
+    // try to parse a meaningful fragment from an HTML page (article/main/etc.)
+    function extractHTMLFragment(html){
+      try {
         const parser = new DOMParser();
         const d = parser.parseFromString(html, 'text/html');
-        const selectors = ['article','main','.post','.content','.author-card'];
+        const selectors = ['article','main','#main','.post','.author-card','.card','section'];
         for(const s of selectors){
           const node = d.querySelector(s);
-          if(node) return node.innerHTML;
+          if(node && node.innerHTML.trim()) return node.innerHTML;
         }
-        // fallback: body inner
-        return d.body.innerHTML;
-      }catch(e){ return html; }
+        // fallback to body
+        return d.body.innerHTML || html;
+      } catch(e){
+        return html;
+      }
     }
 
-    // init on load
+    // search implementation: filters visible cards and opens series if match
+    function attachSearch(){
+      const input = document.getElementById('q');
+      const btn = document.getElementById('qbtn');
+      btn.addEventListener('click', doSearch);
+      input.addEventListener('input', debounce(doSearch, 200));
+    }
+
+    function doSearch(){
+      const q = document.getElementById('q').value.trim().toLowerCase();
+      document.querySelectorAll('.cards-row').forEach(row=>{
+        let anyVisible = false;
+        row.querySelectorAll('.card').forEach(card=>{
+          const title = (card.querySelector('h3')?.innerText || '').toLowerCase();
+          const preview = (card.querySelector('p')?.innerText || '').toLowerCase();
+          const show = !q || title.includes(q) || preview.includes(q);
+          card.style.display = show ? '' : 'none';
+          if(show) anyVisible = true;
+        });
+        // if any card visible, leave series expanded region (do nothing), else hide expanded area
+        const seriesBlock = row.closest('.series-block');
+        const expanded = seriesBlock.querySelector('.expanded-area');
+        // optionally collapse expanded area if no match
+        if(!anyVisible){
+          expanded.style.display = 'none'; expanded.innerHTML=''; expanded.dataset.openFor='';
+        }
+      });
+      // (nice UX) scroll to first visible card if search non-empty
+      if(q){
+        const first = document.querySelector('.card[style*="display: block"], .card:not([style*="display: none"])');
+        if(first) first.scrollIntoView({behavior:'smooth', block:'center'});
+      }
+    }
+
+    // helpers
+    function escape(s){ if(!s && s!==0) return ''; return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
+    function debounce(fn, ms=200){ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), ms); } }
+
+    // kick off
     window.addEventListener('load', init);
   </script>
 </body>
