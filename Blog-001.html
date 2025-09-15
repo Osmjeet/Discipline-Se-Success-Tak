@@ -217,13 +217,11 @@
               if (!extracted) extracted = temp.querySelector('body');
               if (extracted) {
                 wrapper.innerHTML = `<div class="content">${extracted.outerHTML}</div>
-                  <div class="author-line">✍️ Written by <strong>Jeet S Singh</strong>, Author of <a href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">“Discipline Se Success Tak”</a></div>`;
               } else {
                 // last fallback: just insert raw text (but avoid full html tag dupes)
                 // remove full html/head/body tags if present
                 const cleaned = text.replace(/<\/?html[^>]*>/gi,'').replace(/<\/?head[^>]*>[\s\S]*?<\/head>/gi,'').replace(/<\/?body[^>]*>/gi,'').trim();
                 wrapper.innerHTML = `<div class="content">${cleaned}</div>
-                  <div class="author-line">✍️ Written by <strong>Jeet S Singh</strong></div>`;
               }
               wrapper.dataset.loaded = '1';
             } catch(err){
