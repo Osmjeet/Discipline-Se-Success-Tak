@@ -8,120 +8,297 @@
   <link rel="canonical" href="https://discipline-se-success-tak.vercel.app/blog.html" />
 
   <style>
-    body{margin:0;font-family:Inter,Roboto,Arial;background:#f9fbfa;color:#102827;line-height:1.75}
-    .wrap{max-width:900px;margin:0 auto;padding:28px}
-    h1{color:#06493f;text-align:center;margin:32px 0}
-    h2{color:#0a3d36;margin-top:20px;margin-bottom:10px}
-    p{margin-bottom:14px;font-size:1.05rem}
-    .preview{margin-bottom:44px;padding:24px;background:#fff;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
-    .preview h2{margin-top:0}
-    .actions{margin-top:14px}
-    .btn{display:inline-block;background:#0bb39a;color:#fff;padding:10px 16px;border-radius:8px;font-weight:600;text-decoration:none;cursor:pointer;border:none}
-    .btn:hover{background:#078a72}
-    .collapse{margin-top:16px;padding:12px;background:#fafafa;border-radius:8px;display:none}
-    footer{text-align:center;margin-top:28px;padding:16px;font-size:0.9rem;color:#666}
+    :root{
+      --accent:#06493f;
+      --accent-2:#0bb39a;
+      --muted:#6b7a75;
+      --card-bg:#ffffff;
+      --page-bg:#f6fbf9;
+      --maxw:940px;
+      --radius:14px;
+    }
 
-    /* Navigation */
-    nav{background:#06493f;padding:14px 20px}
-    nav .menu{max-width:900px;margin:auto;display:flex;gap:20px;flex-wrap:wrap}
-    nav a{color:#fff;text-decoration:none;font-weight:600}
+    html,body{height:100%;margin:0;font-family:Inter,Roboto,Arial,sans-serif;background:var(--page-bg);color:#102827;line-height:1.75;-webkit-font-smoothing:antialiased}
+    nav{background:var(--accent);padding:14px 18px;box-shadow:0 4px 18px rgba(0,0,0,0.06)}
+    nav .menu{max-width:var(--maxw);margin:0 auto;display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+    nav a{color:#fff;text-decoration:none;font-weight:700}
     nav a:hover{text-decoration:underline}
-    @media(max-width:600px){nav .menu{flex-direction:column;gap:10px}}
+
+    .wrap{max-width:var(--maxw);margin:28px auto;padding:18px}
+    h1{color:var(--accent);text-align:left;margin:8px 0 18px;font-size:28px}
+    .topbar{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .search-bar{display:flex;gap:8px;align-items:center}
+    .search-bar input{padding:10px 12px;border-radius:10px;border:1px solid #ddeee8;min-width:220px;max-width:420px}
+    .search-btn{background:var(--accent-2);color:#fff;border:none;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700}
+    .search-btn:hover{opacity:0.95}
+
+    .series-row{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 22px}
+    .series-pill{background:#eaf9f3;padding:12px 14px;border-radius:12px;color:var(--accent);font-weight:700;cursor:pointer;border:1px solid rgba(6,73,63,0.06)}
+    .series-pill.active{background:#dff8ef;box-shadow:inset 0 1px 0 rgba(255,255,255,0.5)}
+
+    #blog-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+
+    .preview{background:var(--card-bg);padding:18px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(6,20,18,0.05);border:1px solid #eef7f3;display:flex;flex-direction:column;min-height:180px}
+    .preview h2{margin:0 0 12px;color:var(--accent);font-size:18px;text-align:center}
+    .preview p{margin:0 auto 12px;text-align:center;color:#21433b}
+    .actions{text-align:center;margin-top:auto}
+    .btn{display:inline-block;background:var(--accent-2);color:#fff;padding:10px 14px;border-radius:10px;font-weight:700;border:none;cursor:pointer}
+    .btn:hover{opacity:0.95}
+
+    .expanded{margin-top:12px;padding:18px;border-radius:12px;background:#fbfff9;border:1px solid #e6f7ef;display:none}
+    .expanded .post-content{max-width:820px;margin:0 auto;text-align:left;color:#123532}
+    /* center read text while preview is centered */
+    .preview .post-content{ text-align:center }
+
+    footer{text-align:center;margin:36px 0;color:var(--muted);font-size:14px}
+
+    /* responsive */
+    @media(max-width:700px){
+      h1{font-size:22px}
+      .preview{min-height:160px}
+      .search-bar input{width:60%}
+    }
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
   <nav>
     <div class="menu">
-      <a href="index.html">🏠 Home</a>
-      <a href="author.html">👤 Author</a>
-      <a href="blog.html">📝 Blogs</a>
+      <div style="font-weight:800;color:#fff">📚 Discipline Se Success Tak</div>
+      <div style="margin-left:auto;display:flex;gap:12px;align-items:center">
+        <a href="index.html">🏠 Home</a>
+        <a href="author.html">👤 Author</a>
+        <a href="blog.html">📝 Blogs</a>
+      </div>
     </div>
   </nav>
 
   <div class="wrap">
-    <h1>📖 Blogs by Jeet S Singh</h1>
+    <div class="topbar">
+      <div>
+        <h1>📖 Blogs by Jeet S Singh</h1>
+        <div style="color:var(--muted);margin-top:6px">Series organized — click a post's Read to expand inline.</div>
+      </div>
+
+      <div class="search-bar" role="search" aria-label="Search blogs">
+        <input id="search" placeholder="Search blogs by title or preview..." aria-label="Search blogs">
+        <button class="search-btn" id="searchBtn">🔍</button>
+      </div>
+    </div>
+
+    <div class="series-row" id="series-row">
+      <div class="series-pill active" data-series="1">Series 1–10 (10)</div>
+      <div class="series-pill" data-series="2">Series 11–20 (2)</div>
+    </div>
+
     <div id="blog-list">Loading blogs...</div>
   </div>
 
   <footer>© 2025 Jeet S Singh — Discipline • Faith • Success</footer>
 
-  <script>
-    async function loadPosts(){
-      try {
-        const res = await fetch('posts.json');
-        const posts = await res.json();
-        const list = document.getElementById('blog-list');
-        list.innerHTML = '';
+<script>
+  // global cache
+  let allPosts = [];
+  let openPostId = null;
 
-        posts.forEach((p, idx)=>{
-          const card = document.createElement('div');
-          card.className = 'preview';
-
-          const h2 = document.createElement('h2');
-          h2.textContent = p.title;
-          card.appendChild(h2);
-
-          const snippet = document.createElement('p');
-          snippet.textContent = p.preview;
-          card.appendChild(snippet);
-
-          // actions
-          const actions = document.createElement('div');
-          actions.className = 'actions';
-
-          const readBtn = document.createElement('button');
-          readBtn.className = 'btn btn-read';
-          readBtn.type = 'button';
-          readBtn.dataset.file = p.file;
-          readBtn.dataset.id = 'post' + (idx+1);
-          readBtn.textContent = 'Read More →';
-          actions.appendChild(readBtn);
-
-          card.appendChild(actions);
-
-          const expandedWrapper = document.createElement('div');
-          expandedWrapper.className = 'collapse';
-          expandedWrapper.id = 'post' + (idx+1);
-          card.appendChild(expandedWrapper);
-
-          list.appendChild(card);
-        });
-
-        // attach click listeners
-        document.querySelectorAll('.btn-read').forEach(btn=>{
-          btn.addEventListener('click', async ()=>{
-            const file = btn.dataset.file;
-            const target = document.getElementById(btn.dataset.id);
-
-            if(target.style.display==='block'){
-              target.style.display='none';
-              btn.textContent='Read More →';
-              return;
-            }
-
-            target.style.display='block';
-            btn.textContent='Hide';
-
-            if(!target.dataset.loaded){
-              target.innerHTML='<em>Loading...</em>';
-              try {
-                const r = await fetch(file);
-                const html = await r.text();
-                target.innerHTML = html;
-                target.dataset.loaded = 'true';
-              } catch(e){
-                target.innerHTML='<em>Error loading blog.</em>';
-              }
-            }
-          });
-        });
-      } catch(e){
-        document.getElementById('blog-list').textContent = 'Error loading posts.json';
-      }
+  async function loadPosts(){
+    try {
+      const res = await fetch('posts.json');
+      allPosts = await res.json();
+      renderPosts(allPosts);
+    } catch(err){
+      document.getElementById('blog-list').textContent = 'Error loading posts.json — check path.';
+      console.error(err);
     }
-    loadPosts();
-  </script>
+  }
+
+  function renderPosts(posts){
+    const list = document.getElementById('blog-list');
+    list.innerHTML = '';
+
+    // render as grid of previews (one row per series not needed — user wanted all posts visible)
+    posts.forEach((p, idx)=>{
+      const id = 'post' + (idx+1);
+
+      const card = document.createElement('div');
+      card.className = 'preview';
+      card.dataset.series = p.series ?? 1;
+
+      const h2 = document.createElement('h2');
+      h2.textContent = p.title;
+      card.appendChild(h2);
+
+      const snippet = document.createElement('p');
+      snippet.textContent = p.preview;
+      card.appendChild(snippet);
+
+      const actions = document.createElement('div');
+      actions.className = 'actions';
+
+      const readBtn = document.createElement('button');
+      readBtn.className = 'btn btn-read';
+      readBtn.type = 'button';
+      readBtn.dataset.file = p.file;
+      readBtn.dataset.target = id;
+      readBtn.textContent = 'Read More →';
+      actions.appendChild(readBtn);
+
+      card.appendChild(actions);
+
+      const expanded = document.createElement('div');
+      expanded.className = 'expanded';
+      expanded.id = id;
+      // placeholder inner wrapper for loaded content
+      const inner = document.createElement('div');
+      inner.className = 'post-content';
+      expanded.appendChild(inner);
+
+      card.appendChild(expanded);
+      list.appendChild(card);
+    });
+
+    attachListeners();
+  }
+
+  function attachListeners(){
+    // Read buttons
+    document.querySelectorAll('.btn-read').forEach(btn=>{
+      btn.onclick = async (e) => {
+        const targetId = btn.dataset.target;
+        const target = document.getElementById(targetId);
+
+        // if same open -> close
+        if(openPostId && openPostId === targetId){
+          closeExpanded(targetId);
+          return;
+        }
+
+        // close any open
+        if(openPostId) closeExpanded(openPostId);
+
+        // open this
+        await openExpanded(btn, target);
+      };
+    });
+
+    // series pills
+    document.querySelectorAll('.series-pill').forEach(p=>{
+      p.onclick = () => {
+        document.querySelectorAll('.series-pill').forEach(x=>x.classList.remove('active'));
+        p.classList.add('active');
+        const series = p.dataset.series;
+        filterSeries(series);
+      };
+    });
+
+    // search
+    document.getElementById('searchBtn').onclick = doSearch;
+    document.getElementById('search').addEventListener('keydown', (ev)=>{
+      if(ev.key === 'Enter') doSearch();
+    });
+  }
+
+  function closeExpanded(id){
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.style.display = 'none';
+    // change corresponding button text back to Read More
+    document.querySelectorAll(`.btn-read[data-target="${id}"]`).forEach(b=> b.textContent = 'Read More →');
+    openPostId = null;
+  }
+
+  async function openExpanded(btn, target){
+    // set UI open before loading so user sees feedback
+    target.style.display = 'block';
+    btn.textContent = 'Hide';
+    openPostId = target.id;
+
+    // if already loaded, just scroll into view
+    if(target.dataset.loaded === 'true'){
+      scrollToElement(target);
+      return;
+    }
+
+    // load file and extract main content
+    target.querySelector('.post-content').innerHTML = '<em>Loading...</em>';
+    try {
+      const res = await fetch(btn.dataset.file);
+      const html = await res.text();
+
+      // parse fetched HTML and try to extract the main article/post content intelligently
+      const tmp = document.createElement('div');
+      tmp.innerHTML = html;
+
+      // possible selectors to look for common containers
+      const selectors = [
+        '#post-content', '.post-content', 'article', 'main', '.card', '.author-card', '.content', '.container'
+      ];
+
+      let extracted = '';
+      for(const sel of selectors){
+        const node = tmp.querySelector(sel);
+        if(node){
+          extracted = node.innerHTML.trim();
+          break;
+        }
+      }
+      // fallback: if nothing found, try body innerHTML
+      if(!extracted){
+        const bodyNode = tmp.querySelector('body');
+        extracted = bodyNode ? bodyNode.innerHTML.trim() : tmp.innerHTML.trim();
+      }
+
+      // remove any top-level <h1> or duplicate title if present
+      extracted = extracted.replace(/<h1[^>]*>[\s\S]*?<\/h1>/i, '');
+
+      // insert cleaned content
+      target.querySelector('.post-content').innerHTML = extracted;
+
+      // mark loaded
+      target.dataset.loaded = 'true';
+
+      // scroll into view (center-ish)
+      scrollToElement(target);
+    } catch(err){
+      console.error(err);
+      target.querySelector('.post-content').innerHTML = '<em>Error loading blog.</em>';
+    }
+  }
+
+  function scrollToElement(el){
+    // smooth scroll so that the expanded block appears nicely in view
+    const rect = el.getBoundingClientRect();
+    // compute absolute position
+    const top = window.pageYOffset + rect.top - 80; // offset header
+    window.scrollTo({top, behavior: 'smooth'});
+  }
+
+  function doSearch(){
+    const q = document.getElementById('search').value.trim().toLowerCase();
+    if(!q){
+      renderPosts(allPosts);
+      return;
+    }
+    const filtered = allPosts.filter(p => {
+      return (p.title && p.title.toLowerCase().includes(q)) ||
+             (p.preview && p.preview.toLowerCase().includes(q));
+    });
+    renderPosts(filtered);
+  }
+
+  function filterSeries(series){
+    // show only cards matching series value (posts must have p.series property in posts.json)
+    document.querySelectorAll('#blog-list .preview').forEach(card=>{
+      const cardSeries = card.dataset.series || '1';
+      card.style.display = (String(cardSeries) === String(series)) ? 'flex' : 'none';
+    });
+    // close any open
+    if(openPostId) closeExpanded(openPostId);
+  }
+
+  // initial load
+  loadPosts();
+</script>
+
 </body>
 </html>
