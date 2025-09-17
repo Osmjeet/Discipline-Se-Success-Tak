@@ -76,5 +76,11 @@
     "title": "Blog 13: Overthinking का इलाज",
     "preview": "जितना सोचते हो, उतना ही फँसते हो — Action ही असली इलाज है। छोटे steps, journaling और action से clarity मिलती है।",
     "file": "posts/blog13.html"
+  },
+  {
+  "series": 2,
+  "title": "Blog 14: Criticism को Fuel बनाओ",
+  "preview": "Criticism आपको रोकने नहीं, आगे बढ़ाने के लिए होता है। सीखो कि कैसे negative comments को filter करके उन्हें अपनी growth का सबसे बड़ा हथियार बनाया जा सकता है।",
+  "file": "posts/blog14.html"
   }
 ]
