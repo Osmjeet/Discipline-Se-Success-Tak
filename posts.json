@@ -82,5 +82,11 @@
   "title": "Blog 14: Criticism को Fuel बनाओ",
   "preview": "Criticism आपको रोकने नहीं, आगे बढ़ाने के लिए होता है। सीखो कि कैसे negative comments को filter करके उन्हें अपनी growth का सबसे बड़ा हथियार बनाया जा सकता है।",
   "file": "posts/blog14.html"
+  },
+  {
+  "series": 2,
+  "title": "Blog 15: Fear of Failure को तोड़ो",
+  "preview": "डर को देखो, समझो और उसे action से तोड़ दो। Failure कोई end नहीं है, बल्कि feedback है जो आपको अगली बार और मजबूत बनाता है।",
+  "file": "posts/blog15.html"
   }
 ]
