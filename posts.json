@@ -127,5 +127,12 @@
   "title": "Blog 21: Accept Change, Unlock Growth",
   "preview": "जो बदलाव को अपनाता है, वही आगे बढ़ता है।",
   "file": "posts/blog21.html"
-  }
+  },
+    {
+    "id": 22,
+    "series": 3,
+    "title": "Blog 22: Break the Comfort Zone Trap",
+    "preview": "Comfort zone मीठा है, पर growth हमेशा उसके बाहर है।",
+    "file": "posts/blog22.html"
+    }
 ]
