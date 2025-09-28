@@ -134,5 +134,12 @@
     "title": "Blog 22: Break the Comfort Zone Trap",
     "preview": "Comfort zone मीठा है, पर growth हमेशा उसके बाहर है।",
     "file": "posts/blog22.html"
-    }
+    },
+   {
+    "id": 23,
+    "series": 3,
+    "title": "Blog 23: Fail Fast, Learn Faster",
+    "preview": "हर गलती अगली जीत की तैयारी है।",
+    "file": "posts/blog23.html"
+  }
 ]
