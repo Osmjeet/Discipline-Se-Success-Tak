@@ -141,5 +141,12 @@
     "title": "Blog 23: Fail Fast, Learn Faster",
     "preview": "हर गलती अगली जीत की तैयारी है।",
     "file": "posts/blog23.html"
+  },
+  {
+    "id": 24,
+    "series": 3,
+    "title": "Blog 24: Inner Strength — Turning Setbacks into Comebacks",
+    "preview": "गिरना normal है, पर उठना greatness है।",
+    "file": "posts/blog24.html"
   }
 ]
