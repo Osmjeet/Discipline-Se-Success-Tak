@@ -1,0 +1,7 @@
+body { font-family: Arial, sans-serif; background:#f7f7f7; }
+.container { max-width:800px; margin:20px auto; padding:20px; background:#fff; border-radius:10px; }
+h1,h2,h3 { color:#06493f; }
+.qa { margin:18px 0; }
+.opt, label { display:block; margin:6px 0; }
+.btn { display:inline-block; padding:10px 18px; background:#0bb39a; color:#fff; border-radius:6px; text-decoration:none; }
+.btn:hover { background:#088c75; }
