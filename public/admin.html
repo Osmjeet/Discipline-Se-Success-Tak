@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quiz Admin — Results & Leaderboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{--bg:#f9fbfa;--card:#fff;--accent:#0bb39a;--accent2:#078a72;--dark:#06493f;--radius:14px;--maxw:1100px}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:#122;line-height:1.7}
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:20px}
+    .card{background:var(--card);border:1px solid #eef7f4;border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,.06);padding:18px;margin:16px 0}
+    h1,h2{color:var(--dark)} .muted{color:#556}
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .btn{padding:10px 14px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;font-weight:800;cursor:pointer}
+    .btn.ghost{background:#fff;border:1px solid #e6f4ef;color:#06493f}
+    input,select{padding:10px 12px;border:1px solid #e6efec;border-radius:10px;outline:none}
+    table{width:100%;border-collapse:separate;border-spacing:0}
+    th,td{padding:10px;border-bottom:1px solid #eef3f1;text-align:left;font-size:14px}
+    th{color:#06493f;cursor:pointer;user-select:none}
+    .pill{display:inline-block;padding:2px 8px;border-radius:999px;background:#eef9f6;color:#06493f;font-weight:700;font-size:12px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+    .kpi{padding:12px;border-radius:12px;background:#f6fffb;border:1px solid #e6f4ef}
+    .kpi h3{margin:0 0 6px;font-size:14px;color:#066}
+    .kpi .val{font-weight:900;font-size:22px;color:#06493f}
+    .note{font-size:12px;color:#667}
+    .footer{margin-top:18px;text-align:center;color:#667;font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>📊 Quiz Admin</h1>
+      <p class="muted">Leaderboard, filters, export — सब एक जगह.</p>
+      <div class="row" style="margin-top:8px">
+        <button class="btn" onclick="loadAll()">Refresh</button>
+        <button class="btn ghost" onclick="exportCSV()">Export CSV</button>
+        <input id="search" placeholder="Search name/email/phone..." oninput="render()" />
+        <select id="minScore" onchange="render()">
+          <option value="">Min Score (all)</option>
+          <option>5</option><option>10</option><option>15</option><option>20</option><option>25</option>
+        </select>
+        <select id="dedupe" onchange="render()">
+          <option value="none">All attempts</option>
+          <option value="email">Best per email</option>
+          <option value="phone">Best per phone</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="kpi"><h3>Total Submissions</h3><div class="val" id="kTotal">—</div></div>
+      <div class="kpi"><h3>Unique Emails</h3><div class="val" id="kEmails">—</div></div>
+      <div class="kpi"><h3>Avg Score</h3><div class="val" id="kAvg">—</div></div>
+      <div class="kpi"><h3>Perfect Scores</h3><div class="val" id="kPerfect">—</div></div>
+    </div>
+
+    <div class="card">
+      <h2>🏆 Leaderboard (Top 10)</h2>
+      <div id="topList" class="note">Loading…</div>
+    </div>
+
+    <div class="card">
+      <h2>📄 All Results</h2>
+      <div class="note">Columns sortable — header पर click करें.</div>
+      <table id="tbl">
+        <thead>
+          <tr>
+            <th onclick="sortBy('name')">Name</th>
+            <th onclick="sortBy('email')">Email</th>
+            <th onclick="sortBy('phone')">Phone</th>
+            <th onclick="sortBy('city')">City</th>
+            <th onclick="sortBy('score')">Score</th>
+            <th onclick="sortBy('ts')">Time</th>
+            <th>Device</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+
+    <div class="footer">© Jeet S. Singh — Quiz Admin</div>
+  </div>
+
+<script>
+let RAW = [];
+let SORT = { key: 'ts', dir: 'desc' };
+
+async function loadAll(){
+  const r = await fetch('/api/results');
+  const j = await r.json();
+  RAW = (j && j.items) ? j.items : [];
+  // KPIs
+  gid('kTotal').textContent = RAW.length;
+  const emails = new Set(RAW.map(x=> (x.email||'').trim().toLowerCase()).filter(Boolean));
+  gid('kEmails').textContent = emails.size;
+  const avg = RAW.length ? (RAW.reduce((s,x)=>s+(x.score||0),0)/RAW.length).toFixed(2) : '0.00';
+  gid('kAvg').textContent = avg;
+  const maxScore = maxPossible();
+  const perfects = RAW.filter(x=> (x.score||0)===maxScore).length;
+  gid('kPerfect').textContent = perfects;
+  // Top
+  const topR = await fetch('/api/top?limit=10').then(r=>r.json()).catch(()=>({items:[]}));
+  renderTop(topR.items || []);
+  // Table
+  render();
+}
+
+function maxPossible(){
+  // अंदाज़न 25 Q — अगर अलग है तो बदल लेना
+  const names = new Set(RAW.flatMap(x => Object.keys(x.answers||{})));
+  const guessed = Math.max(25, names.size || 25);
+  return guessed;
+}
+
+function renderTop(items){
+  if(!items.length){ gid('topList').textContent='No data'; return; }
+  const html = items.map((x,i)=> `
+    <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eef3f1">
+      <div><span class="pill">#${i+1}</span> <strong>${esc(x.name||'')}</strong> — ${esc(x.email||'')} • ${esc(x.phone||'')}</div>
+      <div><strong>${x.score}</strong> pts • <span class="muted">${fmt(x.ts)}</span></div>
+    </div>`
+  ).join('');
+  gid('topList').innerHTML = html;
+}
+
+function render(){
+  let list = RAW.slice();
+  const q = (gid('search').value||'').trim().toLowerCase();
+  if(q){
+    list = list.filter(x => [x.name,x.email,x.phone,x.city].some(v => (v||'').toLowerCase().includes(q)));
+  }
+  const min = parseInt(gid('minScore').value||'0',10);
+  if(min) list = list.filter(x => (x.score||0) >= min);
+
+  // de-dupe best attempt per email/phone
+  const mode = gid('dedupe').value;
+  if(mode==='email' || mode==='phone'){
+    const keyFn = (m) => (m || '').trim().toLowerCase();
+    const map = new Map();
+    for(const x of list){
+      const key = keyFn(x[mode]);
+      if(!key) continue;
+      const prev = map.get(key);
+      if(!prev) map.set(key, x);
+      else {
+        // keep best: higher score, then earlier ts
+        if (x.score > prev.score || (x.score===prev.score && new Date(x.ts) < new Date(prev.ts))) {
+          map.set(key, x);
+        }
+      }
+    }
+    list = Array.from(map.values());
+  }
+
+  // sort
+  list.sort((a,b)=>{
+    const dir = (SORT.dir==='asc') ? 1 : -1;
+    const ka = (a[SORT.key] ?? ''), kb = (b[SORT.key] ?? '');
+    if(SORT.key==='score') return dir * ((ka||0)-(kb||0));
+    if(SORT.key==='ts') return dir * (new Date(ka)-new Date(kb));
+    return dir * String(ka).localeCompare(String(kb));
+  });
+
+  // render
+  const rows = list.map(x=> `
+    <tr>
+      <td>${esc(x.name||'')}</td>
+      <td>${esc(x.email||'')}</td>
+      <td>${esc(x.phone||'')}</td>
+      <td>${esc(x.city||'')}</td>
+      <td><strong>${x.score}</strong></td>
+      <td>${fmt(x.ts)}</td>
+      <td class="muted">${esc(x.ua||'')}</td>
+    </tr>
+  `).join('');
+  gid('tbody').innerHTML = rows || `<tr><td colspan="7" class="muted">No results</td></tr>`;
+}
+
+function sortBy(key){
+  if(SORT.key===key){ SORT.dir = (SORT.dir==='asc')?'desc':'asc'; }
+  else { SORT.key = key; SORT.dir='desc'; }
+  render();
+}
+
+function exportCSV(){
+  const headers = ["name","email","phone","city","score","ts","ua"];
+  const lines = [headers.join(",")];
+  RAW.forEach(x=>{
+    const row = headers.map(h => `"${String(x[h]??'').replace(/"/g,'""')}"`).join(",");
+    lines.push(row);
+  });
+  const blob = new Blob([lines.join("\n")], {type:"text/csv;charset=utf-8"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `quiz-results-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+}
+
+function esc(s){ return String(s).replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])); }
+function gid(id){ return document.getElementById(id); }
+function fmt(ts){ try{ return new Date(ts).toLocaleString(); }catch(_){ return ts||''; } }
+
+loadAll();
+</script>
+</body>
+</html>
