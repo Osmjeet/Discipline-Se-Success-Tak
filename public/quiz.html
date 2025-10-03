@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <title>DSST — Mega Quiz (25Q)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{--bg:#f9fbfa;--card:#fff;--accent:#0bb39a;--accent2:#078a72;--dark:#06493f;--radius:14px;--maxw:900px}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:#122;line-height:1.75}
+    .container{max-width:var(--maxw);margin:0 auto;padding:20px}
+    .card{background:var(--card);border:1px solid #eef7f4;border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,.06);padding:20px;margin:18px 0}
+    h1,h2,h3{color:var(--dark)} .btn{display:inline-block;padding:12px 18px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;font-weight:800;cursor:pointer;text-decoration:none}
+    .btn-ghost{background:#fff;border:1px solid #e6f4ef;color:#06493f}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px} @media(max-width:680px){.grid{grid-template-columns:1fr}}
+    label{display:block;font-weight:700;margin:8px 0 6px}
+    input[type="text"],input[type="email"],input[type="tel"]{width:100%;padding:10px 12px;border:1px solid #e6efec;border-radius:10px;outline:none}
+    .qa{margin:18px 0} .qa h3{font-size:18px;margin:0 0 10px;color:#0b3f36} .opt{display:block;margin:8px 0}
+    .hr{height:1px;background:#e9f5f1;margin:16px 0} .hidden{display:none} .top-link{color:#078a72;font-weight:800;text-decoration:none}
+  </style>
+</head>
+<body>
+
+<div class="container" id="introPage">
+  <div class="card">
+    <h1>📘 Discipline Se Success Tak — Mega Quiz</h1>
+    <p>पहले 10 top scorers (fastest perfect/highest) को ₹250 each. 🎁</p>
+    <div class="hr"></div>
+    <p>👉 Free Book Read: <a class="top-link" href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">Discipline Se Success Tak</a></p>
+    <div style="margin-top:14px">
+      <a class="btn" href="#" onclick="showForm()">🚀 Start Quiz</a>
+    </div>
+  </div>
+</div>
+
+<div class="container hidden" id="formPage">
+  <div class="card">
+    <h2>📋 Fill Your Details</h2>
+    <div class="grid">
+      <div><label for="name">Full Name</label><input id="name" type="text" required></div>
+      <div><label for="email">Email</label><input id="email" type="email" required></div>
+      <div><label for="phone">WhatsApp / Phone</label><input id="phone" type="tel" required></div>
+      <div><label for="city">City (optional)</label><input id="city" type="text"></div>
+    </div>
+    <div style="margin-top:12px">
+      <button class="btn" onclick="startQuiz()">Start Quiz</button>
+      <button class="btn btn-ghost" onclick="backIntro()">Back</button>
+    </div>
+  </div>
+</div>
+
+<div class="container hidden" id="quizPage">
+  <div class="card">
+    <h2>📝 Quiz</h2>
+    <p>👉 Free Book Read Again: <a class="top-link" href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">Discipline Se Success Tak</a></p>
+    <div class="hr"></div>
+    <form id="quizForm"></form>
+    <div style="margin-top:16px">
+      <button class="btn" onclick="submitQuiz()">Submit Quiz</button>
+      <button class="btn btn-ghost" onclick="resetQuiz()">Reset</button>
+    </div>
+  </div>
+</div>
+
+<div class="container hidden" id="resultPage">
+  <div class="card">
+    <h2>🎉 Thank You!</h2>
+    <p id="scoreText"></p>
+    <p>👉 Free Book Read: <a class="top-link" href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">Discipline Se Success Tak</a></p>
+    <div style="margin-top:12px">
+      <button class="btn btn-ghost" onclick="restart()">Go to Start</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let QUIZ = null;
+
+function gid(id){ return document.getElementById(id); }
+function toggle(id, show){ gid(id).classList[show?"remove":"add"]("hidden"); }
+function v(id){ return gid(id)?.value?.trim(); }
+
+function showForm(){ toggle("introPage", false); toggle("formPage", true); }
+function backIntro(){ toggle("formPage", false); toggle("introPage", true); }
+
+async function startQuiz(){
+  if(!v("name") || !v("email") || !v("phone")){ alert("Please fill Name, Email, Phone."); return; }
+  // Load quiz.json first time
+  if(!QUIZ){
+    const res = await fetch("/quiz.json", {cache:"no-store"});
+    QUIZ = await res.json();
+    buildQuiz(QUIZ.questions || []);
+  }
+  toggle("formPage", false); toggle("quizPage", true); window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function buildQuiz(questions){
+  const form = gid("quizForm");
+  form.innerHTML = "";
+  questions.forEach((q, i) => {
+    const div = document.createElement("div");
+    div.className = "qa";
+    div.innerHTML = `
+      <h3>Q${i+1}. ${escapeHtml(q.q)}</h3>
+      ${q.options.map((opt, idx) => `
+        <label class="opt">
+          <input type="radio" name="q${q.id}" value="${idx}">
+          ${escapeHtml(opt)}
+        </label>`).join("")}
+    `;
+    form.appendChild(div);
+  });
+}
+
+function escapeHtml(s){ return String(s||"").replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])); }
+
+function submitQuiz(){
+  if(!QUIZ || !Array.isArray(QUIZ.questions)){ alert("Quiz not loaded"); return; }
+  // validate all answered
+  for(const q of QUIZ.questions){
+    if(!document.querySelector(`input[name="q${q.id}"]:checked`)){
+      alert("Please answer all questions."); return;
+    }
+  }
+  // score
+  let score = 0;
+  const answers = {};
+  for(const q of QUIZ.questions){
+    const sel = document.querySelector(`input[name="q${q.id}"]:checked`);
+    const chosen = parseInt(sel.value, 10);
+    if(chosen === q.answer) score++;
+    answers[`q${q.id}`] = (chosen === q.answer) ? "correct" : "wrong";
+  }
+
+  // send
+  const payload = {
+    name: v("name"),
+    email: v("email"),
+    phone: v("phone"),
+    city: v("city"),
+    score,
+    answers
+  };
+  fetch("/api/save", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify(payload) }).catch(()=>{});
+
+  // show result
+  toggle("quizPage", false); toggle("resultPage", true);
+  gid("scoreText").innerHTML = `<strong>${payload.name}</strong>, आपका Score: <strong>${score}/${QUIZ.meta?.total || QUIZ.questions.length}</strong>.<br>Top 10 fastest perfect/highest win ₹250 (Terms apply). Screenshot लेकर @jeetssingh9 को tag करें!`;
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function resetQuiz(){ (gid("quizForm")||{}).reset?.(); window.scrollTo({top:0,behavior:"smooth"}); }
+function restart(){
+  toggle("resultPage", false); toggle("introPage", true);
+  (gid("quizForm")||{}).reset?.();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+</script>
+</body>
+  </html>
