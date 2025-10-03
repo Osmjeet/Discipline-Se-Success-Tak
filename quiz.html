@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <title>Discipline Se Success Tak — Mega Quiz (25 Q)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="25-Question MCQ Quiz from the book 'Discipline Se Success Tak'. Fill details, attempt quiz, and see your score.">
+  <style>
+    :root{
+      --bg:#f9fbfa; --card:#ffffff; --accent:#0bb39a; --accent2:#078a72; --dark:#06493f;
+      --muted:#5f6e6a; --radius:14px; --maxw:900px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial; background:var(--bg); color:#122; line-height:1.75}
+    .container{max-width:var(--maxw); margin:0 auto; padding:20px}
+    h1,h2,h3{color:var(--dark)}
+    a.btn,button.btn{display:inline-block; padding:12px 18px; background:linear-gradient(90deg,var(--accent),var(--accent2)); color:#fff; border:none; border-radius:10px; font-weight:800; text-decoration:none; cursor:pointer}
+    a.btn:hover,button.btn:hover{filter:brightness(0.95)}
+    .btn-ghost{background:#fff; border:1px solid #e6f4ef; color:#06493f}
+    .card{background:#fff; padding:20px; border-radius:14px; box-shadow:0 8px 24px rgba(0,0,0,0.06); border:1px solid #eef7f4; margin:18px 0}
+    .hidden{display:none}
+    label{display:block; font-weight:700; margin:8px 0 6px}
+    input[type="text"],input[type="email"],input[type="tel"]{width:100%; padding:10px 12px; border:1px solid #e6efec; border-radius:10px; outline:none}
+    .qa{margin:18px 0}
+    .qa h3{font-size:18px; margin:0 0 10px; color:#0b3f36}
+    .opt{display:block; margin:8px 0; padding-left:2px}
+    .top-link{color:var(--accent2); font-weight:800; text-decoration:none}
+    .note{font-size:13px; color:var(--muted)}
+    .grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    @media(max-width:680px){ .grid{grid-template-columns:1fr} }
+    .hr{height:1px; background:#e9f5f1; margin:16px 0}
+  </style>
+</head>
+<body>
+
+<!-- Intro Page -->
+<div class="container" id="introPage">
+  <div class="card">
+    <h1>📘 Discipline Se Success Tak — Mega Quiz</h1>
+    <p>अपनी knowledge check करो और जीतों rewards! पहले 10 top scorers (fastest perfect/highest) को ₹250 each. 🎁</p>
+    <div class="hr"></div>
+    <p>👉 Free Book Read: 
+      <a class="top-link" href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">Discipline Se Success Tak</a>
+    </p>
+    <div style="margin-top:14px">
+      <a class="btn" href="#" onclick="showForm()">🚀 Start Quiz</a>
+    </div>
+  </div>
+</div>
+
+<!-- Form Page -->
+<div class="container hidden" id="formPage">
+  <div class="card">
+    <h2>📋 Fill Your Details</h2>
+    <div class="grid">
+      <div>
+        <label for="name">Full Name</label>
+        <input id="name" type="text" placeholder="Your full name" required>
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="you@example.com" required>
+      </div>
+      <div>
+        <label for="phone">WhatsApp / Phone</label>
+        <input id="phone" type="tel" placeholder="10-digit number" required>
+      </div>
+      <div>
+        <label for="city">City (optional)</label>
+        <input id="city" type="text" placeholder="Your city">
+      </div>
+    </div>
+    <p class="note">Note: यह पेज अभी local score दिखाता है. Winners pick करने के लिए Google Form से connect करना चाहो तो बताना, मैं map कर दूँगा.</p>
+    <div style="margin-top:12px">
+      <button class="btn" onclick="startQuiz()">Start Quiz</button>
+      <button class="btn btn-ghost" onclick="backIntro()">Back</button>
+    </div>
+  </div>
+</div>
+
+<!-- Quiz Page -->
+<div class="container hidden" id="quizPage">
+  <div class="card">
+    <h2>📝 Quiz</h2>
+    <p>👉 Free Book Read Again: 
+      <a class="top-link" href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">Discipline Se Success Tak</a>
+    </p>
+    <div class="hr"></div>
+
+    <form id="quizForm">
+
+      <!-- Q1 -->
+      <div class="qa">
+        <h3>Q1. Book के पहले chapter में discipline को superpower क्यों कहा गया है और किस तरह ये average इंसान को extraordinary बना सकता है?</h3>
+        <label class="opt"><input type="radio" name="q1"> Discipline सिर्फ़ short-term motivation जैसा है</label>
+        <label class="opt"><input type="radio" name="q1" value="correct"> Discipline habits को automate करता है जिससे results लगातार आते हैं</label>
+        <label class="opt"><input type="radio" name="q1"> Discipline बिना talent के भी life बदल सकता है</label>
+        <label class="opt"><input type="radio" name="q1"> Discipline तब useful होता है जब कोई आपको control करे</label>
+      </div>
+
+      <!-- Q2 -->
+      <div class="qa">
+        <h3>Q2. Book में consistency को किससे compare किया गया है और क्यों इसे success का असली secret कहा गया है?</h3>
+        <label class="opt"><input type="radio" name="q2"> Consistency को boring routine से compare किया गया है</label>
+        <label class="opt"><input type="radio" name="q2" value="correct"> Consistency को powerful machine से compare किया गया है जो हर दिन results लाती है</label>
+        <label class="opt"><input type="radio" name="q2"> Consistency को सिर्फ़ luck पर dependent बताया गया है</label>
+        <label class="opt"><input type="radio" name="q2"> Consistency को temporary excitement कहा गया है</label>
+      </div>
+
+      <!-- Q3 -->
+      <div class="qa">
+        <h3>Q3. छोटे steps लेने की strategy क्यों काम करती है और book में इसे कैसे explain किया गया है?</h3>
+        <label class="opt"><input type="radio" name="q3" value="correct"> छोटे steps लेने से आप बड़ी problems avoid कर सकते हो</label>
+        <label class="opt"><input type="radio" name="q3"> छोटे steps लेने से सिर्फ़ short-term satisfaction मिलता है</label>
+        <label class="opt"><input type="radio" name="q3"> छोटे steps लेने से long-term failure आता है</label>
+        <label class="opt"><input type="radio" name="q3"> छोटे steps लेने से motivation automatically बढ़ जाता है</label>
+      </div>
+
+      <!-- Q4 -->
+      <div class="qa">
+        <h3>Q4. Failures को book में किस तरह देखा गया है और उनसे क्या सीखने का message दिया गया है?</h3>
+        <label class="opt"><input type="radio" name="q4"> Failures का मतलब है कि journey यहीं खत्म हो गई</label>
+        <label class="opt"><input type="radio" name="q4"> Failures आपकी किस्मत खराब होने का proof हैं</label>
+        <label class="opt"><input type="radio" name="q4"> Failures हमेशा दूसरों की वजह से आते हैं</label>
+        <label class="opt"><input type="radio" name="q4" value="correct"> Failures को रास्ता बदलने का संकेत और सीखने का मौका माना गया है</label>
+      </div>
+
+      <!-- Q5 -->
+      <div class="qa">
+        <h3>Q5. Book के अनुसार छोटी जीतें (small wins) क्यों इतनी important हैं और ये कैसे बड़ी success की ओर ले जाती हैं?</h3>
+        <label class="opt"><input type="radio" name="q5"> छोटी जीतें temporary satisfaction देती हैं, उनका future में कोई impact नहीं होता</label>
+        <label class="opt"><input type="radio" name="q5" value="correct"> छोटी जीतें confidence build करती हैं और compounding effect से बड़ी success में बदल जाती हैं</label>
+        <label class="opt"><input type="radio" name="q5"> छोटी जीतें सिर्फ़ beginners के लिए होती हैं</label>
+        <label class="opt"><input type="radio" name="q5"> छोटी जीतें distractions create करती हैं जिससे main goal miss हो जाता है</label>
+      </div>
+
+      <!-- Q6 -->
+      <div class="qa">
+        <h3>Q6. Motivation और discipline के फर्क को समझाते हुए book में कौन सा point highlight किया गया है?</h3>
+        <label class="opt"><input type="radio" name="q6"> Motivation हमेशा long-term चलता है और discipline temporary होता है</label>
+        <label class="opt"><input type="radio" name="q6" value="correct"> Motivation short-term spark है लेकिन discipline habit बनकर रोज़ push करता है</label>
+        <label class="opt"><input type="radio" name="q6"> Motivation consistency लाता है और discipline सिर्फ़ जब कोई आपको देखे तब काम करता है</label>
+        <label class="opt"><input type="radio" name="q6"> Motivation और discipline दोनों ही समान हैं</label>
+      </div>
+
+      <!-- Q7 -->
+      <div class="qa">
+        <h3>Q7. Time management के बारे में book में बताया गया है कि इसका असली मक़सद क्या है?</h3>
+        <label class="opt"><input type="radio" name="q7"> हर second को काम में लगाना और खुद को busy दिखाना</label>
+        <label class="opt"><input type="radio" name="q7" value="correct"> Balance create करना ताकि काम और personal life दोनों smoothly चलें</label>
+        <label class="opt"><input type="radio" name="q7"> सिर्फ़ stress कम करना और दिन को हल्का बनाना</label>
+        <label class="opt"><input type="radio" name="q7"> दूसरों के सामने productive दिखना ताकि impression अच्छा बने</label>
+      </div>
+
+      <!-- Q8 -->
+      <div class="qa">
+        <h3>Q8. Habits को destiny shaper क्यों कहा गया है और book में इसे कैसे explain किया गया है?</h3>
+        <label class="opt"><input type="radio" name="q8" value="correct"> Habits daily choices को automatic बनाती हैं और धीरे-धीरे आपकी identity shape करती हैं</label>
+        <label class="opt"><input type="radio" name="q8"> Habits का life में कोई बड़ा role नहीं होता, सिर्फ़ routine control होता है</label>
+        <label class="opt"><input type="radio" name="q8"> Habits motivation से ज्यादा powerful नहीं होतीं</label>
+        <label class="opt"><input type="radio" name="q8"> Habits सिर्फ़ comfort zone maintain करने का तरीका हैं</label>
+      </div>
+
+      <!-- Q9 -->
+      <div class="qa">
+        <h3>Q9. Self-belief को success की सबसे बड़ी नींव क्यों कहा गया है और इसके बिना इंसान क्या खो देता है?</h3>
+        <label class="opt"><input type="radio" name="q9" value="correct"> Self-belief के बिना इंसान luck पर dependent हो जाता है और कोशिश करना बंद कर देता है</label>
+        <label class="opt"><input type="radio" name="q9"> Self-belief के बिना इंसान hard work तो करता है लेकिन results कभी नहीं मिलते</label>
+        <label class="opt"><input type="radio" name="q9"> Self-belief के बिना इंसान दूसरों पर dependent होकर अपनी originality खो देता है</label>
+        <label class="opt"><input type="radio" name="q9"> Self-belief के बिना इंसान overconfidence develop करता है</label>
+      </div>
+
+      <!-- Q10 -->
+      <div class="qa">
+        <h3>Q10. Patience को किससे compare किया गया है और क्यों इसे hidden strength कहा गया है?</h3>
+        <label class="opt"><input type="radio" name="q10"> Patience को weakness से compare किया गया है क्योंकि ये action delay करता है</label>
+        <label class="opt"><input type="radio" name="q10" value="correct"> Patience को hidden strength कहा गया है क्योंकि ये आपको stable रखता है जब दुनिया कहती है “छोड़ दो”</label>
+        <label class="opt"><input type="radio" name="q10"> Patience को luck से compare किया गया है क्योंकि सबकुछ अपने time पर होता है</label>
+        <label class="opt"><input type="radio" name="q10"> Patience को shortcut से compare किया गया है क्योंकि इससे success जल्दी मिलती है</label>
+      </div>
+
+      <!-- Q11 -->
+      <div class="qa">
+        <h3>Q11. जब इंसान बार-बार दूसरों से comparison करता है, तो book के अनुसार सबसे बड़ा नुकसान क्या होता है और क्यों ये growth को रोकता है?</h3>
+        <label class="opt"><input type="radio" name="q11"> Comparison करने से आप दूसरों से पीछे रह जाते हो</label>
+        <label class="opt"><input type="radio" name="q11" value="correct"> Comparison करते-करते इंसान अपना असली potential और originality खो देता है</label>
+        <label class="opt"><input type="radio" name="q11"> Comparison से demotivation आता है लेकिन potential safe रहता है</label>
+        <label class="opt"><input type="radio" name="q11"> Comparison focus को weak करता है लेकिन growth unaffected रहती है</label>
+      </div>
+
+      <!-- Q12 -->
+      <div class="qa">
+        <h3>Q12. Negative self-talk को book में किस तरह की invisible barrier कहा गया है और इसे overcome करने का सबसे practical तरीका क्या बताया गया है?</h3>
+        <label class="opt"><input type="radio" name="q12"> Negative self-talk सिर्फ़ mood खराब करता है, life पर असर नहीं डालता</label>
+        <label class="opt"><input type="radio" name="q12" value="correct"> Negative self-talk एक invisible wall है जो action रोकती है; इसे positive scripts से replace करना चाहिए</label>
+        <label class="opt"><input type="radio" name="q12"> Negative self-talk कभी-कभी inspiration देता है</label>
+        <label class="opt"><input type="radio" name="q12"> Negative self-talk को ignore करना ही सबसे बेहतर तरीका है</label>
+      </div>
+
+      <!-- Q13 -->
+      <div class="qa">
+        <h3>Q13. Overthinking को book में किस तरह describe किया गया है और इससे बाहर निकलने का असली इलाज क्या बताया गया है?</h3>
+        <label class="opt"><input type="radio" name="q13"> Overthinking हमेशा सही decision लेने में मदद करता है</label>
+        <label class="opt"><input type="radio" name="q13" value="correct"> Overthinking को invisible जेल कहा गया है और इसका इलाज immediate action लेना है</label>
+        <label class="opt"><input type="radio" name="q13"> Overthinking stress तो देता है लेकिन growth भी लाता है</label>
+        <label class="opt"><input type="radio" name="q13"> Overthinking खत्म करने का सबसे अच्छा तरीका है किसी और से decision लेना</label>
+      </div>
+
+      <!-- Q14 -->
+      <div class="qa">
+        <h3>Q14. Criticism को book में किस तरह से देखा गया है और क्यों इसे growth का fuel कहा गया है?</h3>
+        <label class="opt"><input type="radio" name="q14"> Criticism हमेशा demotivate करता है और progress रोकता है</label>
+        <label class="opt"><input type="radio" name="q14"> Criticism को ignore करना चाहिए क्योंकि इससे सिर्फ़ negativity आती है</label>
+        <label class="opt"><input type="radio" name="q14" value="correct"> Criticism learning का powerful source है और इसे fuel की तरह use करना चाहिए</label>
+        <label class="opt"><input type="radio" name="q14"> Criticism से बचना ही सबसे अच्छा strategy है</label>
+      </div>
+
+      <!-- Q15 -->
+      <div class="qa">
+        <h3>Q15. Fear of failure इंसान को रोकता क्यों है और book में इससे बाहर आने के लिए कौन सा approach दिया गया है?</h3>
+        <label class="opt"><input type="radio" name="q15"> Fear of failure आपको smart बनाता है और risk लेने से रोकता है</label>
+        <label class="opt"><input type="radio" name="q15"> Fear of failure सिर्फ़ luck खराब होने का result है</label>
+        <label class="opt"><input type="radio" name="q15" value="correct"> Fear को face करके उसे छोटे-छोटे actions से तोड़ना ही solution है</label>
+        <label class="opt"><input type="radio" name="q15"> Fear को completely ignore कर देना चाहिए</label>
+      </div>
+
+      <!-- Q16 -->
+      <div class="qa">
+        <h3>Q16. Toxic habits को book में किससे compare किया गया है और इन्हें छोड़ना क्यों ज़रूरी है?</h3>
+        <label class="opt"><input type="radio" name="q16" value="correct"> Toxic habits invisible enemy हैं जो धीरे-धीरे आपकी किस्मत खा जाती हैं</label>
+        <label class="opt"><input type="radio" name="q16"> Toxic habits सिर्फ़ time pass होती हैं और कोई बड़ा effect नहीं डालतीं</label>
+        <label class="opt"><input type="radio" name="q16"> Toxic habits से कभी-कभी creativity आती है</label>
+        <label class="opt"><input type="radio" name="q16"> Toxic habits को manage करना ही सबसे अच्छा तरीका है</label>
+      </div>
+
+      <!-- Q17 -->
+      <div class="qa">
+        <h3>Q17. Book में negativity को creativity में बदलने का तरीका किस तरह समझाया गया है?</h3>
+        <label class="opt"><input type="radio" name="q17"> Negativity को दबाना चाहिए ताकि वो गायब हो जाए</label>
+        <label class="opt"><input type="radio" name="q17" value="correct"> Negativity को सही दिशा देकर उसे energy में बदलना चाहिए</label>
+        <label class="opt"><input type="radio" name="q17"> Negativity को दूसरों पर निकालना सबसे natural तरीका है</label>
+        <label class="opt"><input type="radio" name="q17"> Negativity का कोई use नहीं है</label>
+      </div>
+
+      <!-- Q18 -->
+      <div class="qa">
+        <h3>Q18. Positivity को shield क्यों कहा गया है और यह इंसान को किस तरह protect करती है?</h3>
+        <label class="opt"><input type="radio" name="q18"> Positivity सिर्फ़ अच्छा mood लाती है, protection से इसका लेना-देना नहीं</label>
+        <label class="opt"><input type="radio" name="q18" value="correct"> Positivity एक shield है जो दूसरों की negativity से बचाकर stable रखती है</label>
+        <label class="opt"><input type="radio" name="q18"> Positivity सिर्फ़ weak लोगों के लिए ज़रूरी है</label>
+        <label class="opt"><input type="radio" name="q18"> Positivity का effect temporary होता है</label>
+      </div>
+
+      <!-- Q19 -->
+      <div class="qa">
+        <h3>Q19. Change को अपनाने वालों और avoid करने वालों के बीच book में कौन सा fundamental difference बताया गया है?</h3>
+        <label class="opt"><input type="radio" name="q19"> Change को avoid करने वाले भी eventually grow कर जाते हैं</label>
+        <label class="opt"><input type="radio" name="q19" value="correct"> Change से भागने वाले वहीं रुक जाते हैं, अपनाने वाले growth unlock करते हैं</label>
+        <label class="opt"><input type="radio" name="q19"> Change से डरने वाले ज़्यादा successful होते हैं</label>
+        <label class="opt"><input type="radio" name="q19"> Change से हमेशा नुकसान होता है</label>
+      </div>
+
+      <!-- Q20 -->
+      <div class="qa">
+        <h3>Q20. Comfort zone को book में किस तरह explain किया गया है और क्यों इसे सबसे बड़ा growth trap कहा गया है?</h3>
+        <label class="opt"><input type="radio" name="q20"> Comfort zone सबसे सुरक्षित जगह है जहाँ इंसान हमेशा happy रहता है</label>
+        <label class="opt"><input type="radio" name="q20" value="correct"> Comfort zone मीठा है लेकिन growth हमेशा उसके बाहर होती है</label>
+        <label class="opt"><input type="radio" name="q20"> Comfort zone risky है और इसे maintain करना ज़रूरी है</label>
+        <label class="opt"><input type="radio" name="q20"> Comfort zone में रहकर भी growth possible है</label>
+      </div>
+
+      <!-- Q21 -->
+      <div class="qa">
+        <h3>Q21. Fail fast, learn faster approach को book में किस practical logic से support किया गया है और इसका असली मक़सद क्या है?</h3>
+        <label class="opt"><input type="radio" name="q21"> Failures avoid करना ही सबसे सही strategy है</label>
+        <label class="opt"><input type="radio" name="q21" value="correct"> जल्दी fail होना जल्दी सीखने और आगे बढ़ने का सबसे तेज़ तरीका है</label>
+        <label class="opt"><input type="radio" name="q21"> Failures का मतलब permanent stop है</label>
+        <label class="opt"><input type="radio" name="q21"> Failures luck का result होते हैं</label>
+      </div>
+
+      <!-- Q22 -->
+      <div class="qa">
+        <h3>Q22. Inner strength (resilience) को book में किस तरह define किया गया है और setbacks से comeback करने का formula क्या है?</h3>
+        <label class="opt"><input type="radio" name="q22"> Inner strength का मतलब है कभी fail ना होना</label>
+        <label class="opt"><input type="radio" name="q22" value="correct"> Inner strength का मतलब है गिरने के बाद फिर से खड़े होना और comeback करना</label>
+        <label class="opt"><input type="radio" name="q22"> Inner strength luck से आती है</label>
+        <label class="opt"><input type="radio" name="q22"> Inner strength सिर्फ़ motivation से build होती है</label>
+      </div>
+
+      <!-- Q23 -->
+      <div class="qa">
+        <h3>Q23. Fixed mindset और growth mindset के बीच सबसे बड़ा difference क्या बताया गया है?</h3>
+        <label class="opt"><input type="radio" name="q23" value="correct"> Fixed mindset abilities को permanent मानता है; growth mindset सीखने और improve करने पर विश्वास करता है</label>
+        <label class="opt"><input type="radio" name="q23"> Fixed mindset ज़्यादा confident होता है</label>
+        <label class="opt"><input type="radio" name="q23"> Growth mindset हमेशा easy रास्ता चुनता है</label>
+        <label class="opt"><input type="radio" name="q23"> दोनों mindset में कोई बड़ा फर्क नहीं होता</label>
+      </div>
+
+      <!-- Q24 -->
+      <div class="qa">
+        <h3>Q24. Curiosity को book में growth fuel क्यों कहा गया है और successful लोगों के लिए ये कैसे काम करती है?</h3>
+        <label class="opt"><input type="radio" name="q24"> Curiosity सिर्फ़ बच्चों के लिए ज़रूरी है</label>
+        <label class="opt"><input type="radio" name="q24" value="correct"> Curiosity innovation और wisdom की जड़ है क्योंकि ये हर बार नया सवाल पूछकर नई possibilities खोलती है</label>
+        <label class="opt"><input type="radio" name="q24"> Curiosity से distractions बढ़ते हैं</label>
+        <label class="opt"><input type="radio" name="q24"> Curiosity का growth से कोई direct relation नहीं है</label>
+      </div>
+
+      <!-- Q25 -->
+      <div class="qa">
+        <h3>Q25. Daily review ritual को book में क्यों powerful habit कहा गया है और ये long-term success के लिए कैसे काम करता है?</h3>
+        <label class="opt"><input type="radio" name="q25"> Daily review सिर्फ़ busy दिखने के लिए होता है</label>
+        <label class="opt"><input type="radio" name="q25" value="correct"> Daily review से clarity आती है, mistakes improve होती हैं और next दिन better decisions लिए जा सकते हैं</label>
+        <label class="opt"><input type="radio" name="q25"> Daily review से productivity कम होती है</label>
+        <label class="opt"><input type="radio" name="q25"> Daily review से कोई बड़ा फर्क नहीं पड़ता</label>
+      </div>
+
+      <div style="margin-top:16px">
+        <button type="button" class="btn" onclick="submitQuiz()">Submit Quiz</button>
+        <button type="button" class="btn btn-ghost" onclick="resetQuiz()">Reset</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Result Page -->
+<div class="container hidden" id="resultPage">
+  <div class="card">
+    <h2>🎉 Thank You!</h2>
+    <p id="scoreText"></p>
+    <p>👉 Free Book Read: 
+      <a class="top-link" href="https://www.amazon.in/dp/B0FPHVNRBK" target="_blank">Discipline Se Success Tak</a>
+    </p>
+    <div style="margin-top:12px">
+      <button class="btn btn-ghost" onclick="restart()">Go to Start</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function showForm(){
+  document.getElementById('introPage').classList.add('hidden');
+  document.getElementById('formPage').classList.remove('hidden');
+}
+function backIntro(){
+  document.getElementById('formPage').classList.add('hidden');
+  document.getElementById('introPage').classList.remove('hidden');
+}
+function startQuiz(){
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  if(!name || !email || !phone){ alert('Please fill Name, Email, Phone.'); return; }
+  document.getElementById('formPage').classList.add('hidden');
+  document.getElementById('quizPage').classList.remove('hidden');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function submitQuiz(){
+  // check all answered
+  for(let i=1;i<=25;i++){
+    const sel = document.querySelector(`input[name="q${i}"]:checked`);
+    if(!sel){ alert('Please answer all questions.'); return; }
+  }
+  // score
+  let score = 0;
+  for(let i=1;i<=25;i++){
+    const sel = document.querySelector(`input[name="q${i}"]:checked`);
+    if(sel && sel.value==="correct") score++;
+  }
+  document.getElementById('quizPage').classList.add('hidden');
+  document.getElementById('resultPage').classList.remove('hidden');
+  const name = document.getElementById('name').value.trim();
+  document.getElementById('scoreText').innerHTML = `<strong>${name}</strong>, आपका Score: <strong>${score}/25</strong>.<br>Top 10 fastest perfect/highest win ₹250 (Terms apply). Screenshot लेकर @jeetssingh9 को tag करें!`;
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function resetQuiz(){
+  document.getElementById('quizForm').reset();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function restart(){
+  document.getElementById('resultPage').classList.add('hidden');
+  document.getElementById('introPage').classList.remove('hidden');
+  document.getElementById('quizForm').reset();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+</script>
+
+</body>
+</html>
