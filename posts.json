@@ -148,5 +148,12 @@
     "title": "Blog 24: Inner Strength — Turning Setbacks into Comebacks",
     "preview": "गिरना normal है, पर उठना greatness है।",
     "file": "posts/blog24.html"
-  }
+  },
+  {
+  "id": 25,
+    "series": 3,
+    "title": "Blog 25: Growth Mindset vs Fixed Mindset",
+    "preview": "Limitations दिमाग में होती हैं, हकीकत में नहीं।",
+    "file": "posts/blog25.html"
+  }  
 ]
