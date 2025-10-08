@@ -155,5 +155,12 @@
     "title": "Blog 25: Growth Mindset vs Fixed Mindset",
     "preview": "Limitations दिमाग में होती हैं, हकीकत में नहीं।",
     "file": "posts/blog25.html"
-  }  
+  },
+    {
+    "id": 26,
+    "series": 3,
+    "title": "Blog 26: Curiosity is the Growth Fuel",
+    "preview": "सवाल पूछना ही innovation और wisdom की जड़ है।",
+    "file": "posts/blog26.html"
+  }
 ]
