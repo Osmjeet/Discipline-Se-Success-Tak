@@ -162,5 +162,12 @@
     "title": "Blog 26: Curiosity is the Growth Fuel",
     "preview": "सवाल पूछना ही innovation और wisdom की जड़ है।",
     "file": "posts/blog26.html"
+  },
+  {
+    "id": 27,
+    "series": 3,
+    "title": "Blog 27: Feedback is Free Coaching",
+    "preview": "Feedback चोट करता है, पर वही improvement का रास्ता खोलता है।",
+    "file": "posts/blog27.html"
   }
 ]
