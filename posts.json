@@ -169,5 +169,13 @@
     "title": "Blog 27: Feedback is Free Coaching",
     "preview": "Feedback चोट करता है, पर वही improvement का रास्ता खोलता है।",
     "file": "posts/blog27.html"
+  },
+   {
+    "id": 28,
+    "series": 3,
+    "title": "Blog 28: Lifelong Learning Advantage",
+    "preview": “सीखना बंद तो विकास रुक गया — और जो रुक गया, वो पीछे छूट गया।”,
+    "file": "posts/blog28.html"
   }
+  
 ]
