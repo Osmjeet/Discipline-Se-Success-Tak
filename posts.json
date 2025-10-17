@@ -176,5 +176,12 @@
   "title": "Blog 28: Lifelong Learning Advantage",
   "preview": "“सीखना बंद तो विकास रुक गया — और जो रुक गया, वो पीछे छूट गया।”",
   "file": "posts/blog28.html"
-}  
+},
+  {
+    "id": 29,
+    "series": 3,
+    "title": "Blog 29: Self-Reflection: Mirror of Growth",
+    "preview": "खुद को रोज़ देखने वाला ही सबसे तेज़ grow करता है।",
+    "file": "posts/blog29.html"
+  } 
 ]
