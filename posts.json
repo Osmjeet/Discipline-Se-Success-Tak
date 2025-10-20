@@ -183,5 +183,12 @@
     "title": "Blog 29: Self-Reflection: Mirror of Growth",
     "preview": "खुद को रोज़ देखने वाला ही सबसे तेज़ grow करता है।",
     "file": "posts/blog29.html"
-  } 
+  },
+   {
+    "id": 30,
+    "series": 3,
+    "title": "Blog 30: The 1% Rule of Progress",
+    "preview": "हर दिन छोटा upgrade = लंबे समय में बड़ा transformation।",
+    "file": "posts/blog30.html"
+   }
 ]
