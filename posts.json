@@ -190,5 +190,11 @@
     "title": "Blog 30: The 1% Rule of Progress",
     "preview": "हर दिन छोटा upgrade = लंबे समय में बड़ा transformation।",
     "file": "posts/blog30.html"
-   }
+   },
+  {
+  "id": "growth-summary",
+  "title": "Growth Mindset Series — अंतिम समापन",
+  "preview": "“विकास कोई मंज़िल नहीं, बल्कि सोच का एक तरीका है — और जिसने इसे सीख लिया, उसके लिए कोई सीमा नहीं रहती।”",
+  "file": "blog-growth-summary.html"
+  }
 ]
