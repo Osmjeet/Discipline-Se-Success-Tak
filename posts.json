@@ -199,9 +199,9 @@
   },
   {
   "id": 31,
-  "series": "Success Habits",
-  "title": "Rise Early, Rule Your Day",
+  "series": 4,
+  "title": "Blog 31: Rise Early, Rule Your Day",
   "preview": "“सुबह की आदतें पूरे दिन की दिशा तय करती हैं — और जो दिन की शुरुआत जीत लेता है, वही ज़िंदगी जीत लेता है।”",
-  "file": "blog-31.html"
+  "file": "posts/blog-31.html"
 }
 ]
