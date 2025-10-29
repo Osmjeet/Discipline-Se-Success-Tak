@@ -203,5 +203,12 @@
   "title": "Blog 31: Rise Early, Rule Your Day",
   "preview": "“सुबह की आदतें पूरे दिन की दिशा तय करती हैं — और जो दिन की शुरुआत जीत लेता है, वही ज़िंदगी जीत लेता है।”",
   "file": "posts/blog31.html"
-}
+},
+  {
+  "id": 32,
+  "series": 4,
+  "title": "Blog 32: Read Daily, Grow Daily",
+  "preview": "हर दिन पढ़ना मतलब हर दिन थोड़ा और समझदार बनना।",
+  "file": "posts/blog32.html"
+  }
 ]
