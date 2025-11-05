@@ -217,5 +217,12 @@
   "title": "Blog 33: Journaling = Mental Clarity",
   "preview": "लिखना दिमाग को clutter-free और focused बनाता है।",
   "file": "posts/blog33.html"
-}
+},
+  {
+  "id": 34,
+  "series": 4,
+  "title": "Blog 34: Practice Gratitude Daily",
+  "preview": "“Gratitude सिखाता है — जो है, वही काफी है।”",
+  "file": "posts/blog34.html"
+  }
 ]
