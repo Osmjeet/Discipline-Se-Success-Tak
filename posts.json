@@ -231,5 +231,12 @@
     "title": "Blog 35: Build Your Success Network",
     "preview": "सही लोग, सही दरवाज़े खोलते हैं।",
     "file": "posts/blog35.html"
+  },
+  {
+    "id": 36,
+    "series": 4,
+    "title": "Blog 36: Deep Work Habit",
+    "preview": "Distraction हटाकर काम करना ही आज की असली superpower है।",
+    "file": "posts/blog36.html"
   }
 ]
