@@ -238,5 +238,12 @@
     "title": "Blog 36: Deep Work Habit",
     "preview": "जब मन स्थिर होता है, तब काम साधना बन जाता है।",
     "file": "posts/blog36.html"
+  },
+  {
+    "id": 37,
+    "series": 4,
+    "title": "Blog 37: Consistency Beats Motivation",
+    "preview": "Motivation spark है, consistency fire है।",
+    "file": "posts/blog37.html"
   }
-]
+  ]
