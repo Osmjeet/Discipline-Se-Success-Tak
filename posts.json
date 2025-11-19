@@ -245,5 +245,12 @@
     "title": "Blog 37: Consistency Beats Motivation",
     "preview": "Motivation spark है, consistency fire है।",
     "file": "posts/blog37.html"
+  },
+  {
+    "id": 38,
+    "series": 4,
+    "title": "Blog 38: Digital Detox Discipline",
+    "preview": "फोन को control करो वरना वही तुम्हें control करेगा।",
+    "file": "posts/blog38.html"
   }
   ]
